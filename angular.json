@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "timesheet_mat": {
+    "hr-automation-ui": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/timesheet_mat",
+            "outputPath": "dist/hr-automation-ui",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -67,10 +67,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "timesheet_mat:build:production"
+              "browserTarget": "hr-automation-ui:build:production"
             },
             "development": {
-              "browserTarget": "timesheet_mat:build:development"
+              "browserTarget": "hr-automation-ui:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -78,7 +78,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "timesheet_mat:build"
+            "browserTarget": "hr-automation-ui:build"
           }
         },
         "test": {
@@ -106,7 +106,7 @@
       }
     }
   },
-  "defaultProject": "timesheet_mat",
+  "defaultProject": "hr-automation-ui",
   "cli": {
     "defaultCollection": "@angular-eslint/schematics"
   }

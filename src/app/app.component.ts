@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 class AppComponent {
-  title = 'timesheet_mat';
+  title = 'hr-automation-ui';
 }
 
 export default AppComponent;

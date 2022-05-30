@@ -24,6 +24,7 @@ export class SignInModalComponent implements OnInit {
       password: ['', [Validators.required]],
     });
   }
+
   onNoClick(): void {
     this._notification.show('Closed');
     this.dialogRef.close();
