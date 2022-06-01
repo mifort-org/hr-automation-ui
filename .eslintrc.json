@@ -41,6 +41,21 @@
             "style": "kebab-case"
           }
         ],
+        "import/order": [
+          "error",
+          {
+            "groups": [
+              "builtin",
+              "external",
+              "internal",
+              "parent",
+              "sibling",
+              "index",
+              "object",
+              "type"
+            ]
+          }
+        ],
          "no-console": "error",
          "import/prefer-default-export": "off",
          "no-magic-numbers": [
@@ -50,7 +65,6 @@
           }
         ],
         "no-underscore-dangle": "off"
-
       },
       "settings": {
         "import/parsers": {
