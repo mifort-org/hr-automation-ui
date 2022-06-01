@@ -18,6 +18,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSelectModule } from '@angular/material/select';
 
 import AppRoutingModule from './app-routing.module';
 import AppComponent from './app.component';
@@ -28,6 +29,8 @@ import { CandidateItemComponent } from './components/shared/candidate-item/candi
 import { CandidatesFilterComponent } from './components/shared/candidates-filter/candidates-filter.component';
 import { ErrorDisplayComponent } from './components/shared/error-display/error-display.component';
 import { ActionsBarComponent } from './components/systems/actions-bar/actions-bar.component';
+import { NewCandidateModalComponent } from './components/shared/new-candidate-modal/new-candidate-modal.component';
+import { CandidateFormComponent } from './components/shared/candidate-form/candidate-form.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +42,8 @@ import { ActionsBarComponent } from './components/systems/actions-bar/actions-ba
     CandidatesFilterComponent,
     ErrorDisplayComponent,
     ActionsBarComponent,
+    NewCandidateModalComponent,
+    CandidateFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,6 +67,7 @@ import { ActionsBarComponent } from './components/systems/actions-bar/actions-ba
     MatAutocompleteModule,
     MatDividerModule,
     MatProgressBarModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

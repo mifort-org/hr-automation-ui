@@ -30,7 +30,7 @@
     <app-candidates-filter></app-candidates-filter>
   </mat-drawer>
 
-  <div class="container" *ngIf="pageState?.error; then errorDisplay">
+  <div class="container">
     <div class="mb-20">
       <mat-chip-list aria-label="Keywords selection">
         <mat-chip *ngFor="let keyword of keywordsList" (removed)="remove(keyword)">
@@ -43,7 +43,13 @@
     </div>
 
     <div class="row gap-10 content-container">
-      <div class="col-5 col-10-sm" *ngFor="let candidate of candidatesList">
+      <div class="col-5 col-10-sm">
+        <app-candidate-item></app-candidate-item>
+      </div>
+      <div class="col-5 col-10-sm">
+        <app-candidate-item></app-candidate-item>
+      </div>
+      <div class="col-5 col-10-sm">
         <app-candidate-item></app-candidate-item>
       </div>
     </div>

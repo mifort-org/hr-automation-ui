@@ -1,0 +1,41 @@
+<form [formGroup]="form">
+  <div class="row">
+    <div class="col-5 col-10-sm">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Firstname</mat-label>
+        <input matInput formControlName="firstname" />
+      </mat-form-field>
+    </div>
+    <div class="col-5 col-10-sm">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Lastname</mat-label>
+        <input matInput formControlName="lastname" />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row flex-between">
+    <div class="col-4 col-10-sm">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" />
+      </mat-form-field>
+    </div>
+    <div class="col-3 col-10-sm">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Phone</mat-label>
+        <input matInput formControlName="phone" />
+      </mat-form-field>
+    </div>
+    <div class="col-2 col-10-sm">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status">
+          <mat-option *ngFor="let status of statusesOptions" [value]="status.value">
+            {{ status.value }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+</form>
