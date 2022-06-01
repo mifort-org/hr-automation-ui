@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+. "$(dirname "$0")/_/husky.sh"
+
+echo "!!!! INSTALL"
+npm install
+echo "####################"
+
+npm run format;
+npm run format:scss;
+npm run lint;
