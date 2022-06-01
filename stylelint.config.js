@@ -41,6 +41,7 @@ module.exports = {
     'value-keyword-case': null,
     'no-invalid-position-at-import-rule': null,
     'length-zero-no-unit': null,
+    'color-function-notation': 'legacy',
   },
   ignoreFiles: [],
 };
