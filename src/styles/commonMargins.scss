@@ -1,0 +1,16 @@
+@mixin commonMargins($pxCont: 30) {
+  $positions: (
+    'left': 'l',
+    'right': 'r',
+    'bottom': 'b',
+    'top': 't'
+  );
+  @for $i from 1 through $pxCont {
+    @each $name, $shortName in $positions {
+      .m#{$shortName}-#{$i} {
+        // stylelint-disable-next-line declaration-no-important
+        margin-#{$name}: $i * 1px !important;
+      }
+    }
+  }
+}

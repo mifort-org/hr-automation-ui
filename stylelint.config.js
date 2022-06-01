@@ -40,6 +40,7 @@ module.exports = {
     'function-no-unknown': null,
     'value-keyword-case': null,
     'no-invalid-position-at-import-rule': null,
+    'length-zero-no-unit': null,
   },
   ignoreFiles: [],
 };

@@ -1,0 +1,8 @@
+@mixin gridClass($gridCol: 10){
+    @for $i from 1 through $gridCol{
+        .col-#{$i} {
+            width: calc($i * 10% - 1%);
+            min-width: 300px;
+        }
+    }
+}

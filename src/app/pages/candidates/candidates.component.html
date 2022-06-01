@@ -1,0 +1,55 @@
+<app-actions-bar></app-actions-bar>
+<div class="sticky-bar">
+  <mat-progress-bar
+    mode="indeterminate"
+    color="accent"
+    *ngIf="pageState.loading"
+  ></mat-progress-bar>
+  <div class="container flex flex-between">
+    <div class="col-5">
+      <button mat-fab color="primary" (click)="drawer.toggle()">
+        <mat-icon>list</mat-icon>
+      </button>
+    </div>
+    <div class="col-5">
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Keywords</mat-label>
+        <input
+          (keyup.enter)="add($event)"
+          matInput
+          placeholder="Enter some keyword"
+          [(ngModel)]="keywordsInput"
+        />
+      </mat-form-field>
+    </div>
+  </div>
+</div>
+
+<mat-drawer-container class="full-width main-container" autosize>
+  <mat-drawer #drawer mode="side" class="drawer-container">
+    <app-candidates-filter></app-candidates-filter>
+  </mat-drawer>
+
+  <div class="container" *ngIf="pageState?.error; then errorDisplay">
+    <div class="mb-20">
+      <mat-chip-list aria-label="Keywords selection">
+        <mat-chip *ngFor="let keyword of keywordsList" (removed)="remove(keyword)">
+          {{ keyword }}
+          <button matChipRemove>
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip>
+      </mat-chip-list>
+    </div>
+
+    <div class="row gap-10 content-container">
+      <div class="col-5 col-10-sm" *ngFor="let candidate of candidatesList">
+        <app-candidate-item></app-candidate-item>
+      </div>
+    </div>
+  </div>
+</mat-drawer-container>
+
+<ng-template #errorDisplay>
+  <app-error-display></app-error-display>
+</ng-template>

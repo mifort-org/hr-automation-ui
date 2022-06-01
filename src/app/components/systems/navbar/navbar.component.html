@@ -1,16 +1,17 @@
 <mat-toolbar class="flex-between">
   <div class="flex align-center">
     <div>
-      <img src="/assets/mifort.png" alt="" width="60" height="50">
+      <img src="/assets/mifort.png" alt="" width="60" height="50" />
     </div>
-    <span>
-      Mifort - Human Resources
-    </span>
+    <span> Mifort - Human Resources </span>
   </div>
- 
+
   <div>
-    <button mat-raised-button color="primary" (click)="openSignInDialog()">
-      Sign in
-    </button>
+    <a mat-button routerLink="candidates" routerLinkActive="active">Candidates</a>
+    <a mat-button routerLink="history" routerLinkActive="active">History</a>
+    <a mat-button routerLink="keywords" routerLinkActive="active">Keywords</a>
+    <a mat-button routerLink="merge" routerLinkActive="active">Merge</a>
+    <a mat-button routerLink="support" routerLinkActive="active">Support</a>
+    <button mat-raised-button color="primary" (click)="openSignInDialog()">Sign in</button>
   </div>
 </mat-toolbar>

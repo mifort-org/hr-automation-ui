@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -11,19 +12,42 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import AppRoutingModule from './app-routing.module';
 import AppComponent from './app.component';
 import { NavbarComponent } from './components/systems/navbar/navbar.component';
 import { SignInModalComponent } from './components/shared/sign-in-modal/sign-in-modal.component';
+import { CandidatesComponent } from './pages/candidates/candidates.component';
+import { CandidateItemComponent } from './components/shared/candidate-item/candidate-item.component';
+import { CandidatesFilterComponent } from './components/shared/candidates-filter/candidates-filter.component';
+import { ErrorDisplayComponent } from './components/shared/error-display/error-display.component';
+import { ActionsBarComponent } from './components/systems/actions-bar/actions-bar.component';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, SignInModalComponent],
+  declarations: [
+    AppComponent,
+    NavbarComponent,
+    SignInModalComponent,
+    CandidatesComponent,
+    CandidateItemComponent,
+    CandidatesFilterComponent,
+    ErrorDisplayComponent,
+    ActionsBarComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    HttpClientModule,
+    FormsModule,
+
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
@@ -32,6 +56,12 @@ import { SignInModalComponent } from './components/shared/sign-in-modal/sign-in-
     MatDialogModule,
     MatInputModule,
     MatSnackBarModule,
+    MatSidenavModule,
+    MatChipsModule,
+    MatBadgeModule,
+    MatAutocompleteModule,
+    MatDividerModule,
+    MatProgressBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
