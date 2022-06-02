@@ -7,8 +7,17 @@
     <div class="col-3 col-10-sm">
       <mat-card class="example-card">
         <mat-card-header>
-          <mat-card-title>Shiba Inu</mat-card-title>
-          <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+          <mat-card-title>
+            <span
+              matBadge="0"
+              matBadgePosition="after"
+              matBadgeSize="small"
+              [matBadgeColor]="candidate?.status | status"
+              class="hide-text"
+              >Adventure Time</span
+            ></mat-card-title
+          >
+          <mat-card-subtitle>{{ candidate?.id }}</mat-card-subtitle>
         </mat-card-header>
         <div class="image-frame" mat-card-image>
           <img src="https://bootdey.com/img/Content/avatar/avatar1.png" />
@@ -28,6 +37,9 @@
       <mat-tab-group mat-align-tabs="start" class="mt-20">
         <mat-tab label="Details info">
           <a></a><app-candidate-main-info></app-candidate-main-info
+        ></mat-tab>
+        <mat-tab label="Communications"
+          ><app-candidate-communications></app-candidate-communications
         ></mat-tab>
         <mat-tab label="History"><app-candidate-history></app-candidate-history></mat-tab>
         <mat-tab label="Updates"><app-candidate-updates></app-candidate-updates></mat-tab>

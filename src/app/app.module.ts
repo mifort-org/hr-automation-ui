@@ -40,6 +40,8 @@ import { CandidateHistoryComponent } from './components/shared/candidate-history
 import { CandidateUpdatesComponent } from './components/shared/candidate-updates/candidate-updates.component';
 import { StatusPipe } from './utils/pipes/status.pipe';
 import { EmptyBlockComponent } from './components/shared/empty-block/empty-block.component';
+import { CandidateCommunicationsComponent } from './components/shared/candidate-communications/candidate-communications.component';
+import { FullnamePipe } from './utils/pipes/fullname.pipe';
 
 @NgModule({
   declarations: [
@@ -60,6 +62,8 @@ import { EmptyBlockComponent } from './components/shared/empty-block/empty-block
     CandidateUpdatesComponent,
     StatusPipe,
     EmptyBlockComponent,
+    CandidateCommunicationsComponent,
+    FullnamePipe,
   ],
   imports: [
     BrowserModule,

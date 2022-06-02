@@ -1,3 +1,4 @@
+import { map } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CandidatesService } from '@services/candidates.service';
@@ -35,16 +36,34 @@ export class CandidatesComponent implements OnInit {
 
   getCandidatesList(filterData: ICandidatesFilterData) {
     this.pageState.loading = true;
-    this._candidatesService.getCandidates(filterData).subscribe({
-      next: (resolve: ICandidate[]) => {
-        this.candidatesList = resolve;
-        this.pageState.loading = false;
-      },
-      error: (error: any) => {
-        this.pageState.error = error;
-        this.pageState.loading = false;
-      },
-    });
+    this._candidatesService
+      .getCandidates(filterData)
+      .pipe(
+        map((data: ICandidate[]) => {
+          const modifiedData = data?.map((candidate) => {
+            const attributes: any = {};
+            candidate?.candidateAttributes?.forEach((attr) => {
+              attributes[attr.attributeTypes.name] = attr?.value;
+            });
+            return {
+              ...candidate,
+              customAttribute: attributes,
+            };
+          });
+
+          return modifiedData;
+        })
+      )
+      .subscribe({
+        next: (resolve: ICandidate[]) => {
+          this.candidatesList = resolve;
+          this.pageState.loading = false;
+        },
+        error: (error: any) => {
+          this.pageState.error = error;
+          this.pageState.loading = false;
+        },
+      });
   }
 
   remove($event: any): void {

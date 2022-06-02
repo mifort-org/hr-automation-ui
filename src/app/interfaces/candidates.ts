@@ -42,6 +42,7 @@ export interface ICandidate {
   keywords: IKeywords[];
   communicationHistory: ICommunicationHistory[];
   candidateAttributes: ICandidateAttribute[];
+  customAttribute?: { [key: string]: any };
 
   // TODO: Need to resolve this one any
   mergeCandidates: any;
