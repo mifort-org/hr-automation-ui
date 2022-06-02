@@ -1,0 +1,17 @@
+.candidate-detail-container{
+    padding: 20px 100px;
+}
+
+.image-frame{
+    padding: 0;
+    height: 200px;
+    overflow: hidden;
+    filter: brightness(20%);;
+    cursor: pointer;
+    transition: 1s;
+
+    &:hover{
+        filter: none;
+        height: 300px;
+    }
+}

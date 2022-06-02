@@ -1,0 +1,37 @@
+<div class="candidate-detail-container">
+  <button mat-raised-button class="mb-20" (click)="back()">
+    <mat-icon>keyboard_backspace</mat-icon>
+    <span class="ml-10">Back</span>
+  </button>
+  <div class="row">
+    <div class="col-3 col-10-sm">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title>Shiba Inu</mat-card-title>
+          <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+        </mat-card-header>
+        <div class="image-frame" mat-card-image>
+          <img src="https://bootdey.com/img/Content/avatar/avatar1.png" />
+        </div>
+        <mat-card-content>
+          <mat-chip-list>
+            <mat-chip color="primary" selected>Java</mat-chip>
+            <mat-chip color="primary" selected>Javascript</mat-chip>
+          </mat-chip-list>
+
+          <div><p>Biography</p></div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-7 col-10-sm">
+      <app-candidate-action></app-candidate-action>
+      <mat-tab-group mat-align-tabs="start" class="mt-20">
+        <mat-tab label="Details info">
+          <a></a><app-candidate-main-info></app-candidate-main-info
+        ></mat-tab>
+        <mat-tab label="History"><app-candidate-history></app-candidate-history></mat-tab>
+        <mat-tab label="Updates"><app-candidate-updates></app-candidate-updates></mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+</div>

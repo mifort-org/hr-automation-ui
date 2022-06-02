@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CandidatesService } from '@services/candidates.service';
-import { ICandidatesFilterData, ICandidates } from '@interfaces/candidates';
+import { ICandidatesFilterData, ICandidate } from '@interfaces/candidates';
 
 @Component({
   selector: 'app-candidates',
@@ -11,7 +11,7 @@ import { ICandidatesFilterData, ICandidates } from '@interfaces/candidates';
 export class CandidatesComponent implements OnInit {
   showFiller = false;
 
-  candidatesList: ICandidates[] = [];
+  candidatesList: ICandidate[] = [];
 
   pageState = {
     error: null,
@@ -30,13 +30,13 @@ export class CandidatesComponent implements OnInit {
     this.filterForm = this._formBuilder.group({
       email: [''],
     });
-    this.getCandidatesList({ pageNumber: 1, pageSize: 100, keywords: this.keywordsList });
+    this.getCandidatesList({ pageNumber: 1, pageSize: 100, keyword: this.keywordsList });
   }
 
   getCandidatesList(filterData: ICandidatesFilterData) {
     this.pageState.loading = true;
     this._candidatesService.getCandidates(filterData).subscribe({
-      next: (resolve: ICandidates[]) => {
+      next: (resolve: ICandidate[]) => {
         this.candidatesList = resolve;
         this.pageState.loading = false;
       },
@@ -50,10 +50,12 @@ export class CandidatesComponent implements OnInit {
   remove($event: any): void {
     const newList = this.keywordsList?.filter((el) => el !== $event);
     this.keywordsList = newList;
+    this.getCandidatesList({ pageNumber: 1, pageSize: 100, keyword: this.keywordsList });
   }
 
   add($event: any): void {
-    this.keywordsList.push($event?.target?.value);
+    this.keywordsList.push($event?.target?.value.toLowerCase());
     this.keywordsInput = '';
+    this.getCandidatesList({ pageNumber: 1, pageSize: 100, keyword: this.keywordsList });
   }
 }

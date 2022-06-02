@@ -19,18 +19,27 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTabsModule } from '@angular/material/tabs';
+
+import { NavbarComponent } from '@components/systems/navbar/navbar.component';
+import { SignInModalComponent } from '@components/shared/sign-in-modal/sign-in-modal.component';
+import { CandidatesComponent } from '@pages/candidates/candidates.component';
+import { CandidateItemComponent } from '@components/shared/candidate-item/candidate-item.component';
+import { CandidatesFilterComponent } from '@components/shared/candidates-filter/candidates-filter.component';
+import { ErrorDisplayComponent } from '@components/shared/error-display/error-display.component';
+import { ActionsBarComponent } from '@components/systems/actions-bar/actions-bar.component';
+import { NewCandidateModalComponent } from '@components/shared/new-candidate-modal/new-candidate-modal.component';
+import { CandidateFormComponent } from '@components/shared/candidate-form/candidate-form.component';
+import { CandidateDetailComponent } from '@pages/candidate-detail/candidate-detail.component';
+import { CandidateActionComponent } from '@components/systems/candidate-action/candidate-action.component';
 
 import AppRoutingModule from './app-routing.module';
 import AppComponent from './app.component';
-import { NavbarComponent } from './components/systems/navbar/navbar.component';
-import { SignInModalComponent } from './components/shared/sign-in-modal/sign-in-modal.component';
-import { CandidatesComponent } from './pages/candidates/candidates.component';
-import { CandidateItemComponent } from './components/shared/candidate-item/candidate-item.component';
-import { CandidatesFilterComponent } from './components/shared/candidates-filter/candidates-filter.component';
-import { ErrorDisplayComponent } from './components/shared/error-display/error-display.component';
-import { ActionsBarComponent } from './components/systems/actions-bar/actions-bar.component';
-import { NewCandidateModalComponent } from './components/shared/new-candidate-modal/new-candidate-modal.component';
-import { CandidateFormComponent } from './components/shared/candidate-form/candidate-form.component';
+import { CandidateMainInfoComponent } from './components/shared/candidate-main-info/candidate-main-info.component';
+import { CandidateHistoryComponent } from './components/shared/candidate-history/candidate-history.component';
+import { CandidateUpdatesComponent } from './components/shared/candidate-updates/candidate-updates.component';
+import { StatusPipe } from './utils/pipes/status.pipe';
+import { EmptyBlockComponent } from './components/shared/empty-block/empty-block.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +53,13 @@ import { CandidateFormComponent } from './components/shared/candidate-form/candi
     ActionsBarComponent,
     NewCandidateModalComponent,
     CandidateFormComponent,
+    CandidateDetailComponent,
+    CandidateActionComponent,
+    CandidateMainInfoComponent,
+    CandidateHistoryComponent,
+    CandidateUpdatesComponent,
+    StatusPipe,
+    EmptyBlockComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,6 +84,7 @@ import { CandidateFormComponent } from './components/shared/candidate-form/candi
     MatDividerModule,
     MatProgressBarModule,
     MatSelectModule,
+    MatTabsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

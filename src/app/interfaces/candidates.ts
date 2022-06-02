@@ -3,7 +3,7 @@ import { ECandidateStatus } from '@constants/candidates';
 export interface ICandidatesFilterData {
   pageNumber?: number;
   pageSize?: number;
-  keywords?: string[];
+  keyword?: string[];
 }
 
 export interface IKeywords {
@@ -32,7 +32,7 @@ export interface ICandidateAttribute {
   };
 }
 
-export interface ICandidates {
+export interface ICandidate {
   id: string;
   lastContact: string;
   status: ECandidateStatus;
