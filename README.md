@@ -2,8 +2,8 @@
 
 ## For developers :vampire:
 
-Project information: https://docs.google.com/document/d/1cRihnqrigPNz3Z30MBC0BO89WKVNDK_opky7Kt5afhM/edit
-Swagger-ui: http://44.200.190.47:8090/swagger-ui.html
+1. Project information: https://docs.google.com/document/d/1cRihnqrigPNz3Z30MBC0BO89WKVNDK_opky7Kt5afhM/edit
+2. Swagger-ui: http://44.200.190.47:8090/swagger-ui.html
 
 ## Start project
 
