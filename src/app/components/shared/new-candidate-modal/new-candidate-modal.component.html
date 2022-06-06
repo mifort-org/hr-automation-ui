@@ -1,8 +1,36 @@
 <h1 mat-dialog-title>Create new candidate</h1>
 <div mat-dialog-content>
-  <app-candidate-form></app-candidate-form>
+  <div *ngIf="!modalState?.loading; else loading">
+    <form [formGroup]="form">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Login of candidate (unique name)</mat-label>
+        <input matInput formControlName="id" required />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Select status for candidate</mat-label>
+        <mat-select formControlName="status">
+          <mat-option *ngFor="let status of statusOptions" [value]="status.value">
+            {{ status.label }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </div>
 </div>
 <div mat-dialog-actions class="flex flex-end">
-  <button mat-raised-button color="primary">Submit</button>
-  <button mat-button (click)="closeModal()">Cancel</button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="submitNewCandidate()"
+    [disabled]="modalState?.loading"
+  >
+    Submit
+  </button>
+  <button mat-button (click)="closeModal()" [disabled]="modalState?.loading">Cancel</button>
 </div>
+
+<ng-template #loading>
+  <div class="full-width flex-column align-center mt-30 mb-30">
+    <mat-spinner color="accent" diameter="70"></mat-spinner>
+  </div>
+</ng-template>

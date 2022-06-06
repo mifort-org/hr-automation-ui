@@ -6,7 +6,7 @@
       >
       <input matInput [formControlName]="attribute.name" type="number" />
     </mat-form-field>
-    <mat-form-field appearance="outline" class="full-width" *ngSwitchCase="'string'" color="accent">
+    <mat-form-field appearance="outline" class="full-width" *ngSwitchCase="'string'">
       <mat-label
         >{{ attribute.name | titlecase }}<span *ngIf="attribute?.identifier"> * </span></mat-label
       >

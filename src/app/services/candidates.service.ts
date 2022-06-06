@@ -59,4 +59,8 @@ export class CandidatesService {
   updateCandidateAttributes(id: string, data: any) {
     return this._fetch.post(`candidates/${id}/attributes`, data);
   }
+
+  createNewCandidate(data: any) {
+    return this._fetch.post(`candidates`, data);
+  }
 }
