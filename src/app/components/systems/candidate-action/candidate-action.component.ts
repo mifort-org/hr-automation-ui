@@ -19,6 +19,6 @@ export class CandidateActionComponent implements OnInit {
   }
 
   openEditModal() {
-    this._modalService.open(EditCandidateModalComponent, EModalSizes.LG);
+    this._modalService.open(EditCandidateModalComponent, EModalSizes.MD);
   }
 }
