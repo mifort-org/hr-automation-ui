@@ -1,41 +1,32 @@
 <form [formGroup]="form">
-  <div class="row">
-    <div class="col-5 col-10-sm">
-      <mat-form-field appearance="fill" class="full-width">
-        <mat-label>Firstname</mat-label>
-        <input matInput formControlName="firstname" />
-      </mat-form-field>
+  <ng-container *ngFor="let attribute of attributesData" [ngSwitch]="attribute?.basicType">
+    <mat-form-field appearance="outline" class="full-width" *ngSwitchCase="'number'">
+      <mat-label
+        >{{ attribute.name | titlecase }}<span *ngIf="attribute?.identifier"> * </span></mat-label
+      >
+      <input matInput [formControlName]="attribute.name" type="number" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="full-width" *ngSwitchCase="'string'" color="accent">
+      <mat-label
+        >{{ attribute.name | titlecase }}<span *ngIf="attribute?.identifier"> * </span></mat-label
+      >
+      <input matInput [formControlName]="attribute.name" />
+      <mat-error *ngIf="attribute?.name && formErrors[attribute.name]">
+        <span>{{ formErrors[attribute.name] }}</span>
+      </mat-error>
+    </mat-form-field>
+    <div *ngSwitchCase="'boolean'" class="full-width mb-20">
+      <mat-radio-group>
+        <div class="mb-10">
+          <label class="subheading-2 text-grey"
+            >{{ attribute.name | titlecase }}<span *ngIf="attribute?.identifier"> * </span></label
+          >
+        </div>
+        <div class="flex">
+          <mat-radio-button [value]="true" class="mr-20">True</mat-radio-button>
+          <mat-radio-button [value]="false">False</mat-radio-button>
+        </div>
+      </mat-radio-group>
     </div>
-    <div class="col-5 col-10-sm">
-      <mat-form-field appearance="fill" class="full-width">
-        <mat-label>Lastname</mat-label>
-        <input matInput formControlName="lastname" />
-      </mat-form-field>
-    </div>
-  </div>
-
-  <div class="row flex-between">
-    <div class="col-4 col-10-sm">
-      <mat-form-field appearance="fill" class="full-width">
-        <mat-label>Email</mat-label>
-        <input matInput formControlName="email" />
-      </mat-form-field>
-    </div>
-    <div class="col-3 col-10-sm">
-      <mat-form-field appearance="fill" class="full-width">
-        <mat-label>Phone</mat-label>
-        <input matInput formControlName="phone" />
-      </mat-form-field>
-    </div>
-    <div class="col-2 col-10-sm">
-      <mat-form-field appearance="fill" class="full-width">
-        <mat-label>Status</mat-label>
-        <mat-select formControlName="status">
-          <mat-option *ngFor="let status of statusesOptions" [value]="status.value">
-            {{ status.value }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-  </div>
+  </ng-container>
 </form>

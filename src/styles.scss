@@ -6,6 +6,23 @@
 @include commonMargins();
 @include gridClass();
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: $background;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: mat-color($primary)
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 body {
   font-family: 'Roboto Mono', monospace;
   background: linear-gradient(to bottom, $background 30%, $middleBlue 80%, mat-color($primary) 120%);
@@ -49,10 +66,24 @@ body {
   text-align: center;
 }
 
+.mat-dialog-container{
+  background-color: $background
+}
+
 .snackbar {
+  &--success{
+    background-color: $success;
+    color: white;
+  }
+  
   &--error {
-    background-color: #333;
-    color: mat-color($warn);
+    background-color: mat-color($warn);
+    color: white
+  }
+
+  &--warning {
+    background-color: $warning;
+    color: $background
   }
 }
 

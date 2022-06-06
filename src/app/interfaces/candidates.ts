@@ -32,6 +32,8 @@ export interface ICandidateAttribute {
   };
 }
 
+export type ICandidateCustomAttribute = { [key: string]: ICandidateAttribute };
+
 export interface ICandidate {
   id: string;
   lastContact: string;
@@ -42,7 +44,7 @@ export interface ICandidate {
   keywords: IKeywords[];
   communicationHistory: ICommunicationHistory[];
   candidateAttributes: ICandidateAttribute[];
-  customAttribute?: { [key: string]: any };
+  customAttribute?: ICandidateCustomAttribute;
 
   // TODO: Need to resolve this one any
   mergeCandidates: any;

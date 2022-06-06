@@ -20,6 +20,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { NavbarComponent } from '@components/systems/navbar/navbar.component';
 import { SignInModalComponent } from '@components/shared/sign-in-modal/sign-in-modal.component';
@@ -32,16 +34,17 @@ import { NewCandidateModalComponent } from '@components/shared/new-candidate-mod
 import { CandidateFormComponent } from '@components/shared/candidate-form/candidate-form.component';
 import { CandidateDetailComponent } from '@pages/candidate-detail/candidate-detail.component';
 import { CandidateActionComponent } from '@components/systems/candidate-action/candidate-action.component';
+import { CandidateMainInfoComponent } from '@components/shared/candidate-main-info/candidate-main-info.component';
+import { CandidateHistoryComponent } from '@components/shared/candidate-history/candidate-history.component';
+import { CandidateUpdatesComponent } from '@components/shared/candidate-updates/candidate-updates.component';
+import { StatusPipe } from '@utils/pipes/status.pipe';
+import { EmptyBlockComponent } from '@components/shared/empty-block/empty-block.component';
+import { CandidateCommunicationsComponent } from '@components/shared/candidate-communications/candidate-communications.component';
+import { FullnamePipe } from '@utils/pipes/fullname.pipe';
+import { EditCandidateModalComponent } from '@components/shared/edit-candidate-modal/edit-candidate-modal.component';
 
 import AppRoutingModule from './app-routing.module';
 import AppComponent from './app.component';
-import { CandidateMainInfoComponent } from './components/shared/candidate-main-info/candidate-main-info.component';
-import { CandidateHistoryComponent } from './components/shared/candidate-history/candidate-history.component';
-import { CandidateUpdatesComponent } from './components/shared/candidate-updates/candidate-updates.component';
-import { StatusPipe } from './utils/pipes/status.pipe';
-import { EmptyBlockComponent } from './components/shared/empty-block/empty-block.component';
-import { CandidateCommunicationsComponent } from './components/shared/candidate-communications/candidate-communications.component';
-import { FullnamePipe } from './utils/pipes/fullname.pipe';
 
 @NgModule({
   declarations: [
@@ -64,6 +67,7 @@ import { FullnamePipe } from './utils/pipes/fullname.pipe';
     EmptyBlockComponent,
     CandidateCommunicationsComponent,
     FullnamePipe,
+    EditCandidateModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -89,6 +93,8 @@ import { FullnamePipe } from './utils/pipes/fullname.pipe';
     MatProgressBarModule,
     MatSelectModule,
     MatTabsModule,
+    MatRadioModule,
+    MatProgressSpinnerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
