@@ -24,12 +24,12 @@ export class CandidateDetailComponent implements OnInit {
     this._activatedRoute.params.subscribe({
       next: (param) => {
         this.candidateId = param['id'];
-      },
-    });
 
-    this._candidateService.getCandidateById(this.candidateId).subscribe({
-      next: (resolve: ICandidate) => {
-        this.candidate = resolve;
+        this._candidateService.getCandidateById(param['id']).subscribe({
+          next: (resolve: ICandidate) => {
+            this.candidate = resolve;
+          },
+        });
       },
     });
   }

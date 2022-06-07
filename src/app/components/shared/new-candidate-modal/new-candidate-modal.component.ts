@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 
 import { ERROR_STATUS_CODES } from '@constants/errorStatusCode';
-import { ModalService } from '@services/modal.service';
 import { ROUTES } from '@src/app/routes';
 import { NotificationService } from '@services/notification.service';
 import { CandidatesService } from '@services/candidates.service';
@@ -37,8 +36,7 @@ export class NewCandidateModalComponent {
     private _formBuilder: FormBuilder,
     private _candidateService: CandidatesService,
     private _notificationService: NotificationService,
-    private _router: Router,
-    private _modalService: ModalService
+    private _router: Router
   ) {
     this.form = this._formBuilder.group({
       id: ['', Validators.required],
