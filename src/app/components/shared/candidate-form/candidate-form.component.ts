@@ -1,10 +1,10 @@
 import { FormGroup, FormControl } from '@angular/forms';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
-import { IAttribute } from '@interfaces/attributes';
+import { AttributeType } from '@interfaces/attributes';
 import { AttributesService } from '@services/attributes.service';
 import { CANDIDATE_STATUSES } from '@constants/candidates';
-import { ICandidate } from '@interfaces/candidates';
+import { Candidate } from '@interfaces/candidates';
 import { VALIDATORS } from '@utils/validators';
 
 @Component({
@@ -12,7 +12,7 @@ import { VALIDATORS } from '@utils/validators';
   templateUrl: './candidate-form.component.html',
 })
 export class CandidateFormComponent implements OnInit {
-  @Input() candidate!: ICandidate;
+  @Input() candidate!: Candidate;
 
   @Output() formOnChange = new EventEmitter();
 
@@ -22,7 +22,7 @@ export class CandidateFormComponent implements OnInit {
 
   formErrors: any = {};
 
-  attributesData!: IAttribute[];
+  attributesData!: AttributeType[];
 
   constructor(private _attributeService: AttributesService) {}
 

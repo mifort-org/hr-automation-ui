@@ -1,7 +1,8 @@
+import { Observable, switchMap } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CandidatesService } from '@services/candidates.service';
-import { ICandidate } from '@interfaces/candidates';
+import { Candidate } from '@interfaces/candidates';
 import { ROUTES } from '@src/app/routes';
 
 @Component({
@@ -12,7 +13,7 @@ import { ROUTES } from '@src/app/routes';
 export class CandidateDetailComponent implements OnInit {
   candidateId!: string;
 
-  candidate!: ICandidate | null;
+  candidate!: Candidate | null;
 
   constructor(
     private _router: Router,
@@ -21,17 +22,17 @@ export class CandidateDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this._activatedRoute.params.subscribe({
-      next: (param) => {
-        this.candidateId = param['id'];
+    this._activatedRoute.params
+      .pipe(
+        switchMap((param): Observable<Candidate> => {
+          this.candidateId = param['id'];
 
-        this._candidateService.getCandidateById(param['id']).subscribe({
-          next: (resolve: ICandidate) => {
-            this.candidate = resolve;
-          },
-        });
-      },
-    });
+          return this._candidateService.getCandidateById(this.candidateId);
+        })
+      )
+      .subscribe((resolve: Candidate) => {
+        this.candidate = resolve;
+      });
   }
 
   back() {

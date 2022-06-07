@@ -4,7 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { ERROR_MESSAGE } from '@constants/strings';
 import { ERROR_STATUS_CODES } from '@constants/errorStatusCode';
 import { AttributesService } from '@services/attributes.service';
-import { ICandidate } from '@interfaces/candidates';
+import { Candidate } from '@interfaces/candidates';
 import { CandidatesService } from '@services/candidates.service';
 import { VALIDATORS } from '@utils/validators';
 import { NotificationService } from '@services/notification.service';
@@ -15,7 +15,7 @@ import { ENotificationMode } from '@constants/notification';
   templateUrl: './edit-candidate-modal.component.html',
 })
 export class EditCandidateModalComponent implements OnInit {
-  candidate!: ICandidate;
+  candidate!: Candidate;
 
   formData = null;
 

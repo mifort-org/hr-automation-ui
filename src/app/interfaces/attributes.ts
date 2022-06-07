@@ -1,4 +1,4 @@
-export interface IAttribute {
+export interface AttributeType {
   basicType: string;
   id: number;
   identifier: boolean;
@@ -7,6 +7,6 @@ export interface IAttribute {
   validation: string;
 }
 
-export interface IAttributeDictionary {
-  [key: string]: IAttribute;
+export interface AttributeTypeDictionary {
+  [key: string]: AttributeType;
 }

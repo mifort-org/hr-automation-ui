@@ -1,16 +1,16 @@
 import { ECandidateStatus } from '@constants/candidates';
 
-export interface ICandidatesFilterData {
+export interface CandidatesFilterData {
   pageNumber?: number;
   pageSize?: number;
   keyword?: string[];
 }
 
-export interface IKeywords {
+export interface Keywords {
   id: string;
 }
 
-export interface ICommunicationHistory {
+export interface CommunicationHistory {
   id: number;
   createDate: string;
   updateDate: string;
@@ -18,7 +18,7 @@ export interface ICommunicationHistory {
   archived: boolean;
 }
 
-export interface ICandidateAttribute {
+export interface CandidateAttribute {
   id: number;
   value: string;
   valueSource: number;
@@ -32,19 +32,19 @@ export interface ICandidateAttribute {
   };
 }
 
-export type ICandidateCustomAttribute = { [key: string]: ICandidateAttribute };
+export type CandidateCustomAttribute = { [key: string]: CandidateAttribute };
 
-export interface ICandidate {
+export interface Candidate {
   id: string;
   lastContact: string;
   status: ECandidateStatus;
 
   // TODO: Need to resolve this one any;
   candidateUpdates: any;
-  keywords: IKeywords[];
-  communicationHistory: ICommunicationHistory[];
-  candidateAttributes: ICandidateAttribute[];
-  customAttribute?: ICandidateCustomAttribute;
+  keywords: Keywords[];
+  communicationHistory: CommunicationHistory[];
+  candidateAttributes: CandidateAttribute[];
+  customAttribute?: CandidateCustomAttribute;
 
   // TODO: Need to resolve this one any
   mergeCandidates: any;

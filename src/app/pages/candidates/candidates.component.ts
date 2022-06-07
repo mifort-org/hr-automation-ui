@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CandidatesService } from '@services/candidates.service';
-import { ICandidatesFilterData, ICandidate } from '@interfaces/candidates';
+import { CandidatesFilterData, Candidate } from '@interfaces/candidates';
 
 @Component({
   selector: 'app-candidates',
@@ -11,7 +11,7 @@ import { ICandidatesFilterData, ICandidate } from '@interfaces/candidates';
 export class CandidatesComponent implements OnInit {
   showFiller = false;
 
-  candidatesList: ICandidate[] = [];
+  candidatesList: Candidate[] = [];
 
   pageState = {
     error: null,
@@ -33,10 +33,10 @@ export class CandidatesComponent implements OnInit {
     this.getCandidatesList({ pageNumber: 1, pageSize: 100, keyword: this.keywordsList });
   }
 
-  getCandidatesList(filterData: ICandidatesFilterData) {
+  getCandidatesList(filterData: CandidatesFilterData) {
     this.pageState.loading = true;
     this._candidatesService.getCandidates(filterData).subscribe({
-      next: (resolve: ICandidate[]) => {
+      next: (resolve: Candidate[]) => {
         this.candidatesList = resolve;
         this.pageState.loading = false;
       },
