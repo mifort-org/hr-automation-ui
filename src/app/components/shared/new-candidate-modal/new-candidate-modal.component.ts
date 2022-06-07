@@ -4,14 +4,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 
 import { ERROR_STATUS_CODES } from '@constants/errorStatusCode';
-import { EditCandidateModalComponent } from '@components/shared/edit-candidate-modal/edit-candidate-modal.component';
 import { ModalService } from '@services/modal.service';
 import { ROUTES } from '@src/app/routes';
 import { NotificationService } from '@services/notification.service';
 import { CandidatesService } from '@services/candidates.service';
 import { CANDIDATE_STATUSES, ECandidateStatus } from '@constants/candidates';
 import { ENotificationMode } from '@constants/notification';
-import { EModalSizes, ERROR_MESSAGE } from '@constants/strings';
+import { ERROR_MESSAGE } from '@constants/strings';
 
 interface IFormData {
   id: string;
@@ -61,7 +60,6 @@ export class NewCandidateModalComponent {
           this._router.navigate([`${ROUTES.CANDIDATES}/details/${this.formData!.id}`]);
           this.modalState.loading = false;
           this.closeModal();
-          this._modalService.open(EditCandidateModalComponent, EModalSizes.LG);
         },
         error: (error) => {
           this.modalState.loading = false;
