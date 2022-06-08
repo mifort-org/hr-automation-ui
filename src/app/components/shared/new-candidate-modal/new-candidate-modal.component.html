@@ -3,11 +3,11 @@
   <div *ngIf="!modalState?.loading; else loading">
     <form [formGroup]="form">
       <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Login of candidate (unique name)</mat-label>
+        <mat-label>Name</mat-label>
         <input matInput formControlName="id" required />
       </mat-form-field>
       <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Select status for candidate</mat-label>
+        <mat-label>Select status</mat-label>
         <mat-select formControlName="status">
           <mat-option *ngFor="let status of statusOptions" [value]="status.value">
             {{ status.label }}
@@ -24,7 +24,7 @@
     (click)="submitNewCandidate()"
     [disabled]="modalState?.loading"
   >
-    Submit
+    Create
   </button>
   <button mat-button (click)="closeModal()" [disabled]="modalState?.loading">Cancel</button>
 </div>

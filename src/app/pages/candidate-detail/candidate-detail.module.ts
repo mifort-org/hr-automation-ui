@@ -1,6 +1,5 @@
 import { MatButtonModule } from '@angular/material/button';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { MatIconModule } from '@angular/material/icon';
@@ -31,7 +30,6 @@ import { CandidateHistoryComponent } from './candidate-history/candidate-history
   imports: [
     BrowserModule,
     AppRoutingModule,
-    CommonModule,
 
     MatIconModule,
     MatCardModule,
