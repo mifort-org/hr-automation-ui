@@ -13,4 +13,5 @@ export const ERROR_MESSAGE = {
 
 export const TEXT_FIELD_ERRORS = {
   IDENTIFIER_FIELD: 'Please fill one of identified field (*)',
+  FORM_INVALID: 'Please, check out the form inputs',
 };

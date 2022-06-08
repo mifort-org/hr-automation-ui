@@ -6,14 +6,6 @@
         <mat-label>Name</mat-label>
         <input matInput formControlName="id" required />
       </mat-form-field>
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Select status</mat-label>
-        <mat-select formControlName="status">
-          <mat-option *ngFor="let status of statusOptions" [value]="status.value">
-            {{ status.label }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
     </form>
   </div>
 </div>

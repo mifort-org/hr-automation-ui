@@ -3,13 +3,14 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 
+import { PageState } from '@utils/pageState';
 import { ERROR_STATUS_CODES } from '@constants/errorStatusCode';
 import { ROUTES } from '@src/app/routes';
 import { NotificationService } from '@services/notification.service';
 import { CandidatesService } from '@services/candidates.service';
 import { CANDIDATE_STATUSES, ECandidateStatus } from '@constants/candidates';
 import { ENotificationMode } from '@constants/notification';
-import { ERROR_MESSAGE } from '@constants/strings';
+import { ERROR_MESSAGE, TEXT_FIELD_ERRORS } from '@constants/strings';
 
 interface IFormData {
   id: string;
@@ -27,9 +28,7 @@ export class NewCandidateModalComponent {
 
   formData: IFormData | null = null;
 
-  modalState = {
-    loading: false,
-  };
+  modalState = new PageState();
 
   constructor(
     private _dialogRef: MatDialogRef<NewCandidateModalComponent>,
@@ -40,7 +39,6 @@ export class NewCandidateModalComponent {
   ) {
     this.form = this._formBuilder.group({
       id: ['', Validators.required],
-      status: ['', Validators.required],
     });
 
     this.form?.valueChanges.subscribe((data) => {
@@ -50,17 +48,17 @@ export class NewCandidateModalComponent {
 
   submitNewCandidate() {
     if (this.formData === null || this.form.invalid) {
-      this._notificationService.show('Check out the form', ENotificationMode.ERROR);
+      this._notificationService.show(TEXT_FIELD_ERRORS.FORM_INVALID, ENotificationMode.ERROR);
     } else {
-      this.modalState.loading = true;
+      this.modalState.startLoading();
       this._candidateService.createNewCandidate(this.formData).subscribe({
         next: () => {
           this._router.navigate([`${ROUTES.CANDIDATES}/details/${this.formData!.id}`]);
-          this.modalState.loading = false;
+          this.modalState.finishLoading();
           this.closeModal();
         },
         error: (error) => {
-          this.modalState.loading = false;
+          this.modalState.finishLoading();
           this._notificationService.show(
             ERROR_MESSAGE[error?.status || ERROR_STATUS_CODES.INTERNAL_SERVER_ERROR],
             ENotificationMode.ERROR

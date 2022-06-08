@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 
+import { PageState } from '@utils/pageState';
 import { ERROR_MESSAGE } from '@constants/strings';
 import { ERROR_STATUS_CODES } from '@constants/errorStatusCode';
 import { AttributesService } from '@services/attributes.service';
@@ -21,10 +22,7 @@ export class EditCandidateModalComponent implements OnInit {
 
   formErrors = null as any;
 
-  modalState = {
-    loading: false,
-    error: null,
-  };
+  modalState = new PageState();
 
   constructor(
     private _dialogRef: MatDialogRef<EditCandidateModalComponent>,
@@ -55,7 +53,7 @@ export class EditCandidateModalComponent implements OnInit {
       );
 
       if (result === null) {
-        this.modalState.loading = true;
+        this.modalState.startLoading();
         const fetchData = Object.entries(this.formData).map(([key, value]) => {
           return {
             value,
@@ -68,7 +66,7 @@ export class EditCandidateModalComponent implements OnInit {
         const data = fetchData.filter((el) => el?.value);
         this._candidateService.updateCandidateAttributes(this.candidate?.id, data).subscribe({
           next: () => {
-            this.modalState.loading = false;
+            this.modalState.finishLoading();
             this.closeModal();
             this._notification.show('Candidate is updated', ENotificationMode.SUCCESS);
             this._candidateService.getCandidateById(this.candidate?.id);
@@ -78,7 +76,7 @@ export class EditCandidateModalComponent implements OnInit {
             this._candidateService.getCandidateById(this.candidate?.id).subscribe();
           },
           error: (err) => {
-            this.modalState.loading = false;
+            this.modalState.finishLoading();
             this._notification.show(
               ERROR_MESSAGE[err?.status || ERROR_STATUS_CODES.INTERNAL_SERVER_ERROR],
               ENotificationMode.ERROR
