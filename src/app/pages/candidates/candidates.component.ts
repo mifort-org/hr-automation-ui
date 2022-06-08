@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CandidatesService } from '@services/candidates.service';
 import { CandidatesFilterData, Candidate } from '@interfaces/candidates';
+import { PageState } from '@utils/pageState';
 
 @Component({
   selector: 'app-candidates',
@@ -13,10 +14,7 @@ export class CandidatesComponent implements OnInit {
 
   candidatesList: Candidate[] = [];
 
-  pageState = {
-    error: null,
-    loading: false,
-  };
+  pageState = new PageState();
 
   filterForm!: FormGroup;
 
@@ -34,15 +32,16 @@ export class CandidatesComponent implements OnInit {
   }
 
   getCandidatesList(filterData: CandidatesFilterData) {
-    this.pageState.loading = true;
+    this.pageState.startLoading();
+
     this._candidatesService.getCandidates(filterData).subscribe({
       next: (resolve: Candidate[]) => {
         this.candidatesList = resolve;
-        this.pageState.loading = false;
+        this.pageState.finishLoading();
       },
       error: (error: any) => {
-        this.pageState.error = error;
-        this.pageState.loading = false;
+        this.pageState.catchError(error);
+        this.pageState.finishLoading();
       },
     });
   }
