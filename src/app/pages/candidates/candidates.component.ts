@@ -1,8 +1,8 @@
-import { map } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CandidatesService } from '@services/candidates.service';
-import { ICandidatesFilterData, ICandidate } from '@interfaces/candidates';
+import { CandidatesFilterData, Candidate } from '@interfaces/candidates';
+import { PageState } from '@utils/pageState';
 
 @Component({
   selector: 'app-candidates',
@@ -12,12 +12,9 @@ import { ICandidatesFilterData, ICandidate } from '@interfaces/candidates';
 export class CandidatesComponent implements OnInit {
   showFiller = false;
 
-  candidatesList: ICandidate[] = [];
+  candidatesList: Candidate[] = [];
 
-  pageState = {
-    error: null,
-    loading: false,
-  };
+  pageState = new PageState();
 
   filterForm!: FormGroup;
 
@@ -34,36 +31,19 @@ export class CandidatesComponent implements OnInit {
     this.getCandidatesList({ pageNumber: 1, pageSize: 100, keyword: this.keywordsList });
   }
 
-  getCandidatesList(filterData: ICandidatesFilterData) {
-    this.pageState.loading = true;
-    this._candidatesService
-      .getCandidates(filterData)
-      .pipe(
-        map((data: ICandidate[]) => {
-          const modifiedData = data?.map((candidate) => {
-            const attributes: any = {};
-            candidate?.candidateAttributes?.forEach((attr) => {
-              attributes[attr.attributeTypes.name] = attr?.value;
-            });
-            return {
-              ...candidate,
-              customAttribute: attributes,
-            };
-          });
+  getCandidatesList(filterData: CandidatesFilterData) {
+    this.pageState.startLoading();
 
-          return modifiedData;
-        })
-      )
-      .subscribe({
-        next: (resolve: ICandidate[]) => {
-          this.candidatesList = resolve;
-          this.pageState.loading = false;
-        },
-        error: (error: any) => {
-          this.pageState.error = error;
-          this.pageState.loading = false;
-        },
-      });
+    this._candidatesService.getCandidates(filterData).subscribe({
+      next: (resolve: Candidate[]) => {
+        this.candidatesList = resolve;
+        this.pageState.finishLoading();
+      },
+      error: (error: any) => {
+        this.pageState.catchError(error);
+        this.pageState.finishLoading();
+      },
+    });
   }
 
   remove($event: any): void {

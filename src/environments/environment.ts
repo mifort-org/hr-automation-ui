@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseAPIUrl: 'http://44.200.190.47:8090',
+  baseAPIUrl: 'http://hr-automation-static-ip-2387069d6f253d30.elb.us-east-1.amazonaws.com:8090',
 };
 
 /*

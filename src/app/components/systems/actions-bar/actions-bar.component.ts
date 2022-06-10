@@ -13,6 +13,6 @@ export class ActionsBarComponent {
   constructor(private _modalService: ModalService) {}
 
   createNewCandidateModalOpen() {
-    this._modalService.open(NewCandidateModalComponent, EModalSizes.LG);
+    this._modalService.open(NewCandidateModalComponent, EModalSizes.SM);
   }
 }

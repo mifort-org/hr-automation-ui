@@ -34,13 +34,13 @@ export class FetchService {
     return this._http.get<T>(`${this.baseUrl}/${url}`, optionsObject);
   }
 
-  post(url: string, data: any, options?: IOptions) {
+  post<T>(url: string, data: any, options?: IOptions) {
     const optionsObject = options ? { ...GLOBAL_OPTIONS, ...options } : GLOBAL_OPTIONS;
-    return this._http.post(`${this.baseUrl}/${url}`, data, optionsObject);
+    return this._http.post<T>(`${this.baseUrl}/${url}`, data, optionsObject);
   }
 
-  put(url: string, data: any, options?: IOptions) {
+  put<T>(url: string, data: any, options?: IOptions) {
     const optionsObject = options ? { ...GLOBAL_OPTIONS, ...options } : GLOBAL_OPTIONS;
-    return this._http.put(`${this.baseUrl}/${url}`, data, optionsObject);
+    return this._http.put<T>(`${this.baseUrl}/${url}`, data, optionsObject);
   }
 }
