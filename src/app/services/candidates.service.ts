@@ -46,8 +46,9 @@ export class CandidatesService {
   getCandidateById(id: string): any {
     return this._fetch.get<Candidate>(`candidates/${id}`).pipe(
       map((data) => {
-        this.currentCandidate = createCustomAttribute(data);
-        return data;
+        const modifiedData = createCustomAttribute(data);
+        this.currentCandidate = modifiedData;
+        return modifiedData;
       })
     );
   }

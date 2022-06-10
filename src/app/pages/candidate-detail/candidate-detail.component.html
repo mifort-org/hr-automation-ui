@@ -14,7 +14,7 @@
               matBadgeSize="small"
               [matBadgeColor]="candidate?.status | status"
               class="hide-text"
-              >Adventure Time</span
+              >{{ candidate?.customAttribute | fullname }}</span
             ></mat-card-title
           >
           <mat-card-subtitle>{{ candidate?.id }}</mat-card-subtitle>
@@ -24,11 +24,10 @@
         </div>
         <mat-card-content>
           <mat-chip-list>
-            <mat-chip color="primary" selected>Java</mat-chip>
-            <mat-chip color="primary" selected>Javascript</mat-chip>
+            <mat-chip color="primary" *ngFor="let keyword of candidate?.keywords">{{
+              keyword?.id | titlecase
+            }}</mat-chip>
           </mat-chip-list>
-
-          <div><p>Biography</p></div>
         </mat-card-content>
       </mat-card>
     </div>
