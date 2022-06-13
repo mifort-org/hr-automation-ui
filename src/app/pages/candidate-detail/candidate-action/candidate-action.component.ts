@@ -14,7 +14,9 @@ export class CandidateActionComponent implements OnInit {
   ngOnInit(): void {
     this._route.fragment.subscribe((f) => {
       const element = document.querySelector(`#${f}`);
-      if (element) element.scrollIntoView();
+      if (element) {
+        element.scrollIntoView();
+      }
     });
   }
 
