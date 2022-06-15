@@ -1,0 +1,26 @@
+<h1 mat-dialog-title>Update candidate information</h1>
+<div mat-dialog-content>
+  <div *ngIf="!modalState?.loading; else loading">
+    <app-candidate-form
+      [candidate]="candidate"
+      (formOnChange)="formValuesOnChange($event)"
+    ></app-candidate-form>
+  </div>
+</div>
+<div mat-dialog-actions class="flex flex-end">
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="submitCandidateUpdate()"
+    [disabled]="modalState.loading"
+  >
+    Submit
+  </button>
+  <button mat-button (click)="closeModal()" [disabled]="modalState.loading">Cancel</button>
+</div>
+
+<ng-template #loading>
+  <div class="full-width flex-column align-center mt-30 mb-30">
+    <mat-spinner color="accent" diameter="70"></mat-spinner>
+  </div>
+</ng-template>

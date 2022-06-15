@@ -7,7 +7,9 @@ export class MergeService {
   private candidatesIds: string[] = [];
 
   addCandidateId(id: string) {
-    if (!this.candidatesIds.includes(id)) this.candidatesIds.push(id);
+    if (!this.candidatesIds.includes(id)) {
+      this.candidatesIds.push(id);
+    }
   }
 
   removeCandidateId(id: string) {

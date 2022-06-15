@@ -1,18 +1,5 @@
 @import 'src/styles/colors';
 
-.main-container{
-    min-height: 100vh;
-    background-color: transparent;
-}
-
-.drawer-container{
-    position: fixed;
-    top: 250px;
-    padding: 0px 10px;
-    min-width: 300px;
-    background-color: transparent;
-}
-
 .sticky-bar{
     position: sticky;
     top: 0;

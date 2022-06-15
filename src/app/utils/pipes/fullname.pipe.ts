@@ -4,8 +4,10 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'fullname',
 })
 export class FullnamePipe implements PipeTransform {
-  transform(value: any): string {
-    if (value?.firstname && value?.lastname) return `${value?.firstname} ${value?.lastname}`;
+  transform(attribute: any): string {
+    if (attribute?.firstname?.value && attribute?.lastname?.value) {
+      return `${attribute?.firstname?.value} ${attribute?.lastname?.value}`;
+    }
     return 'No name';
   }
 }
