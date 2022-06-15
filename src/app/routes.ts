@@ -1,5 +1,5 @@
 export const ROUTES = {
   CANDIDATES: 'candidates',
   CANDIDATE_DETAIL: 'candidates/details/:id',
-  CANDIDATES_MERGE: 'candidates/merge',
+  CANDIDATES_MERGE: 'merge',
 };

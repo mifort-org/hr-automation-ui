@@ -43,6 +43,7 @@ import { EmptyBlockComponent } from './components/shared/empty-block/empty-block
 import { CandidateCommunicationsComponent } from './components/shared/candidate-communications/candidate-communications.component';
 import { FullnamePipe } from './utils/pipes/fullname.pipe';
 import { MergePageComponent } from './pages/merge-page/merge-page.component';
+import { CandidateMergeComponent } from './components/shared/candidate-merge/candidate-merge.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { MergePageComponent } from './pages/merge-page/merge-page.component';
     CandidateCommunicationsComponent,
     FullnamePipe,
     MergePageComponent,
+    CandidateMergeComponent,
   ],
   imports: [
     BrowserModule,

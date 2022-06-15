@@ -1,1 +1,44 @@
-// Test comment
+.candidate-merge-container {
+  margin: 20px 100px;
+  padding-bottom: 10px;
+  font-size: 1.5rem;
+  height: auto;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  display: flex; 
+  gap: 10px;  
+  overflow: auto;
+
+  .desc-candidate-container {    
+    min-width: 300px;
+  }
+
+  .desc-result-container {
+    min-width: 300px;
+
+    .desc-result {
+      height: 12vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: black;
+      margin-top: 10px;
+      border-radius: 5px;
+      box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 20%), 0px 1px 1px 0px rgba(0, 0, 0, 14%), 0px 1px 3px 0px rgba(0, 0, 0, 12%);
+    }
+  }
+  
+  .desc-titles-container {
+    min-width: 200px;
+
+    .desc-title {
+      height: 12vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: black;
+      margin-top: 10px;
+      border-radius: 5px;
+      box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 20%), 0px 1px 1px 0px rgba(0, 0, 0, 14%), 0px 1px 3px 0px rgba(0, 0, 0, 12%);
+    }
+  }
+}
