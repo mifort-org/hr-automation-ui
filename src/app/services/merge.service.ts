@@ -23,4 +23,8 @@ export class MergeService {
   getCandidatesIds() {
     return this.candidatesIds;
   }
+
+  getCandidateIdbyIndex(index: number) {
+    return this.candidatesIds[index];
+  }
 }

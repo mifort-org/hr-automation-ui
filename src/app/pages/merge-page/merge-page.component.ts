@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { CandidatesService } from '@src/app/services/candidates.service';
 import { MergeService } from '@src/app/services/merge.service';
@@ -27,9 +27,9 @@ export class MergePageComponent implements OnInit {
     private _notification: NotificationService
   ) {}
 
-  pageState = new PageState();
+  data = this._mergeService.getCandidatesIds();
 
-  @Input() candsArr = this._mergeService.getCandidatesIds();
+  pageState = new PageState();
 
   attributesTitles: Array<string> = [];
 
@@ -43,7 +43,7 @@ export class MergePageComponent implements OnInit {
 
   ngOnInit() {
     this.pageState.startLoading();
-    const fetchAttrArr = this.candsArr.map((item) =>
+    const fetchAttrArr = this.data.map((item) =>
       this._candidateService.getCandidateAttributesById(item)
     );
 
@@ -54,7 +54,6 @@ export class MergePageComponent implements OnInit {
         this.fillAttributesMatrix();
         this.pageState.finishLoading();
       },
-      // eslint-disable-next-line no-console
       (error) => {
         this.pageState.catchError(error);
         this.pageState.finishLoading();

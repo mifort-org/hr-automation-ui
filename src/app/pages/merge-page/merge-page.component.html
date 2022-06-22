@@ -14,7 +14,7 @@
     <ng-container *ngFor="let candidateAttr of attributesMatrix; let index=index;">
       <app-candidate-merge 
         [candidateAttr] = "candidateAttr" 
-        [candidateId]="_mergeService.getCandidatesIds()[index]" 
+        [candidateId]="_mergeService.getCandidateIdbyIndex(index)" 
         [index]="index" 
         (changeAttributes)="changeAttributes($event)"
         class="desc-candidate-container">
