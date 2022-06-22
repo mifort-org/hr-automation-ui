@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MergeService } from '@src/app/services/merge.service';
 
 @Component({
   selector: 'app-candidate-merge',
@@ -6,6 +7,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./candidate-merge.component.scss'],
 })
 export class CandidateMergeComponent implements OnInit {
+  constructor(public _mergeService: MergeService) {}
+
   @Input() candidateId!: string;
 
   @Input() index!: number;

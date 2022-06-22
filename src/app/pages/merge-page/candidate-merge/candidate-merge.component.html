@@ -1,4 +1,9 @@
-<div class="desc-candidate">{{candidateId}}</div>
+<div class="desc-candidate">
+  {{candidateId}}
+  <button mat-raised-button color="accent" (click)="_mergeService.removeCandidateId(candidateId)">
+    <mat-icon>delete_forever</mat-icon>
+  </button>
+</div>
 <ng-container *ngFor="let attr of candidateAttr; let i=index">
   <label class="desc-candidate">
     <input type="checkbox" class="desc-candidate-checkbox-hidden" [value]="i" (change)="onCheckboxChange($event)">

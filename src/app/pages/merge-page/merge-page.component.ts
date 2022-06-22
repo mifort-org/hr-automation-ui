@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { CandidatesService } from '@src/app/services/candidates.service';
 import { MergeService } from '@src/app/services/merge.service';
+import { PageState } from '@src/app/utils/pageState';
+import { NotificationService } from '@src/app/services/notification.service';
+import { ENotificationMode } from '@src/app/constants/notification';
 
 export interface AttributeTypes {
   id: number;
@@ -18,7 +21,15 @@ export interface AttributeTypes {
   styleUrls: ['./merge-page.component.scss'],
 })
 export class MergePageComponent implements OnInit {
-  constructor(private _candidateService: CandidatesService, public _mergeService: MergeService) {}
+  constructor(
+    private _candidateService: CandidatesService,
+    public _mergeService: MergeService,
+    private _notification: NotificationService
+  ) {}
+
+  pageState = new PageState();
+
+  @Input() candsArr = this._mergeService.getCandidatesIds();
 
   attributesTitles: Array<string> = [];
 
@@ -31,18 +42,23 @@ export class MergePageComponent implements OnInit {
   candidates: Array<Array<AttributeTypes>> = [];
 
   ngOnInit() {
-    const fetchAttrArr = this._mergeService
-      .getCandidatesId()
-      .map((item) => this._candidateService.getCandidateAttributesById(item));
+    this.pageState.startLoading();
+    const fetchAttrArr = this.candsArr.map((item) =>
+      this._candidateService.getCandidateAttributesById(item)
+    );
 
     forkJoin(fetchAttrArr).subscribe(
       (resolve: AttributeTypes[][]) => {
         this.candidates = resolve;
         this.fillTitleValues();
         this.fillAttributesMatrix();
+        this.pageState.finishLoading();
       },
       // eslint-disable-next-line no-console
-      (err) => console.log(err)
+      (error) => {
+        this.pageState.catchError(error);
+        this.pageState.finishLoading();
+      }
     );
   }
 
@@ -81,5 +97,15 @@ export class MergePageComponent implements OnInit {
         }
       });
     });
+  }
+
+  mergeCandidates() {
+    this.attributesTitles.forEach((item, index) => {
+      if (this.finalResult[index].length) {
+        // eslint-disable-next-line no-console
+        console.log(`${item} ${this.finalResult[index]}`);
+      }
+    });
+    this._notification.show('Successfully merged. Check console', ENotificationMode.SUCCESS);
   }
 }

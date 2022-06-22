@@ -20,7 +20,7 @@ export class MergeService {
     this.candidatesIds = [];
   }
 
-  getCandidatesId() {
+  getCandidatesIds() {
     return this.candidatesIds;
   }
 }
