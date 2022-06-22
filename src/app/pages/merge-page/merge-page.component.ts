@@ -27,8 +27,6 @@ export class MergePageComponent implements OnInit {
     private _notification: NotificationService
   ) {}
 
-  data = this._mergeService.getCandidatesIds();
-
   pageState = new PageState();
 
   attributesTitles: Array<string> = [];
@@ -43,9 +41,9 @@ export class MergePageComponent implements OnInit {
 
   ngOnInit() {
     this.pageState.startLoading();
-    const fetchAttrArr = this.data.map((item) =>
-      this._candidateService.getCandidateAttributesById(item)
-    );
+    const fetchAttrArr = this._mergeService
+      .getCandidatesIds()
+      .map((item) => this._candidateService.getCandidateAttributesById(item));
 
     forkJoin(fetchAttrArr).subscribe(
       (resolve: AttributeTypes[][]) => {
