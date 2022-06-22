@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class MergeService {
-  private candidatesIds: string[] = [];
+  private candidatesIds: string[] = ['uliana_fomina', 'artem_skrebets'];
 
   addCandidateId(id: string) {
     if (!this.candidatesIds.includes(id)) {
@@ -18,5 +18,9 @@ export class MergeService {
 
   removeAllCandidatesId() {
     this.candidatesIds = [];
+  }
+
+  getCandidatesId() {
+    return this.candidatesIds;
   }
 }

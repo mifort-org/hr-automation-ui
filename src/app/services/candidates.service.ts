@@ -53,6 +53,14 @@ export class CandidatesService {
     );
   }
 
+  getCandidateAttributesById(id: string): any {
+    return this._fetch.get<Array<string>>(`candidates/${id}/attributes`).pipe(
+      map((data) => {
+        return data;
+      })
+    );
+  }
+
   updateCandidateAttributes(id: string, data: any) {
     return this._fetch.post(`candidates/${id}/attributes`, data);
   }

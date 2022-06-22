@@ -1,4 +1,8 @@
 <div class="desc-candidate">{{candidateId}}</div>
-<ng-container *ngFor="let attr of candidateAttr">
-  <div class="desc-candidate">{{attr}}</div>
+<ng-container *ngFor="let attr of candidateAttr; let i=index">
+  <label class="desc-candidate">
+    <input type="checkbox" class="desc-candidate-checkbox-hidden" [value]="i" (change)="onCheckboxChange($event)">
+    <div class="desc-candidate-data">{{attr}}</div>    
+    <div class="desc-candidate-checked">&#10004;</div>
+  </label>
 </ng-container>

@@ -1,4 +1,4 @@
-<div class="candidate-merge-container">
+<div *ngIf="_mergeService.getCandidatesId().length;else noCandidatesId" class="candidate-merge-container">
   <div class="desc-titles-container">
     <div class="desc-title"></div>
     <ng-container *ngFor="let title of attributesTitles">
@@ -6,12 +6,27 @@
     </ng-container>
   </div>
   <ng-container *ngFor="let candidateAttr of attributesMatrix; let index=index;">
-    <app-candidate-merge [candidateAttr] = "candidateAttr" [candidateId]="this.candidatesIds[index]" class="desc-candidate-container"></app-candidate-merge>
+    <app-candidate-merge 
+      [candidateAttr] = "candidateAttr" 
+      [candidateId]="_mergeService.getCandidatesId()[index]" 
+      [index]="index" 
+      (changeAttributes)="changeAttributes($event)"
+      class="desc-candidate-container">
+    </app-candidate-merge>
   </ng-container>
   <div class="desc-result-container">
     <div class="desc-result">Result</div>
-    <ng-container *ngFor="let title of attributesTitles">
-      <div class="desc-result"></div>
+    <ng-container *ngFor="let result of finalResult">
+      <div class="desc-result">{{result.join(', ')}}</div>
     </ng-container>
   </div>
 </div>
+<div class="full-width action-container">
+  <button mat-raised-button color="accent">
+    <!-- <mat-icon>group_add</mat-icon> -->
+    <span class="ml-10">Merge candidates</span>
+  </button>
+</div>
+<ng-template #noCandidatesId>  
+  <p>Nothing to merge!</p>  
+</ng-template>  
