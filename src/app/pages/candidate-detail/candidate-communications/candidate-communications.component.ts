@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ERROR_STATUS_CODES } from '@src/app/constants/errorStatusCode';
 import { ENotificationMode } from '@src/app/constants/notification';
 import { ERROR_MESSAGE } from '@src/app/constants/strings';
@@ -16,6 +16,8 @@ export class CandidateCommunicationsComponent {
   @Input() candidateHistory!: History;
 
   @Input() candidateId!: string;
+
+  @Output() historyWasChanged: EventEmitter<boolean> = new EventEmitter<boolean>(false);
 
   candidate!: Candidate;
 
@@ -36,6 +38,7 @@ export class CandidateCommunicationsComponent {
     this._historyService.deleteCandidateHistory(this.candidateId, element).subscribe({
       next: () => {
         this._notification.show('Candidate history is deleted', ENotificationMode.SUCCESS);
+        this.historyWasChanged.emit(true);
       },
       error: (err) => {
         this._notification.show(
@@ -48,12 +51,10 @@ export class CandidateCommunicationsComponent {
 
   onBlur(data: any, element: HistoryElement) {
     const currentData = { ...element, comment: data.target.value };
-
-    //  Patch method works incorrect on BE side
-
     this._historyService.updateCandidateHistory(this.candidateId, currentData).subscribe({
       next: () => {
         this._notification.show('Candidate history is updated', ENotificationMode.SUCCESS);
+        this.historyWasChanged.emit(true);
       },
       error: (err) => {
         this._notification.show(

@@ -47,30 +47,25 @@ export class AddCommentModalComponent implements OnInit {
     this._dialogRef.close();
   }
 
-  formValuesOnChange(data: any) {
-    this.formData = data;
-  }
-
-  submitHistoryUpdate() {
+  submitHistoryUpdate(): void {
     this.modalState.startLoading();
     const data = {
       archived: false,
       comment: this.form.value.comment,
       id: '',
     };
-    this._historyService.createNewCandidateHistory(data, this.candidate?.id).subscribe({
-      next: () => {
-        this.modalState.finishLoading();
-        this.closeModal();
+    this._historyService.createNewCandidateHistory(data, this.candidate.id).subscribe(
+      () => {
+        this._dialogRef.close(true);
         this._notification.show('Comment is added', ENotificationMode.SUCCESS);
       },
-      error: (err) => {
+      (err) => {
         this.modalState.finishLoading();
         this._notification.show(
           ERROR_MESSAGE[err?.status || ERROR_STATUS_CODES.INTERNAL_SERVER_ERROR],
           ENotificationMode.ERROR
         );
-      },
-    });
+      }
+    );
   }
 }

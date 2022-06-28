@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalService } from '@services/modal.service';
 import { EditCandidateModalComponent } from '@components/shared/edit-candidate-modal/edit-candidate-modal.component';
@@ -12,6 +12,8 @@ import { ROUTES } from '@src/app/routes';
   templateUrl: './candidate-action.component.html',
 })
 export class CandidateActionComponent implements OnInit {
+  @Output() historyWasChanged: EventEmitter<boolean> = new EventEmitter(false);
+
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
@@ -30,7 +32,9 @@ export class CandidateActionComponent implements OnInit {
   }
 
   openAddCommentModal() {
-    this._modalService.open(AddCommentModalComponent, EModalSizes.MD);
+    this._modalService.open(AddCommentModalComponent, EModalSizes.MD, null, () =>
+      this.historyWasChanged.emit(true)
+    );
   }
 
   back() {

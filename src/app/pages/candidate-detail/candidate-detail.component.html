@@ -1,5 +1,7 @@
 <div class="candidate-detail-container">
-  <app-candidate-action></app-candidate-action>
+  <app-candidate-action
+    (historyWasChanged)="fetchHistoryForCurrentCandidate()"
+  ></app-candidate-action>
   <div class="row">
     <div class="col-3 col-10-sm">
       <mat-card class="example-card">
@@ -39,6 +41,7 @@
           ><app-candidate-communications
             [candidateHistory]="candidateHistory"
             [candidateId]="candidateId"
+            (historyWasChanged)="fetchHistoryForCurrentCandidate()"
           ></app-candidate-communications
         ></mat-tab>
         <mat-tab label="Updates"><app-candidate-updates></app-candidate-updates></mat-tab>
