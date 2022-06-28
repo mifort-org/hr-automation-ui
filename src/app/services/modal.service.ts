@@ -27,9 +27,10 @@ export class ModalService {
       data,
     });
 
-    if (afterClosedCallback)
+    if (afterClosedCallback) {
       dialogRef.afterClosed().subscribe((result) => {
         afterClosedCallback(result);
       });
+    }
   }
 }
