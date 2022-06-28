@@ -49,3 +49,8 @@ export interface Candidate {
   // TODO: Need to resolve this one any
   mergeCandidates: any;
 }
+
+export interface CandidateAttributesValues {
+  name: string;
+  value: string;
+}

@@ -39,8 +39,13 @@ export class FetchService {
     return this._http.post<T>(`${this.baseUrl}/${url}`, data, optionsObject);
   }
 
-  put<T>(url: string, data: any, options?: IOptions) {
+  patch<T>(url: string, data: any, options?: IOptions) {
     const optionsObject = options ? { ...GLOBAL_OPTIONS, ...options } : GLOBAL_OPTIONS;
-    return this._http.put<T>(`${this.baseUrl}/${url}`, data, optionsObject);
+    return this._http.patch<T>(`${this.baseUrl}/${url}`, data, optionsObject);
+  }
+
+  delete<T>(url: string, options?: IOptions) {
+    const optionsObject = options ? { ...GLOBAL_OPTIONS, ...options } : GLOBAL_OPTIONS;
+    return this._http.delete<T>(`${this.baseUrl}/${url}`, optionsObject);
   }
 }

@@ -16,6 +16,7 @@ import { EditCandidateModalComponent } from '@components/shared/edit-candidate-m
 import { ErrorDisplayComponent } from '@components/shared/error-display/error-display.component';
 import { NewCandidateModalComponent } from '@components/shared/new-candidate-modal/new-candidate-modal.component';
 import { SignInModalComponent } from '@components/shared/sign-in-modal/sign-in-modal.component';
+import { AddCommentModalComponent } from '@components/shared/add-comment-modal/add-comment-modal.component';
 
 @NgModule({
   declarations: [
@@ -24,13 +25,13 @@ import { SignInModalComponent } from '@components/shared/sign-in-modal/sign-in-m
     ErrorDisplayComponent,
     EditCandidateModalComponent,
     CandidateFormComponent,
+    AddCommentModalComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-
     MatInputModule,
     MatButtonModule,
     MatProgressSpinnerModule,
@@ -44,6 +45,7 @@ import { SignInModalComponent } from '@components/shared/sign-in-modal/sign-in-m
     ErrorDisplayComponent,
     EditCandidateModalComponent,
     CandidateFormComponent,
+    AddCommentModalComponent,
   ],
 })
 export class SharedModule {}

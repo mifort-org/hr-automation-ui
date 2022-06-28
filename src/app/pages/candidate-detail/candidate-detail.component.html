@@ -1,8 +1,5 @@
 <div class="candidate-detail-container">
-  <button mat-raised-button class="mb-20" (click)="back()">
-    <mat-icon>keyboard_backspace</mat-icon>
-    <span class="ml-10">Back</span>
-  </button>
+  <app-candidate-action></app-candidate-action>
   <div class="row">
     <div class="col-3 col-10-sm">
       <mat-card class="example-card">
@@ -32,15 +29,18 @@
       </mat-card>
     </div>
     <div class="col-7 col-10-sm">
-      <app-candidate-action></app-candidate-action>
       <mat-tab-group mat-align-tabs="start" class="mt-20">
         <mat-tab label="Details info">
-          <a></a><app-candidate-main-info></app-candidate-main-info
+          <app-candidate-main-info
+            [candidateAttributesValues]="candidateAttributesValues"
+          ></app-candidate-main-info
         ></mat-tab>
-        <mat-tab label="Communications"
-          ><app-candidate-communications></app-candidate-communications
+        <mat-tab label="Communication History"
+          ><app-candidate-communications
+            [candidateHistory]="candidateHistory"
+            [candidateId]="candidateId"
+          ></app-candidate-communications
         ></mat-tab>
-        <mat-tab label="History"><app-candidate-history></app-candidate-history></mat-tab>
         <mat-tab label="Updates"><app-candidate-updates></app-candidate-updates></mat-tab>
       </mat-tab-group>
     </div>

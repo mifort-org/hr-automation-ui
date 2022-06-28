@@ -1,0 +1,97 @@
+table {
+  width: 100% !important;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+}
+
+.attachments-wrapper {
+  width: 100%;
+}
+
+.attachments-block {
+  position: relative;
+  margin-left: auto;
+  margin-right: 10px;
+  width: 120px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.attachments-block::after {
+  position: absolute;
+  left: 0;
+  width: 0;
+  bottom: 0;
+  height: 2px;
+  background-color: #0089ff;
+  content: '';
+  transition: width 0.3s ease-out;
+}
+
+.attachments-block:hover::after,
+.attachments-block:focus::after {
+  width: 100%;
+}
+
+.attachments-block.active::after {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  bottom: 0;
+  height: 2px;
+  background-color: #0089ff;
+  content: '';
+}
+
+.attachments-label {
+  width: 100%;
+  padding: 20px;
+  padding-left: 0px;
+  padding-bottom: 10px;
+  padding-right: 1px;
+  text-align: left;
+}
+
+.attachments-arrow {
+  margin-top: 10px;
+  width: 12px;
+  height: 10px;
+  border-bottom: 2px solid #fff;
+  border-left: 2px solid #fff;
+  transform: rotate(-45deg);
+}
+
+.active .attachments-arrow {
+  border-bottom: none;
+  border-left: none;
+  border-top: 2px solid #fff;
+  border-right: 2px solid #fff;
+}
+
+.delete-action {
+  background-color: unset;
+  border: none;
+  cursor: pointer;
+}
+
+.comment-block {
+  height: 50px;
+}
+
+.comment-value {
+  border: 1px solid transparent;
+  width: 100%;
+  height: 95%;
+  background-color: unset;
+  color: #fff;
+  outline: none;
+  font-size: 14px;
+}
+
+.comment-value:hover {
+  border: 1px solid #fff;
+  cursor: pointer;
+}

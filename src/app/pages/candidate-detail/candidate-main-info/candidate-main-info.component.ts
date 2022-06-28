@@ -1,7 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { CandidateAttributesValues } from '@interfaces/candidates';
 
 @Component({
   selector: 'app-candidate-main-info',
+  styleUrls: ['candidate-main-info.component.scss'],
   templateUrl: './candidate-main-info.component.html',
 })
-export class CandidateMainInfoComponent {}
+export class CandidateMainInfoComponent {
+  @Input() candidateAttributesValues!: CandidateAttributesValues[];
+
+  displayedColumns: string[] = ['name', 'value'];
+}
