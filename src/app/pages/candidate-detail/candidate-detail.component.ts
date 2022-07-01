@@ -20,54 +20,43 @@ export class CandidateDetailComponent implements OnInit {
 
   candidate!: Candidate | null;
 
-  candidateAttribute!: CandidateAttribute[] | null;
-
   candidateAttributesValues: CandidateAttributesValues[] = [];
 
   candidateHistory!: HistoryElement[];
 
   constructor(
-    private _candidateService: CandidatesService,
-    private _historyService: HistoryService,
-    private _activatedRoute: ActivatedRoute,
-    private _notification: NotificationService
+    private candidateService: CandidatesService,
+    private historyService: HistoryService,
+    private activatedRoute: ActivatedRoute,
+    private notification: NotificationService
   ) {}
 
   ngOnInit(): void {
-    this.candidateId = this._activatedRoute.snapshot.paramMap.get('id') || '';
+    this.candidateId = this.activatedRoute.snapshot.paramMap.get('id') || '';
     this.fetchCurrentCandidate();
     this.fetchHistoryForCurrentCandidate();
   }
 
   fetchCurrentCandidate(): void {
     if (this.candidateId) {
-      this._candidateService
+      this.candidateService
         .getCandidateById(this.candidateId)
         .pipe(take(1))
         .subscribe({
           next: (candidate: Candidate) => {
             this.candidate = candidate;
-            this.candidateAttribute = candidate.candidateAttributes;
-            this.candidateAttributesValues = candidate.candidateAttributes.reduce((acc, el) => {
-              if (el.value) {
-                if (
-                  el.attributeTypes.name === 'firstname' ||
-                  el.attributeTypes.name === 'lastname'
-                ) {
-                  const fullNameField = acc.find((e) => e.name === 'fullName');
-                  if (fullNameField) {
-                    fullNameField.value += ` ${el.value}`;
-                    return acc;
-                  }
-                  return [...acc, { name: 'fullName', value: el.value }];
-                }
-                return [...acc, { name: el.attributeTypes.name, value: el.value }];
+            this.candidateAttributesValues = candidate.candidateAttributes.map(
+              (attribute: CandidateAttribute) => {
+                const candidateAttributeValue: CandidateAttributesValues = {
+                  name: attribute.attributeTypes.name || '',
+                  value: attribute.value || '',
+                };
+                return candidateAttributeValue;
               }
-              return acc;
-            }, [] as CandidateAttributesValues[]);
+            );
           },
           error: (error: any) => {
-            this._notification.show(
+            this.notification.show(
               ERROR_MESSAGE[error?.status || ERROR_STATUS_CODES.INTERNAL_SERVER_ERROR],
               ENotificationMode.ERROR
             );
@@ -78,7 +67,7 @@ export class CandidateDetailComponent implements OnInit {
 
   fetchHistoryForCurrentCandidate(): void {
     if (this.candidateId) {
-      this._historyService
+      this.historyService
         .getCandidateHistoryById(this.candidateId)
         .pipe(take(1))
         .subscribe({
@@ -86,7 +75,7 @@ export class CandidateDetailComponent implements OnInit {
             this.candidateHistory = history;
           },
           error: (error) => {
-            this._notification.show(
+            this.notification.show(
               ERROR_MESSAGE[error?.status || ERROR_STATUS_CODES.INTERNAL_SERVER_ERROR],
               ENotificationMode.ERROR
             );

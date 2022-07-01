@@ -25,23 +25,20 @@ export class CandidateCommunicationsComponent {
 
   displayedColumns: string[] = ['dateofcreation', 'lastupdate', 'comment', 'action'];
 
-  constructor(
-    private _historyService: HistoryService,
-    private _notification: NotificationService
-  ) {}
+  constructor(private historyService: HistoryService, private notification: NotificationService) {}
 
   showAttachments(): void {
     this.documentStatus = !this.documentStatus;
   }
 
   deleteHistory(element: string): void {
-    this._historyService.deleteCandidateHistory(this.candidateId, element).subscribe({
+    this.historyService.deleteCandidateHistory(this.candidateId, element).subscribe({
       next: () => {
-        this._notification.show('Candidate history is deleted', ENotificationMode.SUCCESS);
+        this.notification.show('Candidate history is deleted', ENotificationMode.SUCCESS);
         this.historyWasChanged.emit(true);
       },
       error: (err) => {
-        this._notification.show(
+        this.notification.show(
           ERROR_MESSAGE[err?.status || ERROR_STATUS_CODES.INTERNAL_SERVER_ERROR],
           ENotificationMode.ERROR
         );
@@ -51,13 +48,13 @@ export class CandidateCommunicationsComponent {
 
   onBlur(data: any, element: HistoryElement): void {
     const currentData = { ...element, comment: data.target.value };
-    this._historyService.updateCandidateHistory(this.candidateId, currentData).subscribe({
+    this.historyService.updateCandidateHistory(this.candidateId, currentData).subscribe({
       next: () => {
-        this._notification.show('Candidate history is updated', ENotificationMode.SUCCESS);
+        this.notification.show('Candidate history is updated', ENotificationMode.SUCCESS);
         this.historyWasChanged.emit(true);
       },
       error: (err) => {
-        this._notification.show(
+        this.notification.show(
           ERROR_MESSAGE[err?.status || ERROR_STATUS_CODES.INTERNAL_SERVER_ERROR],
           ENotificationMode.ERROR
         );

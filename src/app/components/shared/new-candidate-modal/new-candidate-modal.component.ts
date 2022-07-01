@@ -31,13 +31,13 @@ export class NewCandidateModalComponent {
   modalState = new PageState();
 
   constructor(
-    private _dialogRef: MatDialogRef<NewCandidateModalComponent>,
-    private _formBuilder: FormBuilder,
-    private _candidateService: CandidatesService,
-    private _notificationService: NotificationService,
-    private _router: Router
+    private dialogRef: MatDialogRef<NewCandidateModalComponent>,
+    private formBuilder: FormBuilder,
+    private candidateService: CandidatesService,
+    private notificationService: NotificationService,
+    private router: Router
   ) {
-    this.form = this._formBuilder.group({
+    this.form = this.formBuilder.group({
       id: ['', Validators.required],
     });
 
@@ -48,18 +48,18 @@ export class NewCandidateModalComponent {
 
   submitNewCandidate() {
     if (this.formData === null || this.form.invalid) {
-      this._notificationService.show(TEXT_FIELD_ERRORS.FORM_INVALID, ENotificationMode.ERROR);
+      this.notificationService.show(TEXT_FIELD_ERRORS.FORM_INVALID, ENotificationMode.ERROR);
     } else {
       this.modalState.startLoading();
-      this._candidateService.createNewCandidate(this.formData).subscribe({
+      this.candidateService.createNewCandidate(this.formData).subscribe({
         next: () => {
-          this._router.navigate([`${ROUTES.CANDIDATES}/details/${this.formData!.id}`]);
+          this.router.navigate([`${ROUTES.CANDIDATES}/details/${this.formData!.id}`]);
           this.modalState.finishLoading();
           this.closeModal();
         },
         error: (error) => {
           this.modalState.finishLoading();
-          this._notificationService.show(
+          this.notificationService.show(
             ERROR_MESSAGE[error?.status || ERROR_STATUS_CODES.INTERNAL_SERVER_ERROR],
             ENotificationMode.ERROR
           );
@@ -69,6 +69,6 @@ export class NewCandidateModalComponent {
   }
 
   closeModal() {
-    this._dialogRef.close();
+    this.dialogRef.close();
   }
 }

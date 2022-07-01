@@ -1,7 +1,7 @@
 import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
-import { CandidatesFilterData, CandidateCustomAttribute, Candidate } from '@interfaces/candidates';
+import { Candidate, CandidateCustomAttribute, CandidatesFilterData } from '@interfaces/candidates';
 import { FetchService } from './fetch.service';
 
 interface IParam {
@@ -29,22 +29,20 @@ const createCustomAttribute = (candidate: Candidate) => {
 export class CandidatesService {
   currentCandidate!: Candidate;
 
-  constructor(private _fetch: FetchService) {}
+  constructor(private fetch: FetchService) {}
 
   getCandidates(filterData: CandidatesFilterData): any {
     const param = new HttpParams({ fromObject: filterData as IParam }).toString();
 
-    return this._fetch.get<Candidate[]>(`candidates?${param}`).pipe(
+    return this.fetch.get<Candidate[]>(`candidates?${param}`).pipe(
       map((data: Candidate[]) => {
-        const modifiedData = data?.map((candidate) => createCustomAttribute(candidate));
-
-        return modifiedData;
+        return data?.map((candidate) => createCustomAttribute(candidate));
       })
     );
   }
 
   getCandidateById(id: string): any {
-    return this._fetch.get<Candidate>(`candidates/${id}`).pipe(
+    return this.fetch.get<Candidate>(`candidates/${id}`).pipe(
       map((data) => {
         const modifiedData = createCustomAttribute(data);
         this.currentCandidate = modifiedData;
@@ -54,10 +52,10 @@ export class CandidatesService {
   }
 
   updateCandidateAttributes(id: string, data: any) {
-    return this._fetch.post(`candidates/${id}/attributes`, data);
+    return this.fetch.post(`candidates/${id}/attributes`, data);
   }
 
   createNewCandidate(data: any) {
-    return this._fetch.post(`candidates`, data);
+    return this.fetch.post(`candidates`, data);
   }
 }

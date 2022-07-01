@@ -27,25 +27,25 @@ const GLOBAL_OPTIONS: IOptions = {};
 export class FetchService {
   private baseUrl = environment.baseAPIUrl;
 
-  constructor(private _http: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
   get<T>(url: string, options?: IOptions) {
     const optionsObject = options ? { ...GLOBAL_OPTIONS, ...options } : GLOBAL_OPTIONS;
-    return this._http.get<T>(`${this.baseUrl}/${url}`, optionsObject);
+    return this.http.get<T>(`${this.baseUrl}/${url}`, optionsObject);
   }
 
   post<T>(url: string, data: any, options?: IOptions) {
     const optionsObject = options ? { ...GLOBAL_OPTIONS, ...options } : GLOBAL_OPTIONS;
-    return this._http.post<T>(`${this.baseUrl}/${url}`, data, optionsObject);
+    return this.http.post<T>(`${this.baseUrl}/${url}`, data, optionsObject);
   }
 
   patch<T>(url: string, data: any, options?: IOptions) {
     const optionsObject = options ? { ...GLOBAL_OPTIONS, ...options } : GLOBAL_OPTIONS;
-    return this._http.patch<T>(`${this.baseUrl}/${url}`, data, optionsObject);
+    return this.http.patch<T>(`${this.baseUrl}/${url}`, data, optionsObject);
   }
 
   delete<T>(url: string, options?: IOptions) {
     const optionsObject = options ? { ...GLOBAL_OPTIONS, ...options } : GLOBAL_OPTIONS;
-    return this._http.delete<T>(`${this.baseUrl}/${url}`, optionsObject);
+    return this.http.delete<T>(`${this.baseUrl}/${url}`, optionsObject);
   }
 }

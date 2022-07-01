@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CandidatesService } from '@services/candidates.service';
-import { CandidatesFilterData, Candidate } from '@interfaces/candidates';
+import { Candidate, CandidatesFilterData } from '@interfaces/candidates';
 import { PageState } from '@utils/pageState';
 
 @Component({
@@ -22,10 +22,10 @@ export class CandidatesComponent implements OnInit {
 
   keywordsInput = '';
 
-  constructor(private _candidatesService: CandidatesService, private _formBuilder: FormBuilder) {}
+  constructor(private candidatesService: CandidatesService, private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
-    this.filterForm = this._formBuilder.group({
+    this.filterForm = this.formBuilder.group({
       email: [''],
     });
     this.getCandidatesList({ pageNumber: 1, pageSize: 100, keyword: this.keywordsList });
@@ -34,7 +34,7 @@ export class CandidatesComponent implements OnInit {
   getCandidatesList(filterData: CandidatesFilterData) {
     this.pageState.startLoading();
 
-    this._candidatesService.getCandidates(filterData).subscribe({
+    this.candidatesService.getCandidates(filterData).subscribe({
       next: (resolve: Candidate[]) => {
         this.candidatesList = resolve;
         this.pageState.finishLoading();
@@ -47,8 +47,7 @@ export class CandidatesComponent implements OnInit {
   }
 
   remove($event: any): void {
-    const newList = this.keywordsList?.filter((el) => el !== $event);
-    this.keywordsList = newList;
+    this.keywordsList = this.keywordsList?.filter((el) => el !== $event);
     this.getCandidatesList({ pageNumber: 1, pageSize: 100, keyword: this.keywordsList });
   }
 

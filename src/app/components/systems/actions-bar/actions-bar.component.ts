@@ -10,9 +10,9 @@ import { ModalService } from '@services/modal.service';
   styleUrls: ['./actions-bar.component.scss'],
 })
 export class ActionsBarComponent {
-  constructor(private _modalService: ModalService) {}
+  constructor(private modalService: ModalService) {}
 
   createNewCandidateModalOpen() {
-    this._modalService.open(NewCandidateModalComponent, EModalSizes.SM);
+    this.modalService.open(NewCandidateModalComponent, EModalSizes.SM);
   }
 }

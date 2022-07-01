@@ -33,3 +33,8 @@ export interface UpdateDate {
   timezoneOffset: number;
   year: number;
 }
+
+export interface CreateCommentData {
+  comment: string;
+  archived?: boolean;
+}

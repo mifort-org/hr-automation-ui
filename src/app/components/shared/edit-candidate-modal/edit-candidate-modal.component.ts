@@ -25,18 +25,18 @@ export class EditCandidateModalComponent implements OnInit {
   modalState = new PageState();
 
   constructor(
-    private _dialogRef: MatDialogRef<EditCandidateModalComponent>,
-    private _candidateService: CandidatesService,
-    private _attributesService: AttributesService,
-    private _notification: NotificationService
+    private dialogRef: MatDialogRef<EditCandidateModalComponent>,
+    private candidateService: CandidatesService,
+    private attributesService: AttributesService,
+    private notification: NotificationService
   ) {}
 
   ngOnInit(): void {
-    this.candidate = this._candidateService.currentCandidate;
+    this.candidate = this.candidateService.currentCandidate;
   }
 
   closeModal() {
-    this._dialogRef.close();
+    this.dialogRef.close();
   }
 
   formValuesOnChange(data: any) {
@@ -48,7 +48,7 @@ export class EditCandidateModalComponent implements OnInit {
       this.closeModal();
     } else {
       const result = VALIDATORS.identifiedOfData(
-        this._attributesService.identifiedAttributes || [],
+        this.attributesService.identifiedAttributes || [],
         this.formData
       );
 
@@ -59,32 +59,32 @@ export class EditCandidateModalComponent implements OnInit {
             value,
             valueSource: this.candidate?.customAttribute?.[key]?.valueSource || 0,
             archived: false,
-            attributeTypes: this._attributesService.attributesDictionary[key].id,
+            attributeTypes: this.attributesService.attributesDictionary[key].id,
           };
         });
 
         const data = fetchData.filter((el) => el?.value);
-        this._candidateService.updateCandidateAttributes(this.candidate?.id, data).subscribe({
+        this.candidateService.updateCandidateAttributes(this.candidate?.id, data).subscribe({
           next: () => {
             this.modalState.finishLoading();
             this.closeModal();
-            this._notification.show('Candidate is updated', ENotificationMode.SUCCESS);
-            this._candidateService.getCandidateById(this.candidate?.id);
+            this.notification.show('Candidate is updated', ENotificationMode.SUCCESS);
+            this.candidateService.getCandidateById(this.candidate?.id);
 
-            // TODO: Need to think, maybe we should subscribe in service and call just this._candidateService.getCandidateById();
+            // TODO: Need to think, maybe we should subscribe in service and call just this.candidateService.getCandidateById();
             // Or just create and Observable ICandidate object
-            this._candidateService.getCandidateById(this.candidate?.id).subscribe();
+            this.candidateService.getCandidateById(this.candidate?.id).subscribe();
           },
           error: (err) => {
             this.modalState.finishLoading();
-            this._notification.show(
+            this.notification.show(
               ERROR_MESSAGE[err?.status || ERROR_STATUS_CODES.INTERNAL_SERVER_ERROR],
               ENotificationMode.ERROR
             );
           },
         });
       } else {
-        this._notification.show(result, ENotificationMode.ERROR);
+        this.notification.show(result, ENotificationMode.ERROR);
       }
     }
   }

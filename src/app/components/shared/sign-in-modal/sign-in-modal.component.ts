@@ -13,19 +13,19 @@ export class SignInModalComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<SignInModalComponent>,
-    private _notification: NotificationService,
-    private _formBuilder: FormBuilder
+    private notification: NotificationService,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
-    this.form = this._formBuilder.group({
+    this.form = this.formBuilder.group({
       email: ['', [Validators.required]],
       password: ['', [Validators.required]],
     });
   }
 
   onNoClick(): void {
-    this._notification.show('Closed');
+    this.notification.show('Closed');
     this.dialogRef.close();
   }
 }

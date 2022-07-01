@@ -8,6 +8,8 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
 import { CandidateUpdatesComponent } from '@pages/candidate-detail/candidate-updates/candidate-updates.component';
 import { AppPipesModule } from '@utils/pipes/app-pipes.module';
 import AppRoutingModule from '@src/app/app-routing.module';
@@ -15,6 +17,7 @@ import { CandidateCommunicationsComponent } from './candidate-communications/can
 import { CandidateDetailComponent } from './candidate-detail.component';
 import { CandidateMainInfoComponent } from './candidate-main-info/candidate-main-info.component';
 import { CandidateActionComponent } from './candidate-action/candidate-action.component';
+import { AddCommentModalComponent } from './add-comment-modal/add-comment-modal.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +26,7 @@ import { CandidateActionComponent } from './candidate-action/candidate-action.co
     CandidateUpdatesComponent,
     CandidateMainInfoComponent,
     CandidateActionComponent,
+    AddCommentModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,6 +40,8 @@ import { CandidateActionComponent } from './candidate-action/candidate-action.co
     MatButtonModule,
     MatInputModule,
     AppPipesModule,
+    ReactiveFormsModule,
+    MatDialogModule,
   ],
   exports: [
     CandidateCommunicationsComponent,
@@ -43,6 +49,7 @@ import { CandidateActionComponent } from './candidate-action/candidate-action.co
     CandidateUpdatesComponent,
     CandidateMainInfoComponent,
     CandidateActionComponent,
+    AddCommentModalComponent,
   ],
 })
 export class CandidateDetailModule {}
