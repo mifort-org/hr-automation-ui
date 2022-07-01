@@ -14,15 +14,15 @@ export class HistoryService {
   }
 
   // Todo  Patch method is not allowed by BE side
-  updateCandidateHistory(id: string, data: any): Observable<any> {
-    return this._fetch.patch<any>(`candidates/${id}/history`, data);
+  updateCandidateHistory(id: string, data: any): Observable<HistoryElement> {
+    return this._fetch.patch<HistoryElement>(`candidates/${id}/history`, data);
   }
 
-  createNewCandidateHistory(data: any, id: string): Observable<any> {
-    return this._fetch.post<any>(`candidates/${id}/history`, data);
+  createNewCandidateHistory(data: any, id: string): Observable<HistoryElement> {
+    return this._fetch.post<HistoryElement>(`candidates/${id}/history`, data);
   }
 
-  deleteCandidateHistory(id: string, historyId: string): Observable<any> {
-    return this._fetch.delete<any>(`candidates/${id}/history/${historyId}`);
+  deleteCandidateHistory(id: string, historyId: string): Observable<HistoryElement> {
+    return this._fetch.delete<HistoryElement>(`candidates/${id}/history/${historyId}`);
   }
 }

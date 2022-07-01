@@ -30,11 +30,11 @@ export class CandidateCommunicationsComponent {
     private _notification: NotificationService
   ) {}
 
-  showAttachments() {
+  showAttachments(): void {
     this.documentStatus = !this.documentStatus;
   }
 
-  deleteHistory(element: string) {
+  deleteHistory(element: string): void {
     this._historyService.deleteCandidateHistory(this.candidateId, element).subscribe({
       next: () => {
         this._notification.show('Candidate history is deleted', ENotificationMode.SUCCESS);
@@ -49,7 +49,7 @@ export class CandidateCommunicationsComponent {
     });
   }
 
-  onBlur(data: any, element: HistoryElement) {
+  onBlur(data: any, element: HistoryElement): void {
     const currentData = { ...element, comment: data.target.value };
     this._historyService.updateCandidateHistory(this.candidateId, currentData).subscribe({
       next: () => {

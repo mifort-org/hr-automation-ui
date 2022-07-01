@@ -29,17 +29,17 @@ export class CandidateActionComponent implements OnInit {
     });
   }
 
-  openEditModal() {
+  openEditModal(): void {
     this._modalService.open(EditCandidateModalComponent, EModalSizes.MD);
   }
 
-  openAddCommentModal() {
+  openAddCommentModal(): void {
     this._modalService.open(AddCommentModalComponent, EModalSizes.MD, null, () =>
       this.historyWasChanged.emit(true)
     );
   }
 
-  back() {
+  back(): void {
     this._router.navigate([ROUTES.CANDIDATES]);
   }
 }

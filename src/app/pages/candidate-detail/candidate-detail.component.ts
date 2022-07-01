@@ -7,6 +7,8 @@ import { Candidate, CandidateAttribute, CandidateAttributesValues } from '@inter
 import { HistoryElement } from '@interfaces/history';
 import { NotificationService } from '@services/notification.service';
 import { ENotificationMode } from '@constants/notification';
+import { ERROR_MESSAGE } from '@constants/strings';
+import { ERROR_STATUS_CODES } from '@constants/errorStatusCode';
 
 @Component({
   selector: 'app-candidate-detail',
@@ -42,8 +44,8 @@ export class CandidateDetailComponent implements OnInit {
       this._candidateService
         .getCandidateById(this.candidateId)
         .pipe(take(1))
-        .subscribe(
-          (candidate: Candidate) => {
+        .subscribe({
+          next: (candidate: Candidate) => {
             this.candidate = candidate;
             this.candidateAttribute = candidate.candidateAttributes;
             this.candidateAttributesValues = candidate.candidateAttributes.reduce((acc, el) => {
@@ -64,10 +66,13 @@ export class CandidateDetailComponent implements OnInit {
               return acc;
             }, [] as CandidateAttributesValues[]);
           },
-          (error: any) => {
-            this._notification.show(error, ENotificationMode.ERROR);
-          }
-        );
+          error: (error: any) => {
+            this._notification.show(
+              ERROR_MESSAGE[error?.status || ERROR_STATUS_CODES.INTERNAL_SERVER_ERROR],
+              ENotificationMode.ERROR
+            );
+          },
+        });
     }
   }
 
@@ -76,14 +81,17 @@ export class CandidateDetailComponent implements OnInit {
       this._historyService
         .getCandidateHistoryById(this.candidateId)
         .pipe(take(1))
-        .subscribe(
-          (history) => {
+        .subscribe({
+          next: (history) => {
             this.candidateHistory = history;
           },
-          (error: any) => {
-            this._notification.show(error, ENotificationMode.ERROR);
-          }
-        );
+          error: (error) => {
+            this._notification.show(
+              ERROR_MESSAGE[error?.status || ERROR_STATUS_CODES.INTERNAL_SERVER_ERROR],
+              ENotificationMode.ERROR
+            );
+          },
+        });
     }
   }
 }

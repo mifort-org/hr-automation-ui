@@ -43,7 +43,7 @@ export class AddCommentModalComponent implements OnInit {
     });
   }
 
-  closeModal() {
+  closeModal(): void {
     this._dialogRef.close();
   }
 
@@ -54,18 +54,18 @@ export class AddCommentModalComponent implements OnInit {
       comment: this.form.value.comment,
       id: '',
     };
-    this._historyService.createNewCandidateHistory(data, this.candidate.id).subscribe(
-      () => {
+    this._historyService.createNewCandidateHistory(data, this.candidate.id).subscribe({
+      next: () => {
         this._dialogRef.close(true);
         this._notification.show('Comment is added', ENotificationMode.SUCCESS);
       },
-      (err) => {
+      error: (err) => {
         this.modalState.finishLoading();
         this._notification.show(
           ERROR_MESSAGE[err?.status || ERROR_STATUS_CODES.INTERNAL_SERVER_ERROR],
           ENotificationMode.ERROR
         );
-      }
-    );
+      },
+    });
   }
 }
