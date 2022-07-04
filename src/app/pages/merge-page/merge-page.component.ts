@@ -61,6 +61,9 @@ export class MergePageComponent implements OnInit {
         }
       );
     });
+    this.mergeService.getFinalResult().subscribe((item) => {
+      this.finalResult = item;
+    });
   }
 
   changeAttributes(event: { candidatesMatrixIndexes: Array<number>; candidateAttr: string }) {
@@ -71,12 +74,14 @@ export class MergePageComponent implements OnInit {
 
   fillTitleValues() {
     const attributesSetList = new Set();
-    this.finalResult = [];
+    const finalResult: string[][] = [];
     this.candidates.forEach((attrArray) =>
       attrArray.forEach((attr) => attributesSetList.add(attr.name))
     );
     this.attributesTitles = [...(Array.from(attributesSetList.values()) as Array<string>)];
-    this.attributesTitles.forEach(() => this.finalResult.push([]));
+    this.attributesTitles.forEach(() => finalResult.push([]));
+    this.mergeService.addFinalResult(finalResult);
+    this.mergeService.addTitles(this.attributesTitles);
   }
 
   fillAttributesMatrix() {
@@ -90,26 +95,16 @@ export class MergePageComponent implements OnInit {
   }
 
   calculateResult() {
-    this.finalResult = [];
-    this.attributesTitles.forEach(() => this.finalResult.push([]));
+    const finalResult: string[][] = [];
+    this.attributesTitles.forEach(() => finalResult.push([]));
 
     this.finalAttributesMatrix.forEach((candAttrArr) => {
       candAttrArr.forEach((attr, index) => {
         if (attr) {
-          this.finalResult[index].push(attr);
+          finalResult[index].push(attr);
         }
       });
     });
-    this.mergeService.addFinalResult(this.attributesTitles, this.finalResult);
+    this.mergeService.addFinalResult(finalResult);
   }
-
-  // mergeCandidates() {
-  //   this.attributesTitles.forEach((item, index) => {
-  //     if (this.finalResult[index].length) {
-  //       // eslint-disable-next-line no-console
-  //       console.log(`${item} ${this.finalResult[index]}`);
-  //     }
-  //   });
-  //   this.notification.show('Successfully merged. Check console', ENotificationMode.SUCCESS);
-  // }
 }

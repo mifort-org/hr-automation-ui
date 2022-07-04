@@ -19,6 +19,8 @@ export class MergeService {
 
   finalResult: string[][] = [];
 
+  finalResultSubject = new BehaviorSubject<string[][]>([]);
+
   candidatesIdsSubject = new BehaviorSubject<string[]>(this.candidatesIds);
 
   addCandidateId(id: string) {
@@ -42,6 +44,10 @@ export class MergeService {
     return this.candidatesIdsSubject;
   }
 
+  getFinalResult() {
+    return this.finalResultSubject;
+  }
+
   isCandidates() {
     return !!this.candidatesIds.length;
   }
@@ -57,9 +63,13 @@ export class MergeService {
     return forkJoin([...fetchAttrArr]);
   }
 
-  addFinalResult(attributesTitles: string[], finalResult: string[][]) {
-    this.attributesTitles = attributesTitles;
+  addFinalResult(finalResult: string[][]) {
     this.finalResult = finalResult;
+    this.finalResultSubject.next(this.finalResult);
+  }
+
+  addTitles(attributesTitles: string[]) {
+    this.attributesTitles = attributesTitles;
   }
 
   mergeCandidates() {
