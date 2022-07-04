@@ -1,14 +1,23 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, forkJoin } from 'rxjs';
+import { ENotificationMode } from '../constants/notification';
 import { CandidatesService } from './candidates.service';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MergeService {
-  constructor(private candidateService: CandidatesService) {}
+  constructor(
+    private candidateService: CandidatesService,
+    private notification: NotificationService
+  ) {}
 
   private candidatesIds: string[] = ['uliana_fomina', 'artem_skrebets', 'vladimir_zelmanchuk'];
+
+  attributesTitles: string[] = [];
+
+  finalResult: string[][] = [];
 
   candidatesIdsSubject = new BehaviorSubject<string[]>(this.candidatesIds);
 
@@ -48,8 +57,24 @@ export class MergeService {
     return forkJoin([...fetchAttrArr]);
   }
 
-  mergeCandidates(attributesTitle: string[], finalResult: string[][]) {
-    // eslint-disable-next-line no-console
-    attributesTitle.forEach((item, index) => console.log(`${item}: ${finalResult[index]}`));
+  addFinalResult(attributesTitles: string[], finalResult: string[][]) {
+    this.attributesTitles = attributesTitles;
+    this.finalResult = finalResult;
+  }
+
+  mergeCandidates() {
+    if (this.checkFilledResult() && this.attributesTitles.length) {
+      this.attributesTitles.forEach((item, index) =>
+        // eslint-disable-next-line no-console
+        console.log(`${item}: ${this.finalResult[index]}`)
+      );
+      this.notification.show('Successfully merged. Check console', ENotificationMode.SUCCESS);
+    } else {
+      this.notification.show('Please fill all fields', ENotificationMode.ERROR);
+    }
+  }
+
+  checkFilledResult(): boolean {
+    return this.finalResult.every((result) => result.length);
   }
 }

@@ -100,10 +100,7 @@ export class MergePageComponent implements OnInit {
         }
       });
     });
-  }
-
-  checkFilledResult(): boolean {
-    return this.finalResult.every((result) => result.length);
+    this.mergeService.addFinalResult(this.attributesTitles, this.finalResult);
   }
 
   // mergeCandidates() {

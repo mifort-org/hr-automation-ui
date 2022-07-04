@@ -38,7 +38,7 @@
     </div>
 
     <div class="desc-result-container">
-      <div class="desc-result-title" [ngClass]="{'filled-result': checkFilledResult()}">Result</div>
+      <div class="desc-result-title" [ngClass]="{'filled-result': mergeService.checkFilledResult()}">Result</div>
       <ng-container *ngFor="let result of finalResult">
         <div class="desc-result" [ngClass]="{'final-result': result.join(', ')}">
           {{result.join(', ')}}
