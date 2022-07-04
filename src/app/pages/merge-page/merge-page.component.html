@@ -1,39 +1,54 @@
+<!-- <div class="full-width action-container">
+  <button mat-raised-button color="accent" (click)="mergeService.mergeCandidates(attributesTitles, finalResult)">
+    <mat-icon>merge_type</mat-icon>
+    <span class="ml-10">Merge candidates</span>
+  </button>
+</div> -->
+<app-actions-bar></app-actions-bar>
 <mat-progress-bar
   mode="indeterminate"
   color="accent"
   *ngIf="pageState.loading"
 ></mat-progress-bar>
 <ng-container *ngIf="!pageState.loading">
-  <div *ngIf="_mergeService.getCandidatesIds().length;else noCandidatesId" class="candidate-merge-container">
+  <div *ngIf="mergeService.isCandidates();else noCandidatesId" class="candidate-merge-container">
     <div class="desc-titles-container">
       <div class="desc-title"></div>
       <ng-container *ngFor="let title of attributesTitles">
         <div class="desc-title">{{title}}</div>
       </ng-container>
     </div>
-    <ng-container *ngFor="let candidateAttr of attributesMatrix; let index=index;">
-      <app-candidate-merge 
-        [candidateAttr] = "candidateAttr" 
-        [candidateId]="_mergeService.getCandidateIdbyIndex(index)" 
-        [index]="index" 
-        (changeAttributes)="changeAttributes($event)"
-        class="desc-candidate-container">
-      </app-candidate-merge>
-    </ng-container>
+
+    <div class="candidates-container">
+        <div *ngFor="let candidateId of candidateIds; let indexMatrix=index" class="desc-candidate-container">
+          <div class="desc-candidate-title">
+            {{candidateId}}
+            <mat-icon color="warn" (click)="mergeService.removeCandidateId(candidateId)" class="remove-button">delete_forever</mat-icon>
+          </div>
+
+          <ng-container *ngFor="let attribute of attributesMatrix[indexMatrix]; let indexCandidate=index">
+            <app-candidate-merge 
+              [candidateAttr] = "attribute" 
+              [candidatesMatrixIndexes] = "[indexMatrix, indexCandidate]"
+              (changeAttributes)="changeAttributes($event)"
+              class="desc-candidate">
+            </app-candidate-merge>
+          </ng-container>          
+        </div>        
+    </div>
+
     <div class="desc-result-container">
-      <div class="desc-result">Result</div>
+      <div class="desc-result-title" [ngClass]="{'filled-result': checkFilledResult()}">Result</div>
       <ng-container *ngFor="let result of finalResult">
-        <div class="desc-result">{{result.join(', ')}}</div>
+        <div class="desc-result" [ngClass]="{'final-result': result.join(', ')}">
+          {{result.join(', ')}}
+      </div>
       </ng-container>
     </div>
   </div>
-  <div class="full-width action-container">
-    <button mat-raised-button color="accent" (click)="mergeCandidates()">
-      <mat-icon>merge_type</mat-icon>
-      <span class="ml-10">Merge candidates</span>
-    </button>
-  </div>
+
 </ng-container>
+
 <ng-template #noCandidatesId>  
   <p>Nothing to merge!</p>  
 </ng-template>  

@@ -1,11 +1,5 @@
-<div class="desc-candidate">
-  {{candidateId}}
-  <mat-icon color="warn" (click)="_mergeService.removeCandidateId(candidateId)" class="remove-button">delete_forever</mat-icon>
-</div>
-<ng-container *ngFor="let attr of candidateAttr; let i=index">
-  <label class="desc-candidate">
-    <input type="checkbox" class="desc-candidate-checkbox-hidden" [value]="i" (change)="onCheckboxChange($event)">
-    <div class="desc-candidate-data">{{attr}}</div>    
-    <div class="desc-candidate-checked">&#10004;</div>
-  </label>
-</ng-container>
+<label class="desc-candidate-label">
+  <input type="checkbox" class="desc-candidate-checkbox-hidden" [(ngModel)]="checked" [value]="candidatesMatrixIndexes" [disabled]="!candidateAttr" (change)="onCheckboxChange()">
+  <div class="desc-candidate-data">{{candidateAttr}}</div>    
+  <div class="desc-candidate-checked">&#10004;</div>
+</label>

@@ -4,7 +4,7 @@ import { CandidatesService } from '@src/app/services/candidates.service';
 import { MergeService } from '@src/app/services/merge.service';
 import { PageState } from '@src/app/utils/pageState';
 import { NotificationService } from '@src/app/services/notification.service';
-import { ENotificationMode } from '@src/app/constants/notification';
+// import { ENotificationMode } from '@src/app/constants/notification';
 
 export interface AttributeTypes {
   id: number;
@@ -22,12 +22,14 @@ export interface AttributeTypes {
 })
 export class MergePageComponent implements OnInit {
   constructor(
-    private _candidateService: CandidatesService,
-    public _mergeService: MergeService,
-    private _notification: NotificationService
+    private candidateService: CandidatesService,
+    public mergeService: MergeService,
+    private notification: NotificationService
   ) {}
 
   pageState = new PageState();
+
+  candidateIds: Array<string> = [];
 
   attributesTitles: Array<string> = [];
 
@@ -41,31 +43,35 @@ export class MergePageComponent implements OnInit {
 
   ngOnInit() {
     this.pageState.startLoading();
-    const fetchAttrArr = this._mergeService
-      .getCandidatesIds()
-      .map((item) => this._candidateService.getCandidateAttributesById(item));
-
-    forkJoin(fetchAttrArr).subscribe(
-      (resolve: AttributeTypes[][]) => {
-        this.candidates = resolve;
-        this.fillTitleValues();
-        this.fillAttributesMatrix();
-        this.pageState.finishLoading();
-      },
-      (error) => {
-        this.pageState.catchError(error);
-        this.pageState.finishLoading();
-      }
-    );
+    this.mergeService.getCandidatesIds().subscribe((items) => {
+      this.candidateIds = items;
+      const fetchAttrArr = items.map((item) =>
+        this.candidateService.getCandidateAttributesById(item)
+      );
+      forkJoin([...fetchAttrArr]).subscribe(
+        (resolve: AttributeTypes[][]) => {
+          this.candidates = resolve;
+          this.fillTitleValues();
+          this.fillAttributesMatrix();
+          this.pageState.finishLoading();
+        },
+        (error) => {
+          this.pageState.catchError(error);
+          this.pageState.finishLoading();
+        }
+      );
+    });
   }
 
-  changeAttributes(event: { candidateIndex: number; candidateAttr: Array<string> }) {
-    this.finalAttributesMatrix[event.candidateIndex] = event.candidateAttr;
+  changeAttributes(event: { candidatesMatrixIndexes: Array<number>; candidateAttr: string }) {
+    const [indexMatrix, indexCandidate] = event.candidatesMatrixIndexes;
+    this.finalAttributesMatrix[indexMatrix][indexCandidate] = event.candidateAttr;
     this.calculateResult();
   }
 
   fillTitleValues() {
     const attributesSetList = new Set();
+    this.finalResult = [];
     this.candidates.forEach((attrArray) =>
       attrArray.forEach((attr) => attributesSetList.add(attr.name))
     );
@@ -96,13 +102,17 @@ export class MergePageComponent implements OnInit {
     });
   }
 
-  mergeCandidates() {
-    this.attributesTitles.forEach((item, index) => {
-      if (this.finalResult[index].length) {
-        // eslint-disable-next-line no-console
-        console.log(`${item} ${this.finalResult[index]}`);
-      }
-    });
-    this._notification.show('Successfully merged. Check console', ENotificationMode.SUCCESS);
+  checkFilledResult(): boolean {
+    return this.finalResult.every((result) => result.length);
   }
+
+  // mergeCandidates() {
+  //   this.attributesTitles.forEach((item, index) => {
+  //     if (this.finalResult[index].length) {
+  //       // eslint-disable-next-line no-console
+  //       console.log(`${item} ${this.finalResult[index]}`);
+  //     }
+  //   });
+  //   this.notification.show('Successfully merged. Check console', ENotificationMode.SUCCESS);
+  // }
 }

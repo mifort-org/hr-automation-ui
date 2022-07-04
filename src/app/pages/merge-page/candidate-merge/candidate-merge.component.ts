@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MergeService } from '@src/app/services/merge.service';
 
 @Component({
@@ -6,32 +6,24 @@ import { MergeService } from '@src/app/services/merge.service';
   templateUrl: './candidate-merge.component.html',
   styleUrls: ['./candidate-merge.component.scss'],
 })
-export class CandidateMergeComponent implements OnInit {
-  constructor(public _mergeService: MergeService) {}
+export class CandidateMergeComponent {
+  constructor(public mergeService: MergeService) {}
 
-  @Input() candidateId!: string;
+  checked: boolean = false;
 
-  @Input() index!: number;
+  @Input() candidatesMatrixIndexes!: Array<number>;
 
-  @Input() candidateAttr: Array<string> = [];
+  @Input() candidateAttr: string = '';
 
   @Output() changeAttributes = new EventEmitter<{
-    candidateIndex: number;
-    candidateAttr: Array<string>;
+    candidatesMatrixIndexes: Array<number>;
+    candidateAttr: string;
   }>();
 
-  candidateAttrChecked: Array<string> = [];
-
-  ngOnInit() {
-    this.candidateAttrChecked = [...this.candidateAttr].fill('');
-  }
-
-  onCheckboxChange(event: any) {
-    const index = event.target.value;
-    this.candidateAttrChecked[index] = event.target.checked ? this.candidateAttr[index] : '';
+  onCheckboxChange() {
     this.changeAttributes.emit({
-      candidateIndex: this.index,
-      candidateAttr: this.candidateAttrChecked,
+      candidatesMatrixIndexes: this.candidatesMatrixIndexes,
+      candidateAttr: this.checked ? this.candidateAttr : '',
     });
   }
 }

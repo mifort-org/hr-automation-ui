@@ -6,16 +6,63 @@
   font-family: Roboto, "Helvetica Neue", sans-serif;
   display: flex; 
   gap: 10px;  
-  overflow: auto;
+  
+  .candidates-container {
+    display: flex;
+    gap: 10px; 
+    overflow-x: auto;  
+    
+    .desc-candidate-container {    
+      min-width: 300px;
+      overflow-y: hidden;
+      padding-bottom: 5px;
 
-  .desc-candidate-container {    
-    min-width: 300px;
+      .desc-candidate-title {
+        height: 12vh;
+        display: flex;
+        position: relative;  
+        padding: 0 10px;
+        justify-content: space-between;
+        align-items: center;
+        background-color: rgb(10, 10, 10);
+        margin-top: 10px;
+        border-radius: 5px;
+        box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 20%), 0px 1px 1px 0px rgba(0, 0, 0, 14%), 0px 1px 3px 0px rgba(0, 0, 0, 12%);
+        border: 2px solid rgb(121, 121, 121);
+        box-sizing: border-box;
+      
+        .remove-button {
+          cursor: pointer;
+        }
+      }
+      
+      .desc-candidate {
+        height: 12vh;
+        display: flex;
+        position: relative;
+        justify-content: space-between;
+        align-items: center;
+        background-color: rgb(65, 15, 15);
+        margin-top: 10px;
+        border-radius: 5px;
+        box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 20%), 0px 1px 1px 0px rgba(0, 0, 0, 14%), 0px 1px 3px 0px rgba(0, 0, 0, 12%);
+      }
+    }
+    
+    .candidates-container-titles {
+      display: flex;
+      gap: 10px;  
+     
+    }
+
   }
+
+  
 
   .desc-result-container {
     min-width: 300px;
 
-    .desc-result {
+    .desc-result, .desc-result-title {
       height: 12vh;
       display: flex;
       justify-content: center;
@@ -23,7 +70,22 @@
       background-color: black;
       margin-top: 10px;
       border-radius: 5px;
+      box-sizing: border-box;
       box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 20%), 0px 1px 1px 0px rgba(0, 0, 0, 14%), 0px 1px 3px 0px rgba(0, 0, 0, 12%);
+    }
+
+    .desc-result-title {
+      border: 2px solid rgb(121, 1, 1);
+      position: relative;
+    }
+
+    .filled-result {
+      border: 2px solid rgb(151, 224, 40);
+    }
+
+    .final-result {
+      transition: 0.1s ease-in;
+      border: 2px solid rgb(151, 224, 40);
     }
   }
   
@@ -39,6 +101,8 @@
       margin-top: 10px;
       border-radius: 5px;
       box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 20%), 0px 1px 1px 0px rgba(0, 0, 0, 14%), 0px 1px 3px 0px rgba(0, 0, 0, 12%);
+      border: 2px solid rgb(121, 121, 121);
+      box-sizing: border-box;
     }
   }
 }

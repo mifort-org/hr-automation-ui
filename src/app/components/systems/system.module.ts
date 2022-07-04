@@ -15,9 +15,10 @@ import AppRoutingModule from '@src/app/app-routing.module';
 
 import { NavbarComponent } from './navbar/navbar.component';
 import { ActionsBarComponent } from './actions-bar/actions-bar.component';
+import { ActionsBarMergeComponent } from './actions-bar-merge/actions-bar-merge.component';
 
 @NgModule({
-  declarations: [ActionsBarComponent, NavbarComponent],
+  declarations: [ActionsBarComponent, NavbarComponent, ActionsBarMergeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

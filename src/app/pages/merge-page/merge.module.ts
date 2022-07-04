@@ -13,6 +13,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { SharedModule } from '@components/shared/shared.module';
 import { AppPipesModule } from '@utils/pipes/app-pipes.module';
 import AppRoutingModule from '@src/app/app-routing.module';
+import { SystemModule } from '@src/app/components/systems/system.module';
 import { CandidateMergeComponent } from './candidate-merge/candidate-merge.component';
 import { MergePageComponent } from './merge-page.component';
 
@@ -32,7 +33,7 @@ import { MergePageComponent } from './merge-page.component';
     MatButtonModule,
 
     SharedModule,
-
+    SystemModule,
     AppPipesModule,
   ],
   exports: [MergePageComponent, CandidateMergeComponent],
