@@ -19,7 +19,7 @@ export class MergeService {
 
   finalResult: string[][] = [];
 
-  finalResultSubject = new BehaviorSubject<string[][]>([]);
+  finalResultSubject = new BehaviorSubject<string[][]>(this.finalResult);
 
   candidatesIdsSubject = new BehaviorSubject<string[]>(this.candidatesIds);
 

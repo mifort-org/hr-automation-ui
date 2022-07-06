@@ -23,11 +23,12 @@
         <div *ngFor="let candidateId of candidateIds; let indexMatrix=index" class="desc-candidate-container">
           <div class="desc-candidate-title">
             {{candidateId}}
-            <mat-icon color="warn" (click)="mergeService.removeCandidateId(candidateId)" class="remove-button">delete_forever</mat-icon>
+            <mat-icon color="warn" (click)="removeCandidate(candidateId)" class="remove-button">delete_forever</mat-icon>
           </div>
 
           <ng-container *ngFor="let attribute of attributesMatrix[indexMatrix]; let indexCandidate=index">
             <app-candidate-merge 
+              [checked]="!!finalAttributesMatrix[indexMatrix][indexCandidate]"
               [candidateAttr] = "attribute" 
               [candidatesMatrixIndexes] = "[indexMatrix, indexCandidate]"
               (changeAttributes)="changeAttributes($event)"

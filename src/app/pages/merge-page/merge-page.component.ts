@@ -3,8 +3,6 @@ import { forkJoin } from 'rxjs';
 import { CandidatesService } from '@src/app/services/candidates.service';
 import { MergeService } from '@src/app/services/merge.service';
 import { PageState } from '@src/app/utils/pageState';
-import { NotificationService } from '@src/app/services/notification.service';
-// import { ENotificationMode } from '@src/app/constants/notification';
 
 export interface AttributeTypes {
   id: number;
@@ -21,11 +19,7 @@ export interface AttributeTypes {
   styleUrls: ['./merge-page.component.scss'],
 })
 export class MergePageComponent implements OnInit {
-  constructor(
-    private candidateService: CandidatesService,
-    public mergeService: MergeService,
-    private notification: NotificationService
-  ) {}
+  constructor(private candidateService: CandidatesService, public mergeService: MergeService) {}
 
   pageState = new PageState();
 
@@ -106,5 +100,9 @@ export class MergePageComponent implements OnInit {
       });
     });
     this.mergeService.addFinalResult(finalResult);
+  }
+
+  removeCandidate(candidateId: string) {
+    this.mergeService.removeCandidateId(candidateId);
   }
 }

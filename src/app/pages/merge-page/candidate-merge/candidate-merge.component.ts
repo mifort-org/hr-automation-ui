@@ -9,7 +9,8 @@ import { MergeService } from '@src/app/services/merge.service';
 export class CandidateMergeComponent {
   constructor(public mergeService: MergeService) {}
 
-  checked: boolean = false;
+  // checked: boolean = false;
+  @Input() checked: boolean = false;
 
   @Input() candidatesMatrixIndexes!: Array<number>;
 
