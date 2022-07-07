@@ -2,14 +2,9 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { PageState } from '@utils/pageState';
-import { HistoryService } from '@services/history.service';
 import { Candidate } from '@interfaces/candidates';
-import { CandidatesService } from '@services/candidates.service';
-import { NotificationService } from '@services/notification.service';
-import { ENotificationMode } from '@constants/notification';
-import { ERROR_MESSAGE } from '@constants/strings';
-import { ERROR_STATUS_CODES } from '@constants/errorStatusCode';
 import { CreateCommentData } from '@interfaces/history';
+import { CandidateDetailService } from '@services/candidateDetail.service';
 
 @Component({
   selector: 'app-add-comment-modal',
@@ -28,15 +23,17 @@ export class AddCommentModalComponent implements OnInit {
   constructor(
     private dialogRef: MatDialogRef<AddCommentModalComponent>,
     private formBuilder: FormBuilder,
-    private historyService: HistoryService,
-    private candidateService: CandidatesService,
-    private notification: NotificationService
+    public candidateDetailService: CandidateDetailService
   ) {}
 
   ngOnInit(): void {
-    this.candidate = this.candidateService.currentCandidate;
     this.form = this.formBuilder.group({
       comment: '',
+    });
+    this.candidateDetailService.historyOfCurrentCandidate$.subscribe({
+      next: () => {
+        this.closeModal();
+      },
     });
   }
 
@@ -50,18 +47,6 @@ export class AddCommentModalComponent implements OnInit {
       archived: false,
       comment: this.form.value.comment,
     };
-    this.historyService.createNewCandidateHistory(data, this.candidate.id).subscribe({
-      next: () => {
-        this.dialogRef.close(true);
-        this.notification.show('Comment is added', ENotificationMode.SUCCESS);
-      },
-      error: (err) => {
-        this.modalState.finishLoading();
-        this.notification.show(
-          ERROR_MESSAGE[err?.status || ERROR_STATUS_CODES.INTERNAL_SERVER_ERROR],
-          ENotificationMode.ERROR
-        );
-      },
-    });
+    this.candidateDetailService.createNewComment(data);
   }
 }

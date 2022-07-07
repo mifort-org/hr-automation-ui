@@ -1,6 +1,6 @@
 <div class="candidate-detail-container">
   <app-candidate-action
-    (historyWasChanged)="fetchHistoryForCurrentCandidate()"
+    (historyWasChanged)="candidateDetailService.fetchHistoryForCurrentCandidate()"
   ></app-candidate-action>
   <div class="row">
     <div class="col-3 col-10-sm">
@@ -11,21 +11,27 @@
               matBadge="0"
               matBadgePosition="after"
               matBadgeSize="small"
-              [matBadgeColor]="candidate?.status | status"
+              [matBadgeColor]="(candidateDetailService.currentCandidate$ | async)?.status | status"
               class="hide-text"
-              >{{ candidate?.customAttribute | fullname }}</span
+              >{{
+                (candidateDetailService.currentCandidate$ | async)?.customAttribute | fullname
+              }}</span
             ></mat-card-title
           >
-          <mat-card-subtitle>{{ candidate?.id }}</mat-card-subtitle>
+          <mat-card-subtitle>{{
+            (candidateDetailService.currentCandidate$ | async)?.id
+          }}</mat-card-subtitle>
         </mat-card-header>
         <div class="image-frame" mat-card-image>
           <img src="https://bootdey.com/img/Content/avatar/avatar1.png" />
         </div>
         <mat-card-content>
           <mat-chip-list>
-            <mat-chip color="primary" *ngFor="let keyword of candidate?.keywords">{{
-              keyword?.id | titlecase
-            }}</mat-chip>
+            <mat-chip
+              color="primary"
+              *ngFor="let keyword of (candidateDetailService.currentCandidate$ | async)?.keywords"
+              >{{ keyword?.id | titlecase }}</mat-chip
+            >
           </mat-chip-list>
         </mat-card-content>
       </mat-card>
@@ -34,14 +40,14 @@
       <mat-tab-group mat-align-tabs="start" class="mt-20">
         <mat-tab label="Details info">
           <app-candidate-main-info
-            [candidateAttributesValues]="candidateAttributesValues"
+            [candidateAttributesValues]="candidateDetailService.candidateAttributes$ | async"
           ></app-candidate-main-info
         ></mat-tab>
         <mat-tab label="Communication History"
           ><app-candidate-communications
-            [candidateHistory]="candidateHistory"
-            [candidateId]="candidateId"
-            (historyWasChanged)="fetchHistoryForCurrentCandidate()"
+            [candidateHistory]="candidateDetailService.historyOfCurrentCandidate$ | async"
+            [candidateId]="(candidateDetailService.currentCandidate$ | async)?.id || ''"
+            (historyWasChanged)="candidateDetailService.fetchHistoryForCurrentCandidate()"
           ></app-candidate-communications
         ></mat-tab>
         <mat-tab label="Updates"><app-candidate-updates></app-candidate-updates></mat-tab>

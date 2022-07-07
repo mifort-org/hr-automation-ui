@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 
 import { PageState } from '@utils/pageState';
@@ -15,7 +15,7 @@ import { ENotificationMode } from '@constants/notification';
   selector: 'app-edit-candidate-modal',
   templateUrl: './edit-candidate-modal.component.html',
 })
-export class EditCandidateModalComponent implements OnInit {
+export class EditCandidateModalComponent {
   candidate!: Candidate;
 
   formData = null;
@@ -30,10 +30,6 @@ export class EditCandidateModalComponent implements OnInit {
     private attributesService: AttributesService,
     private notification: NotificationService
   ) {}
-
-  ngOnInit(): void {
-    this.candidate = this.candidateService.currentCandidate;
-  }
 
   closeModal() {
     this.dialogRef.close();
@@ -73,7 +69,6 @@ export class EditCandidateModalComponent implements OnInit {
 
             // TODO: Need to think, maybe we should subscribe in service and call just this.candidateService.getCandidateById();
             // Or just create and Observable ICandidate object
-            this.candidateService.getCandidateById(this.candidate?.id).subscribe();
           },
           error: (err) => {
             this.modalState.finishLoading();

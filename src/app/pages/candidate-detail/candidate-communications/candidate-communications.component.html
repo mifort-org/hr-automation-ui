@@ -11,7 +11,12 @@
   </div>
   <div *ngIf="documentStatus">attachemnts</div>
 
-  <table mat-table [dataSource]="candidateHistory" class="mat-elevation-z8">
+  <table
+    mat-table
+    *ngIf="candidateHistory"
+    [dataSource]="candidateHistory"
+    class="mat-elevation-z8"
+  >
     <ng-container matColumnDef="dateofcreation">
       <th mat-header-cell *matHeaderCellDef>Date of creation</th>
       <td mat-cell *matCellDef="let element">{{ element.createDate | date }}</td>

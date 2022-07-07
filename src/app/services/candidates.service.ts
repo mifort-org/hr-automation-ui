@@ -27,8 +27,6 @@ const createCustomAttribute = (candidate: Candidate) => {
   providedIn: 'root',
 })
 export class CandidatesService {
-  currentCandidate!: Candidate;
-
   constructor(private fetch: FetchService) {}
 
   getCandidates(filterData: CandidatesFilterData): any {
@@ -44,9 +42,7 @@ export class CandidatesService {
   getCandidateById(id: string): any {
     return this.fetch.get<Candidate>(`candidates/${id}`).pipe(
       map((data) => {
-        const modifiedData = createCustomAttribute(data);
-        this.currentCandidate = modifiedData;
-        return modifiedData;
+        return createCustomAttribute(data);
       })
     );
   }

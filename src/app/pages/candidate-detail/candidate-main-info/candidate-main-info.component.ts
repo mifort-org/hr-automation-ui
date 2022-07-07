@@ -7,7 +7,7 @@ import { CandidateAttributesValues } from '@interfaces/candidates';
   templateUrl: './candidate-main-info.component.html',
 })
 export class CandidateMainInfoComponent {
-  @Input() candidateAttributesValues!: CandidateAttributesValues[];
+  @Input() candidateAttributesValues!: CandidateAttributesValues[] | null;
 
   displayedColumns: string[] = ['name', 'value'];
 }

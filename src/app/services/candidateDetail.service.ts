@@ -1,0 +1,106 @@
+import { Injectable, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Subject, take } from 'rxjs';
+import { Router } from '@angular/router';
+import { Candidate, CandidateAttribute, CandidateAttributesValues } from '@interfaces/candidates';
+import { CandidatesService } from '@services/candidates.service';
+import { CreateCommentData, HistoryElement } from '@interfaces/history';
+import { HistoryService } from '@services/history.service';
+import { NotificationService } from '@services/notification.service';
+import { ERROR_MESSAGE } from '@constants/strings';
+import { ERROR_STATUS_CODES } from '@constants/errorStatusCode';
+import { ENotificationMode } from '@constants/notification';
+import { FetchService } from './fetch.service';
+
+@Injectable()
+export class CandidateDetailService implements OnDestroy {
+  public currentCandidate$: BehaviorSubject<Candidate | null> =
+    new BehaviorSubject<Candidate | null>(null);
+
+  public historyOfCurrentCandidate$: BehaviorSubject<HistoryElement[] | null> = new BehaviorSubject<
+    HistoryElement[] | null
+  >(null);
+
+  public candidateAttributes$: BehaviorSubject<CandidateAttributesValues[] | null> =
+    new BehaviorSubject<CandidateAttributesValues[] | null>(null);
+
+  private unSubscribe$: Subject<boolean> = new Subject<boolean>();
+
+  constructor(
+    private fetch: FetchService,
+    private router: Router,
+    private candidatesService: CandidatesService,
+    private historyService: HistoryService,
+    private notification: NotificationService
+  ) {
+    const urlArr = router.url.split('/');
+    this.getCandidateById(urlArr[urlArr.length - 1]);
+  }
+
+  getCandidateById(id: string): void {
+    this.candidatesService
+      .getCandidateById(id)
+      .pipe(take(1))
+      .subscribe({
+        next: (candidate: Candidate) => {
+          this.currentCandidate$.next(candidate);
+          const candidateAttributes: CandidateAttributesValues[] =
+            candidate.candidateAttributes.map((attribute: CandidateAttribute) => {
+              const candidateAttributeValue: CandidateAttributesValues = {
+                name: attribute.attributeTypes.name || '',
+                value: attribute.value || '',
+              };
+              return candidateAttributeValue;
+            });
+          this.candidateAttributes$.next(candidateAttributes);
+          this.fetchHistoryForCurrentCandidate();
+        },
+        error: (error: any) => {
+          this.notification.show(
+            ERROR_MESSAGE[error?.status || ERROR_STATUS_CODES.INTERNAL_SERVER_ERROR],
+            ENotificationMode.ERROR
+          );
+        },
+      });
+  }
+
+  fetchHistoryForCurrentCandidate(): void {
+    const candidateId = this.currentCandidate$.getValue()?.id;
+    if (candidateId) {
+      this.historyService.getCandidateHistoryById(candidateId).subscribe({
+        next: (history: HistoryElement[]) => {
+          this.historyOfCurrentCandidate$.next(history);
+        },
+        error: (error: any) => {
+          this.notification.show(
+            ERROR_MESSAGE[error?.status || ERROR_STATUS_CODES.INTERNAL_SERVER_ERROR],
+            ENotificationMode.ERROR
+          );
+        },
+      });
+    }
+  }
+
+  createNewComment(data: CreateCommentData): void {
+    const candidateId = this.currentCandidate$.getValue()?.id;
+    if (candidateId) {
+      this.historyService.createNewCandidateHistory(data, candidateId).subscribe({
+        next: () => {
+          this.fetchHistoryForCurrentCandidate();
+          this.notification.show('Comment is added', ENotificationMode.SUCCESS);
+        },
+        error: (err) => {
+          // this.modalState.finishLoading();
+          this.notification.show(
+            ERROR_MESSAGE[err?.status || ERROR_STATUS_CODES.INTERNAL_SERVER_ERROR],
+            ENotificationMode.ERROR
+          );
+        },
+      });
+    }
+  }
+
+  ngOnDestroy() {
+    this.unSubscribe$.next(true);
+    this.unSubscribe$.complete();
+  }
+}

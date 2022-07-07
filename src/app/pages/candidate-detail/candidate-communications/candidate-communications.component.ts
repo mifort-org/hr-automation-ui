@@ -13,7 +13,7 @@ import { History, HistoryElement } from '@interfaces/history';
   templateUrl: './candidate-communications.component.html',
 })
 export class CandidateCommunicationsComponent {
-  @Input() candidateHistory!: History;
+  @Input() candidateHistory!: History | null;
 
   @Input() candidateId!: string;
 
