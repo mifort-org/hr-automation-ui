@@ -37,12 +37,12 @@ export class MergePageComponent implements OnInit {
 
   ngOnInit() {
     this.pageState.startLoading();
-    this.mergeService.getCandidatesIds().subscribe((items) => {
+    this.mergeService.candidatesIdsSubject.subscribe((items) => {
       this.candidateIds = items;
       const fetchAttrArr = items.map((item) =>
         this.candidateService.getCandidateAttributesById(item)
       );
-      forkJoin([...fetchAttrArr]).subscribe(
+      forkJoin(fetchAttrArr).subscribe(
         (resolve: AttributeTypes[][]) => {
           this.candidates = resolve;
           this.fillTitleValues();
@@ -55,7 +55,7 @@ export class MergePageComponent implements OnInit {
         }
       );
     });
-    this.mergeService.getFinalResult().subscribe((item) => {
+    this.mergeService.finalResultSubject.subscribe((item) => {
       this.finalResult = item;
     });
   }

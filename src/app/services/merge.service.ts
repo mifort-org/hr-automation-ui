@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, forkJoin } from 'rxjs';
+import { BehaviorSubject, take } from 'rxjs';
 import { ENotificationMode } from '../constants/notification';
 import { CandidatesService } from './candidates.service';
 import { NotificationService } from './notification.service';
@@ -13,59 +13,61 @@ export class MergeService {
     private notification: NotificationService
   ) {}
 
-  private candidatesIds: string[] = ['uliana_fomina', 'artem_skrebets', 'vladimir_zelmanchuk'];
-
   attributesTitles: string[] = [];
 
-  finalResult: string[][] = [];
+  // finalResult: string[][] = [];
 
-  finalResultSubject = new BehaviorSubject<string[][]>(this.finalResult);
+  finalResultSubject = new BehaviorSubject<string[][]>([]);
 
-  candidatesIdsSubject = new BehaviorSubject<string[]>(this.candidatesIds);
+  candidatesIdsSubject = new BehaviorSubject<string[]>([
+    'uliana_fomina',
+    'artem_skrebets',
+    'vladimir_zelmanchuk',
+  ]);
 
   addCandidateId(id: string) {
-    if (!this.candidatesIds.includes(id)) {
-      this.candidatesIds.push(id);
-    }
-    this.candidatesIdsSubject.next(this.candidatesIds);
+    this.candidatesIdsSubject.pipe(take(1)).subscribe((candidatesIds) => {
+      if (!candidatesIds.includes(id)) {
+        this.candidatesIdsSubject.next([...candidatesIds, id]);
+      }
+    });
   }
 
   removeCandidateId(id: string) {
-    this.candidatesIds = this.candidatesIds.filter((item) => item !== id);
-    this.candidatesIdsSubject.next(this.candidatesIds);
+    this.candidatesIdsSubject.pipe(take(1)).subscribe((candidatesIds) => {
+      this.candidatesIdsSubject.next(candidatesIds.filter((item) => item !== id));
+    });
   }
 
   removeAllCandidatesId() {
-    this.candidatesIds = [];
-    this.candidatesIdsSubject.next(this.candidatesIds);
-  }
-
-  getCandidatesIds() {
-    return this.candidatesIdsSubject;
-  }
-
-  getFinalResult() {
-    return this.finalResultSubject;
+    this.candidatesIdsSubject.next([]);
   }
 
   isCandidates() {
-    return !!this.candidatesIds.length;
+    let isCandidatesEmpty = false;
+    this.candidatesIdsSubject.pipe(take(1)).subscribe((candidatesIds) => {
+      isCandidatesEmpty = !!candidatesIds.length;
+    });
+    return isCandidatesEmpty;
   }
 
   getCandidateIdbyIndex(index: number) {
-    return this.candidatesIds[index];
+    let candidateByIndex = '';
+    this.candidatesIdsSubject.pipe(take(1)).subscribe((candidatesIds) => {
+      candidateByIndex = candidatesIds[index];
+    });
+    return candidateByIndex;
   }
 
-  fetchCanditatesAttributes() {
-    const fetchAttrArr = this.candidatesIds.map((item) =>
-      this.candidateService.getCandidateAttributesById(item)
-    );
-    return forkJoin([...fetchAttrArr]);
-  }
+  // fetchCanditatesAttributes() {
+  //   const fetchAttrArr = this.candidatesIds.map((item) =>
+  //     this.candidateService.getCandidateAttributesById(item)
+  //   );
+  //   return forkJoin([...fetchAttrArr]);
+  // }
 
   addFinalResult(finalResult: string[][]) {
-    this.finalResult = finalResult;
-    this.finalResultSubject.next(this.finalResult);
+    this.finalResultSubject.next(finalResult);
   }
 
   addTitles(attributesTitles: string[]) {
@@ -74,10 +76,13 @@ export class MergeService {
 
   mergeCandidates() {
     if (this.checkFilledResult() && this.attributesTitles.length) {
-      this.attributesTitles.forEach((item, index) =>
-        // eslint-disable-next-line no-console
-        console.log(`${item}: ${this.finalResult[index]}`)
-      );
+      this.finalResultSubject.pipe(take(1)).subscribe((results) => {
+        this.attributesTitles.forEach((item, index) =>
+          // eslint-disable-next-line no-console
+          console.log(`${item}: ${results[index]}`)
+        );
+      });
+
       this.notification.show('Successfully merged. Check console', ENotificationMode.SUCCESS);
     } else {
       this.notification.show('Please fill all fields', ENotificationMode.ERROR);
@@ -85,6 +90,10 @@ export class MergeService {
   }
 
   checkFilledResult(): boolean {
-    return this.finalResult.every((result) => result.length);
+    let isFilled = false;
+    this.finalResultSubject.pipe(take(1)).subscribe((results) => {
+      isFilled = results.every((result) => result.length);
+    });
+    return isFilled;
   }
 }
