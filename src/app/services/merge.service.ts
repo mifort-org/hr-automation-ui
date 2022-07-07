@@ -31,9 +31,9 @@ export class MergeService {
 
   finalAttributesMatrix: Array<Array<string>> = [];
 
-  finalResultSubject$ = new BehaviorSubject<string[][]>([]);
+  finalResultSubject$: BehaviorSubject<string[][]> = new BehaviorSubject<string[][]>([]);
 
-  candidatesIdsSubject$ = new BehaviorSubject<string[]>([
+  candidatesIdsSubject$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([
     'uliana_fomina',
     'artem_skrebets',
     'vladimir_zelmanchuk',
