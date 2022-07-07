@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { forkJoin } from 'rxjs';
 import { CandidatesService } from '@src/app/services/candidates.service';
+// eslint-disable-next-line import/no-cycle
 import { MergeService } from '@src/app/services/merge.service';
 import { PageState } from '@src/app/utils/pageState';
 
@@ -37,25 +37,33 @@ export class MergePageComponent implements OnInit {
 
   ngOnInit() {
     this.pageState.startLoading();
-    this.mergeService.candidatesIdsSubject.subscribe((items) => {
+    // this.mergeService.candidatesIdsSubject.subscribe((items) => {
+    //   this.candidateIds = items;
+    //   const fetchAttrArr = items.map((item) =>
+    //     this.candidateService.getCandidateAttributesById(item)
+    //   );
+    //   forkJoin(fetchAttrArr)
+    this.mergeService.candidatesIdsSubject$.subscribe((items) => {
       this.candidateIds = items;
-      const fetchAttrArr = items.map((item) =>
-        this.candidateService.getCandidateAttributesById(item)
-      );
-      forkJoin(fetchAttrArr).subscribe(
-        (resolve: AttributeTypes[][]) => {
+    });
+    this.mergeService.fetchCanditatesAttributes().subscribe(
+      (resolve: AttributeTypes[][]) => {
+        const indexNonArray = resolve.findIndex((array) => !Array.isArray(array));
+        if (indexNonArray !== -1) {
+          this.mergeService.removeCandidateByIndex(indexNonArray);
+        } else {
           this.candidates = resolve;
           this.fillTitleValues();
           this.fillAttributesMatrix();
-          this.pageState.finishLoading();
-        },
-        (error) => {
-          this.pageState.catchError(error);
-          this.pageState.finishLoading();
         }
-      );
-    });
-    this.mergeService.finalResultSubject.subscribe((item) => {
+        this.pageState.finishLoading();
+      },
+      (error) => {
+        this.pageState.catchError(error);
+        this.pageState.finishLoading();
+      }
+    );
+    this.mergeService.finalResultSubject$.subscribe((item) => {
       this.finalResult = item;
     });
   }
@@ -103,6 +111,6 @@ export class MergePageComponent implements OnInit {
   }
 
   removeCandidate(candidateId: string) {
-    this.mergeService.removeCandidateId(candidateId);
+    this.mergeService.removeCandidateById(candidateId);
   }
 }

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, take } from 'rxjs';
+import { BehaviorSubject, forkJoin, take, mergeMap, Observable, catchError, of } from 'rxjs';
 import { ENotificationMode } from '../constants/notification';
+// eslint-disable-next-line import/no-cycle
+import { AttributeTypes } from '../pages/merge-page/merge-page.component';
 import { CandidatesService } from './candidates.service';
 import { NotificationService } from './notification.service';
 
@@ -15,54 +17,80 @@ export class MergeService {
 
   attributesTitles: string[] = [];
 
-  finalResultSubject = new BehaviorSubject<string[][]>([]);
+  attributesMatrix: Array<Array<string>> = [];
 
-  candidatesIdsSubject = new BehaviorSubject<string[]>([
+  finalAttributesMatrix: Array<Array<string>> = [];
+
+  finalResultSubject$ = new BehaviorSubject<string[][]>([]);
+
+  candidatesIdsSubject$ = new BehaviorSubject<string[]>([
     'uliana_fomina',
     'artem_skrebets',
     'vladimir_zelmanchuk',
   ]);
 
   addCandidateId(id: string) {
-    this.candidatesIdsSubject.pipe(take(1)).subscribe((candidatesIds) => {
+    this.candidatesIdsSubject$.pipe(take(1)).subscribe((candidatesIds) => {
       if (!candidatesIds.includes(id)) {
-        this.candidatesIdsSubject.next([...candidatesIds, id]);
+        this.candidatesIdsSubject$.next([...candidatesIds, id]);
       }
     });
   }
 
-  removeCandidateId(id: string) {
-    this.candidatesIdsSubject.pipe(take(1)).subscribe((candidatesIds) => {
-      this.candidatesIdsSubject.next(candidatesIds.filter((item) => item !== id));
+  removeCandidateById(id: string) {
+    this.candidatesIdsSubject$.pipe(take(1)).subscribe((candidatesIds) => {
+      this.candidatesIdsSubject$.next(candidatesIds.filter((item) => item !== id));
     });
   }
 
-  removeAllCandidatesId() {
-    this.candidatesIdsSubject.next([]);
+  removeCandidateByIndex(index: number) {
+    this.candidatesIdsSubject$.pipe(take(1)).subscribe((candidatesIds) => {
+      candidatesIds.splice(index, 1);
+      this.candidatesIdsSubject$.next(candidatesIds);
+    });
   }
 
   isCandidates() {
-    let isCandidatesEmpty = false;
-    this.candidatesIdsSubject.pipe(take(1)).subscribe((candidatesIds) => {
-      isCandidatesEmpty = !!candidatesIds.length;
-    });
-    return isCandidatesEmpty;
+    return !!this.candidatesIdsSubject$.getValue().length;
   }
 
   getCandidateIdbyIndex(index: number) {
-    let candidateByIndex = '';
-    this.candidatesIdsSubject.pipe(take(1)).subscribe((candidatesIds) => {
-      candidateByIndex = candidatesIds[index];
-    });
-    return candidateByIndex;
+    return this.candidatesIdsSubject$.getValue()[index];
   }
 
-  fetchCanditatesAttributes() {
-    // this.candidatesIdsSubject.pipe(mergeMap((q) => forkJoin(...q.map())));
+  fetchCanditatesAttributes(): Observable<AttributeTypes[][]> {
+    return this.candidatesIdsSubject$.pipe(
+      mergeMap(
+        (q) =>
+          forkJoin(
+            ...q.map((id) =>
+              this.candidateService
+                .getCandidateAttributesById(id)
+                .pipe(catchError((error) => of(error.status)))
+            )
+          ) as Observable<AttributeTypes[][]>
+      )
+    );
   }
+
+  // parseCanditatesAttributes() {
+  //   this.fetchCanditatesAttributes().subscribe();
+  // }
+
+  // fillTitleValues() {
+  //   const attributesSetList = new Set();
+  //   const finalResult: string[][] = [];
+  //   this.candidates.forEach((attrArray) =>
+  //     attrArray.forEach((attr) => attributesSetList.add(attr.name))
+  //   );
+  //   this.attributesTitles = [...(Array.from(attributesSetList.values()) as Array<string>)];
+  //   this.attributesTitles.forEach(() => finalResult.push([]));
+  //   this.addFinalResult(finalResult);
+  //   // this.addTitles(this.attributesTitles);
+  // }
 
   addFinalResult(finalResult: string[][]) {
-    this.finalResultSubject.next(finalResult);
+    this.finalResultSubject$.next(finalResult);
   }
 
   addTitles(attributesTitles: string[]) {
@@ -71,7 +99,7 @@ export class MergeService {
 
   mergeCandidates() {
     if (this.checkFilledResult() && this.attributesTitles.length) {
-      this.finalResultSubject.pipe(take(1)).subscribe((results) => {
+      this.finalResultSubject$.pipe(take(1)).subscribe((results) => {
         this.attributesTitles.forEach((item, index) =>
           // eslint-disable-next-line no-console
           console.log(`${item}: ${results[index]}`)
@@ -85,10 +113,6 @@ export class MergeService {
   }
 
   checkFilledResult(): boolean {
-    let isFilled = false;
-    this.finalResultSubject.pipe(take(1)).subscribe((results) => {
-      isFilled = results.every((result) => result.length);
-    });
-    return isFilled;
+    return this.finalResultSubject$.getValue().every((result) => result.length);
   }
 }
