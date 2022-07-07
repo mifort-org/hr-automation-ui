@@ -1,5 +1,10 @@
 <label class="desc-candidate-label">
-  <input type="checkbox" class="desc-candidate-checkbox-hidden" [(ngModel)]="checked" [value]="candidatesMatrixIndexes" [disabled]="!candidateAttr" (change)="onCheckboxChange()">
+  <input 
+    type="checkbox" 
+    class="desc-candidate-checkbox-hidden" 
+    [(ngModel)]="checked" [value]="candidatesMatrixIndexes" 
+    [disabled]="!candidateAttr" 
+    (change)="onCheckboxChange()">
   <div class="desc-candidate-data">{{candidateAttr}}</div>    
   <div class="desc-candidate-checked">&#10004;</div>
 </label>

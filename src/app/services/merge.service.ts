@@ -1,10 +1,18 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, forkJoin, take, mergeMap, Observable, catchError, of } from 'rxjs';
 import { ENotificationMode } from '../constants/notification';
-// eslint-disable-next-line import/no-cycle
-import { AttributeTypes } from '../pages/merge-page/merge-page.component';
+import { PageState } from '../utils/pageState';
 import { CandidatesService } from './candidates.service';
 import { NotificationService } from './notification.service';
+
+export interface AttributeTypes {
+  id: number;
+  name: string;
+  basicType: string;
+  validation: string;
+  identifier: boolean;
+  value: string;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +22,8 @@ export class MergeService {
     private candidateService: CandidatesService,
     private notification: NotificationService
   ) {}
+
+  pageState = new PageState();
 
   attributesTitles: string[] = [];
 
@@ -73,28 +83,69 @@ export class MergeService {
     );
   }
 
-  // parseCanditatesAttributes() {
-  //   this.fetchCanditatesAttributes().subscribe();
-  // }
+  parseCanditatesAttributes() {
+    this.pageState.startLoading();
+    this.fetchCanditatesAttributes().subscribe(
+      (candidatesArrays: AttributeTypes[][]) => {
+        const indexNonArray = candidatesArrays.findIndex((array) => !Array.isArray(array));
+        if (indexNonArray !== -1) {
+          this.removeCandidateByIndex(indexNonArray);
+        } else {
+          this.fillTitleValues(candidatesArrays);
+          this.fillAttributesMatrix(candidatesArrays);
+        }
+        this.pageState.finishLoading();
+      },
+      (error) => {
+        this.pageState.catchError(error);
+        this.pageState.finishLoading();
+      }
+    );
+  }
 
-  // fillTitleValues() {
-  //   const attributesSetList = new Set();
-  //   const finalResult: string[][] = [];
-  //   this.candidates.forEach((attrArray) =>
-  //     attrArray.forEach((attr) => attributesSetList.add(attr.name))
-  //   );
-  //   this.attributesTitles = [...(Array.from(attributesSetList.values()) as Array<string>)];
-  //   this.attributesTitles.forEach(() => finalResult.push([]));
-  //   this.addFinalResult(finalResult);
-  //   // this.addTitles(this.attributesTitles);
-  // }
+  fillTitleValues(candidates: AttributeTypes[][]) {
+    const attributesSetList = new Set();
+    const finalResult: string[][] = [];
+    candidates.forEach((attrArray) =>
+      attrArray.forEach((attr) => attributesSetList.add(attr.name))
+    );
+    this.attributesTitles = [...(Array.from(attributesSetList.values()) as Array<string>)];
+    this.attributesTitles.forEach(() => finalResult.push([]));
+    this.addFinalResult(finalResult);
+  }
+
+  fillAttributesMatrix(candidates: AttributeTypes[][]) {
+    this.attributesMatrix = candidates.map((candidateArr) =>
+      this.attributesTitles.map((item) => {
+        const candidateAttribute = candidateArr.find((attr) => attr.name === item);
+        return candidateAttribute ? candidateAttribute.value : '';
+      })
+    );
+    this.finalAttributesMatrix = this.attributesMatrix.map((item) => item.map(() => ''));
+  }
 
   addFinalResult(finalResult: string[][]) {
     this.finalResultSubject$.next(finalResult);
   }
 
-  addTitles(attributesTitles: string[]) {
-    this.attributesTitles = attributesTitles;
+  changeAttributes(event: { candidatesMatrixIndexes: Array<number>; candidateAttr: string }) {
+    const [indexMatrix, indexCandidate] = event.candidatesMatrixIndexes;
+    this.finalAttributesMatrix[indexMatrix][indexCandidate] = event.candidateAttr;
+    this.calculateResult();
+  }
+
+  calculateResult() {
+    const finalResult: string[][] = [];
+    this.attributesTitles.forEach(() => finalResult.push([]));
+
+    this.finalAttributesMatrix.forEach((candAttrArr) => {
+      candAttrArr.forEach((attr, index) => {
+        if (attr) {
+          finalResult[index].push(attr);
+        }
+      });
+    });
+    this.addFinalResult(finalResult);
   }
 
   mergeCandidates() {

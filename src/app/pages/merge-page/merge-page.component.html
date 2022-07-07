@@ -8,30 +8,30 @@
 <mat-progress-bar
   mode="indeterminate"
   color="accent"
-  *ngIf="pageState.loading"
+  *ngIf="mergeService.pageState.loading"
 ></mat-progress-bar>
-<ng-container *ngIf="!pageState.loading">
+<ng-container *ngIf="!mergeService.pageState.loading">
   <div *ngIf="mergeService.isCandidates();else noCandidatesId" class="candidate-merge-container">
     <div class="desc-titles-container">
       <div class="desc-title"></div>
-      <ng-container *ngFor="let title of attributesTitles">
+      <ng-container *ngFor="let title of mergeService.attributesTitles">
         <div class="desc-title">{{title}}</div>
       </ng-container>
     </div>
 
     <div class="candidates-container">
-        <div *ngFor="let candidateId of candidateIds; let indexMatrix=index" class="desc-candidate-container">
+        <div *ngFor="let candidateId of mergeService.candidatesIdsSubject$.getValue(); let indexMatrix=index" class="desc-candidate-container">
           <div class="desc-candidate-title">
             {{candidateId}}
-            <mat-icon color="warn" (click)="removeCandidate(candidateId)" class="remove-button">delete_forever</mat-icon>
+            <mat-icon color="warn" (click)="mergeService.removeCandidateById(candidateId)" class="remove-button">delete_forever</mat-icon>
           </div>
 
-          <ng-container *ngFor="let attribute of attributesMatrix[indexMatrix]; let indexCandidate=index">
+          <ng-container *ngFor="let attribute of mergeService.attributesMatrix[indexMatrix]; let indexCandidate=index">
             <app-candidate-merge 
-              [checked]="!!finalAttributesMatrix[indexMatrix][indexCandidate]"
+              [checked]="!!mergeService.finalAttributesMatrix[indexMatrix][indexCandidate]"
               [candidateAttr] = "attribute" 
               [candidatesMatrixIndexes] = "[indexMatrix, indexCandidate]"
-              (changeAttributes)="changeAttributes($event)"
+              (changeAttributes)="mergeService.changeAttributes($event)"
               class="desc-candidate">
             </app-candidate-merge>
           </ng-container>          
@@ -40,7 +40,7 @@
 
     <div class="desc-result-container">
       <div class="desc-result-title" [ngClass]="{'filled-result': mergeService.checkFilledResult()}">Result</div>
-      <ng-container *ngFor="let result of finalResult">
+      <ng-container *ngFor="let result of mergeService.finalResultSubject$.getValue()">
         <div class="desc-result" [ngClass]="{'final-result': result.join(', ')}">
           {{result.join(', ')}}
       </div>
