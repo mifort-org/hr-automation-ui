@@ -15,8 +15,6 @@ export class MergeService {
 
   attributesTitles: string[] = [];
 
-  // finalResult: string[][] = [];
-
   finalResultSubject = new BehaviorSubject<string[][]>([]);
 
   candidatesIdsSubject = new BehaviorSubject<string[]>([
@@ -59,12 +57,9 @@ export class MergeService {
     return candidateByIndex;
   }
 
-  // fetchCanditatesAttributes() {
-  //   const fetchAttrArr = this.candidatesIds.map((item) =>
-  //     this.candidateService.getCandidateAttributesById(item)
-  //   );
-  //   return forkJoin([...fetchAttrArr]);
-  // }
+  fetchCanditatesAttributes() {
+    // this.candidatesIdsSubject.pipe(mergeMap((q) => forkJoin(...q.map())));
+  }
 
   addFinalResult(finalResult: string[][]) {
     this.finalResultSubject.next(finalResult);
