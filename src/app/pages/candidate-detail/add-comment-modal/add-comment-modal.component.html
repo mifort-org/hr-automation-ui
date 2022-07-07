@@ -6,13 +6,6 @@
   </mat-form-field>
 </form>
 <div mat-dialog-actions class="flex flex-end">
-  <button
-    mat-raised-button
-    color="primary"
-    (click)="submitHistoryUpdate()"
-    [disabled]="modalState.loading"
-  >
-    Submit
-  </button>
-  <button mat-button (click)="closeModal()" [disabled]="modalState.loading">Cancel</button>
+  <button mat-raised-button color="primary" (click)="submitHistoryUpdate()">Submit</button>
+  <button mat-button (click)="dialogRef.close()">Cancel</button>
 </div>

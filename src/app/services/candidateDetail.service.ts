@@ -1,14 +1,15 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { BehaviorSubject, Subject, take } from 'rxjs';
+import { BehaviorSubject, Subject, take, takeUntil } from 'rxjs';
 import { Router } from '@angular/router';
 import { Candidate, CandidateAttribute, CandidateAttributesValues } from '@interfaces/candidates';
 import { CandidatesService } from '@services/candidates.service';
 import { CreateCommentData, HistoryElement } from '@interfaces/history';
 import { HistoryService } from '@services/history.service';
 import { NotificationService } from '@services/notification.service';
-import { ERROR_MESSAGE } from '@constants/strings';
+import { DialogModalIds, ERROR_MESSAGE } from '@constants/strings';
 import { ERROR_STATUS_CODES } from '@constants/errorStatusCode';
 import { ENotificationMode } from '@constants/notification';
+import { ModalService } from '@services/modal.service';
 import { FetchService } from './fetch.service';
 
 @Injectable()
@@ -30,10 +31,23 @@ export class CandidateDetailService implements OnDestroy {
     private router: Router,
     private candidatesService: CandidatesService,
     private historyService: HistoryService,
-    private notification: NotificationService
+    private notification: NotificationService,
+    private modalService: ModalService
   ) {
     const urlArr = router.url.split('/');
     this.getCandidateById(urlArr[urlArr.length - 1]);
+    this.modalService.dialog.afterOpened.pipe(takeUntil(this.unSubscribe$)).subscribe((modal) => {
+      if (modal.id === DialogModalIds.addCommentModal) {
+        modal
+          .beforeClosed()
+          .pipe(take(1))
+          .subscribe((data?: CreateCommentData) => {
+            if (data) {
+              this.createNewComment(data);
+            }
+          });
+      }
+    });
   }
 
   getCandidateById(id: string): void {
@@ -86,10 +100,9 @@ export class CandidateDetailService implements OnDestroy {
       this.historyService.createNewCandidateHistory(data, candidateId).subscribe({
         next: () => {
           this.fetchHistoryForCurrentCandidate();
-          this.notification.show('Comment is added', ENotificationMode.SUCCESS);
+          this.notification.show('Comment was added', ENotificationMode.SUCCESS);
         },
         error: (err) => {
-          // this.modalState.finishLoading();
           this.notification.show(
             ERROR_MESSAGE[err?.status || ERROR_STATUS_CODES.INTERNAL_SERVER_ERROR],
             ENotificationMode.ERROR
