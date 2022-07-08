@@ -1,64 +1,32 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ERROR_STATUS_CODES } from '@src/app/constants/errorStatusCode';
-import { ENotificationMode } from '@src/app/constants/notification';
-import { ERROR_MESSAGE } from '@src/app/constants/strings';
-import { Candidate } from '@src/app/interfaces/candidates';
-import { HistoryService } from '@src/app/services/history.service';
-import { NotificationService } from '@src/app/services/notification.service';
-import { History, HistoryElement } from '@interfaces/history';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
+import { History } from '@interfaces/history';
+import { CandidateDetailService } from '@services/candidateDetail.service';
 
 @Component({
   selector: 'app-candidate-communications',
   styleUrls: ['candidate-communications.scss'],
   templateUrl: './candidate-communications.component.html',
 })
-export class CandidateCommunicationsComponent {
-  @Input() candidateHistory!: History | null;
+export class CandidateCommunicationsComponent implements OnInit, OnDestroy {
+  public candidateHistory!: History | null;
 
-  @Input() candidateId!: string;
+  private unSubscribe$: Subject<boolean> = new Subject<boolean>();
 
-  @Output() historyWasChanged: EventEmitter<boolean> = new EventEmitter<boolean>(false);
+  constructor(public candidateDetailService: CandidateDetailService) {}
 
-  candidate!: Candidate;
-
-  documentStatus: Boolean = false;
-
-  displayedColumns: string[] = ['dateofcreation', 'lastupdate', 'comment', 'action'];
-
-  constructor(private historyService: HistoryService, private notification: NotificationService) {}
-
-  showAttachments(): void {
-    this.documentStatus = !this.documentStatus;
+  ngOnInit() {
+    this.candidateDetailService.historyOfCurrentCandidate$
+      .pipe(takeUntil(this.unSubscribe$))
+      .subscribe({
+        next: (history) => {
+          this.candidateHistory = history;
+        },
+      });
   }
 
-  deleteHistory(element: string): void {
-    this.historyService.deleteCandidateHistory(this.candidateId, element).subscribe({
-      next: () => {
-        this.notification.show('Candidate history is deleted', ENotificationMode.SUCCESS);
-        this.historyWasChanged.emit(true);
-      },
-      error: (err) => {
-        this.notification.show(
-          ERROR_MESSAGE[err?.status || ERROR_STATUS_CODES.INTERNAL_SERVER_ERROR],
-          ENotificationMode.ERROR
-        );
-      },
-    });
-  }
-
-  onBlur(data: any, element: HistoryElement): void {
-    const currentData = { ...element, comment: data.target.value };
-    this.historyService.updateCandidateHistory(this.candidateId, currentData).subscribe({
-      next: () => {
-        this.notification.show('Candidate history is updated', ENotificationMode.SUCCESS);
-        this.historyWasChanged.emit(true);
-      },
-      error: (err) => {
-        this.notification.show(
-          ERROR_MESSAGE[err?.status || ERROR_STATUS_CODES.INTERNAL_SERVER_ERROR],
-          ENotificationMode.ERROR
-        );
-      },
-    });
+  ngOnDestroy() {
+    this.unSubscribe$.next(true);
+    this.unSubscribe$.complete();
   }
 }

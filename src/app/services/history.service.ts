@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CreateCommentData, HistoryElement } from '@interfaces/history';
+import { CommentData, HistoryElement } from '@interfaces/history';
 import { FetchService } from './fetch.service';
 
 @Injectable({
@@ -14,11 +14,11 @@ export class HistoryService {
   }
 
   // Todo  Patch method is not allowed by BE side
-  updateCandidateHistory(id: string, data: any): Observable<HistoryElement> {
-    return this.fetch.patch<HistoryElement>(`candidates/${id}/history`, data);
+  updateCandidateHistory(candidateId: string, data: CommentData): Observable<HistoryElement> {
+    return this.fetch.patch<HistoryElement>(`candidates/${candidateId}/history`, data);
   }
 
-  createNewCandidateHistory(data: CreateCommentData, id: string): Observable<HistoryElement> {
+  createNewCandidateHistory(data: CommentData, id: string): Observable<HistoryElement> {
     return this.fetch.post<HistoryElement>(`candidates/${id}/history`, data);
   }
 

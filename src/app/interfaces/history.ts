@@ -34,7 +34,8 @@ export interface UpdateDate {
   year: number;
 }
 
-export interface CreateCommentData {
+export interface CommentData {
   comment: string;
+  id?: number;
   archived?: boolean;
 }

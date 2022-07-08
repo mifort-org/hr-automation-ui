@@ -3,7 +3,7 @@ import { BehaviorSubject, Subject, take, takeUntil } from 'rxjs';
 import { Router } from '@angular/router';
 import { Candidate, CandidateAttribute, CandidateAttributesValues } from '@interfaces/candidates';
 import { CandidatesService } from '@services/candidates.service';
-import { CreateCommentData, HistoryElement } from '@interfaces/history';
+import { CommentData, HistoryElement } from '@interfaces/history';
 import { HistoryService } from '@services/history.service';
 import { NotificationService } from '@services/notification.service';
 import { DialogModalIds, ERROR_MESSAGE } from '@constants/strings';
@@ -41,8 +41,8 @@ export class CandidateDetailService implements OnDestroy {
         modal
           .beforeClosed()
           .pipe(take(1))
-          .subscribe((data?: CreateCommentData) => {
-            if (data) {
+          .subscribe((data?: CommentData) => {
+            if (data?.comment) {
               this.createNewComment(data);
             }
           });
@@ -50,7 +50,7 @@ export class CandidateDetailService implements OnDestroy {
     });
   }
 
-  getCandidateById(id: string): void {
+  public getCandidateById(id: string): void {
     this.candidatesService
       .getCandidateById(id)
       .pipe(take(1))
@@ -77,7 +77,7 @@ export class CandidateDetailService implements OnDestroy {
       });
   }
 
-  fetchHistoryForCurrentCandidate(): void {
+  public fetchHistoryForCurrentCandidate(): void {
     const candidateId = this.currentCandidate$.getValue()?.id;
     if (candidateId) {
       this.historyService.getCandidateHistoryById(candidateId).subscribe({
@@ -94,7 +94,7 @@ export class CandidateDetailService implements OnDestroy {
     }
   }
 
-  createNewComment(data: CreateCommentData): void {
+  public createNewComment(data: CommentData): void {
     const candidateId = this.currentCandidate$.getValue()?.id;
     if (candidateId) {
       this.historyService.createNewCandidateHistory(data, candidateId).subscribe({
@@ -110,6 +110,44 @@ export class CandidateDetailService implements OnDestroy {
         },
       });
     }
+  }
+
+  public updateComment(data: CommentData): void {
+    const candidateId = this.currentCandidate$.getValue()?.id.toString() || '';
+    this.historyService
+      .updateCandidateHistory(candidateId, data)
+      .pipe(takeUntil(this.unSubscribe$))
+      .subscribe({
+        next: () => {
+          this.notification.show('Candidate history is updated', ENotificationMode.SUCCESS);
+          this.fetchHistoryForCurrentCandidate();
+        },
+        error: (error: any) => {
+          this.notification.show(
+            ERROR_MESSAGE[error?.status || ERROR_STATUS_CODES.INTERNAL_SERVER_ERROR],
+            ENotificationMode.ERROR
+          );
+        },
+      });
+  }
+
+  public deleteHistoryComment(commentId: number): void {
+    const candidateId = this.currentCandidate$.getValue()?.id.toString() || '';
+    this.historyService
+      .deleteCandidateHistory(candidateId, commentId.toString())
+      .pipe(takeUntil(this.unSubscribe$))
+      .subscribe({
+        next: () => {
+          this.notification.show('Candidate history is deleted', ENotificationMode.SUCCESS);
+          this.fetchHistoryForCurrentCandidate();
+        },
+        error: (error: any) => {
+          this.notification.show(
+            ERROR_MESSAGE[error?.status || ERROR_STATUS_CODES.INTERNAL_SERVER_ERROR],
+            ENotificationMode.ERROR
+          );
+        },
+      });
   }
 
   ngOnDestroy() {

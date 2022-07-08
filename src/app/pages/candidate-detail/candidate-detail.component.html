@@ -35,18 +35,16 @@
       </mat-card>
     </div>
     <div class="col-7 col-10-sm">
-      <mat-tab-group mat-align-tabs="start" class="mt-20 communication-tabs" animationDuration="0ms">
+      <mat-tab-group
+        mat-align-tabs="start"
+        class="mt-20 communication-tabs"
+        animationDuration="0ms"
+      >
         <mat-tab label="Details info">
-          <app-candidate-main-info
-            [candidateAttributesValues]="candidateDetailService.candidateAttributes$ | async"
-          ></app-candidate-main-info
-        ></mat-tab>
+          <app-candidate-main-info></app-candidate-main-info>
+        </mat-tab>
         <mat-tab label="Communication History"
-          ><app-candidate-communications
-            [candidateHistory]="candidateDetailService.historyOfCurrentCandidate$ | async"
-            [candidateId]="(candidateDetailService.currentCandidate$ | async)?.id || ''"
-            (historyWasChanged)="candidateDetailService.fetchHistoryForCurrentCandidate()"
-          ></app-candidate-communications
+          ><app-candidate-communications></app-candidate-communications
         ></mat-tab>
         <mat-tab label="Updates"><app-candidate-updates></app-candidate-updates></mat-tab>
       </mat-tab-group>

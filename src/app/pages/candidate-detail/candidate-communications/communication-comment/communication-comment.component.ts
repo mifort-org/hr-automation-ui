@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { HistoryElement } from '@interfaces/history';
+import { CommentData, HistoryElement } from '@interfaces/history';
 
 @Component({
   selector: 'app-communication-comment',
@@ -12,6 +12,8 @@ export class CommunicationCommentComponent {
   @Input() attachment!: string;
 
   @Output() commentDeleted: EventEmitter<number> = new EventEmitter<number>();
+
+  @Output() commentWasUpdated: EventEmitter<CommentData> = new EventEmitter<CommentData>();
 
   public commentWidth!: string;
 
@@ -34,7 +36,14 @@ export class CommunicationCommentComponent {
   }
 
   public editModeOff(): void {
-    this.editFieldValue = '';
+    if (this.editFieldValue?.length) {
+      const updatedDate: CommentData = {
+        id: this.historyItem.id,
+        comment: this.editFieldValue,
+      };
+      this.commentWasUpdated.next(updatedDate);
+      this.editFieldValue = '';
+    }
     this.editMode = false;
   }
 }

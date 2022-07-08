@@ -3,7 +3,8 @@
     <ng-container *ngFor="let historyItem of candidateHistory">
       <app-communication-comment
         [historyItem]="historyItem"
-        (commentDeleted)="deleteHistory($event.toString())"
+        (commentDeleted)="candidateDetailService.deleteHistoryComment($event)"
+        (commentWasUpdated)="candidateDetailService.updateComment($event)"
       ></app-communication-comment>
     </ng-container>
   </ng-container>
