@@ -10,13 +10,13 @@ import { MergeService } from '@src/app/services/merge.service';
 export class MergePageComponent implements OnInit, OnDestroy {
   constructor(public mergeService: MergeService) {}
 
-  candidateIds: Array<string> = [];
+  private candidateIds: Array<string> = [];
 
-  finalResult: Array<Array<string>> = [];
+  private finalResult: Array<Array<string>> = [];
 
-  destroy$: Subject<boolean> = new Subject<boolean>();
+  private destroy$: Subject<boolean> = new Subject<boolean>();
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.mergeService.candidatesIdsSubject$.pipe(takeUntil(this.destroy$)).subscribe((items) => {
       this.candidateIds = items;
     });
@@ -28,6 +28,6 @@ export class MergePageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.destroy$.next(true);
-    this.destroy$.unsubscribe();
+    this.destroy$.complete();
   }
 }

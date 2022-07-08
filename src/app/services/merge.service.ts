@@ -1,18 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, forkJoin, take, mergeMap, Observable, catchError, of } from 'rxjs';
+import { CandidateAttributesTypes } from '@interfaces/attributes';
 import { ENotificationMode } from '../constants/notification';
 import { PageState } from '../utils/pageState';
 import { CandidatesService } from './candidates.service';
 import { NotificationService } from './notification.service';
-
-export interface AttributeTypes {
-  id: number;
-  name: string;
-  basicType: string;
-  validation: string;
-  identifier: boolean;
-  value: string;
-}
 
 @Injectable({
   providedIn: 'root',
@@ -23,52 +15,51 @@ export class MergeService {
     private notification: NotificationService
   ) {}
 
-  pageState = new PageState();
+  public pageState = new PageState();
 
-  attributesTitles: string[] = [];
+  public attributesTitles: string[] = [];
 
-  attributesMatrix: Array<Array<string>> = [];
+  public attributesMatrix: Array<Array<string>> = [];
 
-  finalAttributesMatrix: Array<Array<string>> = [];
+  public finalAttributesMatrix: Array<Array<string>> = [];
 
-  finalResultSubject$: BehaviorSubject<string[][]> = new BehaviorSubject<string[][]>([]);
+  public finalResultSubject$: BehaviorSubject<string[][]> = new BehaviorSubject<string[][]>([]);
 
-  candidatesIdsSubject$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([
+  public candidatesIdsSubject$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([
     'uliana_fomina',
     'artem_skrebets',
     'vladimir_zelmanchuk',
   ]);
 
-  addCandidateId(id: string) {
-    this.candidatesIdsSubject$.pipe(take(1)).subscribe((candidatesIds) => {
-      if (!candidatesIds.includes(id)) {
-        this.candidatesIdsSubject$.next([...candidatesIds, id]);
-      }
-    });
+  addCandidateId(id: string): void {
+    const candidatesIds = this.candidatesIdsSubject$.getValue();
+    if (!candidatesIds.includes(id)) {
+      this.candidatesIdsSubject$.next([...candidatesIds, id]);
+    }
   }
 
-  removeCandidateById(id: string) {
+  removeCandidateById(id: string): void {
     this.candidatesIdsSubject$.pipe(take(1)).subscribe((candidatesIds) => {
       this.candidatesIdsSubject$.next(candidatesIds.filter((item) => item !== id));
     });
   }
 
-  removeCandidateByIndex(index: number) {
+  removeCandidateByIndex(index: number): void {
     this.candidatesIdsSubject$.pipe(take(1)).subscribe((candidatesIds) => {
       candidatesIds.splice(index, 1);
       this.candidatesIdsSubject$.next(candidatesIds);
     });
   }
 
-  isCandidates() {
+  isCandidates(): boolean {
     return !!this.candidatesIdsSubject$.getValue().length;
   }
 
-  getCandidateIdbyIndex(index: number) {
+  getCandidateIdbyIndex(index: number): string {
     return this.candidatesIdsSubject$.getValue()[index];
   }
 
-  fetchCanditatesAttributes(): Observable<AttributeTypes[][]> {
+  fetchCanditatesAttributes(): Observable<CandidateAttributesTypes[][]> {
     return this.candidatesIdsSubject$.pipe(
       mergeMap(
         (q) =>
@@ -78,15 +69,15 @@ export class MergeService {
                 .getCandidateAttributesById(id)
                 .pipe(catchError((error) => of(error.status)))
             )
-          ) as Observable<AttributeTypes[][]>
+          ) as Observable<CandidateAttributesTypes[][]>
       )
     );
   }
 
-  parseCanditatesAttributes() {
+  parseCanditatesAttributes(): void {
     this.pageState.startLoading();
     this.fetchCanditatesAttributes().subscribe(
-      (candidatesArrays: AttributeTypes[][]) => {
+      (candidatesArrays: CandidateAttributesTypes[][]) => {
         const indexNonArray = candidatesArrays.findIndex((array) => !Array.isArray(array));
         if (indexNonArray !== -1) {
           this.removeCandidateByIndex(indexNonArray);
@@ -103,9 +94,10 @@ export class MergeService {
     );
   }
 
-  fillTitleValues(candidates: AttributeTypes[][]) {
+  fillTitleValues(candidates: CandidateAttributesTypes[][]): void {
     const attributesSetList = new Set();
     const finalResult: string[][] = [];
+
     candidates.forEach((attrArray) =>
       attrArray.forEach((attr) => attributesSetList.add(attr.name))
     );
@@ -114,7 +106,7 @@ export class MergeService {
     this.addFinalResult(finalResult);
   }
 
-  fillAttributesMatrix(candidates: AttributeTypes[][]) {
+  fillAttributesMatrix(candidates: CandidateAttributesTypes[][]): void {
     this.attributesMatrix = candidates.map((candidateArr) =>
       this.attributesTitles.map((item) => {
         const candidateAttribute = candidateArr.find((attr) => attr.name === item);
@@ -124,17 +116,17 @@ export class MergeService {
     this.finalAttributesMatrix = this.attributesMatrix.map((item) => item.map(() => ''));
   }
 
-  addFinalResult(finalResult: string[][]) {
+  addFinalResult(finalResult: string[][]): void {
     this.finalResultSubject$.next(finalResult);
   }
 
-  changeAttributes(event: { candidatesMatrixIndexes: Array<number>; candidateAttr: string }) {
+  changeAttributes(event: { candidatesMatrixIndexes: Array<number>; candidateAttr: string }): void {
     const [indexMatrix, indexCandidate] = event.candidatesMatrixIndexes;
     this.finalAttributesMatrix[indexMatrix][indexCandidate] = event.candidateAttr;
     this.calculateResult();
   }
 
-  calculateResult() {
+  calculateResult(): void {
     const finalResult: string[][] = [];
     this.attributesTitles.forEach(() => finalResult.push([]));
 
@@ -148,7 +140,7 @@ export class MergeService {
     this.addFinalResult(finalResult);
   }
 
-  mergeCandidates() {
+  mergeCandidates(): void {
     if (this.checkFilledResult() && this.attributesTitles.length) {
       this.finalResultSubject$.pipe(take(1)).subscribe((results) => {
         this.attributesTitles.forEach((item, index) =>
