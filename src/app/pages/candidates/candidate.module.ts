@@ -15,6 +15,7 @@ import { AppPipesModule } from '@utils/pipes/app-pipes.module';
 import { CandidatesComponent } from '@pages/candidates/candidates.component';
 import { CandidateItemComponent } from '@pages/candidates/candidate-item/candidate-item.component';
 import AppRoutingModule from '@src/app/app-routing.module';
+import { SystemModule } from '@src/app/components/systems/system.module';
 
 @NgModule({
   declarations: [CandidateItemComponent, CandidatesComponent],
@@ -32,7 +33,7 @@ import AppRoutingModule from '@src/app/app-routing.module';
     MatButtonModule,
 
     SharedModule,
-
+    SystemModule,
     AppPipesModule,
   ],
   exports: [CandidateItemComponent, CandidatesComponent],

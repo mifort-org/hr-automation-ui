@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { ROUTES } from '@src/app/routes';
 import { MergeService } from '@src/app/services/merge.service';
 
 @Component({
@@ -7,5 +9,9 @@ import { MergeService } from '@src/app/services/merge.service';
   styleUrls: ['./actions-bar-merge.component.scss'],
 })
 export class ActionsBarMergeComponent {
-  constructor(public mergeService: MergeService) {}
+  constructor(public mergeService: MergeService, private router: Router) {}
+
+  back(): void {
+    this.router.navigate([ROUTES.CANDIDATES]);
+  }
 }

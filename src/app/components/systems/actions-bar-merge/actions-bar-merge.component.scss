@@ -1,4 +1,13 @@
-.action-container{
+.actions-wrapper {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    padding: 10px 15px 0 30px;
 }
+  
+  .buttons-wrapper {
+    text-align: right;
+  }
+  
+  .attachment {
+    margin-left: 10px;
+  }

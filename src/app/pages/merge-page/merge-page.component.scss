@@ -4,8 +4,9 @@
   font-size: 1.5rem;
   height: auto;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  display: flex; 
-  gap: 10px;  
+  gap: 10px;
+  display: flex;
+  justify-content: center;
   
   .candidates-container {
     display: flex;
