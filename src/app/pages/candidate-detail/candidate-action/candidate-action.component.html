@@ -1,18 +1,15 @@
-<div class="actions-wrapper">
-  <button mat-raised-button class="mb-20" (click)="back()">
+<div class="actions-wrapper flex flex-between">
+  <button mat-raised-button (click)="back()">
     <mat-icon>keyboard_backspace</mat-icon>
     <span class="ml-10">Back</span>
   </button>
   <div class="gap-10">
     <div class="col-12 col-10-sm buttons-wrapper">
       <button mat-raised-button color="primary" class="mr-10" (click)="openEditModal()">
-        <mat-icon>edit</mat-icon><span class="ml-10">Edit</span>
+        <mat-icon>edit</mat-icon><span class="ml-10">Edit candidate</span>
       </button>
       <button mat-stroked-button color="basic" (click)="openAddCommentModal()">
         <mat-icon> comment</mat-icon><span class="ml-10">Add comment</span>
-      </button>
-      <button mat-stroked-button class="attachment" color="basic">
-        <mat-icon> attachment</mat-icon><span class="ml-10">Add Attachment</span>
       </button>
     </div>
   </div>

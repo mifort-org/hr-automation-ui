@@ -3,9 +3,9 @@ export type History = HistoryElement[];
 export interface HistoryElement {
   archived: boolean;
   comment: string;
-  createDate: CreateDate;
+  createDate: string;
   id: number;
-  updateDate: UpdateDate;
+  updateDate: string;
 }
 
 export interface CreateDate {

@@ -8,7 +8,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CandidateUpdatesComponent } from '@pages/candidate-detail/candidate-updates/candidate-updates.component';
 import { AppPipesModule } from '@utils/pipes/app-pipes.module';
@@ -18,6 +18,7 @@ import { CandidateDetailComponent } from './candidate-detail.component';
 import { CandidateMainInfoComponent } from './candidate-main-info/candidate-main-info.component';
 import { CandidateActionComponent } from './candidate-action/candidate-action.component';
 import { AddCommentModalComponent } from './add-comment-modal/add-comment-modal.component';
+import { CommunicationCommentComponent } from './candidate-communications/communication-comment/communication-comment.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { AddCommentModalComponent } from './add-comment-modal/add-comment-modal.
     CandidateMainInfoComponent,
     CandidateActionComponent,
     AddCommentModalComponent,
+    CommunicationCommentComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +44,7 @@ import { AddCommentModalComponent } from './add-comment-modal/add-comment-modal.
     AppPipesModule,
     ReactiveFormsModule,
     MatDialogModule,
+    FormsModule,
   ],
   exports: [
     CandidateCommunicationsComponent,

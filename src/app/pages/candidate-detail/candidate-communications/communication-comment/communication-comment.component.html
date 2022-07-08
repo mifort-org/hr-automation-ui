@@ -1,0 +1,58 @@
+<mat-card class="comment-body" (click)="editModeOff()">
+  <mat-card-content class="comment-content">
+    <div class="flex flex-between">
+      <div class="flex flex-column">
+        <div
+          class="comment-text"
+          [id]="historyItem.id + '_comment_text'"
+          (dblclick)="editModeOn(); $event.preventDefault(); $event.stopPropagation()"
+          *ngIf="!editMode; else editField"
+        >
+          {{ historyItem.comment }}
+          <div class="editing-info visible">
+            <span>Double-click on text for editing.</span>
+          </div>
+        </div>
+        <div class="comment-attachments">
+          <mat-card>
+            <mat-card-content>
+              <div class="flex flex-between align-center">
+                <mat-icon>attach_file</mat-icon>
+                <span>Attachment name..</span>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+      <div>
+        <button
+          mat-icon-button
+          class="comment-delete-btn"
+          (click)="
+            commentDeleted.emit(historyItem.id); $event.preventDefault(); $event.stopPropagation()
+          "
+        >
+          <mat-icon color="warn">delete</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-card-content>
+
+  <mat-card-footer class="comment-footer">
+    <div class="comment-info flex flex-between">
+      <span>{{ 'User Name' }}</span>
+      <span *ngIf="historyItem.updateDate"
+        >Last update: {{ historyItem.updateDate | date: 'MM/dd/yy, h:mm a' }}</span
+      >
+    </div>
+  </mat-card-footer>
+</mat-card>
+
+<ng-template #editField>
+  <div [ngStyle]="{ width: commentWidth, height: commentHeight }" class="comment-editing-area">
+    <textarea
+      (click)="$event.preventDefault(); $event.stopPropagation()"
+      [ngModel]="editFieldValue"
+    ></textarea>
+  </div>
+</ng-template>

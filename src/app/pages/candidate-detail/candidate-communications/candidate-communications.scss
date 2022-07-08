@@ -49,7 +49,7 @@ table {
 .attachments-label {
   width: 100%;
   padding: 20px;
-  padding-left: 0px;
+  padding-left: 0;
   padding-bottom: 10px;
   padding-right: 1px;
   text-align: left;
@@ -94,4 +94,8 @@ table {
 .comment-value:hover {
   border: 1px solid #fff;
   cursor: pointer;
+}
+
+.candidate-communications-body {
+  padding-top: 16px;
 }

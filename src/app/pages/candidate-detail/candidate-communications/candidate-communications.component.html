@@ -1,56 +1,14 @@
-<div>
-  <div class="attachments-wrapper">
-    <div
-      class="attachments-block"
-      (click)="showAttachments()"
-      [ngClass]="documentStatus ? 'active' : 'disabled'"
-    >
-      <span class="attachments-label">Attachments</span>
-      <span class="attachments-arrow"></span>
-    </div>
-  </div>
-  <div *ngIf="documentStatus">attachemnts</div>
-
-  <table
-    mat-table
-    *ngIf="candidateHistory"
-    [dataSource]="candidateHistory"
-    class="mat-elevation-z8"
-  >
-    <ng-container matColumnDef="dateofcreation">
-      <th mat-header-cell *matHeaderCellDef>Date of creation</th>
-      <td mat-cell *matCellDef="let element">{{ element.createDate | date }}</td>
+<div class="candidate-communications-body">
+  <ng-container *ngIf="candidateHistory?.length; else historyIsEmpty">
+    <ng-container *ngFor="let historyItem of candidateHistory">
+      <app-communication-comment
+        [historyItem]="historyItem"
+        (commentDeleted)="deleteHistory($event.toString())"
+      ></app-communication-comment>
     </ng-container>
-
-    <ng-container matColumnDef="lastupdate">
-      <th mat-header-cell *matHeaderCellDef>Last update</th>
-      <td mat-cell *matCellDef="let element">{{ element.updateDate | date }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="comment">
-      <th mat-header-cell *matHeaderCellDef>Comment</th>
-      <td mat-cell *matCellDef="let element" class="comment-block">
-        <input
-          matInput
-          type="text"
-          (blur)="onBlur($event, element)"
-          class="comment-value"
-          value="{{ element.comment }}"
-        />
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="action">
-      <th mat-header-cell *matHeaderCellDef>Action</th>
-
-      <td mat-cell *matCellDef="let element">
-        <button class="delete-action" (click)="deleteHistory(element.id)">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-  </table>
+  </ng-container>
 </div>
+
+<ng-template #historyIsEmpty>
+  <span>History is empty. Click on "add comment button" for creating a comment.</span>
+</ng-template>
