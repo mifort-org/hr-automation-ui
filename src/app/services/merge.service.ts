@@ -62,15 +62,14 @@ export class MergeService {
 
   fetchCanditatesAttributes(): Observable<CandidateAttributesTypes[][]> {
     return this.candidatesIdsSubject$.pipe(
-      mergeMap(
-        (q) =>
-          forkJoin(
-            ...q.map((id) =>
-              this.candidateService
-                .getCandidateAttributesById(id)
-                .pipe(catchError((error) => of(error.status)))
-            )
-          ) as Observable<CandidateAttributesTypes[][]>
+      mergeMap((candidatesIds) =>
+        forkJoin(
+          candidatesIds.map((id) =>
+            this.candidateService
+              .getCandidateAttributesById(id)
+              .pipe(catchError((error) => of(error.status)))
+          )
+        )
       )
     );
   }

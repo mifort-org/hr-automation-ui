@@ -1,7 +1,7 @@
 <app-actions-bar-merge></app-actions-bar-merge>
 <mat-progress-bar
   mode="indeterminate"
-  color="accent"
+  color="primary"
   *ngIf="mergeService.pageState.loading"
 ></mat-progress-bar>
 <ng-container *ngIf="!mergeService.pageState.loading">
@@ -17,6 +17,7 @@
       <div *ngFor="let candidateId of mergeService.candidatesIdsSubject$.getValue(); let indexMatrix=index" class="desc-candidate-container">
         <label class="desc-candidate-title">
           <mat-checkbox 
+            color="primary"
             aria-label="desc-candidate-title" 
             [value]="indexMatrix.toString()"
             [checked]="mergeService.isAllCandidateAttributesChoose(indexMatrix)"

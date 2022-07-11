@@ -1,6 +1,7 @@
 import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { map, Observable } from 'rxjs';
+import { CandidateAttributesTypes } from '@interfaces/attributes';
 import { CandidatesFilterData, CandidateCustomAttribute, Candidate } from '@interfaces/candidates';
 import { FetchService } from './fetch.service';
 
@@ -53,8 +54,8 @@ export class CandidatesService {
     );
   }
 
-  getCandidateAttributesById(id: string): any {
-    return this._fetch.get<Array<string>>(`candidates/${id}/attributes`).pipe(
+  getCandidateAttributesById(id: string): Observable<Array<CandidateAttributesTypes>> {
+    return this._fetch.get<Array<CandidateAttributesTypes>>(`candidates/${id}/attributes`).pipe(
       map((data) => {
         return data;
       })

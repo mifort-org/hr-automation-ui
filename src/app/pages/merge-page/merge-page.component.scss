@@ -1,3 +1,9 @@
+$primary-color: rgb(55, 111, 252);
+$dark-back-color: rgb(10, 10, 10);
+$light-back-color: rgb(121, 121, 121);
+$error-color: rgb(121, 1, 1);
+$box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 20%), 0px 1px 1px 0px rgba(0, 0, 0, 14%), 0px 1px 3px 0px rgba(0, 0, 0, 12%);
+
 .candidate-merge-container {
   margin: 20px 100px;
   padding-bottom: 10px;
@@ -25,11 +31,11 @@
         padding: 0 10px;
         justify-content: space-between;
         align-items: center;
-        background-color: rgb(10, 10, 10);
+        background-color: $dark-back-color;
         margin-top: 10px;
         border-radius: 5px;
-        box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 20%), 0px 1px 1px 0px rgba(0, 0, 0, 14%), 0px 1px 3px 0px rgba(0, 0, 0, 12%);
-        border: 2px solid rgb(121, 121, 121);
+        box-shadow: $box-shadow;
+        border: 2px solid $light-back-color;
         box-sizing: border-box;
       
         .remove-button {
@@ -43,10 +49,10 @@
         position: relative;
         justify-content: space-between;
         align-items: center;
-        background-color: rgb(65, 15, 15);
+        background-color: $error-color;
         margin-top: 10px;
         border-radius: 5px;
-        box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 20%), 0px 1px 1px 0px rgba(0, 0, 0, 14%), 0px 1px 3px 0px rgba(0, 0, 0, 12%);
+        box-shadow: $box-shadow;
       }
     }
     
@@ -68,21 +74,21 @@
       margin-top: 10px;
       border-radius: 5px;
       box-sizing: border-box;
-      box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 20%), 0px 1px 1px 0px rgba(0, 0, 0, 14%), 0px 1px 3px 0px rgba(0, 0, 0, 12%);
+      box-shadow: $box-shadow;
     }
 
     .desc-result-title {
-      border: 2px solid rgb(121, 1, 1);
+      border: 2px solid $error-color;
       position: relative;
     }
 
     .filled-result {
-      border: 2px solid rgb(151, 224, 40);
+      border: 2px solid $primary-color;
     }
 
     .final-result {
       transition: 0.1s ease-in;
-      border: 2px solid rgb(151, 224, 40);
+      border: 2px solid $primary-color;
     }
   }
   
@@ -97,8 +103,8 @@
       background-color: black;
       margin-top: 10px;
       border-radius: 5px;
-      box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 20%), 0px 1px 1px 0px rgba(0, 0, 0, 14%), 0px 1px 3px 0px rgba(0, 0, 0, 12%);
-      border: 2px solid rgb(121, 121, 121);
+      box-shadow: $box-shadow;
+      border: 2px solid $light-back-color;
       box-sizing: border-box;
     }
   }
