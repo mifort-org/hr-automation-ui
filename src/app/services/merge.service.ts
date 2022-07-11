@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, forkJoin, take, mergeMap, Observable, catchError, of } from 'rxjs';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 import { CandidateAttributesTypes } from '@interfaces/attributes';
 import { ENotificationMode } from '../constants/notification';
 import { PageState } from '../utils/pageState';
@@ -80,8 +81,6 @@ export class MergeService {
     }
     this.fetchCanditatesAttributes().subscribe(
       (candidatesArrays: CandidateAttributesTypes[][]) => {
-        // eslint-disable-next-line no-console
-        // console.log('dfdf');
         const indexNonArray = candidatesArrays.findIndex((array) => !Array.isArray(array));
         if (indexNonArray !== -1) {
           this.removeCandidateByIndex(indexNonArray);
@@ -128,6 +127,22 @@ export class MergeService {
     const [indexMatrix, indexCandidate] = event.candidatesMatrixIndexes;
     this.finalAttributesMatrix[indexMatrix][indexCandidate] = event.candidateAttr;
     this.calculateResult();
+  }
+
+  chooseAllCandidateAttributes(event: MatCheckboxChange): void {
+    const indexCandidate = +event.source.value;
+    this.finalAttributesMatrix[indexCandidate].forEach((attr, index) => {
+      this.finalAttributesMatrix[indexCandidate][index] = event.checked
+        ? this.attributesMatrix[indexCandidate][index]
+        : '';
+    });
+    this.calculateResult();
+  }
+
+  isAllCandidateAttributesChoose(indexCandidateMatrix: number): boolean {
+    return this.attributesMatrix[indexCandidateMatrix].every(
+      (attr, index) => attr === this.finalAttributesMatrix[indexCandidateMatrix][index]
+    );
   }
 
   calculateResult(): void {

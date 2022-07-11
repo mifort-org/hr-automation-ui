@@ -14,22 +14,28 @@
     </div>
 
     <div class="candidates-container">
-        <div *ngFor="let candidateId of mergeService.candidatesIdsSubject$.getValue(); let indexMatrix=index" class="desc-candidate-container">
-          <div class="desc-candidate-title">
+      <div *ngFor="let candidateId of mergeService.candidatesIdsSubject$.getValue(); let indexMatrix=index" class="desc-candidate-container">
+        <label class="desc-candidate-title">
+          <mat-checkbox 
+            aria-label="desc-candidate-title" 
+            [value]="indexMatrix.toString()"
+            [checked]="mergeService.isAllCandidateAttributesChoose(indexMatrix)"
+            (change)="mergeService.chooseAllCandidateAttributes($event)"
+            >
             {{candidateId}}
-            <mat-icon color="warn" (click)="mergeService.removeCandidateById(candidateId)" class="remove-button">delete_forever</mat-icon>
-          </div>
-
-          <ng-container *ngFor="let attribute of mergeService.attributesMatrix[indexMatrix]; let indexCandidate=index">
-            <app-candidate-merge 
-              [checked]="!!mergeService.finalAttributesMatrix[indexMatrix][indexCandidate]"
-              [candidateAttr] = "attribute" 
-              [candidatesMatrixIndexes] = "[indexMatrix, indexCandidate]"
-              (changeAttributes)="mergeService.changeAttributes($event)"
-              class="desc-candidate">
-            </app-candidate-merge>
-          </ng-container>          
-        </div>        
+          </mat-checkbox>
+          <mat-icon color="warn" (click)="mergeService.removeCandidateById(candidateId)" class="remove-button">delete_forever</mat-icon>
+        </label>
+       <ng-container *ngFor="let attribute of mergeService.attributesMatrix[indexMatrix]; let indexCandidate=index">
+          <app-candidate-merge 
+            [checked]="!!mergeService.finalAttributesMatrix[indexMatrix][indexCandidate]"
+            [candidateAttr] = "attribute" 
+            [candidatesMatrixIndexes] = "[indexMatrix, indexCandidate]"
+            (changeAttributes)="mergeService.changeAttributes($event)"
+            class="desc-candidate">
+          </app-candidate-merge>
+        </ng-container>          
+      </div>        
     </div>
 
     <div class="desc-result-container">

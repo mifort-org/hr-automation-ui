@@ -15,8 +15,7 @@
   }
 
   .desc-candidate-checkbox-hidden:hover:enabled + .desc-candidate-data {
-    // border: 2px solid rgba(150, 224, 40, 50%);
-    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.5);
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 50%);
   }
 
   .desc-candidate-checkbox-hidden:hover:checked + .desc-candidate-data {

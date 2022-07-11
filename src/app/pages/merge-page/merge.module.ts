@@ -9,6 +9,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { SharedModule } from '@components/shared/shared.module';
 import { AppPipesModule } from '@utils/pipes/app-pipes.module';
@@ -25,6 +26,7 @@ import { MergePageComponent } from './merge-page.component';
     AppRoutingModule,
     FormsModule,
 
+    MatCheckboxModule,
     MatInputModule,
     MatChipsModule,
     MatCardModule,
