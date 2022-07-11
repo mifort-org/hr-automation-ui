@@ -75,9 +75,13 @@ export class MergeService {
   }
 
   parseCanditatesAttributes(): void {
-    this.pageState.startLoading();
+    if (this.candidatesIdsSubject$.getValue().length) {
+      this.pageState.startLoading();
+    }
     this.fetchCanditatesAttributes().subscribe(
       (candidatesArrays: CandidateAttributesTypes[][]) => {
+        // eslint-disable-next-line no-console
+        // console.log('dfdf');
         const indexNonArray = candidatesArrays.findIndex((array) => !Array.isArray(array));
         if (indexNonArray !== -1) {
           this.removeCandidateByIndex(indexNonArray);

@@ -52,13 +52,9 @@
     
     .candidates-container-titles {
       display: flex;
-      gap: 10px;  
-     
+      gap: 10px;
     }
-
-  }
-
-  
+  }  
 
   .desc-result-container {
     min-width: 300px;
@@ -106,4 +102,12 @@
       box-sizing: border-box;
     }
   }
+}
+
+.nothing-merge {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 150px;
+  text-align: center;
 }
