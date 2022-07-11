@@ -1,13 +1,5 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import {
-  combineLatest,
-  map,
-  Observable,
-  Subject,
-  switchMap,
-  take,
-  takeUntil,
-} from 'rxjs';
+import { combineLatest, map, Observable, Subject, switchMap, take, takeUntil } from 'rxjs';
 import { Router } from '@angular/router';
 import { CandidateAttributesValues, Candidate } from '@interfaces/candidates';
 import { CandidatesService } from '@services/candidates.service';
