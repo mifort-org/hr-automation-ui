@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CandidatesService } from '@services/candidates.service';
-import { Candidate, CandidatesFilterData } from '@interfaces/candidates';
+import { CandidateDto, CandidatesFilterData } from '@interfaces/candidates';
 import { PageState } from '@utils/pageState';
 
 @Component({
@@ -12,7 +12,7 @@ import { PageState } from '@utils/pageState';
 export class CandidatesComponent implements OnInit {
   showFiller = false;
 
-  candidatesList: Candidate[] = [];
+  candidatesList: CandidateDto[] = [];
 
   pageState = new PageState();
 
@@ -35,7 +35,7 @@ export class CandidatesComponent implements OnInit {
     this.pageState.startLoading();
 
     this.candidatesService.getCandidates(filterData).subscribe({
-      next: (resolve: Candidate[]) => {
+      next: (resolve: CandidateDto[]) => {
         this.candidatesList = resolve;
         this.pageState.finishLoading();
       },

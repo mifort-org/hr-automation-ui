@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { Candidate } from '@interfaces/candidates';
+import { CandidateDto } from '@interfaces/candidates';
 import { CommentData } from '@interfaces/history';
 
 @Component({
@@ -10,7 +10,7 @@ import { CommentData } from '@interfaces/history';
   templateUrl: './add-comment-modal.component.html',
 })
 export class AddCommentModalComponent implements OnInit {
-  candidate!: Candidate;
+  candidate!: CandidateDto;
 
   form!: FormGroup;
 

@@ -4,7 +4,7 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { AttributeType } from '@interfaces/attributes';
 import { AttributesService } from '@services/attributes.service';
 import { CANDIDATE_STATUSES } from '@constants/candidates';
-import { Candidate } from '@interfaces/candidates';
+import { CandidateDto } from '@interfaces/candidates';
 import { VALIDATORS } from '@utils/validators';
 
 @Component({
@@ -12,7 +12,7 @@ import { VALIDATORS } from '@utils/validators';
   templateUrl: './candidate-form.component.html',
 })
 export class CandidateFormComponent implements OnInit {
-  @Input() candidate!: Candidate;
+  @Input() candidate!: CandidateDto;
 
   @Output() formOnChange = new EventEmitter();
 

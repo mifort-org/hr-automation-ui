@@ -1,7 +1,15 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { BehaviorSubject, Subject, take, takeUntil } from 'rxjs';
+import {
+  combineLatest,
+  map,
+  Observable,
+  Subject,
+  switchMap,
+  take,
+  takeUntil,
+} from 'rxjs';
 import { Router } from '@angular/router';
-import { Candidate, CandidateAttribute, CandidateAttributesValues } from '@interfaces/candidates';
+import { CandidateAttributesValues, Candidate } from '@interfaces/candidates';
 import { CandidatesService } from '@services/candidates.service';
 import { CommentData, HistoryElement } from '@interfaces/history';
 import { HistoryService } from '@services/history.service';
@@ -14,15 +22,13 @@ import { FetchService } from './fetch.service';
 
 @Injectable()
 export class CandidateDetailService implements OnDestroy {
-  public currentCandidate$: BehaviorSubject<Candidate | null> =
-    new BehaviorSubject<Candidate | null>(null);
+  public currentCandidate$: Observable<Candidate>;
 
-  public historyOfCurrentCandidate$: BehaviorSubject<HistoryElement[] | null> = new BehaviorSubject<
-    HistoryElement[] | null
-  >(null);
+  public historyOfCurrentCandidate$: Observable<HistoryElement[]>;
 
-  public candidateAttributes$: BehaviorSubject<CandidateAttributesValues[] | null> =
-    new BehaviorSubject<CandidateAttributesValues[] | null>(null);
+  public candidateAttributes$: Observable<CandidateAttributesValues[] | null>;
+
+  private historyUpdate$: Subject<boolean> = new Subject<boolean>();
 
   private unSubscribe$: Subject<boolean> = new Subject<boolean>();
 
@@ -35,7 +41,19 @@ export class CandidateDetailService implements OnDestroy {
     private modalService: ModalService
   ) {
     const urlArr = router.url.split('/');
-    this.getCandidateById(urlArr[urlArr.length - 1]);
+    this.currentCandidate$ = this.getCandidateById(urlArr[urlArr.length - 1]);
+    this.candidateAttributes$ = this.currentCandidate$.pipe(
+      map((c) => c.candidateAttributesValues)
+    );
+    this.historyOfCurrentCandidate$ = combineLatest([
+      this.historyUpdate$,
+      this.currentCandidate$,
+    ]).pipe(
+      switchMap(([, candidate]: [boolean, Candidate]) => {
+        return this.historyService.getCandidateHistoryById(candidate.id);
+      })
+    );
+
     this.modalService.dialog.afterOpened.pipe(takeUntil(this.unSubscribe$)).subscribe((modal) => {
       if (modal.id === DialogModalIds.addCommentModal) {
         modal
@@ -50,56 +68,18 @@ export class CandidateDetailService implements OnDestroy {
     });
   }
 
-  public getCandidateById(id: string): void {
-    this.candidatesService
-      .getCandidateById(id)
-      .pipe(take(1))
-      .subscribe({
-        next: (candidate: Candidate) => {
-          this.currentCandidate$.next(candidate);
-          const candidateAttributes: CandidateAttributesValues[] =
-            candidate.candidateAttributes.map((attribute: CandidateAttribute) => {
-              const candidateAttributeValue: CandidateAttributesValues = {
-                name: attribute.attributeTypes.name || '',
-                value: attribute.value || '',
-              };
-              return candidateAttributeValue;
-            });
-          this.candidateAttributes$.next(candidateAttributes);
-          this.fetchHistoryForCurrentCandidate();
-        },
-        error: (error: any) => {
-          this.notification.show(
-            ERROR_MESSAGE[error?.status || ERROR_STATUS_CODES.INTERNAL_SERVER_ERROR],
-            ENotificationMode.ERROR
-          );
-        },
-      });
-  }
-
-  public fetchHistoryForCurrentCandidate(): void {
-    const candidateId = this.currentCandidate$.getValue()?.id;
-    if (candidateId) {
-      this.historyService.getCandidateHistoryById(candidateId).subscribe({
-        next: (history: HistoryElement[]) => {
-          this.historyOfCurrentCandidate$.next(history);
-        },
-        error: (error: any) => {
-          this.notification.show(
-            ERROR_MESSAGE[error?.status || ERROR_STATUS_CODES.INTERNAL_SERVER_ERROR],
-            ENotificationMode.ERROR
-          );
-        },
-      });
-    }
+  private getCandidateById(id: string): Observable<Candidate> {
+    return this.candidatesService.getCandidateById(id).pipe(take(1));
   }
 
   public createNewComment(data: CommentData): void {
-    const candidateId = this.currentCandidate$.getValue()?.id;
-    if (candidateId) {
-      this.historyService.createNewCandidateHistory(data, candidateId).subscribe({
+    this.currentCandidate$
+      .pipe(
+        switchMap((candidate) => this.historyService.createNewCandidateHistory(data, candidate.id))
+      )
+      .subscribe({
         next: () => {
-          this.fetchHistoryForCurrentCandidate();
+          this.historyUpdate$.next(true);
           this.notification.show('Comment was added', ENotificationMode.SUCCESS);
         },
         error: (err) => {
@@ -109,7 +89,6 @@ export class CandidateDetailService implements OnDestroy {
           );
         },
       });
-    }
   }
 
   public updateComment(data: CommentData): void {
@@ -119,8 +98,8 @@ export class CandidateDetailService implements OnDestroy {
       .pipe(takeUntil(this.unSubscribe$))
       .subscribe({
         next: () => {
+          this.historyUpdate$.next(true);
           this.notification.show('Candidate history is updated', ENotificationMode.SUCCESS);
-          this.fetchHistoryForCurrentCandidate();
         },
         error: (error: any) => {
           this.notification.show(
@@ -138,8 +117,8 @@ export class CandidateDetailService implements OnDestroy {
       .pipe(takeUntil(this.unSubscribe$))
       .subscribe({
         next: () => {
+          this.historyUpdate$.next(true);
           this.notification.show('Candidate history is deleted', ENotificationMode.SUCCESS);
-          this.fetchHistoryForCurrentCandidate();
         },
         error: (error: any) => {
           this.notification.show(

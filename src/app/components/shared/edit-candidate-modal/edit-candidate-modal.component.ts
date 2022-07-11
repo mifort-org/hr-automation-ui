@@ -5,7 +5,7 @@ import { PageState } from '@utils/pageState';
 import { ERROR_MESSAGE } from '@constants/strings';
 import { ERROR_STATUS_CODES } from '@constants/errorStatusCode';
 import { AttributesService } from '@services/attributes.service';
-import { Candidate } from '@interfaces/candidates';
+import { CandidateDto } from '@interfaces/candidates';
 import { CandidatesService } from '@services/candidates.service';
 import { VALIDATORS } from '@utils/validators';
 import { NotificationService } from '@services/notification.service';
@@ -16,7 +16,7 @@ import { ENotificationMode } from '@constants/notification';
   templateUrl: './edit-candidate-modal.component.html',
 })
 export class EditCandidateModalComponent {
-  candidate!: Candidate;
+  candidate!: CandidateDto;
 
   formData = null;
 

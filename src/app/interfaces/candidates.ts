@@ -31,9 +31,6 @@ export interface CandidateAttribute {
     identifier: boolean;
   };
 }
-
-export type CandidateCustomAttribute = { [key: string]: CandidateAttribute };
-
 export interface Candidate {
   id: string;
   lastContact: string;
@@ -44,11 +41,14 @@ export interface Candidate {
   keywords: Keywords[];
   communicationHistory: CommunicationHistory[];
   candidateAttributes: CandidateAttribute[];
-  customAttribute?: CandidateCustomAttribute;
+
+  candidateAttributesValues: CandidateAttributesValues[];
 
   // TODO: Need to resolve this one any
   mergeCandidates: any;
 }
+
+export type CandidateCustomAttributeDto = { [key: string]: CandidateAttribute };
 
 export interface CandidateAttributesValues {
   name: string;
