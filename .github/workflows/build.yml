@@ -4,6 +4,13 @@ on:
     branches: [ "develop" ]
   pull_request:
     branches: [ "develop" ]
+    
+permissions:
+  pull-requests: write # allows SonarCloud to decorate PRs with analysis results
+  actions: write
+  statuses: write
+  checks: write
+  
 jobs:
   sonarcloud:
     name: SonarCloud
