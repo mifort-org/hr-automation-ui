@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, forkJoin, take, mergeMap, Observable, catchError, of } from 'rxjs';
+import { BehaviorSubject, forkJoin, take, mergeMap, Observable, catchError, of, map } from 'rxjs';
 import { CandidateAttributesTypes } from '@interfaces/attributes';
 import { ENotificationMode } from '../constants/notification';
 import { PageState } from '../utils/pageState';
@@ -10,14 +10,11 @@ import { NotificationService } from './notification.service';
   providedIn: 'root',
 })
 export class MergeService {
-  constructor(
-    private candidateService: CandidatesService,
-    private notification: NotificationService
-  ) {}
-
   public pageState = new PageState();
 
   public attributesTitles: Array<string> = [];
+
+  public attributesTitles2!: Observable<string[]>;
 
   public attributesMatrix: Array<Array<string>> = [];
 
@@ -30,6 +27,11 @@ export class MergeService {
     'artem_skrebets',
     'vladimir_zelmanchuk',
   ]);
+
+  constructor(
+    private candidateService: CandidatesService,
+    private notification: NotificationService
+  ) {}
 
   addCandidateId(id: string): void {
     const candidatesIds = this.candidatesIdsSubject$.getValue();
@@ -89,6 +91,19 @@ export class MergeService {
         this.pageState.finishLoading();
       }
     );
+    // this.attributesTitles2 = this.fetchCanditatesAttributes().pipe(
+    //   map((attributesArrays) =>
+    //     attributesArrays.reduce((acc: string[], attributesArray: CandidateAttributesTypes[]) => {
+    //       const resultArray: string[] = [];
+    //       attributesArray.forEach((attribute: CandidateAttributesTypes) => {
+    //         if (!acc.includes(attribute.name)) {
+    //           resultArray.push(attribute.name);
+    //         }
+    //       });
+    //       return [...acc, ...resultArray];
+    //     }, [])
+    //   )
+    // );
   }
 
   fillTitleValues(candidates: CandidateAttributesTypes[][]): void {
