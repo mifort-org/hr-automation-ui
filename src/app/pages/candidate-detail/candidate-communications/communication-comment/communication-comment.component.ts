@@ -35,7 +35,7 @@ export class CommunicationCommentComponent {
     }
   }
 
-  public editModeOff(): void {
+  public applyEditingComment(): void {
     if (this.editFieldValue?.length) {
       const updatedDate: CommentData = {
         id: this.historyItem.id,
@@ -43,7 +43,14 @@ export class CommunicationCommentComponent {
       };
       this.commentWasUpdated.next(updatedDate);
       this.editFieldValue = '';
+      this.editMode = false;
     }
-    this.editMode = false;
+  }
+
+  public editModeOff(): void {
+    if (this.editMode) {
+      this.editFieldValue = '';
+      this.editMode = false;
+    }
   }
 }

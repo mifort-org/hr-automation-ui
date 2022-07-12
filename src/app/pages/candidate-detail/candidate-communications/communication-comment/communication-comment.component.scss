@@ -22,6 +22,7 @@
 
     .comment-attachments {
       padding-left: 10px;
+      padding-right: 10px;
 
       mat-card {
         width: fit-content;
@@ -34,6 +35,14 @@
           width: 18px;
           font-size: 18px;
         }
+      }
+
+      .mat-stroked-button{
+        height: 30px;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     }
 

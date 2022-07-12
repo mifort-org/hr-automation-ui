@@ -13,7 +13,7 @@
             <span>Double-click on text for editing.</span>
           </div>
         </div>
-        <div class="comment-attachments">
+        <div class="flex flex-between comment-attachments">
           <mat-card>
             <mat-card-content>
               <div class="flex flex-between align-center">
@@ -22,6 +22,13 @@
               </div>
             </mat-card-content>
           </mat-card>
+          <button
+            mat-stroked-button
+            *ngIf="editMode"
+            (click)="$event.stopPropagation(); $event.preventDefault(); applyEditingComment()"
+          >
+            Apply
+          </button>
         </div>
       </div>
       <div>
