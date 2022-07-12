@@ -3,6 +3,9 @@
   *ngIf="candidate$ | async"
   [dataSource]="(candidate$ | async)?.candidateAttributesValues || []"
 >
+  <caption>
+    Candidate attributes
+  </caption>
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>Attribute</th>
     <td mat-cell *matCellDef="let element">{{ element.name }}:</td>
