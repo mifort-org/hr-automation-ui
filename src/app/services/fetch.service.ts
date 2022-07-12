@@ -29,22 +29,22 @@ export class FetchService {
 
   constructor(private http: HttpClient) {}
 
-  get<T>(url: string, options?: IOptions) {
+  public get<T>(url: string, options?: IOptions) {
     const optionsObject = options ? { ...GLOBAL_OPTIONS, ...options } : GLOBAL_OPTIONS;
     return this.http.get<T>(`${this.baseUrl}/${url}`, optionsObject);
   }
 
-  post<T>(url: string, data: any, options?: IOptions) {
+  public post<T>(url: string, data: any, options?: IOptions) {
     const optionsObject = options ? { ...GLOBAL_OPTIONS, ...options } : GLOBAL_OPTIONS;
     return this.http.post<T>(`${this.baseUrl}/${url}`, data, optionsObject);
   }
 
-  patch<T>(url: string, data: any, options?: IOptions) {
+  public patch<T>(url: string, data: any, options?: IOptions) {
     const optionsObject = options ? { ...GLOBAL_OPTIONS, ...options } : GLOBAL_OPTIONS;
     return this.http.patch<T>(`${this.baseUrl}/${url}`, data, optionsObject);
   }
 
-  delete<T>(url: string, options?: IOptions) {
+  public delete<T>(url: string, options?: IOptions) {
     const optionsObject = options ? { ...GLOBAL_OPTIONS, ...options } : GLOBAL_OPTIONS;
     return this.http.delete<T>(`${this.baseUrl}/${url}`, optionsObject);
   }

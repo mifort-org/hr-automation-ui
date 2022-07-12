@@ -35,16 +35,12 @@ export interface Candidate {
   id: string;
   lastContact: string;
   status: ECandidateStatus;
-
-  // TODO: Need to resolve this one any;
+  fullName: string;
   candidateUpdates: any;
   keywords: Keywords[];
   communicationHistory: CommunicationHistory[];
   candidateAttributes: CandidateAttribute[];
-
   candidateAttributesValues: CandidateAttributesValues[];
-
-  // TODO: Need to resolve this one any
   mergeCandidates: any;
 }
 

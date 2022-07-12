@@ -10,9 +10,13 @@ import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CandidateUpdatesComponent } from '@pages/candidate-detail/candidate-updates/candidate-updates.component';
 import { AppPipesModule } from '@utils/pipes/app-pipes.module';
 import AppRoutingModule from '@src/app/app-routing.module';
+import { EditCandidateModalComponent } from '@pages/candidate-detail/edit-candidate-modal/edit-candidate-modal.component';
+import { CandidateFormComponent } from '@pages/candidate-detail/candidate-form/candidate-form.component';
 import { CandidateCommunicationsComponent } from './candidate-communications/candidate-communications.component';
 import { CandidateDetailComponent } from './candidate-detail.component';
 import { CandidateMainInfoComponent } from './candidate-main-info/candidate-main-info.component';
@@ -29,6 +33,8 @@ import { CommunicationCommentComponent } from './candidate-communications/commun
     CandidateActionComponent,
     AddCommentModalComponent,
     CommunicationCommentComponent,
+    EditCandidateModalComponent,
+    CandidateFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,6 +51,8 @@ import { CommunicationCommentComponent } from './candidate-communications/commun
     ReactiveFormsModule,
     MatDialogModule,
     FormsModule,
+    MatRadioModule,
+    MatProgressSpinnerModule,
   ],
   exports: [
     CandidateCommunicationsComponent,
@@ -53,6 +61,8 @@ import { CommunicationCommentComponent } from './candidate-communications/commun
     CandidateMainInfoComponent,
     CandidateActionComponent,
     AddCommentModalComponent,
+    EditCandidateModalComponent,
+    CandidateFormComponent,
   ],
 })
 export class CandidateDetailModule {}

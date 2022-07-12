@@ -1,28 +1,25 @@
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
-import { AttributeType } from '@interfaces/attributes';
+import { AttributeType } from '@src/app/models/attributes';
 import { AttributesService } from '@services/attributes.service';
-import { CANDIDATE_STATUSES } from '@constants/candidates';
-import { CandidateDto } from '@interfaces/candidates';
 import { VALIDATORS } from '@utils/validators';
+import { Candidate } from '@src/app/models/candidates';
 
 @Component({
   selector: 'app-candidate-form',
   templateUrl: './candidate-form.component.html',
 })
 export class CandidateFormComponent implements OnInit {
-  @Input() candidate!: CandidateDto;
+  @Input() candidate!: Candidate;
 
   @Output() formOnChange = new EventEmitter();
 
-  statusesOptions = CANDIDATE_STATUSES;
+  public form!: FormGroup;
 
-  form!: FormGroup;
+  public formErrors: any = {};
 
-  formErrors: any = {};
-
-  attributesData!: AttributeType[];
+  public attributesData!: AttributeType[];
 
   constructor(private attributeService: AttributesService) {}
 
@@ -32,7 +29,10 @@ export class CandidateFormComponent implements OnInit {
 
       const group: any = {};
       this.attributeService.attributes.forEach((el) => {
-        group[el.name] = new FormControl(this.candidate?.customAttribute?.[el.name]?.value || '');
+        const attributeName = this.candidate?.candidateAttributes.find(
+          (attr) => attr.attributeTypes.name === el.name
+        );
+        group[el.name] = new FormControl(attributeName?.value || '');
       });
 
       this.form = new FormGroup(group);
@@ -43,7 +43,7 @@ export class CandidateFormComponent implements OnInit {
     }
   }
 
-  onValueChanges(value: any) {
+  public onValueChanges(value: any): void {
     Object.entries(this.form?.controls).forEach(([key]) => {
       const currentControl = this.form?.controls[key];
       currentControl.setErrors(null);

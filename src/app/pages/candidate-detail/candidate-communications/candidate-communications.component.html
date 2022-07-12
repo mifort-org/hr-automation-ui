@@ -1,6 +1,6 @@
 <div class="candidate-communications-body">
-  <ng-container *ngIf="candidateHistory?.length; else historyIsEmpty">
-    <ng-container *ngFor="let historyItem of candidateHistory">
+  <ng-container *ngIf="(candidateDetailService.historyOfCurrentCandidate$ | async)?.length; else historyIsEmpty">
+    <ng-container *ngFor="let historyItem of (candidateDetailService.historyOfCurrentCandidate$ | async)">
       <app-communication-comment
         [historyItem]="historyItem"
         (commentDeleted)="candidateDetailService.deleteHistoryComment($event)"

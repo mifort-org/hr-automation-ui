@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { CandidateDto } from '@interfaces/candidates';
-import { CommentData } from '@interfaces/history';
+import { CommentData } from '@src/app/models/history';
+import { Candidate } from '@src/app/models/candidates';
 
 @Component({
   selector: 'app-add-comment-modal',
@@ -10,9 +10,9 @@ import { CommentData } from '@interfaces/history';
   templateUrl: './add-comment-modal.component.html',
 })
 export class AddCommentModalComponent implements OnInit {
-  candidate!: CandidateDto;
+  public candidate!: Candidate;
 
-  form!: FormGroup;
+  public form!: FormGroup;
 
   constructor(
     public dialogRef: MatDialogRef<AddCommentModalComponent>,
@@ -25,7 +25,7 @@ export class AddCommentModalComponent implements OnInit {
     });
   }
 
-  submitHistoryUpdate(): void {
+  public submitHistoryUpdate(): void {
     const data: CommentData = {
       archived: false,
       comment: this.form.value.comment,

@@ -1,28 +1,53 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { CommentData, HistoryElement } from '@interfaces/history';
+import { catchError, map, Observable } from 'rxjs';
+import { CommentData, HistoryElement } from '@src/app/models/history';
+import { NotificationService } from '@services/notification.service';
+import { defaultErrorhandler } from '@utils/functions';
 import { FetchService } from './fetch.service';
+
+interface HistoryElementDto {
+  archived: boolean;
+  comment: string;
+  createDate: string;
+  id: number;
+  updateDate: string;
+}
 
 @Injectable({
   providedIn: 'root',
 })
 export class HistoryService {
-  constructor(private fetch: FetchService) {}
+  constructor(private fetch: FetchService, private notification: NotificationService) {}
 
-  getCandidateHistoryById(id: string): Observable<HistoryElement[]> {
-    return this.fetch.get<HistoryElement[]>(`candidates/${id}/history`);
+  public getCandidateHistoryById(id: string): Observable<HistoryElement[]> {
+    return this.fetch.get<HistoryElementDto[]>(`candidates/${id}/history`).pipe(
+      map((data: HistoryElementDto[]) => data.map(this.mapHistoryElement.bind(this))),
+      catchError((error) => defaultErrorhandler(this.notification, error))
+    );
   }
 
-  // Todo  Patch method is not allowed by BE side
-  updateCandidateHistory(candidateId: string, data: CommentData): Observable<HistoryElement> {
-    return this.fetch.patch<HistoryElement>(`candidates/${candidateId}/history`, data);
+  public updateCandidateHistory(
+    candidateId: string,
+    data: CommentData
+  ): Observable<HistoryElement> {
+    return this.fetch
+      .patch<HistoryElementDto>(`candidates/${candidateId}/history`, data)
+      .pipe(catchError((error) => defaultErrorhandler(this.notification, error)));
   }
 
-  createNewCandidateHistory(data: CommentData, id: string): Observable<HistoryElement> {
-    return this.fetch.post<HistoryElement>(`candidates/${id}/history`, data);
+  public createNewCandidateHistory(data: CommentData, id: string): Observable<HistoryElement> {
+    return this.fetch
+      .post<HistoryElementDto>(`candidates/${id}/history`, data)
+      .pipe(catchError((error) => defaultErrorhandler(this.notification, error)));
   }
 
-  deleteCandidateHistory(id: string, historyId: string): Observable<HistoryElement> {
-    return this.fetch.delete<HistoryElement>(`candidates/${id}/history/${historyId}`);
+  public deleteCandidateHistory(id: string, historyId: string): Observable<HistoryElement> {
+    return this.fetch
+      .delete<HistoryElementDto>(`candidates/${id}/history/${historyId}`)
+      .pipe(catchError((error) => defaultErrorhandler(this.notification, error)));
+  }
+
+  public mapHistoryElement(historyElement: HistoryElementDto): HistoryElement {
+    return historyElement;
   }
 }

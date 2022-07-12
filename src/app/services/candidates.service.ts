@@ -8,9 +8,9 @@ import {
   CommunicationHistory,
   CandidateAttribute,
   Candidate,
-} from '@interfaces/candidates';
+} from '@src/app/models/candidates';
 import { ECandidateStatus } from '@constants/candidates';
-import { defaultErrorhandler } from '@constants/strings';
+import { defaultErrorhandler, getFullName } from '@utils/functions';
 import { NotificationService } from '@services/notification.service';
 import { FetchService } from './fetch.service';
 
@@ -22,15 +22,11 @@ interface CandidateDto {
   id: string;
   lastContact: string;
   status: ECandidateStatus;
-
-  // TODO: Need to resolve this one any;
   candidateUpdates: any;
   keywords: Keywords[];
   communicationHistory: CommunicationHistory[];
   candidateAttributes: CandidateAttribute[];
   customAttribute?: CandidateCustomAttributeDto;
-
-  // TODO: Need to resolve this one any
   mergeCandidates: any;
 }
 
@@ -40,33 +36,34 @@ interface CandidateDto {
 export class CandidatesService {
   constructor(private fetch: FetchService, private notification: NotificationService) {}
 
-  getCandidates(filterData: CandidatesFilterData): Observable<Candidate[]> {
+  public getCandidates(filterData: CandidatesFilterData): Observable<Candidate[]> {
     const param = new HttpParams({ fromObject: filterData as IParam }).toString();
 
     return this.fetch.get<CandidateDto[]>(`candidates?${param}`).pipe(
       map((data: CandidateDto[]) => data?.map(this.mapCandidateDto.bind(this))),
-      catchError((error, caught) => defaultErrorhandler(this.notification, error, caught))
+      catchError((error) => defaultErrorhandler(this.notification, error))
     );
   }
 
-  getCandidateById(id: string): any {
+  public getCandidateById(id: string): any {
     return this.fetch.get<CandidateDto>(`candidates/${id}`).pipe(
       map(this.mapCandidateDto.bind(this)),
-      catchError((error, caught) => defaultErrorhandler(this.notification, error, caught))
+      catchError((error) => defaultErrorhandler(this.notification, error))
     );
   }
 
-  updateCandidateAttributes(id: string, data: any) {
+  public updateCandidateAttributes(id: string, data: any) {
     return this.fetch.post(`candidates/${id}/attributes`, data);
   }
 
-  createNewCandidate(data: any) {
+  public createNewCandidate(data: any) {
     return this.fetch.post(`candidates`, data);
   }
 
-  mapCandidateDto(candidate: CandidateDto): Candidate {
+  public mapCandidateDto(candidate: CandidateDto): Candidate {
     return {
       ...candidate,
+      fullName: getFullName(candidate.candidateAttributes),
       candidateAttributesValues: candidate.candidateAttributes.map((a) => ({
         name: a.attributeTypes.name || '',
         value: a.value || '',

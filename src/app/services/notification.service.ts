@@ -11,7 +11,7 @@ const NOTIFICATIONS_DURATION = {
 export class NotificationService {
   constructor(private snackBar: MatSnackBar) {}
 
-  show(
+  public show(
     message: string,
     mode?: ENotificationMode,
     duration: number = NOTIFICATIONS_DURATION.STANDART

@@ -12,7 +12,7 @@ import { ModalService } from '@services/modal.service';
 export class ActionsBarComponent {
   constructor(private modalService: ModalService) {}
 
-  createNewCandidateModalOpen() {
+  public createNewCandidateModalOpen(): void {
     this.modalService.open(NewCandidateModalComponent, EModalSizes.SM);
   }
 }

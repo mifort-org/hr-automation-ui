@@ -5,24 +5,22 @@ import { PageState } from '@utils/pageState';
 import { ERROR_MESSAGE } from '@constants/strings';
 import { ERROR_STATUS_CODES } from '@constants/errorStatusCode';
 import { AttributesService } from '@services/attributes.service';
-import { CandidateDto } from '@interfaces/candidates';
 import { CandidatesService } from '@services/candidates.service';
 import { VALIDATORS } from '@utils/validators';
 import { NotificationService } from '@services/notification.service';
 import { ENotificationMode } from '@constants/notification';
+import { Candidate } from '@src/app/models/candidates';
 
 @Component({
   selector: 'app-edit-candidate-modal',
   templateUrl: './edit-candidate-modal.component.html',
 })
 export class EditCandidateModalComponent {
-  candidate!: CandidateDto;
+  public candidate!: Candidate;
 
-  formData = null;
+  public formData!: FormData;
 
-  formErrors = null as any;
-
-  modalState = new PageState();
+  public modalState = new PageState();
 
   constructor(
     private dialogRef: MatDialogRef<EditCandidateModalComponent>,
@@ -31,15 +29,15 @@ export class EditCandidateModalComponent {
     private notification: NotificationService
   ) {}
 
-  closeModal() {
+  public closeModal(): void {
     this.dialogRef.close();
   }
 
-  formValuesOnChange(data: any) {
+  public formValuesOnChange(data: any): void {
     this.formData = data;
   }
 
-  submitCandidateUpdate() {
+  public submitCandidateUpdate(): void {
     if (this.formData === null) {
       this.closeModal();
     } else {
@@ -51,9 +49,11 @@ export class EditCandidateModalComponent {
       if (result === null) {
         this.modalState.startLoading();
         const fetchData = Object.entries(this.formData).map(([key, value]) => {
+          const valueSource =
+            this.candidate.candidateAttributes.find((attr) => attr.value === key)?.valueSource || 0;
           return {
             value,
-            valueSource: this.candidate?.customAttribute?.[key]?.valueSource || 0,
+            valueSource,
             archived: false,
             attributeTypes: this.attributesService.attributesDictionary[key].id,
           };
@@ -66,9 +66,6 @@ export class EditCandidateModalComponent {
             this.closeModal();
             this.notification.show('Candidate is updated', ENotificationMode.SUCCESS);
             this.candidateService.getCandidateById(this.candidate?.id);
-
-            // TODO: Need to think, maybe we should subscribe in service and call just this.candidateService.getCandidateById();
-            // Or just create and Observable ICandidate object
           },
           error: (err) => {
             this.modalState.finishLoading();

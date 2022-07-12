@@ -16,7 +16,7 @@ const MODAL_SIZE = {
 export class ModalService {
   constructor(public dialog: MatDialog) {}
 
-  open(
+  public open(
     modalComponent: ComponentType<any>,
     size: EModalSizes,
     data?: any,

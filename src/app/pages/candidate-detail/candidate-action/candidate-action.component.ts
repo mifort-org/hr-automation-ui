@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalService } from '@services/modal.service';
-import { EditCandidateModalComponent } from '@components/shared/edit-candidate-modal/edit-candidate-modal.component';
 import { DialogModalIds, EModalSizes } from '@constants/strings';
 import { ROUTES } from '@src/app/routes';
 import { AddCommentModalComponent } from '@pages/candidate-detail/add-comment-modal/add-comment-modal.component';
+import { EditCandidateModalComponent } from '@pages/candidate-detail/edit-candidate-modal/edit-candidate-modal.component';
 
 @Component({
   selector: 'app-candidate-action',
@@ -29,11 +29,11 @@ export class CandidateActionComponent implements OnInit {
     });
   }
 
-  openEditModal(): void {
+  public openEditModal(): void {
     this.modalService.open(EditCandidateModalComponent, EModalSizes.MD);
   }
 
-  openAddCommentModal(): void {
+  public openAddCommentModal(): void {
     this.modalService.open(
       AddCommentModalComponent,
       EModalSizes.MD,
@@ -43,7 +43,7 @@ export class CandidateActionComponent implements OnInit {
     );
   }
 
-  back(): void {
+  public back(): void {
     this.router.navigate([ROUTES.CANDIDATES]);
   }
 }

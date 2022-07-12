@@ -11,20 +11,12 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import AppRoutingModule from '@src/app/app-routing.module';
 
-import { CandidateFormComponent } from '@components/shared/candidate-form/candidate-form.component';
-import { EditCandidateModalComponent } from '@components/shared/edit-candidate-modal/edit-candidate-modal.component';
 import { ErrorDisplayComponent } from '@components/shared/error-display/error-display.component';
 import { NewCandidateModalComponent } from '@components/shared/new-candidate-modal/new-candidate-modal.component';
 import { SignInModalComponent } from '@components/shared/sign-in-modal/sign-in-modal.component';
 
 @NgModule({
-  declarations: [
-    SignInModalComponent,
-    NewCandidateModalComponent,
-    ErrorDisplayComponent,
-    EditCandidateModalComponent,
-    CandidateFormComponent,
-  ],
+  declarations: [SignInModalComponent, NewCandidateModalComponent, ErrorDisplayComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -37,12 +29,6 @@ import { SignInModalComponent } from '@components/shared/sign-in-modal/sign-in-m
     MatRadioModule,
     MatDialogModule,
   ],
-  exports: [
-    SignInModalComponent,
-    NewCandidateModalComponent,
-    ErrorDisplayComponent,
-    EditCandidateModalComponent,
-    CandidateFormComponent,
-  ],
+  exports: [SignInModalComponent, NewCandidateModalComponent, ErrorDisplayComponent],
 })
 export class SharedModule {}

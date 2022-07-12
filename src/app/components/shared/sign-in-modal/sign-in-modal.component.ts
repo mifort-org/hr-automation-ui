@@ -9,7 +9,7 @@ import { NotificationService } from '@services/notification.service';
   templateUrl: './sign-in-modal.component.html',
 })
 export class SignInModalComponent implements OnInit {
-  form!: FormGroup;
+  public form!: FormGroup;
 
   constructor(
     public dialogRef: MatDialogRef<SignInModalComponent>,
@@ -24,7 +24,7 @@ export class SignInModalComponent implements OnInit {
     });
   }
 
-  onNoClick(): void {
+  public onNoClick(): void {
     this.notification.show('Closed');
     this.dialogRef.close();
   }

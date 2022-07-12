@@ -11,9 +11,7 @@
               matBadgeSize="small"
               [matBadgeColor]="(candidateDetailService.currentCandidate$ | async)?.status | status"
               class="hide-text"
-              >{{
-                (candidateDetailService.currentCandidate$ | async)?.customAttribute | fullname
-              }}</span
+              >{{ (candidateDetailService.currentCandidate$ | async)?.fullName }}</span
             ></mat-card-title
           >
           <mat-card-subtitle>{{

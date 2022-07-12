@@ -10,7 +10,7 @@ import { ModalService } from '@services/modal.service';
 export class NavbarComponent {
   constructor(private modalService: ModalService) {}
 
-  openSignInDialog() {
+  public openSignInDialog(): void {
     this.modalService.open(SignInModalComponent, EModalSizes.MD);
   }
 }

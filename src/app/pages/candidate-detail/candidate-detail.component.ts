@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CandidateDetailService } from '@services/candidateDetail.service';
+import { CandidateDetailService } from '@services/candidate-detail.service';
 
 @Component({
   selector: 'app-candidate-detail',

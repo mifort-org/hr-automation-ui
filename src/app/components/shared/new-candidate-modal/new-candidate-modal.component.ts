@@ -8,7 +8,7 @@ import { ERROR_STATUS_CODES } from '@constants/errorStatusCode';
 import { ROUTES } from '@src/app/routes';
 import { NotificationService } from '@services/notification.service';
 import { CandidatesService } from '@services/candidates.service';
-import { CANDIDATE_STATUSES, ECandidateStatus } from '@constants/candidates';
+import { ECandidateStatus } from '@constants/candidates';
 import { ENotificationMode } from '@constants/notification';
 import { ERROR_MESSAGE, TEXT_FIELD_ERRORS } from '@constants/strings';
 
@@ -22,13 +22,11 @@ interface IFormData {
   templateUrl: './new-candidate-modal.component.html',
 })
 export class NewCandidateModalComponent {
-  statusOptions = CANDIDATE_STATUSES;
+  public form!: FormGroup;
 
-  form!: FormGroup;
+  public formData: IFormData | null = null;
 
-  formData: IFormData | null = null;
-
-  modalState = new PageState();
+  public modalState = new PageState();
 
   constructor(
     private dialogRef: MatDialogRef<NewCandidateModalComponent>,
@@ -46,7 +44,7 @@ export class NewCandidateModalComponent {
     });
   }
 
-  submitNewCandidate() {
+  public submitNewCandidate(): void {
     if (this.formData === null || this.form.invalid) {
       this.notificationService.show(TEXT_FIELD_ERRORS.FORM_INVALID, ENotificationMode.ERROR);
     } else {
@@ -68,7 +66,7 @@ export class NewCandidateModalComponent {
     }
   }
 
-  closeModal() {
+  public closeModal(): void {
     this.dialogRef.close();
   }
 }

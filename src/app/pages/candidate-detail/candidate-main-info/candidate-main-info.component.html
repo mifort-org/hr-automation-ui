@@ -1,4 +1,8 @@
-<table mat-table *ngIf="candidateAttributesValues" [dataSource]="candidateAttributesValues">
+<table
+  mat-table
+  *ngIf="candidateDetailService.currentCandidate$ | async"
+  [dataSource]="(candidateDetailService.currentCandidate$ | async)?.candidateAttributesValues || []"
+>
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>Attribute</th>
     <td mat-cell *matCellDef="let element">{{ element.name }}:</td>
