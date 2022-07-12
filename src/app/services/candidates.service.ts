@@ -9,6 +9,15 @@ interface IParam {
   [param: string]: any;
 }
 
+interface CandidateAttributesTypesDto {
+  id: number;
+  name: string;
+  basicType: string;
+  validation: string;
+  identifier: boolean;
+  value: string;
+}
+
 const createCustomAttribute = (candidate: Candidate) => {
   const attributes: CandidateCustomAttribute = {};
   candidate?.candidateAttributes?.forEach((attr) => {
@@ -55,7 +64,7 @@ export class CandidatesService {
   }
 
   getCandidateAttributesById(id: string): Observable<Array<CandidateAttributesTypes>> {
-    return this._fetch.get<Array<CandidateAttributesTypes>>(`candidates/${id}/attributes`).pipe(
+    return this._fetch.get<Array<CandidateAttributesTypesDto>>(`candidates/${id}/attributes`).pipe(
       map((data) => {
         return data;
       })

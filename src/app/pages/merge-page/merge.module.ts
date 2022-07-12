@@ -15,7 +15,7 @@ import { SharedModule } from '@components/shared/shared.module';
 import { AppPipesModule } from '@utils/pipes/app-pipes.module';
 import AppRoutingModule from '@src/app/app-routing.module';
 import { SystemModule } from '@src/app/components/systems/system.module';
-import { ActionsBarMergeComponent } from '@src/app/components/systems/actions-bar-merge/actions-bar-merge.component';
+import { ActionsBarMergeComponent } from '@src/app/pages/merge-page/actions-bar-merge/actions-bar-merge.component';
 import { CandidateMergeComponent } from './candidate-merge/candidate-merge.component';
 import { MergePageComponent } from './merge-page.component';
 

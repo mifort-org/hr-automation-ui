@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, forkJoin, take, mergeMap, Observable, catchError, of } from 'rxjs';
-import { MatCheckboxChange } from '@angular/material/checkbox';
 import { CandidateAttributesTypes } from '@interfaces/attributes';
 import { ENotificationMode } from '../constants/notification';
 import { PageState } from '../utils/pageState';
@@ -18,7 +17,7 @@ export class MergeService {
 
   public pageState = new PageState();
 
-  public attributesTitles: string[] = [];
+  public attributesTitles: Array<string> = [];
 
   public attributesMatrix: Array<Array<string>> = [];
 
@@ -54,10 +53,6 @@ export class MergeService {
 
   isCandidates(): boolean {
     return !!this.candidatesIdsSubject$.getValue().length;
-  }
-
-  getCandidateIdbyIndex(index: number): string {
-    return this.candidatesIdsSubject$.getValue()[index];
   }
 
   fetchCanditatesAttributes(): Observable<CandidateAttributesTypes[][]> {
@@ -122,16 +117,15 @@ export class MergeService {
     this.finalResultSubject$.next(finalResult);
   }
 
-  changeAttributes(event: { candidatesMatrixIndexes: Array<number>; candidateAttr: string }): void {
-    const [indexMatrix, indexCandidate] = event.candidatesMatrixIndexes;
-    this.finalAttributesMatrix[indexMatrix][indexCandidate] = event.candidateAttr;
+  changeAttributes(candidatesMatrixIndexes: Array<number>, candidateAttr: string): void {
+    const [indexMatrix, indexCandidate] = candidatesMatrixIndexes;
+    this.finalAttributesMatrix[indexMatrix][indexCandidate] = candidateAttr;
     this.calculateResult();
   }
 
-  chooseAllCandidateAttributes(event: MatCheckboxChange): void {
-    const indexCandidate = +event.source.value;
+  chooseAllCandidateAttributes(indexCandidate: number, checked: boolean): void {
     this.finalAttributesMatrix[indexCandidate].forEach((attr, index) => {
-      this.finalAttributesMatrix[indexCandidate][index] = event.checked
+      this.finalAttributesMatrix[indexCandidate][index] = checked
         ? this.attributesMatrix[indexCandidate][index]
         : '';
     });

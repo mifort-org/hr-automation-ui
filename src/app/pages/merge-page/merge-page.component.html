@@ -5,7 +5,7 @@
   *ngIf="mergeService.pageState.loading"
 ></mat-progress-bar>
 <ng-container *ngIf="!mergeService.pageState.loading">
-  <div *ngIf="mergeService.isCandidates();else noCandidatesId" class="candidate-merge-container">
+  <div *ngIf="isCandidates();else noCandidatesId" class="candidate-merge-container">
     <div class="desc-titles-container">
       <div class="desc-title"></div>
       <ng-container *ngFor="let title of mergeService.attributesTitles">
@@ -14,25 +14,25 @@
     </div>
 
     <div class="candidates-container">
-      <div *ngFor="let candidateId of mergeService.candidatesIdsSubject$.getValue(); let indexMatrix=index" class="desc-candidate-container">
+      <div *ngFor="let candidateId of candidateIds; let indexMatrix=index" class="desc-candidate-container">
         <label class="desc-candidate-title">
           <mat-checkbox 
             color="primary"
             aria-label="desc-candidate-title" 
             [value]="indexMatrix.toString()"
-            [checked]="mergeService.isAllCandidateAttributesChoose(indexMatrix)"
-            (change)="mergeService.chooseAllCandidateAttributes($event)"
+            [checked]="isAllCandidateAttributesChoose(indexMatrix)"
+            (change)="chooseAllCandidateAttributes($event)"
             >
             {{candidateId}}
           </mat-checkbox>
-          <mat-icon color="warn" (click)="mergeService.removeCandidateById(candidateId)" class="remove-button">delete_forever</mat-icon>
+          <mat-icon color="warn" (click)="removeCandidateById(candidateId)" class="remove-button">delete_forever</mat-icon>
         </label>
        <ng-container *ngFor="let attribute of mergeService.attributesMatrix[indexMatrix]; let indexCandidate=index">
           <app-candidate-merge 
             [checked]="!!mergeService.finalAttributesMatrix[indexMatrix][indexCandidate]"
             [candidateAttr] = "attribute" 
             [candidatesMatrixIndexes] = "[indexMatrix, indexCandidate]"
-            (changeAttributes)="mergeService.changeAttributes($event)"
+            (changeAttributes)="changeAttributes($event)"
             class="desc-candidate">
           </app-candidate-merge>
         </ng-container>          
@@ -40,8 +40,8 @@
     </div>
 
     <div class="desc-result-container">
-      <div class="desc-result-title" [ngClass]="{'filled-result': mergeService.checkFilledResult()}">Result</div>
-      <ng-container *ngFor="let result of mergeService.finalResultSubject$.getValue()">
+      <div class="desc-result-title" [ngClass]="{'filled-result': checkFilledResult()}">Result</div>
+      <ng-container *ngFor="let result of finalResult">
         <div class="desc-result" [ngClass]="{'final-result': result.join(', ')}">
           {{result.join(', ')}}
       </div>
