@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { CandidateDetailService } from '@services/candidate-detail.service';
+import { Candidate } from '@src/app/models/candidates';
 
 @Component({
   selector: 'app-candidate-detail',
@@ -7,6 +9,12 @@ import { CandidateDetailService } from '@services/candidate-detail.service';
   styleUrls: ['./candidate-detail.component.scss'],
   providers: [CandidateDetailService],
 })
-export class CandidateDetailComponent {
-  constructor(public candidateDetailService: CandidateDetailService) {}
+export class CandidateDetailComponent implements OnInit {
+  public candidate$!: Observable<Candidate>;
+
+  constructor(private candidateDetailService: CandidateDetailService) {}
+
+  ngOnInit(): void {
+    this.candidate$ = this.candidateDetailService.currentCandidate$;
+  }
 }

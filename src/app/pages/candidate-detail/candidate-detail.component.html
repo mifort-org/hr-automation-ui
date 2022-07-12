@@ -9,13 +9,13 @@
               matBadge="0"
               matBadgePosition="after"
               matBadgeSize="small"
-              [matBadgeColor]="(candidateDetailService.currentCandidate$ | async)?.status | status"
+              [matBadgeColor]="(candidate$ | async)?.status | status"
               class="hide-text"
-              >{{ (candidateDetailService.currentCandidate$ | async)?.fullName }}</span
+              >{{ (candidate$ | async)?.fullName }}</span
             ></mat-card-title
           >
           <mat-card-subtitle>{{
-            (candidateDetailService.currentCandidate$ | async)?.id
+            (candidate$ | async)?.id
           }}</mat-card-subtitle>
         </mat-card-header>
         <div class="image-frame" mat-card-image>
@@ -25,7 +25,7 @@
           <mat-chip-list>
             <mat-chip
               color="primary"
-              *ngFor="let keyword of (candidateDetailService.currentCandidate$ | async)?.keywords"
+              *ngFor="let keyword of (candidate$ | async)?.keywords"
               >{{ keyword?.id | titlecase }}</mat-chip
             >
           </mat-chip-list>

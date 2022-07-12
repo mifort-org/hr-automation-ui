@@ -1,10 +1,10 @@
 <div class="candidate-communications-body">
-  <ng-container *ngIf="(candidateDetailService.historyOfCurrentCandidate$ | async)?.length; else historyIsEmpty">
-    <ng-container *ngFor="let historyItem of (candidateDetailService.historyOfCurrentCandidate$ | async)">
+  <ng-container *ngIf="(candidateHistory$ | async)?.length; else historyIsEmpty">
+    <ng-container *ngFor="let historyItem of (candidateHistory$ | async)">
       <app-communication-comment
         [historyItem]="historyItem"
-        (commentDeleted)="candidateDetailService.deleteHistoryComment($event)"
-        (commentWasUpdated)="candidateDetailService.updateComment($event)"
+        (commentDeleted)="commentDelete($event)"
+        (commentWasUpdated)="updateComment($event)"
       ></app-communication-comment>
     </ng-container>
   </ng-container>

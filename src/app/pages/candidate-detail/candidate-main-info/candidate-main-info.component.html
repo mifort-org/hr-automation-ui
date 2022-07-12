@@ -1,7 +1,7 @@
 <table
   mat-table
-  *ngIf="candidateDetailService.currentCandidate$ | async"
-  [dataSource]="(candidateDetailService.currentCandidate$ | async)?.candidateAttributesValues || []"
+  *ngIf="candidate$ | async"
+  [dataSource]="(candidate$ | async)?.candidateAttributesValues || []"
 >
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>Attribute</th>
