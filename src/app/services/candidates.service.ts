@@ -53,11 +53,15 @@ export class CandidatesService {
   }
 
   public updateCandidateAttributes(id: string, data: any) {
-    return this.fetch.post(`candidates/${id}/attributes`, data);
+    return this.fetch
+      .post(`candidates/${id}/attributes`, data)
+      .pipe(catchError((error) => defaultErrorhandler(this.notification, error)));
   }
 
   public createNewCandidate(data: any) {
-    return this.fetch.post(`candidates`, data);
+    return this.fetch
+      .post(`candidates`, data)
+      .pipe(catchError((error) => defaultErrorhandler(this.notification, error)));
   }
 
   public mapCandidateDto(candidate: CandidateDto): Candidate {
