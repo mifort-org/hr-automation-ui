@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MergeService } from '@src/app/services/merge.service';
+import { PageState } from '@src/app/utils/pageState';
 
 @Component({
   selector: 'app-merge-page',
@@ -9,18 +10,27 @@ import { MergeService } from '@src/app/services/merge.service';
   styleUrls: ['./merge-page.component.scss'],
 })
 export class MergePageComponent implements OnInit {
-  constructor(public mergeService: MergeService) {}
+  public pageState = new PageState();
 
   public candidateIds!: Observable<string[]>;
 
   public finalResult!: Observable<string[][]>;
 
-  private destroy$: Subject<boolean> = new Subject<boolean>();
+  public attributesMatrix2: string[][] = [];
+
+  public attributesTitles2$!: Observable<string[]>;
+
+  constructor(public mergeService: MergeService) {}
 
   ngOnInit(): void {
+    this.pageState.startLoading();
     this.candidateIds = this.mergeService.candidatesIdsSubject$;
-    this.finalResult = this.mergeService.finalResultSubject$;
-    this.mergeService.parseCanditatesAttributes();
+    this.finalResult = this.mergeService.finalResultSubject2$;
+    this.attributesTitles2$ = this.mergeService.getAttributesTitles2();
+    this.mergeService.getAttributesMatrix2().subscribe((item) => {
+      this.attributesMatrix2 = item;
+      this.pageState.finishLoading();
+    });
   }
 
   isAllCandidateAttributesChoose(indexMatrix: number) {

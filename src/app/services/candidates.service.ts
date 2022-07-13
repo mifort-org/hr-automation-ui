@@ -1,6 +1,6 @@
 import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, filter, map, Observable, of } from 'rxjs';
+import { catchError, map, Observable } from 'rxjs';
 import {
   CandidateCustomAttributeDto,
   CandidatesFilterData,
@@ -63,14 +63,15 @@ export class CandidatesService {
   }
 
   getCandidateAttributesById(id: string): Observable<Array<CandidateAttributesTypes>> {
-    return this.fetch.get<Array<CandidateAttributesTypesDto>>(`candidates/${id}/attributes`).pipe(
-      catchError((error) => of(error.status)),
-      filter((data) => {
-        // eslint-disable-next-line no-console
-        console.log(data);
-        return Array.isArray(data);
-      })
-    );
+    return this.fetch.get<Array<CandidateAttributesTypesDto>>(`candidates/${id}/attributes`);
+    // .pipe(
+    //   catchError((error) => of(error.status)),
+    //   filter((data) => {
+    //     // eslint-disable-next-line no-console
+    //     console.log(data);
+    //     return Array.isArray(data);
+    //   })
+    // );
   }
 
   public updateCandidateAttributes(id: string, data: any) {

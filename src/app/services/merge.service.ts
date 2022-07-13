@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, forkJoin, take, mergeMap, Observable } from 'rxjs';
+import { BehaviorSubject, forkJoin, take, mergeMap, Observable, map, withLatestFrom } from 'rxjs';
 import { CandidateAttributesTypes } from '@src/app/models/candidates';
 import { ENotificationMode } from '../constants/notification';
-import { PageState } from '../utils/pageState';
 import { CandidatesService } from './candidates.service';
 import { NotificationService } from './notification.service';
 
@@ -10,11 +9,7 @@ import { NotificationService } from './notification.service';
   providedIn: 'root',
 })
 export class MergeService {
-  public pageState = new PageState();
-
   public attributesTitles: Array<string> = [];
-
-  public attributesTitles2!: Observable<string[]>;
 
   public attributesMatrix: Array<Array<string>> = [];
 
@@ -22,8 +17,14 @@ export class MergeService {
 
   public finalResultSubject$: BehaviorSubject<string[][]> = new BehaviorSubject<string[][]>([]);
 
+  public attributesMatrix2$!: Observable<string[][]>;
+
+  public attributesTitles2$!: Observable<string[]>;
+
+  public finalResultSubject2$: BehaviorSubject<string[][]> = new BehaviorSubject<string[][]>([]);
+
   public candidatesIdsSubject$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([
-    'uliana_fomina1',
+    'uliana_fomina',
     'artem_skrebets',
     'vladimir_zelmanchuk',
   ]);
@@ -70,49 +71,79 @@ export class MergeService {
     );
   }
 
-  parseCanditatesAttributes(): void {
-    if (this.candidatesIdsSubject$.getValue().length) {
-      this.pageState.startLoading();
-    }
-    this.fetchCanditatesAttributes().subscribe(
-      (candidatesArrays: CandidateAttributesTypes[][]) => {
-        this.checkValidateAnswer(candidatesArrays);
-        // if (indexNonArray !== -1) {
-        //   this.removeCandidateByIndex(indexNonArray);
-        // } else {
-        // eslint-disable-next-line no-console
-        console.log(candidatesArrays);
-        this.fillTitleValues(candidatesArrays);
-        this.fillAttributesMatrix(candidatesArrays);
-        // }
-        this.pageState.finishLoading();
-      },
-      (error) => {
-        this.pageState.catchError(error);
-        this.pageState.finishLoading();
-      }
+  // parseCanditatesAttributes(): void {
+  // this.fetchCanditatesAttributes().subscribe(
+  //   (candidatesArrays: CandidateAttributesTypes[][]) => {
+  //     this.checkValidateAnswer(candidatesArrays);
+  //     // if (indexNonArray !== -1) {
+  //     //   this.removeCandidateByIndex(indexNonArray);
+  //     // } else {
+  //     // eslint-disable-next-line no-console
+  //     console.log(candidatesArrays);
+  //     this.fillTitleValues(candidatesArrays);
+  //     this.fillAttributesMatrix(candidatesArrays);
+  //     // }
+  // );
+  getAttributesTitles2() {
+    this.attributesTitles2$ = this.fetchCanditatesAttributes().pipe(
+      map((attributesArrays) =>
+        attributesArrays.reduce((acc: string[], attributesArray: CandidateAttributesTypes[]) => {
+          const resultArray: string[] = [];
+          attributesArray.forEach((attribute: CandidateAttributesTypes) => {
+            if (!acc.includes(attribute.name)) {
+              resultArray.push(attribute.name);
+            }
+          });
+          return [...acc, ...resultArray];
+        }, [])
+      )
     );
-    // this.attributesTitles2 = this.fetchCanditatesAttributes().pipe(
-    //   map((attributesArrays) =>
-    //     attributesArrays.reduce((acc: string[], attributesArray: CandidateAttributesTypes[]) => {
-    //       const resultArray: string[] = [];
-    //       attributesArray.forEach((attribute: CandidateAttributesTypes) => {
-    //         if (!acc.includes(attribute.name)) {
-    //           resultArray.push(attribute.name);
-    //         }
-    //       });
-    //       return [...acc, ...resultArray];
-    //     }, [])
-    //   )
-    // );
+    this.getResultSubject2();
+    return this.attributesTitles2$;
   }
 
-  checkValidateAnswer(answerArray: any[]) {
-    const indexNonArray = answerArray.findIndex((array) => !Array.isArray(array));
-    if (indexNonArray !== -1) {
-      this.removeCandidateByIndex(indexNonArray);
-    }
+  // eslint-disable-next-line no-console
+  getResultSubject2() {
+    this.attributesTitles2$
+      .pipe(map((titles: string[]) => titles.map(() => [])))
+      .subscribe(this.finalResultSubject2$);
   }
+
+  getAttributesMatrix2() {
+    this.attributesMatrix2$ = this.getAttributesTitles2().pipe(
+      withLatestFrom(this.fetchCanditatesAttributes()),
+      map(([titles, candidateAttributes]) => {
+        return candidateAttributes.map((candidateArr) =>
+          titles.map((item) => {
+            const candidateAttribute = candidateArr.find((attr) => attr.name === item);
+            return candidateAttribute ? candidateAttribute.value : '';
+          })
+        );
+      })
+    );
+    this.fillFinalAttributesMatrix();
+    return this.attributesMatrix2$;
+  }
+
+  fillFinalAttributesMatrix() {
+    this.attributesMatrix2$
+      .pipe(map((matrix) => matrix.map((item) => item.map(() => ''))))
+      .subscribe((matrix) => {
+        this.finalAttributesMatrix = matrix;
+      });
+  }
+
+  // this.attributesMatrix2$ = this.attributesTitles2$.pipe((map((attributesArray) =>
+  //   attributesArray.map((attribute) => )
+  // )))
+  // }
+
+  // checkValidateAnswer(answerArray: any[]) {
+  //   const indexNonArray = answerArray.findIndex((array) => !Array.isArray(array));
+  //   if (indexNonArray !== -1) {
+  //     this.removeCandidateByIndex(indexNonArray);
+  //   }
+  // }
 
   fillTitleValues(candidates: CandidateAttributesTypes[][]): void {
     const attributesSetList = new Set();
@@ -137,7 +168,7 @@ export class MergeService {
   }
 
   addFinalResult(finalResult: string[][]): void {
-    this.finalResultSubject$.next(finalResult);
+    this.finalResultSubject2$.next(finalResult);
   }
 
   changeAttributes(candidatesMatrixIndexes: Array<number>, candidateAttr: string): void {
@@ -165,7 +196,7 @@ export class MergeService {
 
   calculateResult(): void {
     const finalResult: string[][] = [];
-    this.attributesTitles.forEach(() => finalResult.push([]));
+    this.finalAttributesMatrix[0].forEach(() => finalResult.push([]));
 
     this.finalAttributesMatrix.forEach((candAttrArr) => {
       candAttrArr.forEach((attr, index) => {
@@ -178,14 +209,14 @@ export class MergeService {
   }
 
   mergeCandidates(): void {
-    if (this.checkFilledResult() && this.attributesTitles.length) {
-      this.finalResultSubject$.pipe(take(1)).subscribe((results) => {
-        this.attributesTitles.forEach((item, index) =>
+    if (this.checkFilledResult()) {
+      const finalResult = this.finalResultSubject2$.getValue();
+      this.attributesTitles2$.pipe(take(1)).subscribe((titles) => {
+        titles.forEach((title, index) => {
           // eslint-disable-next-line no-console
-          console.log(`${item}: ${results[index]}`)
-        );
+          console.log(`${title} : ${finalResult[index]}`);
+        });
       });
-
       this.notification.show('Successfully merged. Check console', ENotificationMode.SUCCESS);
     } else {
       this.notification.show('Please fill all fields', ENotificationMode.ERROR);
@@ -193,6 +224,6 @@ export class MergeService {
   }
 
   checkFilledResult(): boolean {
-    return this.finalResultSubject$.getValue().every((result) => result.length);
+    return this.finalResultSubject2$.getValue().every((result) => result.length);
   }
 }

@@ -2,13 +2,13 @@
 <mat-progress-bar
   mode="indeterminate"
   color="primary"
-  *ngIf="mergeService.pageState.loading"
+  *ngIf="pageState.loading"
 ></mat-progress-bar>
-<ng-container *ngIf="!mergeService.pageState.loading">
+<ng-container *ngIf="!pageState.loading">
   <div *ngIf="isCandidates();else noCandidatesId" class="candidate-merge-container">
     <div class="desc-titles-container">
       <div class="desc-title"></div>
-      <ng-container *ngFor="let title of mergeService.attributesTitles">
+      <ng-container *ngFor="let title of attributesTitles2$ | async">
         <div class="desc-title">{{title}}</div>
       </ng-container>
     </div>
@@ -27,10 +27,9 @@
           </mat-checkbox>
           <mat-icon color="warn" (click)="removeCandidateById(candidateId)" class="remove-button">delete_forever</mat-icon>
         </label>
-       <ng-container *ngFor="let attribute of mergeService.attributesMatrix[indexMatrix]; let indexCandidate=index">
+       <ng-container *ngFor="let attribute of attributesMatrix2[indexMatrix]; let indexCandidate=index">
           <app-candidate-merge 
-            [checked]="!!mergeService.finalAttributesMatrix[indexMatrix][indexCandidate]"
-            [candidateAttr] = "attribute" 
+            [candidateAttr] = "attribute.toString()" 
             [candidatesMatrixIndexes] = "[indexMatrix, indexCandidate]"
             (changeAttributes)="changeAttributes($event)"
             class="desc-candidate">
