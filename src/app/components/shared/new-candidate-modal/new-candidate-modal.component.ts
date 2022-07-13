@@ -8,7 +8,7 @@ import { ERROR_STATUS_CODES } from '@constants/errorStatusCode';
 import { ROUTES } from '@src/app/routes';
 import { NotificationService } from '@services/notification.service';
 import { CandidatesService } from '@services/candidates.service';
-import { CANDIDATE_STATUSES, ECandidateStatus } from '@constants/candidates';
+import { ECandidateStatus } from '@constants/candidates';
 import { ENotificationMode } from '@constants/notification';
 import { ERROR_MESSAGE, TEXT_FIELD_ERRORS } from '@constants/strings';
 
@@ -22,22 +22,20 @@ interface IFormData {
   templateUrl: './new-candidate-modal.component.html',
 })
 export class NewCandidateModalComponent {
-  statusOptions = CANDIDATE_STATUSES;
+  public form!: FormGroup;
 
-  form!: FormGroup;
+  public formData: IFormData | null = null;
 
-  formData: IFormData | null = null;
-
-  modalState = new PageState();
+  public modalState = new PageState();
 
   constructor(
-    private _dialogRef: MatDialogRef<NewCandidateModalComponent>,
-    private _formBuilder: FormBuilder,
-    private _candidateService: CandidatesService,
-    private _notificationService: NotificationService,
-    private _router: Router
+    private dialogRef: MatDialogRef<NewCandidateModalComponent>,
+    private formBuilder: FormBuilder,
+    private candidateService: CandidatesService,
+    private notificationService: NotificationService,
+    private router: Router
   ) {
-    this.form = this._formBuilder.group({
+    this.form = this.formBuilder.group({
       id: ['', Validators.required],
     });
 
@@ -46,20 +44,20 @@ export class NewCandidateModalComponent {
     });
   }
 
-  submitNewCandidate() {
+  public submitNewCandidate(): void {
     if (this.formData === null || this.form.invalid) {
-      this._notificationService.show(TEXT_FIELD_ERRORS.FORM_INVALID, ENotificationMode.ERROR);
+      this.notificationService.show(TEXT_FIELD_ERRORS.FORM_INVALID, ENotificationMode.ERROR);
     } else {
       this.modalState.startLoading();
-      this._candidateService.createNewCandidate(this.formData).subscribe({
+      this.candidateService.createNewCandidate(this.formData).subscribe({
         next: () => {
-          this._router.navigate([`${ROUTES.CANDIDATES}/details/${this.formData!.id}`]);
+          this.router.navigate([`${ROUTES.CANDIDATES}/details/${this.formData!.id}`]);
           this.modalState.finishLoading();
           this.closeModal();
         },
         error: (error) => {
           this.modalState.finishLoading();
-          this._notificationService.show(
+          this.notificationService.show(
             ERROR_MESSAGE[error?.status || ERROR_STATUS_CODES.INTERNAL_SERVER_ERROR],
             ENotificationMode.ERROR
           );
@@ -68,7 +66,7 @@ export class NewCandidateModalComponent {
     }
   }
 
-  closeModal() {
-    this._dialogRef.close();
+  public closeModal(): void {
+    this.dialogRef.close();
   }
 }

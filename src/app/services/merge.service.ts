@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, forkJoin, take, mergeMap, Observable } from 'rxjs';
-import { CandidateAttributesTypes } from '@interfaces/attributes';
+import { CandidateAttributesTypes } from '@src/app/models/candidates';
 import { ENotificationMode } from '../constants/notification';
 import { PageState } from '../utils/pageState';
 import { CandidatesService } from './candidates.service';

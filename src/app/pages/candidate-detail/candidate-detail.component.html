@@ -1,8 +1,5 @@
 <div class="candidate-detail-container">
-  <button mat-raised-button class="mb-20" (click)="back()">
-    <mat-icon>keyboard_backspace</mat-icon>
-    <span class="ml-10">Back</span>
-  </button>
+  <app-candidate-action></app-candidate-action>
   <div class="row">
     <div class="col-3 col-10-sm">
       <mat-card class="example-card">
@@ -12,35 +9,41 @@
               matBadge="0"
               matBadgePosition="after"
               matBadgeSize="small"
-              [matBadgeColor]="candidate?.status | status"
+              [matBadgeColor]="(candidate$ | async)?.status | status"
               class="hide-text"
-              >{{ candidate?.customAttribute | fullname }}</span
+              >{{ (candidate$ | async)?.fullName }}</span
             ></mat-card-title
           >
-          <mat-card-subtitle>{{ candidate?.id }}</mat-card-subtitle>
+          <mat-card-subtitle>{{
+            (candidate$ | async)?.id
+          }}</mat-card-subtitle>
         </mat-card-header>
         <div class="image-frame" mat-card-image>
           <img src="https://bootdey.com/img/Content/avatar/avatar1.png" />
         </div>
         <mat-card-content>
           <mat-chip-list>
-            <mat-chip color="primary" *ngFor="let keyword of candidate?.keywords">{{
-              keyword?.id | titlecase
-            }}</mat-chip>
+            <mat-chip
+              color="primary"
+              *ngFor="let keyword of (candidate$ | async)?.keywords"
+              >{{ keyword?.id | titlecase }}</mat-chip
+            >
           </mat-chip-list>
         </mat-card-content>
       </mat-card>
     </div>
     <div class="col-7 col-10-sm">
-      <app-candidate-action></app-candidate-action>
-      <mat-tab-group mat-align-tabs="start" class="mt-20">
+      <mat-tab-group
+        mat-align-tabs="start"
+        class="mt-20 communication-tabs"
+        animationDuration="0ms"
+      >
         <mat-tab label="Details info">
-          <a></a><app-candidate-main-info></app-candidate-main-info
-        ></mat-tab>
-        <mat-tab label="Communications"
+          <app-candidate-main-info></app-candidate-main-info>
+        </mat-tab>
+        <mat-tab label="Communication History"
           ><app-candidate-communications></app-candidate-communications
         ></mat-tab>
-        <mat-tab label="History"><app-candidate-history></app-candidate-history></mat-tab>
         <mat-tab label="Updates"><app-candidate-updates></app-candidate-updates></mat-tab>
       </mat-tab-group>
     </div>

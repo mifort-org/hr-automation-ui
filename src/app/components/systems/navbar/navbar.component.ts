@@ -8,9 +8,9 @@ import { ModalService } from '@services/modal.service';
   templateUrl: './navbar.component.html',
 })
 export class NavbarComponent {
-  constructor(private _modalService: ModalService) {}
+  constructor(private modalService: ModalService) {}
 
-  openSignInDialog() {
-    this._modalService.open(SignInModalComponent, EModalSizes.MD);
+  public openSignInDialog(): void {
+    this.modalService.open(SignInModalComponent, EModalSizes.MD);
   }
 }

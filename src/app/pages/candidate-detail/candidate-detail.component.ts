@@ -1,41 +1,20 @@
-import { Observable, switchMap } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { CandidatesService } from '@services/candidates.service';
-import { Candidate } from '@interfaces/candidates';
-import { ROUTES } from '@src/app/routes';
+import { Observable } from 'rxjs';
+import { CandidateDetailService } from '@services/candidate-detail.service';
+import { Candidate } from '@src/app/models/candidates';
 
 @Component({
   selector: 'app-candidate-detail',
   templateUrl: './candidate-detail.component.html',
   styleUrls: ['./candidate-detail.component.scss'],
+  providers: [CandidateDetailService],
 })
 export class CandidateDetailComponent implements OnInit {
-  candidateId!: string;
+  public candidate$!: Observable<Candidate>;
 
-  candidate!: Candidate | null;
-
-  constructor(
-    private _router: Router,
-    private _candidateService: CandidatesService,
-    private _activatedRoute: ActivatedRoute
-  ) {}
+  constructor(private candidateDetailService: CandidateDetailService) {}
 
   ngOnInit(): void {
-    this._activatedRoute.params
-      .pipe(
-        switchMap((param): Observable<Candidate> => {
-          this.candidateId = param['id'];
-
-          return this._candidateService.getCandidateById(this.candidateId);
-        })
-      )
-      .subscribe((resolve: Candidate) => {
-        this.candidate = resolve;
-      });
-  }
-
-  back() {
-    this._router.navigate([ROUTES.CANDIDATES]);
+    this.candidate$ = this.candidateDetailService.currentCandidate$;
   }
 }

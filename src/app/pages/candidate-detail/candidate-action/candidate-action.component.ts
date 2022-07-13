@@ -1,26 +1,49 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ModalService } from '@services/modal.service';
-import { EditCandidateModalComponent } from '@components/shared/edit-candidate-modal/edit-candidate-modal.component';
-import { EModalSizes } from '@constants/strings';
+import { DialogModalIds, EModalSizes } from '@constants/strings';
+import { ROUTES } from '@src/app/routes';
+import { AddCommentModalComponent } from '@pages/candidate-detail/add-comment-modal/add-comment-modal.component';
+import { EditCandidateModalComponent } from '@pages/candidate-detail/edit-candidate-modal/edit-candidate-modal.component';
 
 @Component({
   selector: 'app-candidate-action',
+  styleUrls: ['candidate-action.scss'],
   templateUrl: './candidate-action.component.html',
 })
 export class CandidateActionComponent implements OnInit {
-  constructor(private _route: ActivatedRoute, private _modalService: ModalService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private modalService: ModalService
+  ) {}
 
   ngOnInit(): void {
-    this._route.fragment.subscribe((f) => {
-      const element = document.querySelector(`#${f}`);
-      if (element) {
-        element.scrollIntoView();
-      }
+    this.route.fragment.subscribe({
+      next: (f) => {
+        const element = document.querySelector(`#${f}`);
+        if (element) {
+          element.scrollIntoView();
+        }
+      },
     });
   }
 
-  openEditModal() {
-    this._modalService.open(EditCandidateModalComponent, EModalSizes.MD);
+  public openEditModal(): void {
+    this.modalService.open(EditCandidateModalComponent, EModalSizes.MD);
+  }
+
+  public openAddCommentModal(): void {
+    this.modalService.open(
+      AddCommentModalComponent,
+      EModalSizes.MD,
+      null,
+      undefined,
+      DialogModalIds.addCommentModal
+    );
+  }
+
+  public back(): void {
+    this.router.navigate([ROUTES.CANDIDATES]);
   }
 }

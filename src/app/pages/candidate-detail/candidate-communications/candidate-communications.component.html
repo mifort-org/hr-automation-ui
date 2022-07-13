@@ -1,1 +1,15 @@
-<p>candidate-communications works!</p>
+<div class="candidate-communications-body">
+  <ng-container *ngIf="(candidateHistory$ | async)?.length; else historyIsEmpty">
+    <ng-container *ngFor="let historyItem of (candidateHistory$ | async)">
+      <app-communication-comment
+        [historyItem]="historyItem"
+        (commentDeleted)="commentDelete($event)"
+        (commentWasUpdated)="updateComment($event)"
+      ></app-communication-comment>
+    </ng-container>
+  </ng-container>
+</div>
+
+<ng-template #historyIsEmpty>
+  <span>History is empty. Click on "add comment button" for creating a comment.</span>
+</ng-template>

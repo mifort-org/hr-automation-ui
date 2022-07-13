@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AttributeType, AttributeTypeDictionary } from '@interfaces/attributes';
+import { AttributeType, AttributeTypeDictionary } from '@src/app/models/attributes';
 import { FetchService } from './fetch.service';
 
 @Injectable({
@@ -12,13 +12,13 @@ export class AttributesService {
 
   public identifiedAttributes: AttributeType[] | null = null;
 
-  constructor(private _fetch: FetchService) {}
+  constructor(private fetch: FetchService) {}
 
-  getAllAttributes() {
-    return this._fetch.get<AttributeType[]>(`attributetypes?pageNumber=1&pageSize=100`).subscribe({
+  public getAllAttributes() {
+    return this.fetch.get<AttributeType[]>(`attributetypes?pageNumber=1&pageSize=100`).subscribe({
       next: (resolve) => {
         this.attributes = resolve;
-        this.identifiedAttributes = resolve.filter((el) => el.identifier === true);
+        this.identifiedAttributes = resolve.filter((el: AttributeType) => el.identifier);
         resolve.forEach((el) => {
           this.attributesDictionary[el.name] = { ...el };
         });

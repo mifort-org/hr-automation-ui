@@ -19,7 +19,6 @@ import { MergeModule } from './pages/merge-page/merge.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-
     CandidateModule,
     CandidateDetailModule,
     MergeModule,

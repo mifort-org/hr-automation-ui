@@ -31,21 +31,31 @@ export interface CandidateAttribute {
     identifier: boolean;
   };
 }
-
-export type CandidateCustomAttribute = { [key: string]: CandidateAttribute };
-
 export interface Candidate {
   id: string;
   lastContact: string;
   status: ECandidateStatus;
-
-  // TODO: Need to resolve this one any;
+  fullName: string;
   candidateUpdates: any;
   keywords: Keywords[];
   communicationHistory: CommunicationHistory[];
   candidateAttributes: CandidateAttribute[];
-  customAttribute?: CandidateCustomAttribute;
-
-  // TODO: Need to resolve this one any
+  candidateAttributesValues: CandidateAttributesValues[];
   mergeCandidates: any;
+}
+
+export type CandidateCustomAttributeDto = { [key: string]: CandidateAttribute };
+
+export interface CandidateAttributesValues {
+  name: string;
+  value: string;
+}
+
+export interface CandidateAttributesTypes {
+  id: number;
+  name: string;
+  basicType: string;
+  validation: string;
+  identifier: boolean;
+  value: string;
 }
