@@ -14,7 +14,7 @@
     </div>
 
     <div class="candidates-container">
-      <div *ngFor="let candidateId of candidateIds; let indexMatrix=index" class="desc-candidate-container">
+      <div *ngFor="let candidateId of candidateIds | async; let indexMatrix=index" class="desc-candidate-container">
         <label class="desc-candidate-title">
           <mat-checkbox 
             color="primary"
@@ -41,7 +41,7 @@
 
     <div class="desc-result-container">
       <div class="desc-result-title" [ngClass]="{'filled-result': checkFilledResult()}">Result</div>
-      <ng-container *ngFor="let result of finalResult">
+      <ng-container *ngFor="let result of finalResult | async">
         <div class="desc-result" [ngClass]="{'final-result': result.join(', ')}">
           {{result.join(', ')}}
       </div>

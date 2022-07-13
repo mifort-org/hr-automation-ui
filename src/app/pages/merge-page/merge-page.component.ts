@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MergeService } from '@src/app/services/merge.service';
 
@@ -8,28 +8,19 @@ import { MergeService } from '@src/app/services/merge.service';
   templateUrl: './merge-page.component.html',
   styleUrls: ['./merge-page.component.scss'],
 })
-export class MergePageComponent implements OnInit, OnDestroy {
+export class MergePageComponent implements OnInit {
   constructor(public mergeService: MergeService) {}
 
-  public candidateIds: Array<string> = [];
+  public candidateIds!: Observable<string[]>;
 
-  public finalResult: Array<Array<string>> = [];
+  public finalResult!: Observable<string[][]>;
 
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
   ngOnInit(): void {
-    this.mergeService.candidatesIdsSubject$.pipe(takeUntil(this.destroy$)).subscribe((items) => {
-      this.candidateIds = items;
-    });
-    this.mergeService.finalResultSubject$.pipe(takeUntil(this.destroy$)).subscribe((item) => {
-      this.finalResult = item;
-    });
+    this.candidateIds = this.mergeService.candidatesIdsSubject$;
+    this.finalResult = this.mergeService.finalResultSubject$;
     this.mergeService.parseCanditatesAttributes();
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next(true);
-    this.destroy$.complete();
   }
 
   isAllCandidateAttributesChoose(indexMatrix: number) {

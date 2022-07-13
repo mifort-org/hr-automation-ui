@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, forkJoin, take, mergeMap, Observable, catchError, of, map } from 'rxjs';
+import { BehaviorSubject, forkJoin, take, mergeMap, Observable } from 'rxjs';
 import { CandidateAttributesTypes } from '@interfaces/attributes';
 import { ENotificationMode } from '../constants/notification';
 import { PageState } from '../utils/pageState';
@@ -23,7 +23,7 @@ export class MergeService {
   public finalResultSubject$: BehaviorSubject<string[][]> = new BehaviorSubject<string[][]>([]);
 
   public candidatesIdsSubject$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([
-    'uliana_fomina',
+    'uliana_fomina1',
     'artem_skrebets',
     'vladimir_zelmanchuk',
   ]);
@@ -61,10 +61,9 @@ export class MergeService {
     return this.candidatesIdsSubject$.pipe(
       mergeMap((candidatesIds) =>
         forkJoin(
-          candidatesIds.map((id) =>
-            this.candidateService
-              .getCandidateAttributesById(id)
-              .pipe(catchError((error) => of(error.status)))
+          candidatesIds.map(
+            (id) => this.candidateService.getCandidateAttributesById(id)
+            // .pipe(catchError((error) => of(error.status)))
           )
         )
       )
@@ -77,13 +76,15 @@ export class MergeService {
     }
     this.fetchCanditatesAttributes().subscribe(
       (candidatesArrays: CandidateAttributesTypes[][]) => {
-        const indexNonArray = candidatesArrays.findIndex((array) => !Array.isArray(array));
-        if (indexNonArray !== -1) {
-          this.removeCandidateByIndex(indexNonArray);
-        } else {
-          this.fillTitleValues(candidatesArrays);
-          this.fillAttributesMatrix(candidatesArrays);
-        }
+        this.checkValidateAnswer(candidatesArrays);
+        // if (indexNonArray !== -1) {
+        //   this.removeCandidateByIndex(indexNonArray);
+        // } else {
+        // eslint-disable-next-line no-console
+        console.log(candidatesArrays);
+        this.fillTitleValues(candidatesArrays);
+        this.fillAttributesMatrix(candidatesArrays);
+        // }
         this.pageState.finishLoading();
       },
       (error) => {
@@ -104,6 +105,13 @@ export class MergeService {
     //     }, [])
     //   )
     // );
+  }
+
+  checkValidateAnswer(answerArray: any[]) {
+    const indexNonArray = answerArray.findIndex((array) => !Array.isArray(array));
+    if (indexNonArray !== -1) {
+      this.removeCandidateByIndex(indexNonArray);
+    }
   }
 
   fillTitleValues(candidates: CandidateAttributesTypes[][]): void {
@@ -148,9 +156,11 @@ export class MergeService {
   }
 
   isAllCandidateAttributesChoose(indexCandidateMatrix: number): boolean {
-    return this.attributesMatrix[indexCandidateMatrix].every(
-      (attr, index) => attr === this.finalAttributesMatrix[indexCandidateMatrix][index]
-    );
+    return !this.attributesMatrix.length
+      ? false
+      : this.attributesMatrix[indexCandidateMatrix].every(
+          (attr, index) => attr === this.finalAttributesMatrix[indexCandidateMatrix][index]
+        );
   }
 
   calculateResult(): void {
