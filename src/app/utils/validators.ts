@@ -1,5 +1,5 @@
 import { FormGroup, ValidationErrors } from '@angular/forms';
-import { AttributeType } from '@interfaces/attributes';
+import { AttributeType } from '@src/app/models/attributes';
 import { TEXT_FIELD_ERRORS } from '@constants/strings';
 
 const EMPTY_VALUES = ['', undefined, null];

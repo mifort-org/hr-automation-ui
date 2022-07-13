@@ -9,14 +9,14 @@ const NOTIFICATIONS_DURATION = {
   providedIn: 'root',
 })
 export class NotificationService {
-  constructor(private _snackBar: MatSnackBar) {}
+  constructor(private snackBar: MatSnackBar) {}
 
-  show(
+  public show(
     message: string,
     mode?: ENotificationMode,
     duration: number = NOTIFICATIONS_DURATION.STANDART
   ) {
-    this._snackBar.open(message, '', {
+    this.snackBar.open(message, '', {
       verticalPosition: 'top',
       politeness: 'assertive',
       duration,

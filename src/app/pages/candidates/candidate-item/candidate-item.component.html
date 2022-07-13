@@ -7,7 +7,7 @@
         matBadgeSize="small"
         [matBadgeColor]="candidate?.status | status"
         class="hide-text"
-        >{{ candidate?.customAttribute | fullname | titlecase }}</span
+        >{{ candidate?.fullName | titlecase }}</span
       >
       <span class="mat-body-2 text-grey">{{ candidate?.lastContact | date }}</span>
     </div>

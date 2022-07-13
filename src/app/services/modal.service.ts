@@ -16,15 +16,17 @@ const MODAL_SIZE = {
 export class ModalService {
   constructor(public dialog: MatDialog) {}
 
-  open(
+  public open(
     modalComponent: ComponentType<any>,
     size: EModalSizes,
     data?: any,
-    afterClosedCallback?: (result: any) => void
+    afterClosedCallback?: (result: any) => void,
+    id?: string
   ) {
     const dialogRef = this.dialog.open(modalComponent, {
       width: MODAL_SIZE[size],
       data,
+      id,
     });
 
     if (afterClosedCallback) {

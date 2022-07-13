@@ -10,7 +10,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-
 import AppRoutingModule from '@src/app/app-routing.module';
 
 import { NavbarComponent } from './navbar/navbar.component';

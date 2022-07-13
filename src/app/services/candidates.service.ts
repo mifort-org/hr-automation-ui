@@ -1,63 +1,77 @@
 import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
-import { CandidatesFilterData, CandidateCustomAttribute, Candidate } from '@interfaces/candidates';
+import { catchError, map, Observable } from 'rxjs';
+import {
+  CandidateCustomAttributeDto,
+  CandidatesFilterData,
+  Keywords,
+  CommunicationHistory,
+  CandidateAttribute,
+  Candidate,
+} from '@src/app/models/candidates';
+import { ECandidateStatus } from '@constants/candidates';
+import { defaultErrorhandler, getFullName } from '@utils/functions';
+import { NotificationService } from '@services/notification.service';
 import { FetchService } from './fetch.service';
 
 interface IParam {
   [param: string]: any;
 }
 
-const createCustomAttribute = (candidate: Candidate) => {
-  const attributes: CandidateCustomAttribute = {};
-  candidate?.candidateAttributes?.forEach((attr) => {
-    attributes[attr.attributeTypes.name] = {
-      ...attr,
-      ...attr?.attributeTypes,
-    };
-  });
-
-  return {
-    ...candidate,
-    customAttribute: attributes,
-  };
-};
+interface CandidateDto {
+  id: string;
+  lastContact: string;
+  status: ECandidateStatus;
+  candidateUpdates: any;
+  keywords: Keywords[];
+  communicationHistory: CommunicationHistory[];
+  candidateAttributes: CandidateAttribute[];
+  customAttribute?: CandidateCustomAttributeDto;
+  mergeCandidates: any;
+}
 
 @Injectable({
   providedIn: 'root',
 })
 export class CandidatesService {
-  currentCandidate!: Candidate;
+  constructor(private fetch: FetchService, private notification: NotificationService) {}
 
-  constructor(private _fetch: FetchService) {}
-
-  getCandidates(filterData: CandidatesFilterData): any {
+  public getCandidates(filterData: CandidatesFilterData): Observable<Candidate[]> {
     const param = new HttpParams({ fromObject: filterData as IParam }).toString();
 
-    return this._fetch.get<Candidate[]>(`candidates?${param}`).pipe(
-      map((data: Candidate[]) => {
-        const modifiedData = data?.map((candidate) => createCustomAttribute(candidate));
-
-        return modifiedData;
-      })
+    return this.fetch.get<CandidateDto[]>(`candidates?${param}`).pipe(
+      map((data: CandidateDto[]) => data?.map(this.mapCandidateDto.bind(this))),
+      catchError((error) => defaultErrorhandler(this.notification, error))
     );
   }
 
-  getCandidateById(id: string): any {
-    return this._fetch.get<Candidate>(`candidates/${id}`).pipe(
-      map((data) => {
-        const modifiedData = createCustomAttribute(data);
-        this.currentCandidate = modifiedData;
-        return modifiedData;
-      })
+  public getCandidateById(id: string): any {
+    return this.fetch.get<CandidateDto>(`candidates/${id}`).pipe(
+      map(this.mapCandidateDto.bind(this)),
+      catchError((error) => defaultErrorhandler(this.notification, error))
     );
   }
 
-  updateCandidateAttributes(id: string, data: any) {
-    return this._fetch.post(`candidates/${id}/attributes`, data);
+  public updateCandidateAttributes(id: string, data: any) {
+    return this.fetch
+      .post(`candidates/${id}/attributes`, data)
+      .pipe(catchError((error) => defaultErrorhandler(this.notification, error)));
   }
 
-  createNewCandidate(data: any) {
-    return this._fetch.post(`candidates`, data);
+  public createNewCandidate(data: any) {
+    return this.fetch
+      .post(`candidates`, data)
+      .pipe(catchError((error) => defaultErrorhandler(this.notification, error)));
+  }
+
+  public mapCandidateDto(candidate: CandidateDto): Candidate {
+    return {
+      ...candidate,
+      fullName: getFullName(candidate.candidateAttributes),
+      candidateAttributesValues: candidate.candidateAttributes.map((a) => ({
+        name: a.attributeTypes.name || '',
+        value: a.value || '',
+      })),
+    };
   }
 }

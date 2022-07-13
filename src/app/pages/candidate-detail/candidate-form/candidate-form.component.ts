@@ -1,11 +1,10 @@
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
-import { AttributeType } from '@interfaces/attributes';
+import { AttributeType } from '@src/app/models/attributes';
 import { AttributesService } from '@services/attributes.service';
-import { CANDIDATE_STATUSES } from '@constants/candidates';
-import { Candidate } from '@interfaces/candidates';
 import { VALIDATORS } from '@utils/validators';
+import { Candidate } from '@src/app/models/candidates';
 
 @Component({
   selector: 'app-candidate-form',
@@ -16,23 +15,24 @@ export class CandidateFormComponent implements OnInit {
 
   @Output() formOnChange = new EventEmitter();
 
-  statusesOptions = CANDIDATE_STATUSES;
+  public form!: FormGroup;
 
-  form!: FormGroup;
+  public formErrors: any = {};
 
-  formErrors: any = {};
+  public attributesData!: AttributeType[];
 
-  attributesData!: AttributeType[];
-
-  constructor(private _attributeService: AttributesService) {}
+  constructor(private attributeService: AttributesService) {}
 
   ngOnInit(): void {
-    if (this._attributeService.attributes) {
-      this.attributesData = this._attributeService.attributes;
+    if (this.attributeService.attributes) {
+      this.attributesData = this.attributeService.attributes;
 
       const group: any = {};
-      this._attributeService.attributes.forEach((el) => {
-        group[el.name] = new FormControl(this.candidate?.customAttribute?.[el.name]?.value || '');
+      this.attributeService.attributes.forEach((el) => {
+        const attributeName = this.candidate?.candidateAttributes.find(
+          (attr) => attr.attributeTypes.name === el.name
+        );
+        group[el.name] = new FormControl(attributeName?.value || '');
       });
 
       this.form = new FormGroup(group);
@@ -43,16 +43,16 @@ export class CandidateFormComponent implements OnInit {
     }
   }
 
-  onValueChanges(value: any) {
+  public onValueChanges(value: any): void {
     Object.entries(this.form?.controls).forEach(([key]) => {
       const currentControl = this.form?.controls[key];
       currentControl.setErrors(null);
 
       const result = VALIDATORS.identifiedOfField(
-        this._attributeService.identifiedAttributes || [],
+        this.attributeService.identifiedAttributes || [],
         this.form
       );
-      if (this._attributeService?.identifiedAttributes?.find((el) => el.name === key)) {
+      if (this.attributeService?.identifiedAttributes?.find((el) => el.name === key)) {
         currentControl.setErrors(result);
         this.formErrors = {
           ...this.formErrors,

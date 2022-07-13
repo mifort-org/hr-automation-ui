@@ -1,17 +1,19 @@
-.candidate-detail-container{
-    padding: 20px 100px;
+@import 'src/styles/colors';
+
+.candidate-detail-container {
+  padding: 16px 16px 0;
 }
 
-.image-frame{
-    padding: 0;
-    height: 200px;
-    overflow: hidden;
-    filter: brightness(20%);;
-    cursor: pointer;
-    transition: 1s;
+.image-frame {
+  padding: 0;
+  height: 200px;
+  overflow: hidden;
+  filter: brightness(20%);
+  cursor: pointer;
+  transition: 1s;
 
-    &:hover{
-        filter: none;
-        height: 300px;
-    }
+  &:hover {
+    filter: none;
+    height: 300px;
+  }
 }

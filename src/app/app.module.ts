@@ -18,7 +18,6 @@ import AppComponent from './app.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-
     CandidateModule,
     CandidateDetailModule,
     SharedModule,
