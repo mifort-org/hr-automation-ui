@@ -16,7 +16,7 @@ export class MergePageComponent implements OnInit {
 
   public finalResult!: Observable<string[][]>;
 
-  public attributesMatrix2: string[][] = [];
+  public attributesMatrix: string[][] = [];
 
   public attributesTitles2$!: Observable<string[]>;
 
@@ -25,38 +25,38 @@ export class MergePageComponent implements OnInit {
   ngOnInit(): void {
     this.pageState.startLoading();
     this.candidateIds = this.mergeService.candidatesIdsSubject$;
-    this.finalResult = this.mergeService.finalResultSubject2$;
-    this.attributesTitles2$ = this.mergeService.getAttributesTitles2();
-    this.mergeService.getAttributesMatrix2().subscribe((item) => {
-      this.attributesMatrix2 = item;
+    this.finalResult = this.mergeService.finalResultSubject$;
+    this.attributesTitles2$ = this.mergeService.attributesTitles2$;
+    this.mergeService.attributesMatrix$.subscribe((item) => {
+      this.attributesMatrix = item;
       this.pageState.finishLoading();
     });
   }
 
-  isAllCandidateAttributesChoose(indexMatrix: number) {
-    return this.mergeService.isAllCandidateAttributesChoose(indexMatrix);
-  }
-
-  isCandidates() {
+  isCandidates(): boolean {
     return this.mergeService.isCandidates();
   }
 
-  removeCandidateById(candidateId: string) {
+  removeCandidateById(candidateId: string): void {
     return this.mergeService.removeCandidateById(candidateId);
   }
 
-  chooseAllCandidateAttributes(event: MatCheckboxChange) {
+  chooseAllCandidateAttributes(event: MatCheckboxChange): void {
     const indexCandidate = +event.source.value;
     const { checked } = event;
     this.mergeService.chooseAllCandidateAttributes(indexCandidate, checked);
   }
 
-  changeAttributes(event: { candidatesMatrixIndexes: Array<number>; candidateAttr: string }) {
+  changeAttributes(event: { candidatesMatrixIndexes: Array<number>; candidateAttr: string }): void {
     const { candidatesMatrixIndexes, candidateAttr } = event;
     return this.mergeService.changeAttributes(candidatesMatrixIndexes, candidateAttr);
   }
 
-  checkFilledResult() {
+  checkFilledResult(): boolean {
     return this.mergeService.checkFilledResult();
+  }
+
+  attributeIsChecked(indexMatrix: number, indexCandidate: number): boolean {
+    return this.mergeService.attributeIsChecked(indexMatrix, indexCandidate);
   }
 }

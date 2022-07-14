@@ -20,17 +20,17 @@
             color="primary"
             aria-label="desc-candidate-title" 
             [value]="indexMatrix.toString()"
-            [checked]="isAllCandidateAttributesChoose(indexMatrix)"
             (change)="chooseAllCandidateAttributes($event)"
             >
             {{candidateId}}
           </mat-checkbox>
           <mat-icon color="warn" (click)="removeCandidateById(candidateId)" class="remove-button">delete_forever</mat-icon>
         </label>
-       <ng-container *ngFor="let attribute of attributesMatrix2[indexMatrix]; let indexCandidate=index">
+       <ng-container *ngFor="let attribute of attributesMatrix[indexMatrix]; let indexCandidate=index">
           <app-candidate-merge 
-            [candidateAttr] = "attribute.toString()" 
+            [candidateAttr] = "attribute" 
             [candidatesMatrixIndexes] = "[indexMatrix, indexCandidate]"
+            [checked]="attributeIsChecked(indexMatrix, indexCandidate)"
             (changeAttributes)="changeAttributes($event)"
             class="desc-candidate">
           </app-candidate-merge>
