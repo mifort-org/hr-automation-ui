@@ -19,6 +19,7 @@
           <mat-checkbox 
             color="primary"
             aria-label="desc-candidate-title" 
+            [checked]="false"
             [value]="indexMatrix.toString()"
             (change)="chooseAllCandidateAttributes($event)"
             >

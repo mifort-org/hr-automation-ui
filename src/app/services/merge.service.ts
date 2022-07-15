@@ -96,58 +96,6 @@ export class MergeService {
     );
   }
 
-  // getAttributesTitles2() {
-  //   // this.attributesTitles2$ = this.fetchCanditatesAttributes().pipe(
-  //   //   map((attributesArrays) =>
-  //   //     attributesArrays.reduce((acc: string[], attributesArray: CandidateAttributesTypes[]) => {
-  //   //       const resultArray: string[] = [];
-  //   //       attributesArray.forEach((attribute: CandidateAttributesTypes) => {
-  //   //         if (!acc.includes(attribute.name)) {
-  //   //           resultArray.push(attribute.name);
-  //   //         }
-  //   //       });
-  //   //       return [...acc, ...resultArray];
-  //   //     }, [])
-  //   //   )
-  //   // );
-  //   this.getResultSubjectFromTitles();
-  //   return this.attributesTitles2$;
-  // }
-
-  // getResultSubjectFromTitles() {
-  //   this.attributesTitles2$
-  //     .pipe(map((titles: string[]) => titles.map(() => [])))
-  //     .subscribe(this.finalResultSubject$);
-  // }
-
-  // getAttributesMatrix2() {
-  //   this.attributesMatrix$ = this.getAttributesTitles2().pipe(
-  //     withLatestFrom(this.fetchCanditatesAttributes()),
-  //     map(([titles, candidateAttributes]) => {
-  //       // eslint-disable-next-line no-console
-  //       console.log('getAttributesMatrix2()');
-  //       return candidateAttributes.map((candidateArr) =>
-  //         titles.map((item) => {
-  //           const candidateAttribute = candidateArr.find((attr) => attr.name === item);
-  //           return candidateAttribute ? candidateAttribute.value : '';
-  //         })
-  //       );
-  //     })
-  //   );
-  //   this.fillFinalAttributesMatrix();
-  //   return this.attributesMatrix$;
-  // }
-
-  // fillFinalAttributesMatrix() {
-  //   this.attributesMatrix$
-  //     .pipe(map((matrix) => matrix.map((item) => item.map(() => ''))))
-  //     .subscribe((matrix) => {
-  //       // eslint-disable-next-line no-console
-  //       console.log('fillFinalAttributesMatrix()');
-  //       this.finalAttributesMatrix = matrix;
-  //     });
-  // }
-
   attributeIsChecked(indexMatrix: number, indexCandidate: number): boolean {
     return !!this.finalAttributesMatrix[indexMatrix][indexCandidate];
   }
@@ -164,7 +112,7 @@ export class MergeService {
 
   chooseAllCandidateAttributes(indexCandidate: number, checked: boolean): void {
     this.attributesMatrix$.pipe(take(1)).subscribe((attributesMatrix) => {
-      this.finalAttributesMatrix[indexCandidate].forEach((attr, index) => {
+      this.finalAttributesMatrix[indexCandidate].forEach((_attr, index) => {
         this.finalAttributesMatrix[indexCandidate][index] = checked
           ? attributesMatrix[indexCandidate][index]
           : '';
