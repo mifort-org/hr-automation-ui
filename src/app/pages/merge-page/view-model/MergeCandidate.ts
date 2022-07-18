@@ -10,5 +10,4 @@ export interface MergeCandidate {
   attributesMap: Map<string, MergeCandidateAttribute[]>;
 
   selected: boolean;
-  show: boolean;
 }

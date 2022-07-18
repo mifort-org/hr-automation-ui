@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 // eslint-disable-next-line max-classes-per-file
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import * as _ from 'lodash';
 import { MergeService } from '@pages/merge-page/merge.service';
@@ -19,7 +19,6 @@ class MergeCandidates {
 
     this.candidates = candidates;
     this.allAttributeTypes = _(candidates)
-      .filter((candidate: MergeCandidate) => candidate.show)
       .flatMap((c) => c.attributes.map((a) => a.attributeTypes))
       .uniqBy('id')
       .reduce(
@@ -59,7 +58,7 @@ class MergeCandidates {
   templateUrl: './merge-page.component.html',
   styleUrls: ['./merge-page.component.scss'],
 })
-export class MergePageComponent implements OnInit, OnChanges {
+export class MergePageComponent implements OnInit {
   public pageState = new PageState();
 
   public candidateIds: string[] = ['uliana_fomina', 'artem_skrebets', 'vladimir_zelmanchuk'];
@@ -98,6 +97,7 @@ export class MergePageComponent implements OnInit, OnChanges {
   }
 
   finalResult(): MergeCandidate {
+    console.log('MergeCandidates.finalResult');
     return this.candidates.reduce((res, candidate) => {
       res.id = 'Results';
       res.attributes = (res.attributes || []).concat(
@@ -113,9 +113,5 @@ export class MergePageComponent implements OnInit, OnChanges {
 
   deleteCandidate(candidate: MergeCandidate) {
     this.mergeService.updateCandidates(this.candidateIds.filter((id) => id !== candidate.id));
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log('ngOnChanges', changes);
   }
 }

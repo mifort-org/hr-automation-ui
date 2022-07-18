@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import { Injectable } from '@angular/core';
-import { forkJoin, mergeMap, Observable, Subject, map, tap, distinctUntilChanged } from 'rxjs';
+import { forkJoin, mergeMap, Observable, Subject, map, distinctUntilChanged } from 'rxjs';
 import { ENotificationMode } from '@constants/notification';
 import { CandidatesService } from '@services/candidates.service';
 import { NotificationService } from '@services/notification.service';
@@ -8,46 +8,13 @@ import { MergeCandidate } from '@pages/merge-page/view-model/MergeCandidate';
 import { Candidate, CandidateAttribute } from '@src/app/models/candidates';
 import { MergeCandidateAttribute } from '@pages/merge-page/view-model/MergeCandidateAttribute';
 
-function attributeToMergeModel(
-  candidateId: string,
-  attr: CandidateAttribute
-): MergeCandidateAttribute {
-  return {
-    ...attr,
-    candidateId,
-    selected: false,
-  };
-}
-
-function candidateToMergeModel(candidate: Candidate): MergeCandidate {
-  const attributes = candidate.candidateAttributes.map((attr) =>
-    attributeToMergeModel(candidate.id, attr)
-  );
-  return {
-    ...candidate,
-    selected: false,
-    show: true,
-    attributes,
-    attributesMap: attributes.reduce((resMap, attr) => {
-      const attributeName = attr.attributeTypes.name;
-      let attrValues = resMap.get(attributeName);
-      if (!attrValues) {
-        attrValues = [];
-        resMap.set(attributeName, attrValues);
-      }
-      attrValues.push(attr);
-      return resMap;
-    }, new Map<string, MergeCandidateAttribute[]>()),
-  };
-}
-
 @Injectable({
   providedIn: 'root',
 })
 export class MergeService {
-  private readonly candidates$: Observable<MergeCandidate[]>;
-
   private readonly candidatesIds$: Subject<string[]> = new Subject<string[]>();
+
+  private readonly candidates$: Observable<MergeCandidate[]>;
 
   constructor(
     private candidateService: CandidatesService,
@@ -55,17 +22,11 @@ export class MergeService {
   ) {
     console.log('MergeService.constructor');
     this.candidates$ = this.candidatesIds$.pipe(
-      tap((ids) => {
-        console.log('candidatesIds$ - tap -1-', ids);
-      }),
       distinctUntilChanged(),
       mergeMap((candidatesIds) =>
         forkJoin(candidatesIds.map((id) => this.candidateService.getCandidateById(id)))
       ),
-      tap((ids) => {
-        console.log('candidatesIds$ - tap -2-', ids);
-      }),
-      map((candidates) => candidates.map(candidateToMergeModel))
+      map((candidates) => candidates.map((c) => this.candidateToMergeModel(c)))
     );
   }
 
@@ -80,5 +41,35 @@ export class MergeService {
 
   getCandidates(): Observable<MergeCandidate[]> {
     return this.candidates$;
+  }
+
+  candidateToMergeModel(candidate: Candidate): MergeCandidate {
+    const attributes = candidate.candidateAttributes.map((attr) =>
+      this.attributeToMergeModel(candidate.id, attr)
+    );
+    return {
+      ...candidate,
+      selected: false,
+      attributes,
+      attributesMap: attributes.reduce((resMap, attr) => {
+        // TODO groupBy
+        const attributeName = attr.attributeTypes.name;
+        let attrValues = resMap.get(attributeName);
+        if (!attrValues) {
+          attrValues = [];
+          resMap.set(attributeName, attrValues);
+        }
+        attrValues.push(attr);
+        return resMap;
+      }, new Map<string, MergeCandidateAttribute[]>()),
+    };
+  }
+
+  attributeToMergeModel(candidateId: string, attr: CandidateAttribute): MergeCandidateAttribute {
+    return {
+      ...attr,
+      candidateId,
+      selected: false,
+    };
   }
 }

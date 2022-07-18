@@ -13,7 +13,7 @@ import { MergeCandidateAttribute } from '@pages/merge-page/view-model/MergeCandi
 export class MergeCandidateComponent {
   constructor(public mergeService: MergeService) {}
 
-  @Input() editable: boolean = false;
+  @Input() editable: boolean = true;
 
   @Input() candidate!: MergeCandidate;
 
