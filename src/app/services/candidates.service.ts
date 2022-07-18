@@ -8,7 +8,6 @@ import {
   CommunicationHistory,
   CandidateAttribute,
   Candidate,
-  CandidateAttributesTypes,
 } from '@src/app/models/candidates';
 import { ECandidateStatus } from '@constants/candidates';
 import { defaultErrorhandler, getFullName } from '@utils/functions';
@@ -17,15 +16,6 @@ import { FetchService } from './fetch.service';
 
 interface IParam {
   [param: string]: any;
-}
-
-interface CandidateAttributesTypesDto {
-  id: number;
-  name: string;
-  basicType: string;
-  validation: string;
-  identifier: boolean;
-  value: string;
 }
 
 interface CandidateDto {
@@ -55,15 +45,13 @@ export class CandidatesService {
     );
   }
 
-  public getCandidateById(id: string): any {
+  public getCandidateById(id: string): Observable<Candidate> {
+    // eslint-disable-next-line no-console
+    console.log('CandidatesService.getCandidateById', id);
     return this.fetch.get<CandidateDto>(`candidates/${id}`).pipe(
-      map(this.mapCandidateDto.bind(this)),
+      map((c) => this.mapCandidateDto(c)),
       catchError((error) => defaultErrorhandler(this.notification, error))
     );
-  }
-
-  getCandidateAttributesById(id: string): Observable<Array<CandidateAttributesTypes>> {
-    return this.fetch.get<Array<CandidateAttributesTypesDto>>(`candidates/${id}/attributes`);
   }
 
   public updateCandidateAttributes(id: string, data: any) {

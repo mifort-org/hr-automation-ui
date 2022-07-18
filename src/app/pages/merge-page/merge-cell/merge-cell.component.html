@@ -1,0 +1,10 @@
+<label class="desc-candidate-label" *ngIf='value'>
+  <input
+    type="checkbox"
+    class="desc-candidate-checkbox-hidden"
+    [(ngModel)]="value[0].selected" [value]="value[0].selected"
+    [disabled]="!value"
+    (change)="onCheckboxChange()">
+  <div class="desc-candidate-data">{{value && value[0].value}}</div>
+  <div class="desc-candidate-checked">&#10004;</div>
+</label>

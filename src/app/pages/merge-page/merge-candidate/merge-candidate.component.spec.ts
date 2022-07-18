@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CandidateMergeComponent } from './candidate-merge.component';
+import { MergeCandidateComponent } from './merge-candidate.component';
 
 describe('CandidateMergeComponent', () => {
-  let component: CandidateMergeComponent;
-  let fixture: ComponentFixture<CandidateMergeComponent>;
+  let component: MergeCandidateComponent;
+  let fixture: ComponentFixture<MergeCandidateComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CandidateMergeComponent],
+      declarations: [MergeCandidateComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CandidateMergeComponent);
+    fixture = TestBed.createComponent(MergeCandidateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

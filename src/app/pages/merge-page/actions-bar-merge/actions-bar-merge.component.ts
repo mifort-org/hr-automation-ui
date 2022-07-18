@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MergeService } from '@src/app/services/merge.service';
+import { MergeService } from '@pages/merge-page/merge.service';
 
 @Component({
   selector: 'app-actions-bar-merge',

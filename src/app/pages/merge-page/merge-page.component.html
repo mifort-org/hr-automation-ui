@@ -5,52 +5,34 @@
   *ngIf="pageState.loading"
 ></mat-progress-bar>
 <ng-container *ngIf="!pageState.loading">
-  <div *ngIf="isCandidates();else noCandidatesId" class="candidate-merge-container">
+  <div *ngIf="candidatesMatrixNotEmpty; else noCandidatesId" class="candidate-merge-container">
     <div class="desc-titles-container">
       <div class="desc-title"></div>
-      <ng-container *ngFor="let title of attributesTitles2$ | async">
-        <div class="desc-title">{{title}}</div>
+      <ng-container *ngFor="let attributeType of attributeTypes">
+        <div class="desc-title">{{attributeType.name}}</div>
       </ng-container>
     </div>
 
     <div class="candidates-container">
-      <div *ngFor="let candidateId of candidateIds | async; let indexMatrix=index" class="desc-candidate-container">
-        <label class="desc-candidate-title">
-          <mat-checkbox 
-            color="primary"
-            aria-label="desc-candidate-title" 
-            [checked]="false"
-            [value]="indexMatrix.toString()"
-            (change)="chooseAllCandidateAttributes($event)"
-            >
-            {{candidateId}}
-          </mat-checkbox>
-          <mat-icon color="warn" (click)="removeCandidateById(candidateId)" class="remove-button">delete_forever</mat-icon>
-        </label>
-       <ng-container *ngFor="let attribute of attributesMatrix[indexMatrix]; let indexCandidate=index">
-          <app-candidate-merge 
-            [candidateAttr] = "attribute" 
-            [candidatesMatrixIndexes] = "[indexMatrix, indexCandidate]"
-            [checked]="attributeIsChecked(indexMatrix, indexCandidate)"
-            (changeAttributes)="changeAttributes($event)"
-            class="desc-candidate">
-          </app-candidate-merge>
-        </ng-container>          
-      </div>        
+      <div *ngFor="let candidate of candidates" class="desc-candidate-container">
+        <app-merge-candidate
+          [candidate]='candidate'
+          [attributeTypes]='attributeTypes'
+          (delete)='deleteCandidate(candidate)'
+        ></app-merge-candidate>
+      </div>
     </div>
 
     <div class="desc-result-container">
-      <div class="desc-result-title" [ngClass]="{'filled-result': checkFilledResult()}">Result</div>
-      <ng-container *ngFor="let result of finalResult | async">
-        <div class="desc-result" [ngClass]="{'final-result': result.join(', ')}">
-          {{result.join(', ')}}
-      </div>
-      </ng-container>
+      <app-merge-candidate
+        [candidate]='finalResult()'
+        [attributeTypes]='attributeTypes'
+      ></app-merge-candidate>
     </div>
   </div>
 
 </ng-container>
 
-<ng-template #noCandidatesId>  
-  <p class="nothing-merge">You have not selected candidates for the merge. Please add more candidates.</p>  
-</ng-template>  
+<ng-template #noCandidatesId>
+  <p class="nothing-merge">You have not selected candidates for the merge. Please add more candidates.</p>
+</ng-template>
