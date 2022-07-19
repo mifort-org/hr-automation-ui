@@ -13,6 +13,8 @@ import { MergeCandidateAttribute } from '@pages/merge-page/view-model/MergeCandi
 export class MergeCandidateComponent {
   constructor(public mergeService: MergeService) {}
 
+  checked = false;
+
   @Input() editable: boolean = true;
 
   @Input() candidate!: MergeCandidate;
@@ -24,11 +26,7 @@ export class MergeCandidateComponent {
   @Output() delete = new EventEmitter<void>();
 
   selectCandidate(value: MatCheckboxChange) {
-    this.candidate.selected = value.checked;
-    this.changeAttributeSelections(
-      this.candidate.attributes.filter((a) => a.selected !== value.checked),
-      value.checked
-    );
+    this.changeAttributeSelections(this.candidate.attributes, value.checked);
   }
 
   changeAttributeSelections(attrs?: MergeCandidateAttribute[], selected?: boolean) {
@@ -40,6 +38,8 @@ export class MergeCandidateComponent {
       attr.selected = selected === undefined ? attr.selected : selected;
       this.attributeSelectionChanged.emit(attr);
     });
+
+    this.checked = this.candidate.attributes.every((attr) => attr.selected);
   }
 
   deleteClick() {

@@ -3,57 +3,33 @@ $dark-back-color: rgb(10, 10, 10);
 $light-back-color: rgb(121, 121, 121);
 $error-color: rgb(121, 1, 1);
 $box-inner-shadow: inset 0 0 10px rgba(255, 255, 255, 50%);
+$height: 12vh;
 
-.desc-candidate-label {
+* {
+  box-sizing: border-box;
+}
+
+.desc-candidate-attrs {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
+  overflow-y: auto;
+  
+  .desc-candidate-label {
+    position: relative;
 
-  .desc-candidate-data {
-    width: 100%;
-    height: 100%;
-    border-radius: 5px;
-    background-color: $dark-back-color;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-  }
-
-  .desc-candidate-checkbox-hidden:hover:enabled + .desc-candidate-data {
-    box-shadow: $box-inner-shadow;
-  }
-
-  .desc-candidate-checkbox-hidden:hover:checked + .desc-candidate-data {
-    border: 2px solid $primary-color;
-  }
-
-  .desc-candidate-checked {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    visibility: hidden;
-  }
-
-  .desc-candidate-checkbox-hidden {
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-    box-sizing: border-box;
-
-    &:checked ~ .desc-candidate-checked {
-      visibility: visible;
-      color: $primary-color;
-    }
-
-    &:checked ~ .desc-candidate-data {
-      transition: 0.05s linear;
-      border: 2px solid $primary-color;
-    }
+    .desc-candidate-data {
+      border-radius: 5px;
+      background-color: $dark-back-color;
+      display: flex;
+      padding: 10px;
+      align-items: center;
+      box-sizing: border-box;
+    } 
   }
 }
+
+.final {
+  border: 1px solid $light-back-color;
+  border-radius: 5px;
+} 

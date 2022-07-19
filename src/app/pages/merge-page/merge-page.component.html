@@ -9,18 +9,31 @@
     <div class="desc-titles-container">
       <div class="desc-title"></div>
       <ng-container *ngFor="let attributeType of attributeTypes">
-        <div class="desc-title">{{attributeType.name}}</div>
+        <div class="desc-title">
+          <ng-container [ngSwitch]="attributeType.name">
+            <mat-icon [inline]="true" *ngSwitchCase="'email'">email</mat-icon>
+            <mat-icon [inline]="true" *ngSwitchCase="'facebookid'">facebook</mat-icon>
+            <mat-icon [inline]="true" *ngSwitchCase="'phone'">phone</mat-icon>
+            <mat-icon [inline]="true" *ngSwitchCase="'twitter'">chat</mat-icon>
+            <mat-icon [inline]="true" *ngSwitchCase="'firstname'">person</mat-icon>
+            <mat-icon [inline]="true" *ngSwitchCase="'lastname'">person</mat-icon>
+            <mat-icon [inline]="true" *ngSwitchDefault>info</mat-icon>
+          </ng-container>
+          <span>&nbsp;</span>        
+          {{attributeType.name}}
+        </div>
       </ng-container>
-    </div>
+  </div>
 
     <div class="candidates-container">
-      <div *ngFor="let candidate of candidates" class="desc-candidate-container">
+      <ng-container *ngFor="let candidate of candidates">
         <app-merge-candidate
+          class="desc-candidate-container"
           [candidate]='candidate'
           [attributeTypes]='attributeTypes'
           (delete)='deleteCandidate(candidate)'
         ></app-merge-candidate>
-      </div>
+      </ng-container>
     </div>
 
     <div class="desc-result-container">

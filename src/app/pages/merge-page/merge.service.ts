@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import { Injectable } from '@angular/core';
-import { forkJoin, mergeMap, Observable, Subject, map, distinctUntilChanged } from 'rxjs';
+import { forkJoin, mergeMap, Observable, map, distinctUntilChanged, BehaviorSubject } from 'rxjs';
+import * as _ from 'lodash';
 import { ENotificationMode } from '@constants/notification';
 import { CandidatesService } from '@services/candidates.service';
 import { NotificationService } from '@services/notification.service';
@@ -12,7 +13,12 @@ import { MergeCandidateAttribute } from '@pages/merge-page/view-model/MergeCandi
   providedIn: 'root',
 })
 export class MergeService {
-  private readonly candidatesIds$: Subject<string[]> = new Subject<string[]>();
+  public candidatesIds$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([
+    'uliana_fomina',
+    'artem_skrebets',
+    'artem_skrebets',
+    'vladimir_zelmanchuk',
+  ]);
 
   private readonly candidates$: Observable<MergeCandidate[]>;
 
@@ -20,7 +26,6 @@ export class MergeService {
     private candidateService: CandidatesService,
     private notification: NotificationService
   ) {
-    console.log('MergeService.constructor');
     this.candidates$ = this.candidatesIds$.pipe(
       distinctUntilChanged(),
       mergeMap((candidatesIds) =>
@@ -30,9 +35,8 @@ export class MergeService {
     );
   }
 
-  updateCandidates(ids: string[]) {
-    console.log('MergeService.updateCandidates', ids);
-    this.candidatesIds$.next(ids);
+  deleteCandidate(candidate: MergeCandidate) {
+    this.candidatesIds$.next(this.candidatesIds$.getValue().filter((id) => id !== candidate.id));
   }
 
   mergeCandidates(): void {
@@ -49,19 +53,10 @@ export class MergeService {
     );
     return {
       ...candidate,
-      selected: false,
       attributes,
-      attributesMap: attributes.reduce((resMap, attr) => {
-        // TODO groupBy
-        const attributeName = attr.attributeTypes.name;
-        let attrValues = resMap.get(attributeName);
-        if (!attrValues) {
-          attrValues = [];
-          resMap.set(attributeName, attrValues);
-        }
-        attrValues.push(attr);
-        return resMap;
-      }, new Map<string, MergeCandidateAttribute[]>()),
+      attributesMap: new Map<string, MergeCandidateAttribute[]>(
+        Object.entries(_.groupBy(attributes, (attr) => attr.attributeTypes.name))
+      ),
     };
   }
 

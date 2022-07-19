@@ -1,8 +1,9 @@
 <label class="desc-candidate-title" *ngIf='editable'>
   <mat-checkbox
     color="primary"
+    class="desc-candidate-title-label"
     aria-label="desc-candidate-title"
-    [checked]="candidate.selected"
+    [checked]="checked"
     [value]="candidate.id"
     (change)="selectCandidate($event)"
   >
@@ -18,6 +19,7 @@
   <app-merge-cell
     [value]='candidate.attributesMap.get(type.name)'
     (valueChange)='changeAttributeSelections(candidate.attributesMap.get(type.name), $event)'
-    class="desc-candidate">
+    class="desc-candidate"
+    [editable]='editable'>
   </app-merge-cell>
 </ng-container>

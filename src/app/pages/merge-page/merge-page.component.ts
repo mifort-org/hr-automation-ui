@@ -15,8 +15,6 @@ class MergeCandidates {
   private readonly allAttributeTypes: CandidateAttributeType[];
 
   constructor(candidates: MergeCandidate[]) {
-    console.log('MergeCandidates.constructor', candidates);
-
     this.candidates = candidates;
     this.allAttributeTypes = _(candidates)
       .flatMap((c) => c.attributes.map((a) => a.attributeTypes))
@@ -38,10 +36,6 @@ class MergeCandidates {
   ) {
     // eslint-disable-next-line no-param-reassign
     attr.selected = selectValue;
-    if (candidate.selected && !selectValue) {
-      // eslint-disable-next-line no-param-reassign
-      candidate.selected = false;
-    }
   }
 
   isEmpty(): boolean {
@@ -61,8 +55,6 @@ class MergeCandidates {
 export class MergePageComponent implements OnInit {
   public pageState = new PageState();
 
-  public candidateIds: string[] = ['uliana_fomina', 'artem_skrebets', 'vladimir_zelmanchuk'];
-
   public candidatesMatrix!: Observable<MergeCandidates>;
 
   public attributeTypes!: CandidateAttributeType[];
@@ -72,19 +64,15 @@ export class MergePageComponent implements OnInit {
   public candidatesMatrixNotEmpty!: boolean;
 
   constructor(public mergeService: MergeService) {
-    console.log('MergePageComponent.constructor');
     this.candidatesMatrix = this.mergeService
       .getCandidates()
       .pipe(map((candidates) => new MergeCandidates(candidates)));
   }
 
   ngOnInit(): void {
-    console.log('MergePageComponent.ngOnInit -1- ');
     this.pageState.startLoading();
     this.candidatesMatrix.subscribe((matrix) => {
-      console.log('MergePageComponent.ngOnInit -2- ', matrix);
       if (matrix) {
-        console.log('MergePageComponent.ngOnInit -3- ', matrix);
         this.pageState.finishLoading();
       }
 
@@ -92,26 +80,26 @@ export class MergePageComponent implements OnInit {
       this.candidates = matrix.getCandidates();
       this.attributeTypes = matrix.getAllAttributeTypesFrom();
     });
-
-    this.mergeService.updateCandidates(this.candidateIds);
   }
 
   finalResult(): MergeCandidate {
-    console.log('MergeCandidates.finalResult');
     return this.candidates.reduce((res, candidate) => {
       res.id = 'Results';
       res.attributes = (res.attributes || []).concat(
         candidate.attributes.filter((a) => a.selected)
       );
+      res.attributesMap = new Map<string, MergeCandidateAttribute[]>(
+        Object.entries(
+          _.forEach(_.groupBy(res.attributes, (attr) => attr.attributeTypes.name))
+        ).map((item) => {
+          return [item[0], _.uniqBy(item[1], 'value')];
+        })
+      );
       return res;
     }, {} as MergeCandidate);
   }
 
-  checkFilledResult(): boolean {
-    return false;
-  }
-
   deleteCandidate(candidate: MergeCandidate) {
-    this.mergeService.updateCandidates(this.candidateIds.filter((id) => id !== candidate.id));
+    this.mergeService.deleteCandidate(candidate);
   }
 }
