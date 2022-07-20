@@ -1,9 +1,5 @@
-$primary-color: rgb(55, 111, 252);
-$dark-back-color: rgb(10, 10, 10);
-$light-back-color: rgb(121, 121, 121);
-$error-color: rgb(121, 1, 1);
-$box-inner-shadow: inset 0 0 10px rgba(255, 255, 255, 50%);
-$height: 12vh;
+@import 'src/styles';
+@import 'src/styles/theme';
 
 * {
   box-sizing: border-box;

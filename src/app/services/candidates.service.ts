@@ -46,8 +46,6 @@ export class CandidatesService {
   }
 
   public getCandidateById(id: string): Observable<Candidate> {
-    // eslint-disable-next-line no-console
-    console.log('CandidatesService.getCandidateById', id);
     return this.fetch.get<CandidateDto>(`candidates/${id}`).pipe(
       map((c) => this.mapCandidateDto(c)),
       catchError((error) => defaultErrorhandler(this.notification, error))

@@ -5,7 +5,7 @@
   *ngIf="pageState.loading"
 ></mat-progress-bar>
 <ng-container *ngIf="!pageState.loading">
-  <div *ngIf="candidatesMatrixNotEmpty; else noCandidatesId" class="candidate-merge-container">
+  <div *ngIf="candidatesMatrixNotEmpty; else noCandidatesId" class="candidate-merge-container gap-10">
     <div class="desc-titles-container">
       <div class="desc-title"></div>
       <ng-container *ngFor="let attributeType of attributeTypes">
@@ -25,10 +25,9 @@
       </ng-container>
   </div>
 
-    <div class="candidates-container">
+    <div class="candidates-container gap-10">
       <ng-container *ngFor="let candidate of candidates">
-        <app-merge-candidate
-          class="desc-candidate-container"
+        <app-merge-candidate          
           [candidate]='candidate'
           [attributeTypes]='attributeTypes'
           (delete)='deleteCandidate(candidate)'

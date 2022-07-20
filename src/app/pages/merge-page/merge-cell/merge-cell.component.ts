@@ -17,7 +17,6 @@ export class MergeCellComponent {
   @Output() valueChange = new EventEmitter<boolean>();
 
   onCheckboxChange(item: MergeCandidateAttribute) {
-    // eslint-disable-next-line no-param-reassign
     this.valueChange.emit(item.selected);
   }
 }

@@ -1,23 +1,18 @@
-$primary-color: rgb(55, 111, 252);
-$dark-back-color: rgb(10, 10, 10);
-$light-back-color: rgb(121, 121, 121);
-$error-color: rgb(121, 1, 1);
-$box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 20%), 0px 1px 1px 0px rgba(0, 0, 0, 14%), 0px 1px 3px 0px rgba(0, 0, 0, 12%);
-$height: 12vh;
+@import 'src/styles';
+@import 'src/styles/theme';
 
 .candidate-merge-container {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
   margin: 20px 100px;
   padding-bottom: 10px;
   height: auto;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  gap: 10px;
   display: flex;
 
   .desc-titles-container {
     min-width: 200px;
 
     .desc-title {
-      height: $height;
+      height: 90px;
       display: flex;
       padding: 10px;
       background-color: black;
@@ -31,19 +26,7 @@ $height: 12vh;
   
   .candidates-container {
     display: flex;
-    gap: 10px; 
-    overflow-x: auto;  
-    
-    .desc-candidate-container {    
-      min-width: 300px;
-      overflow-y: hidden;
-      padding-bottom: 5px;
-    }
-    
-    .candidates-container-titles {
-      display: flex;
-      gap: 10px;
-    }
+    overflow-x: auto;
   }  
 
   .desc-result-container {

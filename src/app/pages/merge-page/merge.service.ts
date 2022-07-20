@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { Injectable } from '@angular/core';
 import { forkJoin, mergeMap, Observable, map, distinctUntilChanged, BehaviorSubject } from 'rxjs';
 import * as _ from 'lodash';
@@ -17,7 +16,6 @@ export class MergeService {
     'uliana_fomina',
     'artem_skrebets',
     'artem_skrebets',
-    'vladimir_zelmanchuk',
   ]);
 
   private readonly candidates$: Observable<MergeCandidate[]>;
