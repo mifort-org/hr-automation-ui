@@ -45,9 +45,9 @@ export class CandidatesService {
     );
   }
 
-  public getCandidateById(id: string): any {
+  public getCandidateById(id: string): Observable<Candidate> {
     return this.fetch.get<CandidateDto>(`candidates/${id}`).pipe(
-      map(this.mapCandidateDto.bind(this)),
+      map((c) => this.mapCandidateDto(c)),
       catchError((error) => defaultErrorhandler(this.notification, error))
     );
   }

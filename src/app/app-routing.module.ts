@@ -5,6 +5,7 @@ import { CandidatesComponent } from '@pages/candidates/candidates.component';
 import { CandidateDetailComponent } from '@pages/candidate-detail/candidate-detail.component';
 
 import { ROUTES } from './routes';
+import { MergePageComponent } from './pages/merge-page/merge-page.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,10 @@ const routes: Routes = [
   {
     path: ROUTES.CANDIDATE_DETAIL,
     component: CandidateDetailComponent,
+  },
+  {
+    path: ROUTES.CANDIDATES_MERGE,
+    component: MergePageComponent,
   },
 ];
 

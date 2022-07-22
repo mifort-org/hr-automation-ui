@@ -18,19 +18,22 @@ export interface CommunicationHistory {
   archived: boolean;
 }
 
+export interface CandidateAttributeType {
+  id: number;
+  name: string;
+  basicType: string;
+  validation: string;
+  identifier: boolean;
+}
+
 export interface CandidateAttribute {
   id: number;
   value: string;
   valueSource: number;
   isArchived: boolean;
-  attributeTypes: {
-    id: number;
-    name: string;
-    basicType: string;
-    validation: string;
-    identifier: boolean;
-  };
+  attributeTypes: CandidateAttributeType;
 }
+
 export interface Candidate {
   id: string;
   lastContact: string;

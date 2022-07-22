@@ -1,0 +1,31 @@
+@import 'src/styles';
+@import 'src/styles/theme';
+
+* {
+  box-sizing: border-box;
+}
+
+.desc-candidate-attrs {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  overflow-y: auto;
+  
+  .desc-candidate-label {
+    position: relative;
+
+    .desc-candidate-data {
+      border-radius: 5px;
+      background-color: $dark-back-color;
+      display: flex;
+      padding: 10px;
+      align-items: center;
+      box-sizing: border-box;
+    } 
+  }
+}
+
+.final {
+  border: 1px solid $light-back-color;
+  border-radius: 5px;
+} 

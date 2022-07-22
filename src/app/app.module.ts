@@ -10,6 +10,7 @@ import { CandidateModule } from '@pages/candidates/candidate.module';
 
 import AppRoutingModule from './app-routing.module';
 import AppComponent from './app.component';
+import { MergeModule } from './pages/merge-page/merge.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +21,7 @@ import AppComponent from './app.component';
     HttpClientModule,
     CandidateModule,
     CandidateDetailModule,
+    MergeModule,
     SharedModule,
     SystemModule,
   ],

@@ -1,0 +1,37 @@
+@import 'src/styles';
+@import 'src/styles/theme';
+
+.desc-candidate {
+  height: 90px;
+  min-width: 300px;
+  display: flex;
+  position: relative;
+  align-items: center;
+  background-color: $dark-back-color;
+  margin-top: 10px;
+  border-radius: 5px;
+  box-shadow: $box-shadow;
+}
+
+.desc-candidate-title {
+  height: 90px;
+  display: flex;
+  position: relative;
+  padding: 0 10px;
+  align-items: center;
+  background-color: $dark-back-color;
+  margin-top: 10px;
+  border-radius: 5px;
+  box-shadow: $box-shadow;
+  border: 1px solid $light-back-color;
+  box-sizing: border-box;
+
+  .desc-candidate-title-label {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    flex-grow: 1;
+  }
+
+  .remove-button {
+    cursor: pointer;
+  }
+}

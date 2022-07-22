@@ -1,0 +1,43 @@
+@import 'src/styles';
+@import 'src/styles/theme';
+
+.candidate-merge-container {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  margin: 20px 100px;
+  padding-bottom: 10px;
+  height: auto;
+  display: flex;
+
+  .desc-titles-container {
+    min-width: 200px;
+
+    .desc-title {
+      height: 90px;
+      display: flex;
+      padding: 10px;
+      background-color: black;
+      margin-top: 10px;
+      border-radius: 5px;
+      box-shadow: $box-shadow;
+      border: 1px solid $light-back-color;
+      box-sizing: border-box;
+    }
+  }
+  
+  .candidates-container {
+    display: flex;
+    overflow-x: auto;
+  }  
+
+  .desc-result-container {
+    min-width: 300px;
+  }
+}
+
+.nothing-merge {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 150px;
+  text-align: center;
+}

@@ -1,0 +1,51 @@
+<app-actions-bar-merge></app-actions-bar-merge>
+<mat-progress-bar
+  mode="indeterminate"
+  color="primary"
+  *ngIf="pageState.loading"
+></mat-progress-bar>
+<ng-container *ngIf="!pageState.loading">
+  <div *ngIf="candidatesMatrixNotEmpty; else noCandidatesId" class="candidate-merge-container gap-10">
+    <div class="desc-titles-container">
+      <div class="desc-title"></div>
+      <ng-container *ngFor="let attributeType of attributeTypes">
+        <div class="desc-title">
+          <ng-container [ngSwitch]="attributeType.name">
+            <mat-icon [inline]="true" *ngSwitchCase="'email'">email</mat-icon>
+            <mat-icon [inline]="true" *ngSwitchCase="'facebookid'">facebook</mat-icon>
+            <mat-icon [inline]="true" *ngSwitchCase="'phone'">phone</mat-icon>
+            <mat-icon [inline]="true" *ngSwitchCase="'twitter'">chat</mat-icon>
+            <mat-icon [inline]="true" *ngSwitchCase="'firstname'">person</mat-icon>
+            <mat-icon [inline]="true" *ngSwitchCase="'lastname'">person</mat-icon>
+            <mat-icon [inline]="true" *ngSwitchDefault>info</mat-icon>
+          </ng-container>
+          <span>&nbsp;</span>        
+          {{attributeType.name}}
+        </div>
+      </ng-container>
+  </div>
+
+    <div class="candidates-container gap-10">
+      <ng-container *ngFor="let candidate of candidates">
+        <app-merge-candidate          
+          [candidate]='candidate'
+          [attributeTypes]='attributeTypes'
+          (delete)='deleteCandidate(candidate)'
+        ></app-merge-candidate>
+      </ng-container>
+    </div>
+
+    <div class="desc-result-container">
+      <app-merge-candidate
+        [candidate]='finalResult()'
+        [attributeTypes]='attributeTypes'
+        [editable]='false'
+      ></app-merge-candidate>
+    </div>
+  </div>
+
+</ng-container>
+
+<ng-template #noCandidatesId>
+  <p class="nothing-merge">You have not selected candidates for the merge. Please add more candidates.</p>
+</ng-template>

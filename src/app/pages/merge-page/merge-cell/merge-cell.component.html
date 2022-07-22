@@ -1,0 +1,23 @@
+<div class="desc-candidate-attrs" [ngClass]="{'final': !editable}">
+  <ng-container *ngFor="let item of value">
+  <div class="desc-candidate-label">
+    <label class="desc-candidate-data" *ngIf='editable'>
+      <mat-checkbox
+        color="primary"
+        aria-label="desc-candidate-data"
+        [checked]="item.selected"
+        [value]="item.value"
+        [(ngModel)]="item.selected"
+        (change)="onCheckboxChange(item)"
+      >
+    </mat-checkbox>
+    &nbsp;
+      {{item.value}}
+    </label>
+    <div class="desc-candidate-data" *ngIf='!editable'>
+      {{item.value}}
+    </div>
+  </div>
+</ng-container>
+
+</div>

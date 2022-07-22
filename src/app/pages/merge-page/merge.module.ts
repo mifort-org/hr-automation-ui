@@ -9,21 +9,30 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { SharedModule } from '@components/shared/shared.module';
 import { AppPipesModule } from '@utils/pipes/app-pipes.module';
-import { CandidatesComponent } from '@pages/candidates/candidates.component';
-import { CandidateItemComponent } from '@pages/candidates/candidate-item/candidate-item.component';
 import AppRoutingModule from '@src/app/app-routing.module';
 import { SystemModule } from '@src/app/components/systems/system.module';
+import { ActionsBarMergeComponent } from '@src/app/pages/merge-page/actions-bar-merge/actions-bar-merge.component';
+import { MergeCandidateComponent } from '@pages/merge-page/merge-candidate/merge-candidate.component';
+import { MergeCellComponent } from './merge-cell/merge-cell.component';
+import { MergePageComponent } from './merge-page.component';
 
 @NgModule({
-  declarations: [CandidateItemComponent, CandidatesComponent],
+  declarations: [
+    MergePageComponent,
+    MergeCandidateComponent,
+    MergeCellComponent,
+    ActionsBarMergeComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
 
+    MatCheckboxModule,
     MatInputModule,
     MatChipsModule,
     MatCardModule,
@@ -36,6 +45,6 @@ import { SystemModule } from '@src/app/components/systems/system.module';
     SystemModule,
     AppPipesModule,
   ],
-  exports: [CandidateItemComponent, CandidatesComponent],
+  exports: [MergePageComponent],
 })
-export class CandidateModule {}
+export class MergeModule {}
