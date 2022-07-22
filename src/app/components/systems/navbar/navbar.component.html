@@ -1,17 +1,33 @@
 <mat-toolbar class="flex-between">
-  <div class="flex align-center">
-    <div>
-      <img src="/assets/mifort.png" alt="" width="60" height="50" />
+  <div class="flex align-center gap-20">
+    <div class="flex align-center">
+      <div>
+        <img src="/assets/mifort.png" alt="" width="60" height="50" />
+      </div>
+      <span  *ngIf="checkIsMainPage()"> Mifort - Human Resources </span>
     </div>
-    <span> Mifort - Human Resources </span>
+    <button mat-raised-button (click)="back()" *ngIf="!checkIsMainPage()">
+      <mat-icon>keyboard_backspace</mat-icon>
+      <span class="ml-10">Back</span>
+    </button>
   </div>
 
-  <div>
-    <a mat-button routerLink="candidates" routerLinkActive="active">Candidates</a>
-    <a mat-button routerLink="history" routerLinkActive="active">History</a>
-    <a mat-button routerLink="keywords" routerLinkActive="active">Keywords</a>
-    <a mat-button routerLink="merge" routerLinkActive="active">Merge</a>
-    <a mat-button routerLink="support" routerLinkActive="active">Support</a>
+  <div class="flex gap-10">
+    <div>
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>settings</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu" [overlapTrigger]="false" xPosition="before">      
+        <button mat-menu-item routerLink="merge" routerLinkActive="active">
+          <mat-icon>merge_type</mat-icon>
+          <span>Merge</span>
+        </button>      
+        <button mat-menu-item routerLink="" routerLinkActive="active">
+          <mat-icon>supervised_user_circle</mat-icon>
+          <span>Attributes Types</span>
+        </button>      
+      </mat-menu>
+    </div>
     <button mat-raised-button color="primary" (click)="openSignInDialog()">Sign in</button>
   </div>
 </mat-toolbar>
