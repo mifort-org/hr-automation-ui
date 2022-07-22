@@ -1,16 +1,26 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { SignInModalComponent } from '@components/shared/sign-in-modal/sign-in-modal.component';
 import { EModalSizes } from '@constants/strings';
 import { ModalService } from '@services/modal.service';
+import { ROUTES } from '@src/app/routes';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
 })
 export class NavbarComponent {
-  constructor(private modalService: ModalService) {}
+  constructor(private modalService: ModalService, private router: Router) {}
 
   public openSignInDialog(): void {
     this.modalService.open(SignInModalComponent, EModalSizes.MD);
+  }
+
+  public back(): void {
+    this.router.navigate([ROUTES.CANDIDATES]);
+  }
+
+  checkIsMainPage() {
+    return this.router.url === `/${ROUTES.CANDIDATES}`;
   }
 }

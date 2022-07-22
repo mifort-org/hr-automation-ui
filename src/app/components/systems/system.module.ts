@@ -10,13 +10,13 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatMenuModule } from '@angular/material/menu';
 import AppRoutingModule from '@src/app/app-routing.module';
 
 import { NavbarComponent } from './navbar/navbar.component';
-import { ActionsBarComponent } from './actions-bar/actions-bar.component';
 
 @NgModule({
-  declarations: [ActionsBarComponent, NavbarComponent],
+  declarations: [NavbarComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -29,9 +29,10 @@ import { ActionsBarComponent } from './actions-bar/actions-bar.component';
     MatToolbarModule,
     MatIconModule,
     MatInputModule,
+    MatMenuModule,
     MatSelectModule,
     MatProgressSpinnerModule,
   ],
-  exports: [ActionsBarComponent, NavbarComponent],
+  exports: [NavbarComponent],
 })
 export class SystemModule {}
