@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
-import { ECandidateStatus } from '@constants/candidates';
+import { CandidateStatus } from '@constants/candidates';
 
 @Pipe({
   name: 'status',
@@ -8,11 +8,11 @@ import { ECandidateStatus } from '@constants/candidates';
 export class StatusPipe implements PipeTransform {
   transform(value: unknown): ThemePalette {
     switch (value) {
-      case ECandidateStatus.CREATED:
+      case CandidateStatus.CREATED:
         return 'primary';
-      case ECandidateStatus.EMPLOYED:
+      case CandidateStatus.EMPLOYED:
         return 'accent';
-      case ECandidateStatus.UNEMPLOYED:
+      case CandidateStatus.UNEMPLOYED:
         return 'warn';
       default:
         return 'primary';

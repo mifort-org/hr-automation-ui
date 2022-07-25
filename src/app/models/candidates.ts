@@ -1,4 +1,4 @@
-import { ECandidateStatus } from '@constants/candidates';
+import { CandidateStatus } from '@constants/candidates';
 
 export interface CandidatesFilterData {
   pageNumber?: number;
@@ -37,7 +37,7 @@ export interface CandidateAttribute {
 export interface Candidate {
   id: string;
   lastContact: string;
-  status: ECandidateStatus;
+  status: CandidateStatus;
   fullName: string;
   candidateUpdates: any;
   keywords: Keywords[];

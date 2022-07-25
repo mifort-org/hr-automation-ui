@@ -16,7 +16,6 @@ import { AppPipesModule } from '@utils/pipes/app-pipes.module';
 import { CandidatesComponent } from '@pages/candidates/candidates.component';
 import { CandidateItemComponent } from '@pages/candidates/candidate-item/candidate-item.component';
 import AppRoutingModule from '@src/app/app-routing.module';
-import { SystemModule } from '@src/app/components/systems/system.module';
 import { ActionsBarComponent } from './actions-bar/actions-bar.component';
 
 @NgModule({
@@ -36,7 +35,6 @@ import { ActionsBarComponent } from './actions-bar/actions-bar.component';
     MatButtonModule,
 
     SharedModule,
-    SystemModule,
     AppPipesModule,
   ],
   exports: [ActionsBarComponent, CandidateItemComponent, CandidatesComponent],

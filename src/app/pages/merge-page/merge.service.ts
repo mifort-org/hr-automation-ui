@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { forkJoin, mergeMap, Observable, map, distinctUntilChanged, BehaviorSubject } from 'rxjs';
 import * as _ from 'lodash';
-import { ENotificationMode } from '@constants/notification';
+import { NotificationMode } from '@constants/notification';
 import { CandidatesService } from '@services/candidates.service';
 import { NotificationService } from '@services/notification.service';
 import { MergeCandidate } from '@pages/merge-page/view-model/MergeCandidate';
@@ -38,7 +38,7 @@ export class MergeService {
   }
 
   mergeCandidates(): void {
-    this.notification.show('Successfully merged. Check console', ENotificationMode.SUCCESS);
+    this.notification.show('Successfully merged. Check console', NotificationMode.SUCCESS);
   }
 
   getCandidates(): Observable<MergeCandidate[]> {

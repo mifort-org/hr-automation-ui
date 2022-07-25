@@ -1,7 +1,7 @@
 import { throwError } from 'rxjs';
 import { NotificationService } from '@services/notification.service';
 import { ERROR_STATUS_CODES } from '@constants/errorStatusCode';
-import { ENotificationMode } from '@constants/notification';
+import { NotificationMode } from '@constants/notification';
 import { ERROR_MESSAGE } from '@constants/strings';
 import { CandidateAttribute } from '@src/app/models/candidates';
 
@@ -11,7 +11,7 @@ export const defaultErrorhandler = (
 ) => {
   notification.show(
     ERROR_MESSAGE[error?.status || ERROR_STATUS_CODES.INTERNAL_SERVER_ERROR],
-    ENotificationMode.ERROR
+    NotificationMode.ERROR
   );
   return throwError('error');
 };

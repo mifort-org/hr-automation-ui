@@ -14,7 +14,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SharedModule } from '@components/shared/shared.module';
 import { AppPipesModule } from '@utils/pipes/app-pipes.module';
 import AppRoutingModule from '@src/app/app-routing.module';
-import { SystemModule } from '@src/app/components/systems/system.module';
 import { ActionsBarMergeComponent } from '@src/app/pages/merge-page/actions-bar-merge/actions-bar-merge.component';
 import { MergeCandidateComponent } from '@pages/merge-page/merge-candidate/merge-candidate.component';
 import { MergeCellComponent } from './merge-cell/merge-cell.component';
@@ -42,7 +41,6 @@ import { MergePageComponent } from './merge-page.component';
     MatButtonModule,
 
     SharedModule,
-    SystemModule,
     AppPipesModule,
   ],
   exports: [MergePageComponent],

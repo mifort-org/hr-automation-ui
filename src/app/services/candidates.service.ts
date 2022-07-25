@@ -9,7 +9,7 @@ import {
   CandidateAttribute,
   Candidate,
 } from '@src/app/models/candidates';
-import { ECandidateStatus } from '@constants/candidates';
+import { CandidateStatus } from '@constants/candidates';
 import { defaultErrorhandler, getFullName } from '@utils/functions';
 import { NotificationService } from '@services/notification.service';
 import { FetchService } from './fetch.service';
@@ -21,7 +21,7 @@ interface IParam {
 interface CandidateDto {
   id: string;
   lastContact: string;
-  status: ECandidateStatus;
+  status: CandidateStatus;
   candidateUpdates: any;
   keywords: Keywords[];
   communicationHistory: CommunicationHistory[];
@@ -52,15 +52,15 @@ export class CandidatesService {
     );
   }
 
-  public updateCandidateAttributes(id: string, data: any) {
+  public updateCandidateAttributes(id: string, data: any): Observable<CandidateDto> {
     return this.fetch
-      .post(`candidates/${id}/attributes`, data)
+      .post<CandidateDto>(`candidates/${id}/attributes`, this.mapCandidateToDto(data))
       .pipe(catchError((error) => defaultErrorhandler(this.notification, error)));
   }
 
-  public createNewCandidate(data: any) {
+  public createNewCandidate(data: any): Observable<CandidateDto> {
     return this.fetch
-      .post(`candidates`, data)
+      .post<CandidateDto>(`candidates`, this.mapCandidateToDto(data))
       .pipe(catchError((error) => defaultErrorhandler(this.notification, error)));
   }
 
@@ -73,5 +73,9 @@ export class CandidatesService {
         value: a.value || '',
       })),
     };
+  }
+
+  public mapCandidateToDto(candidate: Candidate): CandidateDto {
+    return candidate;
   }
 }

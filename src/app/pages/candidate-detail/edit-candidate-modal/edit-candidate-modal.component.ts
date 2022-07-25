@@ -8,7 +8,7 @@ import { AttributesService } from '@services/attributes.service';
 import { CandidatesService } from '@services/candidates.service';
 import { VALIDATORS } from '@utils/validators';
 import { NotificationService } from '@services/notification.service';
-import { ENotificationMode } from '@constants/notification';
+import { NotificationMode } from '@constants/notification';
 import { Candidate } from '@src/app/models/candidates';
 
 @Component({
@@ -64,19 +64,19 @@ export class EditCandidateModalComponent {
           next: () => {
             this.modalState.finishLoading();
             this.closeModal();
-            this.notification.show('Candidate is updated', ENotificationMode.SUCCESS);
+            this.notification.show('Candidate is updated', NotificationMode.SUCCESS);
             this.candidateService.getCandidateById(this.candidate?.id);
           },
           error: (err) => {
             this.modalState.finishLoading();
             this.notification.show(
               ERROR_MESSAGE[err?.status || ERROR_STATUS_CODES.INTERNAL_SERVER_ERROR],
-              ENotificationMode.ERROR
+              NotificationMode.ERROR
             );
           },
         });
       } else {
-        this.notification.show(result, ENotificationMode.ERROR);
+        this.notification.show(result, NotificationMode.ERROR);
       }
     }
   }
