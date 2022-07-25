@@ -3,9 +3,9 @@ import { map, Observable, Subject, takeUntil } from 'rxjs';
 import * as _ from 'lodash';
 import { MergeService } from '@pages/merge-page/merge.service';
 import { PageState } from '@src/app/utils/pageState';
-import { CandidateAttributeType } from '@src/app/models/candidates';
 import { MergeCandidate } from '@pages/merge-page/view-model/MergeCandidate';
 import { MergeCandidateAttribute } from '@pages/merge-page/view-model/MergeCandidateAttribute';
+import { CandidateAttributeType } from '@src/app/models/candidateAttributeType';
 import { MergeCandidates } from './mergeCandidate';
 
 @Component({

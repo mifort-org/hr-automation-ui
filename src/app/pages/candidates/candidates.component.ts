@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CandidatesService } from '@services/candidates.service';
-import { Candidate, CandidatesFilterData } from '@src/app/models/candidates';
+import { Candidate } from '@src/app/models/candidate';
+import { CandidatesFilterData } from '@src/app/models/candidatesFilterData';
 import { PageState } from '@utils/pageState';
 
 @Component({

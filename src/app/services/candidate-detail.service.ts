@@ -9,12 +9,13 @@ import {
   takeUntil,
 } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { Candidate } from '@src/app/models/candidates';
 import { CandidatesService } from '@services/candidates.service';
-import { CommentData, HistoryElement } from '@src/app/models/history';
+import { HistoryElement } from '@src/app/models/historyElement';
 import { HistoryService } from '@services/history.service';
 import { DialogModalIds } from '@constants/strings';
 import { ModalService } from '@services/modal.service';
+import { Candidate } from '../models/candidate';
+import { CommentData } from '../models/commentData';
 import { FetchService } from './fetch.service';
 
 @Injectable()

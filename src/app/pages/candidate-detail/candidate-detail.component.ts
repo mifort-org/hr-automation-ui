@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CandidateDetailService } from '@services/candidate-detail.service';
-import { Candidate } from '@src/app/models/candidates';
+import { Candidate } from '@src/app/models/candidate';
 
 @Component({
   selector: 'app-candidate-detail',

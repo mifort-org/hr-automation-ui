@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
-import { AttributeType, AttributeTypeDictionary } from '@src/app/models/attributes';
+import { AttributeType } from '@src/app/models/attributeType';
+import { AttributeTypeDictionary } from '../models/attributeTypeDictionary';
 import { FetchService } from './fetch.service';
 
 interface AttributeTypeDto {

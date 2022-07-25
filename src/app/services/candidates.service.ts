@@ -1,22 +1,21 @@
 import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
-import {
-  CandidateCustomAttributeDto,
-  CandidatesFilterData,
-  Keywords,
-  CommunicationHistory,
-  CandidateAttribute,
-  Candidate,
-} from '@src/app/models/candidates';
+import { Keywords } from '@src/app/models/keywords';
 import { CandidateStatus } from '@constants/candidates';
 import { defaultErrorhandler, getFullName } from '@utils/functions';
 import { NotificationService } from '@services/notification.service';
+import { Candidate } from '../models/candidate';
+import { CandidateAttribute } from '../models/candidateAttribute';
+import { CandidatesFilterData } from '../models/candidatesFilterData';
+import { CommunicationHistory } from '../models/communicationHistory';
 import { FetchService } from './fetch.service';
 
 interface IParam {
   [param: string]: any;
 }
+
+type CandidateCustomAttributeDto = { [key: string]: CandidateAttribute };
 
 interface CandidateDto {
   id: string;

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CandidateDetailService } from '@services/candidate-detail.service';
-import { CommentData, HistoryElement } from '@src/app/models/history';
+import { HistoryElement } from '@src/app/models/historyElement';
+import { CommentData } from '@src/app/models/commentData';
 
 @Component({
   selector: 'app-candidate-communications',

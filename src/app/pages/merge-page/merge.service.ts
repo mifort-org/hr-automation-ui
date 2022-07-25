@@ -5,8 +5,9 @@ import { NotificationMode } from '@constants/notification';
 import { CandidatesService } from '@services/candidates.service';
 import { NotificationService } from '@services/notification.service';
 import { MergeCandidate } from '@pages/merge-page/view-model/MergeCandidate';
-import { Candidate, CandidateAttribute } from '@src/app/models/candidates';
 import { MergeCandidateAttribute } from '@pages/merge-page/view-model/MergeCandidateAttribute';
+import { Candidate } from '@src/app/models/candidate';
+import { CandidateAttribute } from '@src/app/models/candidateAttribute';
 
 @Injectable({
   providedIn: 'root',

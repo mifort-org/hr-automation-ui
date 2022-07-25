@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { CandidateAttributeType } from '@src/app/models/candidates';
+import { CandidateAttributeType } from '@src/app/models/candidateAttributeType';
 import { MergeCandidate } from './view-model/MergeCandidate';
 
 export class MergeCandidates {

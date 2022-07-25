@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { CommentData } from '@src/app/models/history';
-import { Candidate } from '@src/app/models/candidates';
+import { Candidate } from '@src/app/models/candidate';
+import { CommentData } from '@src/app/models/commentData';
 
 @Component({
   selector: 'app-add-comment-modal',

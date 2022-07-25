@@ -6,7 +6,3 @@ export interface AttributeType {
   label: string;
   validation: string;
 }
-
-export interface AttributeTypeDictionary {
-  [key: string]: AttributeType;
-}

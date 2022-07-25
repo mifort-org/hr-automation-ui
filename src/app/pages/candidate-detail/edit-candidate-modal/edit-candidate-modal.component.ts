@@ -9,7 +9,7 @@ import { CandidatesService } from '@services/candidates.service';
 import { VALIDATORS } from '@utils/validators';
 import { NotificationService } from '@services/notification.service';
 import { NotificationMode } from '@constants/notification';
-import { Candidate } from '@src/app/models/candidates';
+import { Candidate } from '@src/app/models/candidate';
 
 @Component({
   selector: 'app-edit-candidate-modal',

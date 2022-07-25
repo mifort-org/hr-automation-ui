@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
-import { CommentData, HistoryElement } from '@src/app/models/history';
+import { HistoryElement } from '@src/app/models/historyElement';
 import { NotificationService } from '@services/notification.service';
 import { defaultErrorhandler } from '@utils/functions';
+import { CommentData } from '../models/commentData';
 import { FetchService } from './fetch.service';
 
 interface HistoryElementDto {
