@@ -2,7 +2,7 @@ import { AttributeType } from './attributeType';
 
 /**
  * @typedef AttributeTypeDictionary
- * @prop {AttributeType} [key: string] Attribute type {@link AttributeType}
+ * Represents a dictionary of attribute types
  */
 
 export interface AttributeTypeDictionary {

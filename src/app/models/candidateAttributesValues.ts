@@ -1,7 +1,6 @@
 /**
  * @typedef CandidateAttributesValues
- * @prop {string} name Candidate attribute name
- * @prop {string} value Candidate attribute value
+ * Represents one candidate attribute and its value
  */
 
 export interface CandidateAttributesValues {

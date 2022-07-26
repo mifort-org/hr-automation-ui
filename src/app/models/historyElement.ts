@@ -1,10 +1,6 @@
 /**
  * @typedef HistoryElement
- * @prop {boolean} archived Is archived
- * @prop {string} comment Comment text
- * @prop {string} createDate Creation date
- * @prop {number} id Id
- * @prop {string} updateDate Update date
+ * Represents one history episode of communication with the candidate
  */
 
 export interface HistoryElement {

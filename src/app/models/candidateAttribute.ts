@@ -2,11 +2,7 @@ import { CandidateAttributeType } from './candidateAttributeType';
 
 /**
  * @typedef CandidateAttribute
- * @prop {number} id Id
- * @prop {string} value Value
- * @prop {number} valueSource Value Source
- * @prop {boolean} isArchived Is archived
- * @prop {CandidateAttributeType} attributeTypes Attribute types {@link CandidateAttributeType}
+ * Represents full description of candidate attribute
  */
 
 export interface CandidateAttribute {

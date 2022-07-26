@@ -1,10 +1,6 @@
 /**
  * @typedef CommunicationHistory
- * @prop {number} id Id
- * @prop {string} createDate Creation date
- * @prop {string} updateDate Update date
- * @prop {string} comment Comment text
- * @prop {boolean} archived Is archived
+ * Represents full description of communication history with candidate
  */
 
 export interface CommunicationHistory {

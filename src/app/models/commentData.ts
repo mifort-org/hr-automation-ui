@@ -1,8 +1,6 @@
 /**
  * @typedef CommentData
- * @prop {string} comment Comment text
- * @prop {number} id Id
- * @prop {boolean} archived Is archived
+ * Represents full description of one comment
  */
 
 export interface CommentData {

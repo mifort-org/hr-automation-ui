@@ -1,6 +1,6 @@
 /**
  * @typedef Keywords
- * @prop {string} id Id
+ * Represents keyword
  */
 
 export interface Keywords {

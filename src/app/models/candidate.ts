@@ -6,16 +6,7 @@ import { Keywords } from './keywords';
 
 /**
  * @typedef Candidate
- * @prop {string} id Id
- * @prop {string} lastContact Last contact
- * @prop {CandidateStatus} status Candidate status {@link CandidateStatus}
- * @prop {string} fullName Candidate fullname
- * @prop {any} candidateUpdates Candidate updates
- * @prop {Keywords[]} keywords Keywords for candidate {@link Keywords}
- * @prop {communicationHistory[]} communicationHistory Communication history with candidate {@link communicationHistory}
- * @prop {CandidateAttribute[]} candidateAttributes Candidate attrubutes {@link CandidateAttribute}
- * @prop {CandidateAttributesValues[]} CandidateAttributesValues Candidate attrubutes values {@link CandidateAttributesValues}
- * @prop {any} mergeCandidates Merge candidates
+ * Represents full description of candidate
  */
 
 export interface Candidate {

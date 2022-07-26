@@ -1,10 +1,6 @@
 /**
  * @typedef CandidateAttributeType
- * @prop {number} id Id
- * @prop {string} name Candidate name
- * @prop {string} basicType Basic type
- * @prop {string} validation Validation
- * @prop {boolean} identifier Identifier
+ * Represents full description of candidate attribute type
  */
 
 export interface CandidateAttributeType {
