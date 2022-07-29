@@ -1,0 +1,860 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>hr-automation-ui documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">hr-automation-ui documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li
+  >
+  MergeCandidateComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/pages/merge-page/merge-candidate/merge-candidate.component.ts</code>
+</p>
+
+
+
+
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-merge-candidate</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./merge-candidate.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./merge-candidate.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#checked" >checked</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#mergeService" >mergeService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#changeAttributeSelections" >changeAttributeSelections</a>
+                            </li>
+                            <li>
+                                <a href="#deleteClick" >deleteClick</a>
+                            </li>
+                            <li>
+                                <a href="#selectCandidate" >selectCandidate</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#attributeTypes" >attributeTypes</a>
+                            </li>
+                            <li>
+                                <a href="#candidate" >candidate</a>
+                            </li>
+                            <li>
+                                <a href="#editable" >editable</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#attributeSelectionChanged" >attributeSelectionChanged</a>
+                            </li>
+                            <li>
+                                <a href="#delete" >delete</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(mergeService: <a href="../injectables/MergeService.html" target="_self">MergeService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/pages/merge-page/merge-candidate/merge-candidate.component.ts:13</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>mergeService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/MergeService.html" target="_self" >MergeService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="attributeTypes"></a>
+                        <b>attributeTypes</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>CandidateAttributeType[] | null</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/pages/merge-page/merge-candidate/merge-candidate.component.ts:22</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="candidate"></a>
+                        <b>candidate</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/MergeCandidate.html" target="_self" >MergeCandidate</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/pages/merge-page/merge-candidate/merge-candidate.component.ts:20</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="editable"></a>
+                        <b>editable</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/pages/merge-page/merge-candidate/merge-candidate.component.ts:18</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+    <section>
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="attributeSelectionChanged"></a>
+                        <b>attributeSelectionChanged</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/core/EventEmitter" target="_blank" >EventEmitter</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/pages/merge-page/merge-candidate/merge-candidate.component.ts:24</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="delete"></a>
+                        <b>delete</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/core/EventEmitter" target="_blank" >EventEmitter</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/pages/merge-page/merge-candidate/merge-candidate.component.ts:26</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="changeAttributeSelections"></a>
+                    <span class="name">
+                        <span ><b>changeAttributeSelections</b></span>
+                        <a href="#changeAttributeSelections"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>changeAttributeSelections(attrs?: MergeCandidateAttribute[], selected?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="32"
+                            class="link-to-prism">src/app/pages/merge-page/merge-candidate/merge-candidate.component.ts:32</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>attrs</td>
+                                    <td>
+                                            <code>MergeCandidateAttribute[]</code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>selected</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deleteClick"></a>
+                    <span class="name">
+                        <span ><b>deleteClick</b></span>
+                        <a href="#deleteClick"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>deleteClick()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="45"
+                            class="link-to-prism">src/app/pages/merge-page/merge-candidate/merge-candidate.component.ts:45</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectCandidate"></a>
+                    <span class="name">
+                        <span ><b>selectCandidate</b></span>
+                        <a href="#selectCandidate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>selectCandidate(value: MatCheckboxChange)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="28"
+                            class="link-to-prism">src/app/pages/merge-page/merge-candidate/merge-candidate.component.ts:28</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>value</td>
+                                    <td>
+                                            <code>MatCheckboxChange</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="checked"></a>
+                    <span class="name">
+                        <span ><b>checked</b></span>
+                        <a href="#checked"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/pages/merge-page/merge-candidate/merge-candidate.component.ts:16</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="mergeService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>mergeService</b></span>
+                        <a href="#mergeService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/MergeService.html" target="_self" >MergeService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/pages/merge-page/merge-candidate/merge-candidate.component.ts:14</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, EventEmitter, Input, Output } from &#x27;@angular/core&#x27;;
+import { MatCheckboxChange } from &#x27;@angular/material/checkbox&#x27;;
+import { MergeService } from &#x27;@pages/merge-page/merge.service&#x27;;
+import { MergeCandidate } from &#x27;@pages/merge-page/view-model/MergeCandidate&#x27;;
+import { CandidateAttributeType } from &#x27;@src/app/models/candidates&#x27;;
+import { MergeCandidateAttribute } from &#x27;@pages/merge-page/view-model/MergeCandidateAttribute&#x27;;
+
+@Component({
+  selector: &#x27;app-merge-candidate&#x27;,
+  templateUrl: &#x27;./merge-candidate.component.html&#x27;,
+  styleUrls: [&#x27;./merge-candidate.component.scss&#x27;],
+})
+export class MergeCandidateComponent {
+  constructor(public mergeService: MergeService) {}
+
+  checked &#x3D; false;
+
+  @Input() editable: boolean &#x3D; true;
+
+  @Input() candidate!: MergeCandidate;
+
+  @Input() attributeTypes!: CandidateAttributeType[] | null;
+
+  @Output() attributeSelectionChanged &#x3D; new EventEmitter&lt;MergeCandidateAttribute&gt;();
+
+  @Output() delete &#x3D; new EventEmitter&lt;void&gt;();
+
+  selectCandidate(value: MatCheckboxChange) {
+    this.changeAttributeSelections(this.candidate.attributes, value.checked);
+  }
+
+  changeAttributeSelections(attrs?: MergeCandidateAttribute[], selected?: boolean) {
+    if (!this.editable || !attrs) {
+      return;
+    }
+    attrs.forEach((attr) &#x3D;&gt; {
+      // eslint-disable-next-line no-param-reassign
+      attr.selected &#x3D; selected &#x3D;&#x3D;&#x3D; undefined ? attr.selected : selected;
+      this.attributeSelectionChanged.emit(attr);
+    });
+
+    this.checked &#x3D; this.candidate.attributes.every((attr) &#x3D;&gt; attr.selected);
+  }
+
+  deleteClick() {
+    this.delete.emit();
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;label class&#x3D;&quot;desc-candidate-title&quot; *ngIf&#x3D;&#x27;editable&#x27;&gt;
+  &lt;mat-checkbox
+    color&#x3D;&quot;primary&quot;
+    class&#x3D;&quot;desc-candidate-title-label&quot;
+    aria-label&#x3D;&quot;desc-candidate-title&quot;
+    [checked]&#x3D;&quot;checked&quot;
+    [value]&#x3D;&quot;candidate.id&quot;
+    (change)&#x3D;&quot;selectCandidate($event)&quot;
+  &gt;
+    {{candidate.id}}
+  &lt;/mat-checkbox&gt;
+  &lt;mat-icon color&#x3D;&quot;warn&quot; (click)&#x3D;&quot;deleteClick()&quot; class&#x3D;&quot;remove-button&quot;&gt;delete_forever&lt;/mat-icon&gt;
+&lt;/label&gt;
+&lt;label class&#x3D;&quot;desc-candidate-title&quot; *ngIf&#x3D;&#x27;!editable&#x27;&gt;
+  {{candidate.id}}
+&lt;/label&gt;
+
+&lt;ng-container *ngFor&#x3D;&quot;let type of attributeTypes&quot;&gt;
+  &lt;app-merge-cell
+    [value]&#x3D;&#x27;candidate.attributesMap.get(type.name)&#x27;
+    (valueChange)&#x3D;&#x27;changeAttributeSelections(candidate.attributesMap.get(type.name), $event)&#x27;
+    class&#x3D;&quot;desc-candidate&quot;
+    [editable]&#x3D;&#x27;editable&#x27;&gt;
+  &lt;/app-merge-cell&gt;
+&lt;/ng-container&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./merge-candidate.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">@import &#x27;src/styles&#x27;;
+@import &#x27;src/styles/theme&#x27;;
+
+.desc-candidate {
+  height: 90px;
+  min-width: 300px;
+  display: flex;
+  position: relative;
+  align-items: center;
+  background-color: $dark-back-color;
+  margin-top: 10px;
+  border-radius: 5px;
+  box-shadow: $box-shadow;
+}
+
+.desc-candidate-title {
+  height: 90px;
+  display: flex;
+  position: relative;
+  padding: 0 10px;
+  align-items: center;
+  background-color: $dark-back-color;
+  margin-top: 10px;
+  border-radius: 5px;
+  box-shadow: $box-shadow;
+  border: 1px solid $light-back-color;
+  box-sizing: border-box;
+
+  .desc-candidate-title-label {
+    font-family: Roboto, &quot;Helvetica Neue&quot;, sans-serif;
+    flex-grow: 1;
+  }
+
+  .remove-button {
+    cursor: pointer;
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><label class="desc-candidate-title" *ngIf=\'editable\'>  <mat-checkbox    color="primary"    class="desc-candidate-title-label"    aria-label="desc-candidate-title"    [checked]="checked"    [value]="candidate.id"    (change)="selectCandidate($event)"  >    {{candidate.id}}  </mat-checkbox>  <mat-icon color="warn" (click)="deleteClick()" class="remove-button">delete_forever</mat-icon></label><label class="desc-candidate-title" *ngIf=\'!editable\'>  {{candidate.id}}</label><ng-container *ngFor="let type of attributeTypes">  <app-merge-cell    [value]=\'candidate.attributesMap.get(type.name)\'    (valueChange)=\'changeAttributeSelections(candidate.attributesMap.get(type.name), $event)\'    class="desc-candidate"    [editable]=\'editable\'>  </app-merge-cell></ng-container></div>'
+    var COMPONENTS = [{'name': 'ActionsBarComponent', 'selector': 'app-actions-bar'},{'name': 'ActionsBarMergeComponent', 'selector': 'app-actions-bar-merge'},{'name': 'AddCommentModalComponent', 'selector': 'app-add-comment-modal'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CandidateActionComponent', 'selector': 'app-candidate-action'},{'name': 'CandidateCommunicationsComponent', 'selector': 'app-candidate-communications'},{'name': 'CandidateDetailComponent', 'selector': 'app-candidate-detail'},{'name': 'CandidateFormComponent', 'selector': 'app-candidate-form'},{'name': 'CandidateItemComponent', 'selector': 'app-candidate-item'},{'name': 'CandidateMainInfoComponent', 'selector': 'app-candidate-main-info'},{'name': 'CandidatesComponent', 'selector': 'app-candidates'},{'name': 'CandidateUpdatesComponent', 'selector': 'app-candidate-updates'},{'name': 'CommunicationCommentComponent', 'selector': 'app-communication-comment'},{'name': 'EditCandidateModalComponent', 'selector': 'app-edit-candidate-modal'},{'name': 'ErrorDisplayComponent', 'selector': 'app-error-display'},{'name': 'MergeCandidateComponent', 'selector': 'app-merge-candidate'},{'name': 'MergeCellComponent', 'selector': 'app-merge-cell'},{'name': 'MergePageComponent', 'selector': 'app-merge-page'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NewCandidateModalComponent', 'selector': 'app-new-candidate-modal'},{'name': 'SignInModalComponent', 'selector': 'app-sign-in-modal'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'MergeCandidateComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'MergeCandidateComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -1,0 +1,941 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>hr-automation-ui documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">hr-automation-ui documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li
+  >
+  MergePageComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/pages/merge-page/merge-page.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-merge-page</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./merge-page.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./merge-page.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#attributeTypes" >attributeTypes</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#candidates" >candidates</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#candidatesMatrix" >candidatesMatrix</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#candidatesMatrixNotEmpty" >candidatesMatrixNotEmpty</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#mergeService" >mergeService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#pageState" >pageState</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#unSubscribe$" >unSubscribe$</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#deleteCandidate" >deleteCandidate</a>
+                            </li>
+                            <li>
+                                <a href="#finalResult" >finalResult</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(mergeService: <a href="../injectables/MergeService.html" target="_self">MergeService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/pages/merge-page/merge-page.component.ts:27</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>mergeService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/MergeService.html" target="_self" >MergeService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deleteCandidate"></a>
+                    <span class="name">
+                        <span ><b>deleteCandidate</b></span>
+                        <a href="#deleteCandidate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>deleteCandidate(candidate: <a href="../interfaces/MergeCandidate.html" target="_self">MergeCandidate</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="75"
+                            class="link-to-prism">src/app/pages/merge-page/merge-page.component.ts:75</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>candidate</td>
+                                    <td>
+                                                <code><a href="../interfaces/MergeCandidate.html" target="_self" >MergeCandidate</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="finalResult"></a>
+                    <span class="name">
+                        <span ><b>finalResult</b></span>
+                        <a href="#finalResult"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>finalResult()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="53"
+                            class="link-to-prism">src/app/pages/merge-page/merge-page.component.ts:53</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/MergeCandidate.html" target="_self" >MergeCandidate</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="79"
+                            class="link-to-prism">src/app/pages/merge-page/merge-page.component.ts:79</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="35"
+                            class="link-to-prism">src/app/pages/merge-page/merge-page.component.ts:35</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="attributeTypes"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>attributeTypes</b></span>
+                        <a href="#attributeTypes"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>CandidateAttributeType[]</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/pages/merge-page/merge-page.component.ts:21</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="candidates"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>candidates</b></span>
+                        <a href="#candidates"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>MergeCandidate[]</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/pages/merge-page/merge-page.component.ts:23</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="candidatesMatrix"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>candidatesMatrix</b></span>
+                        <a href="#candidatesMatrix"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/MergeCandidates.html" target="_self" >Observable&lt;MergeCandidates&gt;</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/pages/merge-page/merge-page.component.ts:19</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="candidatesMatrixNotEmpty"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>candidatesMatrixNotEmpty</b></span>
+                        <a href="#candidatesMatrixNotEmpty"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/pages/merge-page/merge-page.component.ts:25</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="mergeService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>mergeService</b></span>
+                        <a href="#mergeService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/MergeService.html" target="_self" >MergeService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/pages/merge-page/merge-page.component.ts:29</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pageState"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>pageState</b></span>
+                        <a href="#pageState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new PageState()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/pages/merge-page/merge-page.component.ts:17</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="unSubscribe$"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>unSubscribe$</b></span>
+                        <a href="#unSubscribe$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subject&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subject&lt;boolean&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/pages/merge-page/merge-page.component.ts:27</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnDestroy, OnInit } from &#x27;@angular/core&#x27;;
+import { map, Observable, Subject, takeUntil } from &#x27;rxjs&#x27;;
+import * as _ from &#x27;lodash&#x27;;
+import { MergeService } from &#x27;@pages/merge-page/merge.service&#x27;;
+import { PageState } from &#x27;@src/app/utils/pageState&#x27;;
+import { CandidateAttributeType } from &#x27;@src/app/models/candidates&#x27;;
+import { MergeCandidate } from &#x27;@pages/merge-page/view-model/MergeCandidate&#x27;;
+import { MergeCandidateAttribute } from &#x27;@pages/merge-page/view-model/MergeCandidateAttribute&#x27;;
+import { MergeCandidates } from &#x27;./mergeCandidate&#x27;;
+
+@Component({
+  selector: &#x27;app-merge-page&#x27;,
+  templateUrl: &#x27;./merge-page.component.html&#x27;,
+  styleUrls: [&#x27;./merge-page.component.scss&#x27;],
+})
+export class MergePageComponent implements OnInit, OnDestroy {
+  public pageState &#x3D; new PageState();
+
+  public candidatesMatrix!: Observable&lt;MergeCandidates&gt;;
+
+  public attributeTypes!: CandidateAttributeType[];
+
+  public candidates!: MergeCandidate[];
+
+  public candidatesMatrixNotEmpty!: boolean;
+
+  private unSubscribe$: Subject&lt;boolean&gt; &#x3D; new Subject&lt;boolean&gt;();
+
+  constructor(public mergeService: MergeService) {
+    this.candidatesMatrix &#x3D; this.mergeService
+      .getCandidates()
+      .pipe(map((candidates) &#x3D;&gt; new MergeCandidates(candidates)));
+  }
+
+  ngOnInit(): void {
+    this.pageState.startLoading();
+    this.candidatesMatrix.pipe(takeUntil(this.unSubscribe$)).subscribe({
+      next: (matrix: MergeCandidates) &#x3D;&gt; {
+        if (matrix) {
+          this.pageState.finishLoading();
+        }
+        this.candidatesMatrixNotEmpty &#x3D; !matrix.isEmpty();
+        this.candidates &#x3D; matrix.getCandidates();
+        this.attributeTypes &#x3D; matrix.getAllAttributeTypesFrom();
+      },
+      error: (error: any) &#x3D;&gt; {
+        this.pageState.catchError(error);
+        this.pageState.finishLoading();
+      },
+    });
+  }
+
+  finalResult(): MergeCandidate {
+    const result &#x3D; this.candidates.reduce((res, candidate) &#x3D;&gt; {
+      res.id &#x3D; &#x27;Results&#x27;;
+      res.attributes &#x3D; (res.attributes || []).concat(
+        candidate.attributes.filter((a) &#x3D;&gt; a.selected)
+      );
+      res.attributesMap &#x3D; new Map&lt;string, MergeCandidateAttribute[]&gt;(
+        Object.entries(
+          _.chain(res.attributes)
+            .groupBy((attr) &#x3D;&gt; attr.attributeTypes.name)
+            .mapValues((item) &#x3D;&gt; _.uniqBy(item, &#x27;value&#x27;))
+            .value()
+        )
+      );
+      return res;
+    }, {} as MergeCandidate);
+
+    // eslint-disable-next-line no-console
+    console.log(result);
+    return result;
+  }
+
+  deleteCandidate(candidate: MergeCandidate) {
+    this.mergeService.deleteCandidate(candidate);
+  }
+
+  ngOnDestroy(): void {
+    this.unSubscribe$.next(true);
+    this.unSubscribe$.complete();
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;app-actions-bar-merge&gt;&lt;/app-actions-bar-merge&gt;
+&lt;mat-progress-bar
+  mode&#x3D;&quot;indeterminate&quot;
+  color&#x3D;&quot;primary&quot;
+  *ngIf&#x3D;&quot;pageState.loading&quot;
+&gt;&lt;/mat-progress-bar&gt;
+&lt;ng-container *ngIf&#x3D;&quot;!pageState.loading&quot;&gt;
+  &lt;div *ngIf&#x3D;&quot;candidatesMatrixNotEmpty; else noCandidatesId&quot; class&#x3D;&quot;candidate-merge-container gap-10&quot;&gt;
+    &lt;div class&#x3D;&quot;desc-titles-container&quot;&gt;
+      &lt;div class&#x3D;&quot;desc-title&quot;&gt;&lt;/div&gt;
+      &lt;ng-container *ngFor&#x3D;&quot;let attributeType of attributeTypes&quot;&gt;
+        &lt;div class&#x3D;&quot;desc-title&quot;&gt;
+          &lt;ng-container [ngSwitch]&#x3D;&quot;attributeType.name&quot;&gt;
+            &lt;mat-icon [inline]&#x3D;&quot;true&quot; *ngSwitchCase&#x3D;&quot;&#x27;email&#x27;&quot;&gt;email&lt;/mat-icon&gt;
+            &lt;mat-icon [inline]&#x3D;&quot;true&quot; *ngSwitchCase&#x3D;&quot;&#x27;facebookid&#x27;&quot;&gt;facebook&lt;/mat-icon&gt;
+            &lt;mat-icon [inline]&#x3D;&quot;true&quot; *ngSwitchCase&#x3D;&quot;&#x27;phone&#x27;&quot;&gt;phone&lt;/mat-icon&gt;
+            &lt;mat-icon [inline]&#x3D;&quot;true&quot; *ngSwitchCase&#x3D;&quot;&#x27;twitter&#x27;&quot;&gt;chat&lt;/mat-icon&gt;
+            &lt;mat-icon [inline]&#x3D;&quot;true&quot; *ngSwitchCase&#x3D;&quot;&#x27;firstname&#x27;&quot;&gt;person&lt;/mat-icon&gt;
+            &lt;mat-icon [inline]&#x3D;&quot;true&quot; *ngSwitchCase&#x3D;&quot;&#x27;lastname&#x27;&quot;&gt;person&lt;/mat-icon&gt;
+            &lt;mat-icon [inline]&#x3D;&quot;true&quot; *ngSwitchDefault&gt;info&lt;/mat-icon&gt;
+          &lt;/ng-container&gt;
+          &lt;span&gt;&amp;nbsp;&lt;/span&gt;        
+          {{attributeType.name}}
+        &lt;/div&gt;
+      &lt;/ng-container&gt;
+  &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;candidates-container gap-10&quot;&gt;
+      &lt;ng-container *ngFor&#x3D;&quot;let candidate of candidates&quot;&gt;
+        &lt;app-merge-candidate          
+          [candidate]&#x3D;&#x27;candidate&#x27;
+          [attributeTypes]&#x3D;&#x27;attributeTypes&#x27;
+          (delete)&#x3D;&#x27;deleteCandidate(candidate)&#x27;
+        &gt;&lt;/app-merge-candidate&gt;
+      &lt;/ng-container&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;desc-result-container&quot;&gt;
+      &lt;app-merge-candidate
+        [candidate]&#x3D;&#x27;finalResult()&#x27;
+        [attributeTypes]&#x3D;&#x27;attributeTypes&#x27;
+        [editable]&#x3D;&#x27;false&#x27;
+      &gt;&lt;/app-merge-candidate&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/ng-container&gt;
+
+&lt;ng-template #noCandidatesId&gt;
+  &lt;p class&#x3D;&quot;nothing-merge&quot;&gt;You have not selected candidates for the merge. Please add more candidates.&lt;/p&gt;
+&lt;/ng-template&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./merge-page.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">@import &#x27;src/styles&#x27;;
+@import &#x27;src/styles/theme&#x27;;
+
+.candidate-merge-container {
+  font-family: Roboto, &quot;Helvetica Neue&quot;, sans-serif;
+  margin: 20px 100px;
+  padding-bottom: 10px;
+  height: auto;
+  display: flex;
+
+  .desc-titles-container {
+    min-width: 200px;
+
+    .desc-title {
+      height: 90px;
+      display: flex;
+      padding: 10px;
+      background-color: black;
+      margin-top: 10px;
+      border-radius: 5px;
+      box-shadow: $box-shadow;
+      border: 1px solid $light-back-color;
+      box-sizing: border-box;
+    }
+  }
+  
+  .candidates-container {
+    display: flex;
+    overflow-x: auto;
+  }  
+
+  .desc-result-container {
+    min-width: 300px;
+  }
+}
+
+.nothing-merge {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 150px;
+  text-align: center;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><app-actions-bar-merge></app-actions-bar-merge><mat-progress-bar  mode="indeterminate"  color="primary"  *ngIf="pageState.loading"></mat-progress-bar><ng-container *ngIf="!pageState.loading">  <div *ngIf="candidatesMatrixNotEmpty; else noCandidatesId" class="candidate-merge-container gap-10">    <div class="desc-titles-container">      <div class="desc-title"></div>      <ng-container *ngFor="let attributeType of attributeTypes">        <div class="desc-title">          <ng-container [ngSwitch]="attributeType.name">            <mat-icon [inline]="true" *ngSwitchCase="\'email\'">email</mat-icon>            <mat-icon [inline]="true" *ngSwitchCase="\'facebookid\'">facebook</mat-icon>            <mat-icon [inline]="true" *ngSwitchCase="\'phone\'">phone</mat-icon>            <mat-icon [inline]="true" *ngSwitchCase="\'twitter\'">chat</mat-icon>            <mat-icon [inline]="true" *ngSwitchCase="\'firstname\'">person</mat-icon>            <mat-icon [inline]="true" *ngSwitchCase="\'lastname\'">person</mat-icon>            <mat-icon [inline]="true" *ngSwitchDefault>info</mat-icon>          </ng-container>          <span>&nbsp;</span>                  {{attributeType.name}}        </div>      </ng-container>  </div>    <div class="candidates-container gap-10">      <ng-container *ngFor="let candidate of candidates">        <app-merge-candidate                    [candidate]=\'candidate\'          [attributeTypes]=\'attributeTypes\'          (delete)=\'deleteCandidate(candidate)\'        ></app-merge-candidate>      </ng-container>    </div>    <div class="desc-result-container">      <app-merge-candidate        [candidate]=\'finalResult()\'        [attributeTypes]=\'attributeTypes\'        [editable]=\'false\'      ></app-merge-candidate>    </div>  </div></ng-container><ng-template #noCandidatesId>  <p class="nothing-merge">You have not selected candidates for the merge. Please add more candidates.</p></ng-template></div>'
+    var COMPONENTS = [{'name': 'ActionsBarComponent', 'selector': 'app-actions-bar'},{'name': 'ActionsBarMergeComponent', 'selector': 'app-actions-bar-merge'},{'name': 'AddCommentModalComponent', 'selector': 'app-add-comment-modal'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CandidateActionComponent', 'selector': 'app-candidate-action'},{'name': 'CandidateCommunicationsComponent', 'selector': 'app-candidate-communications'},{'name': 'CandidateDetailComponent', 'selector': 'app-candidate-detail'},{'name': 'CandidateFormComponent', 'selector': 'app-candidate-form'},{'name': 'CandidateItemComponent', 'selector': 'app-candidate-item'},{'name': 'CandidateMainInfoComponent', 'selector': 'app-candidate-main-info'},{'name': 'CandidatesComponent', 'selector': 'app-candidates'},{'name': 'CandidateUpdatesComponent', 'selector': 'app-candidate-updates'},{'name': 'CommunicationCommentComponent', 'selector': 'app-communication-comment'},{'name': 'EditCandidateModalComponent', 'selector': 'app-edit-candidate-modal'},{'name': 'ErrorDisplayComponent', 'selector': 'app-error-display'},{'name': 'MergeCandidateComponent', 'selector': 'app-merge-candidate'},{'name': 'MergeCellComponent', 'selector': 'app-merge-cell'},{'name': 'MergePageComponent', 'selector': 'app-merge-page'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NewCandidateModalComponent', 'selector': 'app-new-candidate-modal'},{'name': 'SignInModalComponent', 'selector': 'app-sign-in-modal'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'MergePageComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'MergePageComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
