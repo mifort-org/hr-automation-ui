@@ -1,0 +1,707 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>hr-automation-ui documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">hr-automation-ui documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content miscellaneous-variables">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Miscellaneous</li>
+  <li>Variables</li>
+</ol>
+
+<section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <ul class="index-list">
+                        <li>
+                            <a href="#CANDIDATE_STATUSES" title="src/app/constants/candidates.ts" ><b>CANDIDATE_STATUSES</b>&nbsp;&nbsp;&nbsp;(src/.../candidates.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#context" title="src/test.ts" ><b>context</b>&nbsp;&nbsp;&nbsp;(src/.../test.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#defaultErrorhandler" title="src/app/utils/functions.ts" ><b>defaultErrorhandler</b>&nbsp;&nbsp;&nbsp;(src/.../functions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#EMPTY_VALUES" title="src/app/utils/validators.ts" ><b>EMPTY_VALUES</b>&nbsp;&nbsp;&nbsp;(src/.../validators.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#environment" title="src/environments/environment.prod.ts" ><b>environment</b>&nbsp;&nbsp;&nbsp;(src/.../environment.prod.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#environment" title="src/environments/environment.ts" ><b>environment</b>&nbsp;&nbsp;&nbsp;(src/.../environment.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ERROR_MESSAGE" title="src/app/constants/strings.ts" ><b>ERROR_MESSAGE</b>&nbsp;&nbsp;&nbsp;(src/.../strings.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ERROR_STATUS_CODES" title="src/app/constants/errorStatusCode.ts" ><b>ERROR_STATUS_CODES</b>&nbsp;&nbsp;&nbsp;(src/.../errorStatusCode.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#getFullName" title="src/app/utils/functions.ts" ><b>getFullName</b>&nbsp;&nbsp;&nbsp;(src/.../functions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#GLOBAL_OPTIONS" title="src/app/services/fetch.service.ts" ><b>GLOBAL_OPTIONS</b>&nbsp;&nbsp;&nbsp;(src/.../fetch.service.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#MODAL_SIZE" title="src/app/services/modal.service.ts" ><b>MODAL_SIZE</b>&nbsp;&nbsp;&nbsp;(src/.../modal.service.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#NOTIFICATIONS_DURATION" title="src/app/services/notification.service.ts" ><b>NOTIFICATIONS_DURATION</b>&nbsp;&nbsp;&nbsp;(src/.../notification.service.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#require" title="src/test.ts" ><b>require</b>&nbsp;&nbsp;&nbsp;(src/.../test.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ROUTES" title="src/app/routes.ts" ><b>ROUTES</b>&nbsp;&nbsp;&nbsp;(src/.../routes.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#SUCCESS_CODE" title="src/app/constants/errorStatusCode.ts" ><b>SUCCESS_CODE</b>&nbsp;&nbsp;&nbsp;(src/.../errorStatusCode.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#TEXT_FIELD_ERRORS" title="src/app/constants/strings.ts" ><b>TEXT_FIELD_ERRORS</b>&nbsp;&nbsp;&nbsp;(src/.../strings.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#VALIDATORS" title="src/app/utils/validators.ts" ><b>VALIDATORS</b>&nbsp;&nbsp;&nbsp;(src/.../validators.ts)</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <h3>src/app/constants/candidates.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CANDIDATE_STATUSES"></a>
+                    <span class="name">
+                        <span ><b>CANDIDATE_STATUSES</b></span>
+                        <a href="#CANDIDATE_STATUSES"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+  {
+    label: &#x27;Unemployed&#x27;,
+    value: ECandidateStatus.UNEMPLOYED,
+  },
+  {
+    label: &#x27;Employed&#x27;,
+    value: ECandidateStatus.EMPLOYED,
+  },
+  {
+    label: &#x27;Created&#x27;,
+    value: ECandidateStatus.CREATED,
+  },
+]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/test.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="context"></a>
+                    <span class="name">
+                        <span ><b>context</b></span>
+                        <a href="#context"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>require.context(&#x27;./&#x27;, true, /\.spec\.ts$/)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="require"></a>
+                    <span class="name">
+                        <span ><b>require</b></span>
+                        <a href="#require"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>literal type</code>
+
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/utils/functions.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="defaultErrorhandler"></a>
+                    <span class="name">
+                        <span ><b>defaultErrorhandler</b></span>
+                        <a href="#defaultErrorhandler"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(
+  notification: NotificationService,
+  error: { status: number }
+) &#x3D;&gt; {
+  notification.show(
+    ERROR_MESSAGE[error?.status || ERROR_STATUS_CODES.INTERNAL_SERVER_ERROR],
+    ENotificationMode.ERROR
+  );
+  return throwError(&#x27;error&#x27;);
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getFullName"></a>
+                    <span class="name">
+                        <span ><b>getFullName</b></span>
+                        <a href="#getFullName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(candidateAttributes: CandidateAttribute[]): string &#x3D;&gt; {
+  const firstName &#x3D; candidateAttributes.find((attr) &#x3D;&gt; attr.attributeTypes.name &#x3D;&#x3D;&#x3D; &#x27;firstname&#x27;);
+  const lastName &#x3D; candidateAttributes.find((attr) &#x3D;&gt; attr.attributeTypes.name &#x3D;&#x3D;&#x3D; &#x27;lastname&#x27;);
+  return firstName?.value.length &amp;&amp; lastName?.value.length
+    ? &#x60;${firstName.value} ${lastName.value}&#x60;
+    : &#x27;No name&#x27;;
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/utils/validators.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="EMPTY_VALUES"></a>
+                    <span class="name">
+                        <span ><b>EMPTY_VALUES</b></span>
+                        <a href="#EMPTY_VALUES"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[&#x27;&#x27;, undefined, null]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="VALIDATORS"></a>
+                    <span class="name">
+                        <span ><b>VALIDATORS</b></span>
+                        <a href="#VALIDATORS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  identifiedOfField(identifiedArray: AttributeType[], form: FormGroup): ValidationErrors | null {
+    if (identifiedArray.some((el) &#x3D;&gt; !EMPTY_VALUES.includes(form.controls[el?.name]?.value))) {
+      return null;
+    }
+    return { identifiedOfField: TEXT_FIELD_ERRORS.IDENTIFIER_FIELD };
+  },
+
+  identifiedOfData(identifiedArray: AttributeType[], data: any): string | null {
+    if (identifiedArray.some((el) &#x3D;&gt; !EMPTY_VALUES.includes(data[el?.name]))) {
+      return null;
+    }
+    return TEXT_FIELD_ERRORS.IDENTIFIER_FIELD;
+  },
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/environments/environment.prod.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="environment"></a>
+                    <span class="name">
+                        <span ><b>environment</b></span>
+                        <a href="#environment"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  production: true,
+  baseAPIUrl: &#x27;http://hr-automation-static-ip-2387069d6f253d30.elb.us-east-1.amazonaws.com:8090/&#x27;,
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/environments/environment.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="environment"></a>
+                    <span class="name">
+                        <span ><b>environment</b></span>
+                        <a href="#environment"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  production: false,
+  baseAPIUrl: &#x27;http://hr-automation-static-ip-2387069d6f253d30.elb.us-east-1.amazonaws.com:8090/&#x27;,
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/constants/strings.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ERROR_MESSAGE"></a>
+                    <span class="name">
+                        <span ><b>ERROR_MESSAGE</b></span>
+                        <a href="#ERROR_MESSAGE"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  [ERROR_STATUS_CODES.INTERNAL_SERVER_ERROR]: &#x27;500 Internal Server Error. Please, try later&#x27;,
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="TEXT_FIELD_ERRORS"></a>
+                    <span class="name">
+                        <span ><b>TEXT_FIELD_ERRORS</b></span>
+                        <a href="#TEXT_FIELD_ERRORS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  IDENTIFIER_FIELD: &#x27;Please fill one of identified field (*)&#x27;,
+  FORM_INVALID: &#x27;Please, check out the form inputs&#x27;,
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/constants/errorStatusCode.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ERROR_STATUS_CODES"></a>
+                    <span class="name">
+                        <span ><b>ERROR_STATUS_CODES</b></span>
+                        <a href="#ERROR_STATUS_CODES"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  BAD_REQUEST: 400,
+  ACCESS_DENIED: 403,
+  NOT_FOUND: 404,
+  INTERNAL_SERVER_ERROR: 500,
+  TEMPORARILY_UNAVAILABLE: 503,
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="SUCCESS_CODE"></a>
+                    <span class="name">
+                        <span ><b>SUCCESS_CODE</b></span>
+                        <a href="#SUCCESS_CODE"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>200</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/services/fetch.service.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="GLOBAL_OPTIONS"></a>
+                    <span class="name">
+                        <span ><b>GLOBAL_OPTIONS</b></span>
+                        <a href="#GLOBAL_OPTIONS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/IOptions.html" target="_self" >IOptions</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/services/modal.service.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="MODAL_SIZE"></a>
+                    <span class="name">
+                        <span ><b>MODAL_SIZE</b></span>
+                        <a href="#MODAL_SIZE"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  [EModalSizes.XS]: &#x27;250px&#x27;,
+  [EModalSizes.SM]: &#x27;450px&#x27;,
+  [EModalSizes.MD]: &#x27;650px&#x27;,
+  [EModalSizes.LG]: &#x27;1200px&#x27;,
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/services/notification.service.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="NOTIFICATIONS_DURATION"></a>
+                    <span class="name">
+                        <span ><b>NOTIFICATIONS_DURATION</b></span>
+                        <a href="#NOTIFICATIONS_DURATION"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  STANDART: 3000,
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/routes.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ROUTES"></a>
+                    <span class="name">
+                        <span ><b>ROUTES</b></span>
+                        <a href="#ROUTES"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  CANDIDATES: &#x27;candidates&#x27;,
+  CANDIDATE_DETAIL: &#x27;candidates/details/:id&#x27;,
+  CANDIDATES_MERGE: &#x27;merge&#x27;,
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'miscellaneous-variables';
+            var COMPODOC_CURRENT_PAGE_URL = 'variables.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
