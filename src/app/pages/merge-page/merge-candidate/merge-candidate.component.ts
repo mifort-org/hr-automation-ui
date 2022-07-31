@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MergeService } from '@pages/merge-page/merge.service';
 import { MergeCandidate } from '@pages/merge-page/view-model/MergeCandidate';
-import { CandidateAttributeType } from '@src/app/models/candidates';
 import { MergeCandidateAttribute } from '@pages/merge-page/view-model/MergeCandidateAttribute';
+import { CandidateAttributeType } from '@src/app/models/candidateAttributeType';
 
 @Component({
   selector: 'app-merge-candidate',

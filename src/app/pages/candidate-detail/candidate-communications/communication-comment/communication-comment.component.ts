@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CommentData, HistoryElement } from '@src/app/models/history';
+import { CommentData } from '@src/app/models/commentData';
+import { HistoryElement } from '@src/app/models/historyElement';
 
 @Component({
   selector: 'app-communication-comment',

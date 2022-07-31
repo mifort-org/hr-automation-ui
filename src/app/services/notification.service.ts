@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ENotificationMode } from '@constants/notification';
+import { NotificationMode } from '@constants/notification';
 
 const NOTIFICATIONS_DURATION = {
   STANDART: 3000,
@@ -13,7 +13,7 @@ export class NotificationService {
 
   public show(
     message: string,
-    mode?: ENotificationMode,
+    mode?: NotificationMode,
     duration: number = NOTIFICATIONS_DURATION.STANDART
   ) {
     this.snackBar.open(message, '', {

@@ -1,3 +1,8 @@
+/**
+ * @typedef AttributeType
+ * Represents an attribute type
+ */
+
 export interface AttributeType {
   basicType: string;
   id: number;
@@ -5,8 +10,4 @@ export interface AttributeType {
   name: string;
   label: string;
   validation: string;
-}
-
-export interface AttributeTypeDictionary {
-  [key: string]: AttributeType;
 }

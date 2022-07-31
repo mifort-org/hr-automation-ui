@@ -1,4 +1,4 @@
-export enum ECandidateStatus {
+export enum CandidateStatus {
   UNEMPLOYED = 'unemployed',
   EMPLOYED = 'employed',
   CREATED = 'created',
@@ -7,14 +7,14 @@ export enum ECandidateStatus {
 export const CANDIDATE_STATUSES = [
   {
     label: 'Unemployed',
-    value: ECandidateStatus.UNEMPLOYED,
+    value: CandidateStatus.UNEMPLOYED,
   },
   {
     label: 'Employed',
-    value: ECandidateStatus.EMPLOYED,
+    value: CandidateStatus.EMPLOYED,
   },
   {
     label: 'Created',
-    value: ECandidateStatus.CREATED,
+    value: CandidateStatus.CREATED,
   },
 ];

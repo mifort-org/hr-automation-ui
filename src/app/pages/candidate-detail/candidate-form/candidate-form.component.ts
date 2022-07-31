@@ -1,10 +1,10 @@
 import { FormControl, FormGroup } from '@angular/forms';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
-import { AttributeType } from '@src/app/models/attributes';
+import { AttributeType } from '@src/app/models/attributeType';
 import { AttributesService } from '@services/attributes.service';
 import { VALIDATORS } from '@utils/validators';
-import { Candidate } from '@src/app/models/candidates';
+import { Candidate } from '@src/app/models/candidate';
 
 @Component({
   selector: 'app-candidate-form',

@@ -1,4 +1,4 @@
-import { CandidateAttribute } from '@src/app/models/candidates';
+import { CandidateAttribute } from '@src/app/models/candidateAttribute';
 
 export interface MergeCandidateAttribute extends CandidateAttribute {
   candidateId: string;

@@ -8,13 +8,13 @@ import { ERROR_STATUS_CODES } from '@constants/errorStatusCode';
 import { ROUTES } from '@src/app/routes';
 import { NotificationService } from '@services/notification.service';
 import { CandidatesService } from '@services/candidates.service';
-import { ECandidateStatus } from '@constants/candidates';
-import { ENotificationMode } from '@constants/notification';
+import { CandidateStatus } from '@constants/candidates';
+import { NotificationMode } from '@constants/notification';
 import { ERROR_MESSAGE, TEXT_FIELD_ERRORS } from '@constants/strings';
 
 interface IFormData {
   id: string;
-  status: ECandidateStatus;
+  status: CandidateStatus;
 }
 
 @Component({
@@ -46,7 +46,7 @@ export class NewCandidateModalComponent {
 
   public submitNewCandidate(): void {
     if (this.formData === null || this.form.invalid) {
-      this.notificationService.show(TEXT_FIELD_ERRORS.FORM_INVALID, ENotificationMode.ERROR);
+      this.notificationService.show(TEXT_FIELD_ERRORS.FORM_INVALID, NotificationMode.ERROR);
     } else {
       this.modalState.startLoading();
       this.candidateService.createNewCandidate(this.formData).subscribe({
@@ -59,7 +59,7 @@ export class NewCandidateModalComponent {
           this.modalState.finishLoading();
           this.notificationService.show(
             ERROR_MESSAGE[error?.status || ERROR_STATUS_CODES.INTERNAL_SERVER_ERROR],
-            ENotificationMode.ERROR
+            NotificationMode.ERROR
           );
         },
       });
