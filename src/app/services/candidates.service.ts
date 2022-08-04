@@ -1,6 +1,6 @@
 import { HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
 import { Keywords } from '@src/app/models/keywords';
 import { CandidateStatus } from '@constants/candidates';
 import { defaultErrorhandler, getFullName } from '@utils/functions';

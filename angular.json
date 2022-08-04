@@ -105,6 +105,7 @@
   },
   "defaultProject": "hr-automation-ui",
   "cli": {
+    "analytics": "f0877087-7665-498e-abb5-90410902e1c8",
     "defaultCollection": "@angular-eslint/schematics"
   }
 }

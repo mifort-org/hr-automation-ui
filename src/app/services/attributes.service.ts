@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
+import { Injectable } from '@angular/core';
 import { AttributeType } from '@src/app/models/attributeType';
 import { AttributeTypeDictionary } from '../models/attributeTypeDictionary';
 import { FetchService } from './fetch.service';
@@ -11,6 +11,7 @@ interface AttributeTypeDto {
   name: string;
   label: string;
   validation: string;
+  icon: string;
 }
 
 @Injectable({

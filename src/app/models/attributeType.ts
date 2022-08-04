@@ -10,4 +10,5 @@ export interface AttributeType {
   name: string;
   label: string;
   validation: string;
+  icon: string;
 }

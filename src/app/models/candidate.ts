@@ -18,6 +18,6 @@ export interface Candidate {
   keywords: Keywords[];
   communicationHistory: CommunicationHistory[];
   candidateAttributes: CandidateAttribute[];
-  CandidateAttributesValues: CandidateAttributesValues[];
+  candidateAttributesValues: CandidateAttributesValues[];
   mergeCandidates: any;
 }
