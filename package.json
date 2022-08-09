@@ -14,7 +14,8 @@
     "prepare": "husky install",
     "compodoc:build": "compodoc -p tsconfig.doc.json",
     "compodoc:build-and-serve": "compodoc -p tsconfig.doc.json -s",
-    "compodoc:serve": "compodoc -s"
+    "compodoc:serve": "compodoc -s",
+    "deploy-aws": "node aws-deploy.js"
   },
   "private": true,
   "dependencies": {
@@ -29,6 +30,8 @@
     "@angular/platform-browser-dynamic": "~13.2.0",
     "@angular/router": "~13.2.0",
     "@compodoc/compodoc": "^1.1.19",
+    "aws-sdk": "^2.1190.0",
+    "dotenv": "^16.0.1",
     "lodash": "^4.17.21",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
