@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NonNullableFormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 
 import { NotificationService } from '@services/notification.service';
@@ -14,7 +14,7 @@ export class SignInModalComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<SignInModalComponent>,
     private notification: NotificationService,
-    private formBuilder: FormBuilder
+    private formBuilder: NonNullableFormBuilder
   ) {}
 
   ngOnInit(): void {

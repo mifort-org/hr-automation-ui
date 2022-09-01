@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { NonNullableFormBuilder, FormGroup } from '@angular/forms';
 import { CandidatesService } from '@services/candidates.service';
 import { Candidate } from '@src/app/models/candidate';
 import { CandidatesFilterData } from '@src/app/models/candidatesFilterData';
@@ -21,7 +21,10 @@ export class CandidatesComponent implements OnInit {
 
   public keywordsInput = '';
 
-  constructor(private candidatesService: CandidatesService, private formBuilder: FormBuilder) {}
+  constructor(
+    private candidatesService: CandidatesService,
+    private formBuilder: NonNullableFormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.filterForm = this.formBuilder.group({
