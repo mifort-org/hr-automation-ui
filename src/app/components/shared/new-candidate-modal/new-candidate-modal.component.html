@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>Create new candidate</h1>
 <div mat-dialog-content>
-  <div *ngIf="!modalState?.loading; else loading">
+  <div *ngIf="!modalState.loading; else loading">
     <form [formGroup]="form">
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Name</mat-label>
@@ -14,11 +14,11 @@
     mat-raised-button
     color="primary"
     (click)="submitNewCandidate()"
-    [disabled]="modalState?.loading"
+    [disabled]="modalState.loading"
   >
     Create
   </button>
-  <button mat-button (click)="closeModal()" [disabled]="modalState?.loading">Cancel</button>
+  <button mat-button (click)="closeModal()" [disabled]="modalState.loading">Cancel</button>
 </div>
 
 <ng-template #loading>

@@ -32,7 +32,7 @@ export class CandidateFormComponent implements OnInit {
         const attributeName = this.candidate?.candidateAttributes.find(
           (attr) => attr.attributeTypes.name === el.name
         );
-        group[el.name] = new FormControl(attributeName?.value || '');
+        group[el.name] = new FormControl<string>(attributeName?.value || '', { nonNullable: true });
       });
 
       this.form = new FormGroup(group);

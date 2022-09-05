@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NonNullableFormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 
 import { PageState } from '@utils/pageState';
@@ -30,7 +30,7 @@ export class NewCandidateModalComponent {
 
   constructor(
     private dialogRef: MatDialogRef<NewCandidateModalComponent>,
-    private formBuilder: FormBuilder,
+    private formBuilder: NonNullableFormBuilder,
     private candidateService: CandidatesService,
     private notificationService: NotificationService,
     private router: Router

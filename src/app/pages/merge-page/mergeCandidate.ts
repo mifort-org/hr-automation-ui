@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import * as _ from 'lodash-es';
 import { CandidateAttributeType } from '@src/app/models/candidateAttributeType';
 import { MergeCandidate } from './view-model/MergeCandidate';
 
@@ -9,13 +9,13 @@ export class MergeCandidates {
 
   constructor(candidates: MergeCandidate[]) {
     this.candidates = candidates;
-    this.allAttributeTypes = _(candidates)
+    this.allAttributeTypes = _.chain(candidates)
       .flatMap((c) => c.attributes.map((a) => a.attributeTypes))
       .uniqBy('id')
       .reduce(
         (array: CandidateAttributeType[], a: CandidateAttributeType) => array.concat([a]),
         []
-      );
+      ).value();
   }
 
   getAllAttributeTypesFrom(): CandidateAttributeType[] {

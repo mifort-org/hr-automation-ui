@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, NonNullableFormBuilder} from '@angular/forms';
 import { Candidate } from '@src/app/models/candidate';
 import { CommentData } from '@src/app/models/commentData';
 
@@ -16,7 +16,7 @@ export class AddCommentModalComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<AddCommentModalComponent>,
-    private formBuilder: FormBuilder
+    private formBuilder: NonNullableFormBuilder
   ) {}
 
   ngOnInit(): void {
