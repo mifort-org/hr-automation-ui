@@ -1,5 +1,10 @@
 @import 'src/styles/colors';
 
+.mat-badge-content {
+  top: 7px;
+  margin-right: -15px;
+}
+
 .sticky-bar{
     position: sticky;
     top: 0;
@@ -8,4 +13,3 @@
     width: 100%;
     z-index: 1000;
 }
-
