@@ -12,10 +12,8 @@ export class MergeCandidates {
     this.allAttributeTypes = _.chain(candidates)
       .flatMap((c) => c.attributes.map((a) => a.attributeTypes))
       .uniqBy('id')
-      .reduce(
-        (array: CandidateAttributeType[], a: CandidateAttributeType) => array.concat([a]),
-        []
-      ).value();
+      .reduce((array: CandidateAttributeType[], a: CandidateAttributeType) => array.concat([a]), [])
+      .value();
   }
 
   getAllAttributeTypesFrom(): CandidateAttributeType[] {
