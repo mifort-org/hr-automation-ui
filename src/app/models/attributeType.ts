@@ -6,7 +6,7 @@
 export interface AttributeType {
   basicType: string;
   id: number;
-  identifier: boolean;
+  isIdentifier: boolean;
   name: string;
   label: string;
   validation: string;

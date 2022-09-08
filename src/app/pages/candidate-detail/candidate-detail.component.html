@@ -1,5 +1,5 @@
-<div class="candidate-detail-container">
-  <app-candidate-action></app-candidate-action>
+<div *ngIf="candidate" class="candidate-detail-container">
+  <app-candidate-action [currentCandidate]="candidate" (updateCandidate)="updateCandidate($event)"></app-candidate-action>
   <div class="row">
     <div class="col-3 col-10-sm">
       <mat-card class="example-card">
@@ -9,13 +9,13 @@
               matBadge="0"
               matBadgePosition="after"
               matBadgeSize="small"
-              [matBadgeColor]="(candidate$ | async)?.status | status"
+              [matBadgeColor]="candidate.status | status"
               class="hide-text"
-              >{{ (candidate$ | async)?.fullName }}</span
+              >{{ candidate.fullName }}</span
             ></mat-card-title
           >
           <mat-card-subtitle>{{
-            (candidate$ | async)?.id
+            candidate.id
           }}</mat-card-subtitle>
         </mat-card-header>
         <div class="image-frame" mat-card-image>
@@ -25,7 +25,7 @@
           <mat-chip-list>
             <mat-chip
               color="primary"
-              *ngFor="let keyword of (candidate$ | async)?.keywords"
+              *ngFor="let keyword of candidate.keywords"
               >{{ keyword?.id | titlecase }}</mat-chip
             >
           </mat-chip-list>
@@ -39,7 +39,7 @@
         animationDuration="0ms"
       >
         <mat-tab label="Details info">
-          <app-candidate-main-info></app-candidate-main-info>
+          <app-candidate-main-info [candidate]="candidate"></app-candidate-main-info>
         </mat-tab>
         <mat-tab label="Communication History"
           ><app-candidate-communications></app-candidate-communications

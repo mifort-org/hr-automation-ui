@@ -1,7 +1,7 @@
 <table
   mat-table
-  *ngIf="candidate$ | async"
-  [dataSource]="(candidate$ | async)?.candidateAttributesValues || []"
+  *ngIf="candidate"
+  [dataSource]="candidate.candidateAttributesValues"
 >
   <caption>
     Candidate attributes

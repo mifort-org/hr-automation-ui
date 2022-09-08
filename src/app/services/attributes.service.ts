@@ -7,7 +7,7 @@ import { FetchService } from './fetch.service';
 interface AttributeTypeDto {
   basicType: string;
   id: number;
-  identifier: boolean;
+  isIdentifier: boolean;
   name: string;
   label: string;
   validation: string;
@@ -33,7 +33,7 @@ export class AttributesService {
       .subscribe({
         next: (resolve) => {
           this.attributes = resolve;
-          this.identifiedAttributes = resolve.filter((el: AttributeType) => el.identifier);
+          this.identifiedAttributes = resolve.filter((el: AttributeType) => el.isIdentifier);
           resolve.forEach((el) => {
             this.attributesDictionary[el.name] = { ...el };
           });

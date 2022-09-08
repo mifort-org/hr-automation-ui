@@ -2,13 +2,13 @@
   <ng-container *ngFor="let attribute of attributesData" [ngSwitch]="attribute?.basicType">
     <mat-form-field appearance="outline" class="full-width" *ngSwitchCase="'number'">
       <mat-label
-        >{{ attribute.name | titlecase }}<span *ngIf="attribute?.identifier"> * </span></mat-label
+        >{{ attribute.name | titlecase }}<span *ngIf="attribute?.isIdentifier"> * </span></mat-label
       >
       <input matInput [formControlName]="attribute.name" type="number" />
     </mat-form-field>
     <mat-form-field appearance="outline" class="full-width" *ngSwitchCase="'string'">
       <mat-label
-        >{{ attribute.name | titlecase }}<span *ngIf="attribute?.identifier"> * </span></mat-label
+        >{{ attribute.name | titlecase }}<span *ngIf="attribute?.isIdentifier"> * </span></mat-label
       >
       <input matInput [formControlName]="attribute.name" />
       <mat-error *ngIf="attribute?.name && formErrors[attribute.name]">
@@ -16,15 +16,15 @@
       </mat-error>
     </mat-form-field>
     <div *ngSwitchCase="'boolean'" class="full-width mb-20">
-      <mat-radio-group>
+      <mat-radio-group [formControlName]="attribute.name">
         <div class="mb-10">
           <label class="subheading-2 text-grey"
-            >{{ attribute.name | titlecase }}<span *ngIf="attribute?.identifier"> * </span></label
+            >{{ attribute.name | titlecase }}<span *ngIf="attribute?.isIdentifier"> * </span></label
           >
         </div>
         <div class="flex">
-          <mat-radio-button [value]="true" class="mr-20">True</mat-radio-button>
-          <mat-radio-button [value]="false">False</mat-radio-button>
+          <mat-radio-button [value]="'male'" class="mr-20">Male</mat-radio-button>
+          <mat-radio-button [value]="'female'">Female</mat-radio-button>
         </div>
       </mat-radio-group>
     </div>

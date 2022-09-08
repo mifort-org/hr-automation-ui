@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { switchMap, take } from 'rxjs';
+import { ActivatedRoute, Params } from '@angular/router';
 import { CandidateDetailService } from '@services/candidate-detail.service';
 import { Candidate } from '@src/app/models/candidate';
 
@@ -10,11 +11,35 @@ import { Candidate } from '@src/app/models/candidate';
   providers: [CandidateDetailService],
 })
 export class CandidateDetailComponent implements OnInit {
-  public candidate$!: Observable<Candidate>;
+  public candidate!: Candidate;
 
-  constructor(private candidateDetailService: CandidateDetailService) {}
+  constructor(
+    private candidateDetailService: CandidateDetailService,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.candidate$ = this.candidateDetailService.currentCandidate$;
+    this.activatedRoute.params
+      .pipe(
+        switchMap((params: Params) =>
+          this.candidateDetailService.getCandidateById(params['id']).pipe(take(1))
+        )
+      )
+      .subscribe((candidate: Candidate) => {
+        this.candidate = candidate;
+      });
+  }
+
+  public updateCandidate(candidate: Candidate) {
+    if (!candidate) {
+      return;
+    }
+
+    this.candidateDetailService
+      .getCandidateById(candidate.id)
+      .pipe(take(1))
+      .subscribe((updatedCandidate) => {
+        this.candidate = updatedCandidate;
+      });
   }
 }

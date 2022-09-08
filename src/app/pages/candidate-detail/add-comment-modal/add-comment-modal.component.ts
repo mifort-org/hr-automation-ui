@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { FormGroup, NonNullableFormBuilder} from '@angular/forms';
+import { FormGroup, NonNullableFormBuilder } from '@angular/forms';
 import { Candidate } from '@src/app/models/candidate';
 import { CommentData } from '@src/app/models/commentData';
 

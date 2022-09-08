@@ -112,7 +112,7 @@ export class CandidateDetailService implements OnDestroy {
     this.unSubscribe$.complete();
   }
 
-  private getCandidateById(id: string): Observable<Candidate> {
+  public getCandidateById(id: string): Observable<Candidate> {
     return this.candidatesService.getCandidateById(id).pipe(take(1));
   }
 }

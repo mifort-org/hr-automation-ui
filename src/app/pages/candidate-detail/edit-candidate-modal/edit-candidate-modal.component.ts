@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 import { PageState } from '@utils/pageState';
 import { ERROR_MESSAGE } from '@constants/strings';
@@ -23,14 +23,17 @@ export class EditCandidateModalComponent {
   public modalState = new PageState();
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public candidateData: Candidate,
     private dialogRef: MatDialogRef<EditCandidateModalComponent>,
     private candidateService: CandidatesService,
     private attributesService: AttributesService,
     private notification: NotificationService
-  ) {}
+  ) {
+    this.candidate = this.candidateData;
+  }
 
-  public closeModal(): void {
-    this.dialogRef.close();
+  public closeModal(candidate?: Candidate): void {
+    this.dialogRef.close(candidate);
   }
 
   public formValuesOnChange(data: any): void {
@@ -54,7 +57,7 @@ export class EditCandidateModalComponent {
           return {
             value,
             valueSource,
-            archived: false,
+            isArchived: false,
             attributeTypes: this.attributesService.attributesDictionary[key].id,
           };
         });
@@ -63,9 +66,8 @@ export class EditCandidateModalComponent {
         this.candidateService.updateCandidateAttributes(this.candidate?.id, data).subscribe({
           next: () => {
             this.modalState.finishLoading();
-            this.closeModal();
+            this.closeModal(this.candidate);
             this.notification.show('Candidate is updated', NotificationMode.SUCCESS);
-            this.candidateService.getCandidateById(this.candidate?.id);
           },
           error: (err) => {
             this.modalState.finishLoading();
