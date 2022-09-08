@@ -13,7 +13,6 @@ const routes: Routes = [
     path: ROUTES.CANDIDATES,
     loadChildren: () =>
       import('./pages/candidates/candidate.module').then((m) => m.CandidateModule),
-    // component: CandidatesComponent,
   },
   {
     path: ROUTES.CANDIDATE_DETAIL,
@@ -21,12 +20,10 @@ const routes: Routes = [
       import('./pages/candidate-detail/candidate-detail.module').then(
         (m) => m.CandidateDetailModule
       ),
-    // component: CandidateDetailComponent,
   },
   {
     path: ROUTES.CANDIDATES_MERGE,
     loadChildren: () => import('./pages/merge-page/merge.module').then((m) => m.MergeModule),
-    // component: MergePageComponent,
   },
 ];
 
