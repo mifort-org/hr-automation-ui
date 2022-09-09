@@ -1,18 +1,18 @@
-<label class="desc-candidate-title" *ngIf='editable'>
+<label class="desc-candidate-title" *ngIf='editable && candidate'>
   <mat-checkbox
     color="primary"
     class="desc-candidate-title-label"
     aria-label="desc-candidate-title"
     [checked]="checked"
-    [value]="candidate?.id"
+    [value]="candidate.id"
     (change)="selectCandidate($event)"
   >
-    {{candidate?.id}}
+    {{candidate.id}}
   </mat-checkbox>
   <mat-icon color="warn" (click)="deleteClick()" class="remove-button">delete_forever</mat-icon>
 </label>
 <label class="desc-candidate-title" *ngIf='!editable'>
-  {{candidate?.id}}
+  {{candidate.id}}
 </label>
 
 <ng-container *ngFor="let type of attributeTypes">
