@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { StatusPipe } from '@utils/pipes/status.pipe';
 import { CandidateItemComponent } from './candidate-item.component';
 
 describe('CandidateItemComponent', () => {
@@ -8,7 +10,8 @@ describe('CandidateItemComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CandidateItemComponent],
+      declarations: [CandidateItemComponent, StatusPipe],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     }).compileComponents();
   });
 

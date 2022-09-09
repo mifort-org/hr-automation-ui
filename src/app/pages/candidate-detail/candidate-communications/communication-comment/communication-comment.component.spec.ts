@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommunicationCommentComponent } from './communication-comment.component';
 
 describe('CommunicationCommentComponent', () => {
@@ -9,6 +10,7 @@ describe('CommunicationCommentComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [CommunicationCommentComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });
 

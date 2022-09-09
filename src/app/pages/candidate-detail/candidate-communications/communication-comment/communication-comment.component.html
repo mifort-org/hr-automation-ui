@@ -4,11 +4,11 @@
       <div class="flex flex-column">
         <div
           class="comment-text"
-          [id]="historyItem.id + '_comment_text'"
+          [id]="historyItem?.id + '_comment_text'"
           (dblclick)="editModeOn(); $event.preventDefault(); $event.stopPropagation()"
           *ngIf="!editMode; else editField"
         >
-          {{ historyItem.comment }}
+          {{ historyItem?.comment }}
           <div class="editing-info visible">
             <span>Double-click on text for editing.</span>
           </div>
@@ -48,7 +48,7 @@
   <mat-card-footer class="comment-footer">
     <div class="comment-info flex flex-between">
       <span>{{ 'User Name' }}</span>
-      <span *ngIf="historyItem.updateDate"
+      <span *ngIf="historyItem?.updateDate"
         >Last update: {{ historyItem.updateDate | date: 'MM/dd/yy, h:mm a' }}</span
       >
     </div>
