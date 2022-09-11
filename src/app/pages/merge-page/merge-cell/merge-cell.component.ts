@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MergeService } from '@pages/merge-page/merge.service';
-import { MergeCandidateAttribute } from '@pages/merge-page/view-model/MergeCandidateAttribute';
+import { MergeCandidateAttribute } from '@src/app/models/MergeCandidateAttribute';
 
 @Component({
   selector: 'app-merge-cell',

@@ -17,7 +17,7 @@ export class CandidatesComponent implements OnInit {
 
   public filterForm!: FormGroup;
 
-  public keywordsList: any[] = [];
+  public keywordsList: string[] = [];
 
   public keywordsInput = '';
 
@@ -41,20 +41,20 @@ export class CandidatesComponent implements OnInit {
         this.candidatesList = resolve;
         this.pageState.finishLoading();
       },
-      error: (error: any) => {
+      error: (error: string) => {
         this.pageState.catchError(error);
         this.pageState.finishLoading();
       },
     });
   }
 
-  public remove($event: any): void {
-    this.keywordsList = this.keywordsList?.filter((el) => el !== $event);
+  public remove(keyword: string): void {
+    this.keywordsList = this.keywordsList?.filter((el) => el !== keyword);
     this.getCandidatesList({ pageNumber: 1, pageSize: 100, keyword: this.keywordsList });
   }
 
-  public add($event: any): void {
-    this.keywordsList.push($event?.target?.value.toLowerCase());
+  public add($event: Event): void {
+    this.keywordsList.push(($event.target as HTMLInputElement).value.toLowerCase());
     this.keywordsInput = '';
     this.getCandidatesList({ pageNumber: 1, pageSize: 100, keyword: this.keywordsList });
   }

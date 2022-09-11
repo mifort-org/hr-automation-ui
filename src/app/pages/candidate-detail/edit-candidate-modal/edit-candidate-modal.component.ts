@@ -18,7 +18,7 @@ import { Candidate } from '@src/app/models/candidate';
 export class EditCandidateModalComponent {
   public candidate!: Candidate;
 
-  public formData!: FormData;
+  public formData!: { [key: string]: string };
 
   public modalState = new PageState();
 
@@ -33,7 +33,7 @@ export class EditCandidateModalComponent {
     this.dialogRef.close();
   }
 
-  public formValuesOnChange(data: any): void {
+  public formValuesOnChange(data: { [key: string]: string }): void {
     this.formData = data;
   }
 

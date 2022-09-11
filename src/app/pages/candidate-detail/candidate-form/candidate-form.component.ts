@@ -17,7 +17,7 @@ export class CandidateFormComponent implements OnInit {
 
   public form!: FormGroup;
 
-  public formErrors: any = {};
+  public formErrors: { [key: string]: string | number } = {};
 
   public attributesData!: AttributeType[];
 
@@ -27,7 +27,7 @@ export class CandidateFormComponent implements OnInit {
     if (this.attributeService.attributes) {
       this.attributesData = this.attributeService.attributes;
 
-      const group: any = {};
+      const group: { [key: string]: FormControl } = {};
       this.attributeService.attributes.forEach((el) => {
         const attributeName = this.candidate?.candidateAttributes.find(
           (attr) => attr.attributeTypes.name === el.name
@@ -43,7 +43,7 @@ export class CandidateFormComponent implements OnInit {
     }
   }
 
-  public onValueChanges(value: any): void {
+  public onValueChanges(value: { [key: string]: string}): void {
     Object.entries(this.form?.controls).forEach(([key]) => {
       const currentControl = this.form?.controls[key];
       currentControl.setErrors(null);

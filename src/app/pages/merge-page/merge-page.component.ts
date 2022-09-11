@@ -3,8 +3,8 @@ import { map, Observable, Subject, takeUntil } from 'rxjs';
 import * as _ from 'lodash-es';
 import { MergeService } from '@pages/merge-page/merge.service';
 import { PageState } from '@src/app/utils/pageState';
-import { MergeCandidate } from '@pages/merge-page/view-model/MergeCandidate';
-import { MergeCandidateAttribute } from '@pages/merge-page/view-model/MergeCandidateAttribute';
+import { MergeCandidate } from '@src/app/models/MergeCandidate';
+import { MergeCandidateAttribute } from '@src/app/models/MergeCandidateAttribute';
 import { CandidateAttributeType } from '@src/app/models/candidateAttributeType';
 import { MergeCandidates } from './mergeCandidate';
 
@@ -43,7 +43,7 @@ export class MergePageComponent implements OnInit, OnDestroy {
         this.candidates = matrix.getCandidates();
         this.attributeTypes = matrix.getAllAttributeTypesFrom();
       },
-      error: (error: any) => {
+      error: (error: string) => {
         this.pageState.catchError(error);
         this.pageState.finishLoading();
       },
