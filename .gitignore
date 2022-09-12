@@ -39,3 +39,4 @@ Thumbs.db
 
 # Cypress files
 /cypress/videos/*
+/cypress/screenshots/*
