@@ -15,7 +15,9 @@
     "compodoc:build": "compodoc -p tsconfig.doc.json",
     "compodoc:build-and-serve": "compodoc -p tsconfig.doc.json -s",
     "compodoc:serve": "compodoc -s",
-    "deploy-aws": "node aws-deploy.js"
+    "deploy-aws": "node aws-deploy.js",
+    "cy:run": "cypress run --headed --config-file cypress/config/cypress.config.ts --browser chrome",
+    "cy:run-headless": "cypress run --headless --config-file cypress/config/cypress.config.ts --browser chrome"
   },
   "private": true,
   "dependencies": {
