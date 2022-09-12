@@ -1,6 +1,6 @@
 import * as _ from 'lodash-es';
 import { CandidateAttributeType } from '@src/app/models/candidateAttributeType';
-import { MergeCandidate } from './view-model/MergeCandidate';
+import { MergeCandidate } from '../../models/MergeCandidate';
 
 export class MergeCandidates {
   private readonly candidates: MergeCandidate[];
