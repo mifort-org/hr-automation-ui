@@ -1,33 +1,39 @@
-name:  CI/CD
+name: GitHub Pages
+
+env:
+  AWS_BUCKET_NAME: ${{secrets.AWS_BUCKET_NAME}}
+  PROJECT_NAME: hr-automation-ui
 
 on:
-  # Trigger the workflow on push or pull request,
-  # but only for the master branch
   push:
-    branches:
-      -  develop
-
-  pull_request:
     branches:
       - develop
 
 jobs:
-  primary:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-          node-version: 16.x
-      - name: install dependencies
-        run: npm install
-      - name: build
-        run: npm run build
-      - name: test
-        run: npm run test
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
 
-      # should save this keys in github, settings of the project, secrets :
-      # AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY
-      - name: aws deploy
-        run: BUILD_DIRECTORY=build BUCKET_NAME=mifort.automation AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} npm run deploy-aws
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy
+        if: success()
+        run: aws s3 sync ./dist/${{ env.PROJECT_NAME }} s3://${{ env.AWS_BUCKET_NAME }}
