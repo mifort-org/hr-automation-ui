@@ -4,8 +4,8 @@ import * as _ from 'lodash-es';
 import { NotificationMode } from '@constants/notification';
 import { CandidatesService } from '@services/candidates.service';
 import { NotificationService } from '@services/notification.service';
-import { MergeCandidate } from '@pages/merge-page/view-model/MergeCandidate';
-import { MergeCandidateAttribute } from '@pages/merge-page/view-model/MergeCandidateAttribute';
+import { MergeCandidate } from '@src/app/models/MergeCandidate';
+import { MergeCandidateAttribute } from '@src/app/models/MergeCandidateAttribute';
 import { Candidate } from '@src/app/models/candidate';
 import { CandidateAttribute } from '@src/app/models/candidateAttribute';
 

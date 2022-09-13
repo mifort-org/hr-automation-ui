@@ -10,6 +10,8 @@ import { CandidateAttribute } from '../models/candidateAttribute';
 import { CandidatesFilterData } from '../models/candidatesFilterData';
 import { CommunicationHistory } from '../models/communicationHistory';
 import { FetchService } from './fetch.service';
+import { CandidateUpdates } from '@src/app/models/candidate-updates';
+import { MergeCandidate } from '@src/app/models/MergeCandidate';
 
 interface IParam {
   [param: string]: any;
@@ -21,12 +23,12 @@ interface CandidateDto {
   id: string;
   lastContact: string;
   status: CandidateStatus;
-  candidateUpdates: any;
+  candidateUpdates: CandidateUpdates[];
   keywords: Keywords[];
   communicationHistory: CommunicationHistory[];
   candidateAttributes: CandidateAttribute[];
   customAttribute?: CandidateCustomAttributeDto;
-  mergeCandidates: any;
+  mergeCandidates: MergeCandidate[];
 }
 
 @Injectable({

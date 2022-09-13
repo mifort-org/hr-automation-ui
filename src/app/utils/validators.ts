@@ -12,7 +12,10 @@ export const VALIDATORS = {
     return { identifiedOfField: TEXT_FIELD_ERRORS.IDENTIFIER_FIELD };
   },
 
-  identifiedOfData(identifiedArray: AttributeType[], data: any): string | null {
+  identifiedOfData(
+    identifiedArray: AttributeType[],
+    data: { [key: string]: string }
+  ): string | null {
     if (identifiedArray.some((el) => !EMPTY_VALUES.includes(data[el?.name]))) {
       return null;
     }

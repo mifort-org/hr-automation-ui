@@ -1,4 +1,4 @@
-import { MergeCandidateAttribute } from '@pages/merge-page/view-model/MergeCandidateAttribute';
+import { MergeCandidateAttribute } from '@src/app/models/MergeCandidateAttribute';
 import { CandidateStatus } from '@constants/candidates';
 
 export interface MergeCandidate {

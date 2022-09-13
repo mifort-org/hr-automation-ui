@@ -1,10 +1,4 @@
 <div class="sticky-bar">
-  <app-actions-bar></app-actions-bar>
-  <mat-progress-bar
-    mode="indeterminate"
-    color="primary"
-    *ngIf="pageState.loading"
-  ></mat-progress-bar>
   <div class="container flex flex-between">
     <div class="col-3">
       <mat-form-field class="full-width" appearance="fill">
@@ -17,7 +11,13 @@
         />
       </mat-form-field>
     </div>
+    <app-actions-bar></app-actions-bar>
   </div>
+  <mat-progress-bar
+    mode="indeterminate"
+    color="primary"
+    *ngIf="pageState.loading"
+  ></mat-progress-bar>
 </div>
 
 <div class="container">

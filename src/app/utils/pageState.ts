@@ -1,7 +1,7 @@
 export class PageState {
-  public loading = false;
+  public loading: boolean = false;
 
-  public error = null;
+  public error: string | null = null;
 
   startLoading() {
     this.loading = true;
@@ -11,7 +11,7 @@ export class PageState {
     this.loading = false;
   }
 
-  catchError(value: any) {
+  catchError(value: string) {
     this.error = value;
   }
 }
