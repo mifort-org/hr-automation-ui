@@ -1,10 +1,10 @@
 import { CandidateStatus } from '@constants/candidates';
+import { CandidateUpdates } from '@src/app/models/candidate-updates';
+import { MergeCandidate } from '@src/app/models/MergeCandidate';
 import { CandidateAttribute } from './candidateAttribute';
 import { CandidateAttributesValues } from './candidateAttributesValues';
-import { CandidateUpdates } from '@src/app/models/candidate-updates';
 import { CommunicationHistory } from './communicationHistory';
 import { Keywords } from './keywords';
-import { MergeCandidate } from '@src/app/models/MergeCandidate';
 
 /**
  * @typedef Candidate

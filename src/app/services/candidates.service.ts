@@ -5,13 +5,13 @@ import { Keywords } from '@src/app/models/keywords';
 import { CandidateStatus } from '@constants/candidates';
 import { defaultErrorhandler, getFullName } from '@utils/functions';
 import { NotificationService } from '@services/notification.service';
+import { CandidateUpdates } from '@src/app/models/candidate-updates';
+import { MergeCandidate } from '@src/app/models/MergeCandidate';
 import { Candidate } from '../models/candidate';
 import { CandidateAttribute } from '../models/candidateAttribute';
 import { CandidatesFilterData } from '../models/candidatesFilterData';
 import { CommunicationHistory } from '../models/communicationHistory';
 import { FetchService } from './fetch.service';
-import { CandidateUpdates } from '@src/app/models/candidate-updates';
-import { MergeCandidate } from '@src/app/models/MergeCandidate';
 
 interface IParam {
   [param: string]: any;

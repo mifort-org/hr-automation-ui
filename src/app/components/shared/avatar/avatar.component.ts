@@ -5,16 +5,18 @@ import { Candidate } from '@src/app/models/candidate';
 @Component({
   selector: 'app-avatar',
   templateUrl: './avatar.component.html',
-  styleUrls: ['./avatar.component.scss']
+  styleUrls: ['./avatar.component.scss'],
 })
 export class AvatarComponent implements OnInit {
   @Input() candidate: Candidate | undefined;
 
   initials: string = '';
+
   selectedColor: string = '';
+
   colors = ['red', 'green', 'blue'];
+
   imageExists: boolean = false;
-  constructor() { }
 
   ngOnInit(): void {
     this.getColor(this.candidate!.status);
@@ -23,19 +25,29 @@ export class AvatarComponent implements OnInit {
   }
 
   getInitials(par: string): void {
-    let fullName = par.split(' ');
-    let initials = fullName.shift()!.charAt(0) + fullName.pop()!.charAt(0);
+    const fullName = par.split(' ');
+    const initials = fullName.shift()!.charAt(0) + fullName.pop()!.charAt(0);
     this.initials = initials.toUpperCase();
   }
 
-  getColor(par: CandidateStatus):any {
+  getColor(par: CandidateStatus): any {
     switch (par) {
       case CandidateStatus.UNEMPLOYED:
-        return this.selectedColor = this.colors[0];
+        // eslint-disable-next-line prefer-destructuring
+        this.selectedColor = this.colors[0];
+        break;
       case CandidateStatus.EMPLOYED:
-        return this.selectedColor = this.colors[1];
+        // eslint-disable-next-line prefer-destructuring
+        this.selectedColor = this.colors[1];
+        break;
       case CandidateStatus.CREATED:
-        return this.selectedColor = this.colors[2];
+        // eslint-disable-next-line prefer-destructuring, no-magic-numbers
+        this.selectedColor = this.colors[2];
+        break;
+      default:
+        // eslint-disable-next-line prefer-destructuring, no-magic-numbers
+        this.selectedColor = this.colors[2];
+        break;
     }
   }
 
