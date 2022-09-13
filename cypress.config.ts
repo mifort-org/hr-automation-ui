@@ -8,4 +8,6 @@ export default defineConfig({
     baseUrl: 'http://localhost:4200',
     excludeSpecPattern: '*.cy-example.js'
   },
+  viewportWidth: 1920,
+  viewportHeight: 1080
 });

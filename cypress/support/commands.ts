@@ -35,3 +35,18 @@
 //     }
 //   }
 // }
+
+declare namespace Cypress {
+  interface Chainable {
+    validatePath(route: string, fullMatch: boolean): Chainable<any>;
+  }
+}
+
+Cypress.Commands.add('validatePath', (route: string, fullMatch: boolean) => {
+  // Route should start with '/'
+  if (fullMatch) {
+    cy.url().should('eq', Cypress.config().baseUrl + route);
+  } else {
+    cy.url().should('contain', Cypress.config().baseUrl + route);
+  }
+});
