@@ -15,7 +15,9 @@
     "compodoc:build": "compodoc -p tsconfig.doc.json",
     "compodoc:build-and-serve": "compodoc -p tsconfig.doc.json -s",
     "compodoc:serve": "compodoc -s",
-    "deploy-aws": "node aws-deploy.js"
+    "deploy-aws": "node aws-deploy.js",
+    "cy:run": "cypress run --headed --browser chrome",
+    "cy:run-headless": "cypress run --headless --browser chrome"
   },
   "private": true,
   "dependencies": {
@@ -52,6 +54,7 @@
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "^5.29.0",
     "@typescript-eslint/parser": "^5.29.0",
+    "cypress": "^10.7.0",
     "eslint": "^8.18.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^17.0.0",
