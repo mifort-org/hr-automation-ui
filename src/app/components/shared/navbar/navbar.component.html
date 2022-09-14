@@ -18,14 +18,10 @@
         <mat-icon>settings</mat-icon>
       </button>
       <mat-menu #menu="matMenu" [overlapTrigger]="false" xPosition="before">      
-        <button mat-menu-item routerLink="merge" routerLinkActive="active">
+        <button mat-menu-item [routerLink]="['/merge']" routerLinkActive="active">
           <mat-icon>merge_type</mat-icon>
           <span>Merge</span>
-        </button>      
-        <button mat-menu-item routerLink="" routerLinkActive="active">
-          <mat-icon>supervised_user_circle</mat-icon>
-          <span>Attributes Types</span>
-        </button>      
+        </button>
       </mat-menu>
     </div>
     <button mat-raised-button color="primary" (click)="openSignInDialog()">Sign in</button>

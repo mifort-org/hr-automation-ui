@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { map, Observable, Subject, takeUntil } from 'rxjs';
-import * as _ from 'lodash-es';
+import * as _ from 'lodash';
 import { MergeService } from '@pages/merge-page/merge.service';
 import { PageState } from '@src/app/utils/pageState';
 import { MergeCandidate } from '@src/app/models/MergeCandidate';

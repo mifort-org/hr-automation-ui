@@ -15,7 +15,9 @@
     "compodoc:build": "compodoc -p tsconfig.doc.json",
     "compodoc:build-and-serve": "compodoc -p tsconfig.doc.json -s",
     "compodoc:serve": "compodoc -s",
-    "deploy-aws": "node aws-deploy.js"
+    "deploy-aws": "node aws-deploy.js",
+    "cy:run": "cypress run --headed --browser chrome",
+    "cy:run-headless": "cypress run --headless --browser chrome"
   },
   "private": true,
   "dependencies": {
@@ -32,7 +34,7 @@
     "@compodoc/compodoc": "^1.1.19",
     "aws-sdk": "^2.1190.0",
     "dotenv": "^16.0.1",
-    "lodash-es": "^4.17.21",
+    "lodash": "^4.17.21",
     "ngx-logger": "^5.0.11",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
@@ -48,10 +50,11 @@
     "@angular/cli": "^14.2.1",
     "@angular/compiler-cli": "^14.2.0",
     "@types/jasmine": "~3.10.0",
-    "@types/lodash-es": "^4.17.6",
+    "@types/lodash": "^4.14.182",
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "^5.29.0",
     "@typescript-eslint/parser": "^5.29.0",
+    "cypress": "^10.7.0",
     "eslint": "^8.18.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^17.0.0",

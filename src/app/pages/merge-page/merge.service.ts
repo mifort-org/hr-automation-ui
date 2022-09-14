@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { forkJoin, mergeMap, Observable, map, distinctUntilChanged, BehaviorSubject } from 'rxjs';
-import * as _ from 'lodash-es';
+import * as _ from 'lodash';
 import { NotificationMode } from '@constants/notification';
 import { CandidatesService } from '@services/candidates.service';
 import { NotificationService } from '@services/notification.service';
