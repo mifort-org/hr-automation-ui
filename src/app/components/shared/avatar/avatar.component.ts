@@ -20,14 +20,15 @@ export class AvatarComponent implements OnInit {
 
   ngOnInit(): void {
     this.getColor(this.candidate!.status);
-    this.getInitials(this.candidate!.fullName);
-    // this.checkForImage(this.candidate);
+    this.getInitials(this.candidate?.firstName!, this.candidate?.lastName!);
   }
 
-  getInitials(par: string): void {
-    const fullName = par.split(' ');
-    const initials = fullName.shift()!.charAt(0) + fullName.pop()!.charAt(0);
-    this.initials = initials.toUpperCase();
+  getInitials(name: string, surname: string): void {
+    if (name || surname) {
+      const firstNameInitial = name.substring(0, 1);
+      const lastNameInitial = surname.substring(0, 1);
+      this.initials = (firstNameInitial + lastNameInitial).toLocaleUpperCase();
+    }
   }
 
   getColor(par: CandidateStatus): any {
@@ -41,9 +42,4 @@ export class AvatarComponent implements OnInit {
     const modifiedArray = stringArray.slice(0, stringArray.length - 1);
     this.shadowColor = `0px 0px 0px 3px ${modifiedArray.toString()},0.5)`;
   }
-
-  // checkForImage(par: Candidate): void {
-  //   if (par.img)
-  //     this.imageExists = true;
-  // }
 }
