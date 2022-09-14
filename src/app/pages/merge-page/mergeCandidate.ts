@@ -1,4 +1,4 @@
-import * as _ from 'lodash-es';
+import * as _ from 'lodash';
 import { CandidateAttributeType } from '@src/app/models/candidateAttributeType';
 import { MergeCandidate } from '../../models/MergeCandidate';
 

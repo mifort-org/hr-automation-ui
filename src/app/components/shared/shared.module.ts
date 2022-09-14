@@ -14,6 +14,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { ErrorDisplayComponent } from '@components/shared/error-display/error-display.component';
 import { NewCandidateModalComponent } from '@components/shared/new-candidate-modal/new-candidate-modal.component';
 import { SignInModalComponent } from '@components/shared/sign-in-modal/sign-in-modal.component';
@@ -41,6 +42,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     MatIconModule,
     MatMenuModule,
     MatProgressSpinnerModule,
+    RouterModule,
   ],
   exports: [
     SignInModalComponent,
