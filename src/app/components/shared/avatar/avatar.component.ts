@@ -31,7 +31,7 @@ export class AvatarComponent implements OnInit {
   }
 
   getColor(par: CandidateStatus): any {
-    this.selectedColor = STATUS_COLOR[par!];
+    this.selectedColor = STATUS_COLOR[par] || STATUS_COLOR[CandidateStatus.CREATED];
     this.getShadowColor(this.selectedColor);
   }
 
