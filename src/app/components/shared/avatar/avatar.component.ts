@@ -36,8 +36,8 @@ export class AvatarComponent implements OnInit {
     this.getShadowColor(this.selectedColor);
   }
 
-  getShadowColor(par: string) {
-    const withoutCommas = par.replace(/,/g, '');
+  getShadowColor(color: string) {
+    const withoutCommas = color.replace(/,/g, '');
     const stringArray = withoutCommas.split(' ');
     const modifiedArray = stringArray.slice(0, stringArray.length - 1);
     this.shadowColor = `0px 0px 0px 3px ${modifiedArray.toString()},0.5)`;
