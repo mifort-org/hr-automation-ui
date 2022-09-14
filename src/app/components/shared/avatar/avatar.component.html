@@ -1,5 +1,5 @@
 <section class="avatar-section">
-  <div [ngStyle]="{'background-color': selectedColor, 'box-shadow': selectedRgba}" class="avatar">
+  <div [ngStyle]="{'background-color': selectedColor, 'box-shadow': shadowColor}" class="avatar">
     <span *ngIf="imageExists; else elseBlock">
       <img class="image" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="avatar" />
     </span>
