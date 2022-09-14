@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CandidateStatus } from '@src/app/constants/candidates';
+import { STATUS_COLOR, CandidateStatus } from '@src/app/constants/candidates';
 import { Candidate } from '@src/app/models/candidate';
 
 @Component({
@@ -14,13 +14,7 @@ export class AvatarComponent implements OnInit {
 
   selectedColor: string = '';
 
-  selectedRgba = '0px 0px 0px 3px rgba(40, 194, 101, 0.5)';
-
-  selectedRgbaRd = '0px 0px 0px 3px rgba(244, 67, 54, 0.5)';
-
-  selectedRgbaBL = '0px 0px 0px 3px rgba(0, 137, 255, 0.5)';
-
-  colors = ['#F44336', '#28C265', '#0089FF'];
+  shadowColor: string = '';
 
   imageExists: boolean = false;
 
@@ -37,24 +31,15 @@ export class AvatarComponent implements OnInit {
   }
 
   getColor(par: CandidateStatus): any {
-    switch (par) {
-      case CandidateStatus.UNEMPLOYED:
-        // eslint-disable-next-line prefer-destructuring
-        this.selectedColor = this.colors[0];
-        break;
-      case CandidateStatus.EMPLOYED:
-        // eslint-disable-next-line prefer-destructuring
-        this.selectedColor = this.colors[1];
-        break;
-      case CandidateStatus.CREATED:
-        // eslint-disable-next-line prefer-destructuring, no-magic-numbers
-        this.selectedColor = this.colors[2];
-        break;
-      default:
-        // eslint-disable-next-line prefer-destructuring, no-magic-numbers
-        this.selectedColor = this.colors[2];
-        break;
-    }
+    this.selectedColor = STATUS_COLOR[par!];
+    this.getShadowColor(this.selectedColor);
+  }
+
+  getShadowColor(par: string) {
+    const withoutCommas = par.replace(/,/g, '');
+    const stringArray = withoutCommas.split(' ');
+    const modifiedArray = stringArray.slice(0, stringArray.length - 1);
+    this.shadowColor = `0px 0px 0px 3px ${modifiedArray.toString()},0.5)`;
   }
 
   // checkForImage(par: Candidate): void {
