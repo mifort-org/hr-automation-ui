@@ -11,6 +11,14 @@ class AppComponent implements OnInit {
   ngOnInit(): void {
     this._attributeService.getAllAttributes();
   }
+
+  currCandidate: any = {
+    id: 'artem_skrebets',
+    lastContact: '2022-02-11T13:44:33.000+00:00',
+    status: 'created',
+    firstName: 'nano',
+    lastName: 'kiq',
+  };
 }
 
 export default AppComponent;

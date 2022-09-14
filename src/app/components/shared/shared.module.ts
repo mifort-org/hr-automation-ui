@@ -49,6 +49,7 @@ import { AvatarComponent } from './avatar/avatar.component';
     NewCandidateModalComponent,
     ErrorDisplayComponent,
     NavbarComponent,
+    AvatarComponent,
   ],
 })
 export class SharedModule {}
