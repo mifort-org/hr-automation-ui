@@ -43,7 +43,7 @@ export class CandidateFormComponent implements OnInit {
     }
   }
 
-  public onValueChanges(value: { [key: string]: string}): void {
+  public onValueChanges(value: { [key: string]: string }): void {
     Object.entries(this.form?.controls).forEach(([key]) => {
       const currentControl = this.form?.controls[key];
       currentControl.setErrors(null);
