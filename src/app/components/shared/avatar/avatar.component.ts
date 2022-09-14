@@ -14,7 +14,13 @@ export class AvatarComponent implements OnInit {
 
   selectedColor: string = '';
 
-  colors = ['red', 'green', 'blue'];
+  selectedRgba = '0px 0px 0px 3px rgba(40, 194, 101, 0.5)';
+
+  selectedRgbaRd = '0px 0px 0px 3px rgba(244, 67, 54, 0.5)';
+
+  selectedRgbaBL = '0px 0px 0px 3px rgba(0, 137, 255, 0.5)';
+
+  colors = ['#F44336', '#28C265', '#0089FF'];
 
   imageExists: boolean = false;
 
