@@ -24,7 +24,7 @@ export interface Color {
 }
 
 export const STATUS_COLOR: Color = {
-  [CandidateStatus.UNEMPLOYED]: 'rgba(244, 67, 54, 1)',
-  [CandidateStatus.EMPLOYED]: 'rgba(40, 194, 101, 1)',
-  [CandidateStatus.CREATED]: 'rgba(0, 137, 255, 1)',
+  [CandidateStatus.UNEMPLOYED]: '#F44336',
+  [CandidateStatus.EMPLOYED]: '#28C265',
+  [CandidateStatus.CREATED]: '#0089FF',
 };

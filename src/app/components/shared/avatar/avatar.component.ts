@@ -19,27 +19,23 @@ export class AvatarComponent implements OnInit {
   @HostBinding('style.box-shadow') shadowColor: string = '';
 
   ngOnInit(): void {
-    this.getColor(this.candidate!.status);
-    this.getInitials(this.candidate?.firstName!, this.candidate?.lastName!);
+    this.selectedColor = this.getColor(this.candidate!.status);
+    this.initials = this.getInitials(this.candidate?.firstName!, this.candidate?.lastName!);
   }
 
-  getInitials(name: string, surname: string): void {
-    if (name && surname) {
-      const [firstNameInitial] = name;
-      const [lastNameInitial] = surname;
-      this.initials = (firstNameInitial + lastNameInitial).toLocaleUpperCase();
-    }
+  getInitials(name: string, surname: string): any {
+    const [firstNameInitial] = name;
+    const [lastNameInitial] = surname;
+    return (firstNameInitial + lastNameInitial).toLocaleUpperCase();
   }
 
-  getColor(par: CandidateStatus): any {
-    this.selectedColor = STATUS_COLOR[par] || STATUS_COLOR[CandidateStatus.CREATED];
-    this.getShadowColor(this.selectedColor);
+  getColor(par: CandidateStatus): string {
+    const colorHex = STATUS_COLOR[par] || STATUS_COLOR[CandidateStatus.CREATED];
+    this.shadowColor = this.getShadowColor(colorHex);
+    return colorHex;
   }
 
-  getShadowColor(color: string) {
-    const withoutCommas = color.replace(/,/g, '');
-    const stringArray = withoutCommas.split(' ');
-    const modifiedArray = stringArray.slice(0, stringArray.length - 1);
-    this.shadowColor = `0px 0px 0px 3px ${modifiedArray.toString()},0.5)`;
+  getShadowColor(colorHex: string): string {
+    return `0px 0px 0px 3px ${colorHex}80`;
   }
 }
