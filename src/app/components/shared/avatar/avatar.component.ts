@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostBinding, Input, OnInit } from '@angular/core';
 import { STATUS_COLOR, CandidateStatus } from '@src/app/constants/candidates';
 import { Candidate } from '@src/app/models/candidate';
 
@@ -12,11 +12,11 @@ export class AvatarComponent implements OnInit {
 
   initials: string = '';
 
-  selectedColor: string = '';
-
-  shadowColor: string = '';
-
   imageExists: boolean = false;
+
+  @HostBinding('style.background-color') selectedColor: string = '';
+
+  @HostBinding('style.box-shadow') shadowColor: string = '';
 
   ngOnInit(): void {
     this.getColor(this.candidate!.status);
@@ -25,8 +25,8 @@ export class AvatarComponent implements OnInit {
 
   getInitials(name: string, surname: string): void {
     if (name && surname) {
-      const firstNameInitial = name.substring(0, 1);
-      const lastNameInitial = surname.substring(0, 1);
+      const [firstNameInitial] = name;
+      const [lastNameInitial] = surname;
       this.initials = (firstNameInitial + lastNameInitial).toLocaleUpperCase();
     }
   }
