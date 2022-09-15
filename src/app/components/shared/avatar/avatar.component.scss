@@ -1,9 +1,11 @@
-.avatar-section {
-  .avatar {
-    width: 80px;
-    height: 80px;
-    border-radius: 50px;
-    margin: 6px;
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: 6px;
 
   .image {
     max-width: 100%;
@@ -13,11 +15,7 @@
   }
 
   .text {
-    text-align: center;
-    vertical-align: middle;
-    line-height: 80px;
     font-size: 32px;
     margin: 0;
-  }
   }
 }
