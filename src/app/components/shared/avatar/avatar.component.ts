@@ -31,8 +31,7 @@ export class AvatarComponent implements OnInit {
   }
 
   getColor(status: CandidateStatus): string {
-    const colorHex = STATUS_COLOR[status] || STATUS_COLOR[CandidateStatus.CREATED];
-    return colorHex;
+    return STATUS_COLOR[status] || STATUS_COLOR[CandidateStatus.CREATED];
   }
 
   getShadowColor(colorHex: string): any {
