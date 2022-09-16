@@ -34,7 +34,7 @@ export class AvatarComponent implements OnInit {
     return STATUS_COLOR[status] || STATUS_COLOR[CandidateStatus.CREATED];
   }
 
-  getShadowColor(colorHex: string): any {
+  getShadowColor(colorHex: string): string {
     return `0px 0px 0px 3px ${colorHex}80`;
   }
 }
