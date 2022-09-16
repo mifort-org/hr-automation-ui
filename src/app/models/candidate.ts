@@ -16,6 +16,8 @@ export interface Candidate {
   lastContact: string;
   status: CandidateStatus;
   fullName: string;
+  firstName?: string;
+  lastName?: string;
   candidateUpdates: CandidateUpdates[];
   keywords: Keywords[];
   communicationHistory: CommunicationHistory[];

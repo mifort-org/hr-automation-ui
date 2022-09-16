@@ -1,0 +1,9 @@
+    <span *ngIf="imageExists; else elseBlock">
+      <img class="image" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="avatar" />
+    </span>
+    <ng-template #elseBlock>
+      <p class="text">
+        {{initials}}
+      </p>
+    </ng-template>
+

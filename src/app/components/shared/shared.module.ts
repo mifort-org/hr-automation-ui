@@ -19,6 +19,7 @@ import { ErrorDisplayComponent } from '@components/shared/error-display/error-di
 import { NewCandidateModalComponent } from '@components/shared/new-candidate-modal/new-candidate-modal.component';
 import { SignInModalComponent } from '@components/shared/sign-in-modal/sign-in-modal.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { AvatarComponent } from './avatar/avatar.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     NewCandidateModalComponent,
     ErrorDisplayComponent,
     NavbarComponent,
+    AvatarComponent,
   ],
   imports: [
     CommonModule,
