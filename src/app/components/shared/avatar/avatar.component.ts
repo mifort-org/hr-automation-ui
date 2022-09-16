@@ -20,6 +20,7 @@ export class AvatarComponent implements OnInit {
 
   ngOnInit(): void {
     this.selectedColor = this.getColor(this.candidate!.status);
+    this.shadowColor = this.getShadowColor(this.selectedColor);
     this.initials = this.getInitials(this.candidate?.firstName!, this.candidate?.lastName!);
   }
 
@@ -29,13 +30,12 @@ export class AvatarComponent implements OnInit {
     return (firstNameInitial + lastNameInitial).toLocaleUpperCase();
   }
 
-  getColor(par: CandidateStatus): string {
-    const colorHex = STATUS_COLOR[par] || STATUS_COLOR[CandidateStatus.CREATED];
-    this.shadowColor = this.getShadowColor(colorHex);
+  getColor(status: CandidateStatus): string {
+    const colorHex = STATUS_COLOR[status] || STATUS_COLOR[CandidateStatus.CREATED];
     return colorHex;
   }
 
-  getShadowColor(colorHex: string): string {
-    return `0px 0px 0px 3px ${colorHex}80`;
+  getShadowColor(color: string): any {
+    return `0px 0px 0px 3px ${color}80`;
   }
 }
