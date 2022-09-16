@@ -35,7 +35,7 @@ export class AvatarComponent implements OnInit {
     return colorHex;
   }
 
-  getShadowColor(color: string): any {
-    return `0px 0px 0px 3px ${color}80`;
+  getShadowColor(colorHex: string): any {
+    return `0px 0px 0px 3px ${colorHex}80`;
   }
 }
