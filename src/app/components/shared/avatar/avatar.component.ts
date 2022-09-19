@@ -25,6 +25,9 @@ export class AvatarComponent implements OnInit {
   }
 
   getInitials(name: string, surname: string): string {
+    if (name == null || surname == null) {
+      return '';
+    }
     const [firstNameInitial] = name;
     const [lastNameInitial] = surname;
     return (firstNameInitial + lastNameInitial).toLocaleUpperCase();
