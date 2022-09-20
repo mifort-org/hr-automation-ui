@@ -7,7 +7,7 @@
         <mat-card-title>{{ candidate?.fullName}}</mat-card-title>
         <mat-card-subtitle>last contact: {{ candidate?.lastContact | date }}</mat-card-subtitle>
       </div>
-      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu">
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu" xPosition="before">
@@ -29,8 +29,6 @@
         </button>
       </mat-menu>
     </div>
-
-    <hr>
 
     <button class="arrow-button" [routerLink]="['/candidates/details', candidate?.id]"
       data-cy="candidate-item-more">
@@ -67,8 +65,6 @@
         </p>
       </div>
     </div>
-
-    <hr>
 
     <!-- <mat-chip-list>
       <mat-chip *ngFor="let keyword of candidate?.keywords">{{ keyword?.id | titlecase }}</mat-chip>
