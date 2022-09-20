@@ -42,12 +42,13 @@ $background: #212121;
 $middleBlue: #11376f;
 
 
-$success: #049d04;
-$warning: #fd0;
+$success: #28C265;
+$warning: #FFEF63;
 
-$primary-color: rgb(55, 111, 252);
-$dark-back-color: rgb(10, 10, 10);
-$light-back-color: rgb(121, 121, 121);
-$error-color: rgb(121, 1, 1);
+$primary-color: rgba(0, 137, 255, 100%);
+$dark-back-color: rgb(29, 29, 43);
+$light-back-color: rgba(36, 38, 54, 100%);
+$error-color: rgba(244, 67, 54, 100%);
+$light-secondary-color: rgba(54, 57, 81, 100%);
 
 $box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 20%), 0px 1px 1px 0px rgba(0, 0, 0, 14%), 0px 1px 3px 0px rgba(0, 0, 0, 12%);
