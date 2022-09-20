@@ -1,25 +1,55 @@
-<mat-card  data-cy="candidate-item">
-  <mat-card-title>
-    <div class="flex flex-between">
-      <span
-        matBadge="0"
-        matBadgePosition="below"
-        matBadgeSize="small"
-        [matBadgeColor]="candidate?.status | status"
-        class="hide-text"
-        >{{ candidate?.fullName | titlecase }}</span
-      >
-      <span class="mat-body-2 text-grey">{{ candidate?.lastContact | date }}</span>
-    </div>
-  </mat-card-title>
-  <mat-card-subtitle>{{ candidate?.id }}</mat-card-subtitle>
-
+<mat-card data-cy="candidate-item">
   <mat-card-content>
-    <mat-chip-list>
+
+    <div class="upper-section">
+      <app-avatar [candidate]="candidate!"></app-avatar>
+      <div class="text">
+        <mat-card-title>{{ candidate?.fullName}}</mat-card-title>
+        <mat-card-subtitle>last contact: {{ candidate?.lastContact | date }}</mat-card-subtitle>
+      </div>
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu" xPosition="before">
+        <button mat-menu-item>
+          <mat-icon>edit</mat-icon>
+          <span>Edit</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon> comment</mat-icon>
+          <span>Add comment</span>
+        </button>
+      </mat-menu>
+    </div>
+
+    <button class="arrow-button" [routerLink]="['/candidates/details', candidate?.id]" data-cy="candidate-item-more">
+      <mat-icon>arrow_right_alt</mat-icon>
+    </button>
+
+    <div class="middle-section">
+      <div>
+        <div class="rounded-background">
+          <mat-icon>perm_phone_msg</mat-icon>
+        </div>
+        <div class="text">
+          <p>test.candidate@test.com</p>
+          <p>+58569846855</p>
+        </div>
+      </div>
+
+      <div class="left-border">
+        <div class="rounded-background">
+          <mat-icon> location_on</mat-icon>
+        </div>
+        <p class="text">
+          Tbilisi, Georgia
+        </p>
+      </div>
+    </div>
+
+    <!-- <mat-chip-list>
       <mat-chip *ngFor="let keyword of candidate?.keywords">{{ keyword?.id | titlecase }}</mat-chip>
-    </mat-chip-list>
+    </mat-chip-list> -->
   </mat-card-content>
-  <mat-card-actions>
-    <button mat-button [routerLink]="['/candidates/details', candidate?.id]" data-cy="candidate-item-more">More</button>
-  </mat-card-actions>
+
 </mat-card>
