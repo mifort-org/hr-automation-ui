@@ -3,7 +3,7 @@ import { catchError, map, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Keywords } from '@src/app/models/keywords';
 import { CandidateStatus } from '@constants/candidates';
-import { defaultErrorhandler, getFullName } from '@utils/functions';
+import { defaultErrorhandler, getContact, getFullName } from '@utils/functions';
 import { NotificationService } from '@services/notification.service';
 import { CandidateUpdates } from '@src/app/models/candidate-updates';
 import { MergeCandidate } from '@src/app/models/MergeCandidate';
@@ -68,6 +68,15 @@ export class CandidatesService {
   public mapCandidateDto(candidate: CandidateDto): Candidate {
     return {
       ...candidate,
+      city: candidate.candidateAttributes.find((attr) => attr.attributeTypes.name === 'city')
+        ?.value,
+      firstName: candidate.candidateAttributes.find(
+        (attr) => attr.attributeTypes.name === 'firstname'
+      )?.value,
+      lastName: candidate.candidateAttributes.find(
+        (attr) => attr.attributeTypes.name === 'lastname'
+      )?.value,
+      contacts: getContact(candidate.candidateAttributes),
       fullName: getFullName(candidate.candidateAttributes),
       candidateAttributesValues: candidate.candidateAttributes.map((a) => ({
         name: a.attributeTypes.name || '',
