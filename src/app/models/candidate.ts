@@ -4,6 +4,7 @@ import { MergeCandidate } from '@src/app/models/MergeCandidate';
 import { CandidateAttribute } from './candidateAttribute';
 import { CandidateAttributesValues } from './candidateAttributesValues';
 import { CommunicationHistory } from './communicationHistory';
+import { ContactAttribute } from './contactAttribute';
 import { Keywords } from './keywords';
 
 /**
@@ -24,4 +25,6 @@ export interface Candidate {
   candidateAttributes: CandidateAttribute[];
   candidateAttributesValues: CandidateAttributesValues[];
   mergeCandidates: MergeCandidate[];
+  city?: any;
+  contacts?: ContactAttribute;
 }
