@@ -1,3 +1,5 @@
+@import 'src/styles';
+
 .comment-body {
   max-width: 60%;
   width: fit-content;
@@ -69,7 +71,7 @@
         width: 100%;
         height: 100%;
         resize: none;
-        font-family: Roboto, "Helvetica Neue", sans-serif;
+        font-family: $main-font;
         font-size: 14px;
         padding: 0;
       }

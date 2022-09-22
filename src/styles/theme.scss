@@ -1,11 +1,12 @@
 @use '@angular/material' as mat;
 @import '~@angular/material/theming';
 @import 'colors';
+@import 'fonts';
 
 @include mat.core();
 
 $theme-typography: mat.define-typography-config(
-  $font-family: 'Roboto Mono'
+  $font-family: $main-font
 );
 
 $custom-theme: mat.define-dark-theme(
@@ -21,7 +22,7 @@ $custom-theme: mat.define-dark-theme(
 
 @include mat-base-typography($theme-typography);  
 @include mat-checkbox-typography($theme-typography);  
-@include angular-material-typography ($theme-typography);  
+@include angular-material-typography($theme-typography);
 
 @include mat.core-theme($custom-theme);
 @include mat.all-component-themes($custom-theme);

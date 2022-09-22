@@ -1,13 +1,15 @@
 @import 'styles/colors';
+@import 'styles/fonts';
 @import 'styles/commonMargins';
 @import 'src/styles/breakpoints';
 @import 'src/styles/grid';
+@import 'src/styles/custom-material';
 
 @include commonMargins();
 @include gridClass();
 
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 7px;
 }
 
 ::-webkit-scrollbar-track {
@@ -15,19 +17,18 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  border-radius: 10px;
+  border-radius: 7px;
   background: mat-color($primary);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: $middleBlue;
 }
 
 body {
-  font-family: 'Roboto Mono', monospace;
-
+  font-family: $main-font;
   background: $background;
-  color: white;
+  color: $white;
   margin: 0;
   min-height: 100vh;
   width: 100%;

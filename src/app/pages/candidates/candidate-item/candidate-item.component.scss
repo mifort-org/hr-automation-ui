@@ -11,14 +11,7 @@
     box-sizing: border-box;
 
     .text {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
       padding: 12px 0 0 20px;
-
-      >* {
-        margin: 0;
-      }
     }
 
     .mat-icon-button {
@@ -53,14 +46,7 @@
     }
 
     .text {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
       padding-left: 20px;
-
-      >* {
-        margin: 0;
-      }
     }
 
     .left-border {
@@ -69,6 +55,17 @@
 
     .mat-icon {
       color: $light-back-color;
+    }
+  }
+
+  .text {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: $text-secondary;
+
+    > * {
+      margin: 0;
     }
   }
 

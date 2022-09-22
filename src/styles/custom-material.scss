@@ -1,0 +1,17 @@
+@import 'colors';
+
+.mat-toolbar {
+  background: unset;
+}
+
+.mat-menu-panel {
+  background: $background;
+}
+
+.mat-card-subtitle {
+  color: $text-secondary;
+}
+
+.mat-card-title {
+  color: $white;
+}
