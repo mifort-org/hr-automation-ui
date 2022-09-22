@@ -32,8 +32,8 @@
           <mat-icon>perm_phone_msg</mat-icon>
         </div>
         <div class="text">
-          <p>test.candidate@test.com</p>
-          <p>+58569846855</p>
+          <p>{{candidate?.contacts?.email}}</p>
+          <p>{{candidate?.contacts?.phone}} </p>
         </div>
       </div>
 
@@ -42,7 +42,7 @@
           <mat-icon> location_on</mat-icon>
         </div>
         <p class="text">
-          Tbilisi, Georgia
+          {{candidate?.city}}
         </p>
       </div>
     </div>
