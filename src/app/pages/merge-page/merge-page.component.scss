@@ -2,7 +2,7 @@
 @import 'src/styles/theme';
 
 .candidate-merge-container {
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: $main-font;
   margin: 20px 100px;
   padding-bottom: 10px;
   height: auto;

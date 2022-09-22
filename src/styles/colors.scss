@@ -15,11 +15,11 @@ $mat-primary: (
   800: #2363eb,
   900: #2c3fcc,
   contrast: (
-    50: $black-87-opacity,
-    100: $black-87-opacity,
-    200: $black-87-opacity,
-    300: $black-87-opacity,
-    400: $black-87-opacity,
+    50: #1D1D2B,
+    100: #1D1D2B,
+    200: #1D1D2B,
+    300: #1D1D2B,
+    400: #1D1D2B,
     500: white,
     600: white,
     700: white,
@@ -38,17 +38,19 @@ $secondary: mat-palette(mat.$cyan-palette, 200);
 $accent: mat-palette( mat.$light-green-palette, A200, A100, A400);
 $warn: mat-palette(mat.$red-palette, 500);
 
-$background: #212121;
+$background: #1D1D2B;
 $middleBlue: #11376f;
 
 
 $success: #28C265;
 $warning: #FFEF63;
 
-$primary-color: rgba(0, 137, 255, 100%);
-$dark-back-color: rgb(29, 29, 43);
-$light-back-color: rgba(36, 38, 54, 100%);
-$error-color: rgba(244, 67, 54, 100%);
-$light-secondary-color: rgba(54, 57, 81, 100%);
+$primary-color: #0089FF;
+$white: #E3E7FE;
+$dark-back-color: #1D1D2B;
+$light-back-color: #242636;
+$error-color: #F44336;
+$light-secondary-color: #363951;
+$text-secondary: #A0A6D4;
 
 $box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 20%), 0px 1px 1px 0px rgba(0, 0, 0, 14%), 0px 1px 3px 0px rgba(0, 0, 0, 12%);
