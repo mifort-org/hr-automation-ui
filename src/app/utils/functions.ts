@@ -4,6 +4,7 @@ import { ERROR_STATUS_CODES } from '@constants/errorStatusCode';
 import { NotificationMode } from '@constants/notification';
 import { ERROR_MESSAGE } from '@constants/strings';
 import { CandidateAttribute } from '../models/candidateAttribute';
+import { ContactAttribute } from '../models/contactAttribute';
 
 export const defaultErrorhandler = (
   notification: NotificationService,
@@ -22,4 +23,17 @@ export const getFullName = (candidateAttributes: CandidateAttribute[]): string =
   return firstName?.value.length && lastName?.value.length
     ? `${firstName.value} ${lastName.value}`
     : 'No name';
+};
+
+export const getContact = (candidateAttributes: CandidateAttribute[]): ContactAttribute => {
+  const phoneValue = candidateAttributes.find(
+    (attr) => attr.attributeTypes.name === 'phone'
+  )?.value;
+  const emailValue = candidateAttributes.find(
+    (attr) => attr.attributeTypes.name === 'email'
+  )?.value;
+  return {
+    phone: phoneValue,
+    email: emailValue,
+  };
 };
