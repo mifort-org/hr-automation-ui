@@ -86,20 +86,14 @@ export class CandidatesService {
   }
 
   getFullName = (candidateAttributes: CandidateAttribute[]): string => {
-    const firstName = candidateAttributes.find((attr) => attr.attributeTypes.name === 'firstname');
-    const lastName = candidateAttributes.find((attr) => attr.attributeTypes.name === 'lastname');
-    return firstName?.value.length && lastName?.value.length
-      ? `${firstName.value} ${lastName.value}`
-      : 'No name';
+    const firstName = this.getAttributeValue(candidateAttributes, 'firstname');
+    const lastName = this.getAttributeValue(candidateAttributes, 'lastname');
+    return firstName?.length && lastName?.length ? `${firstName} ${lastName}` : 'No name';
   };
 
   getContact = (candidateAttributes: CandidateAttribute[]): ContactAttribute => {
-    const phoneValue = candidateAttributes.find(
-      (attr) => attr.attributeTypes.name === 'phone'
-    )?.value;
-    const emailValue = candidateAttributes.find(
-      (attr) => attr.attributeTypes.name === 'email'
-    )?.value;
+    const phoneValue = this.getAttributeValue(candidateAttributes, 'phone');
+    const emailValue = this.getAttributeValue(candidateAttributes, 'email');
     return {
       phone: phoneValue,
       email: emailValue,
