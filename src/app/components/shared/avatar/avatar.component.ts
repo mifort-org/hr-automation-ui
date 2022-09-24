@@ -30,6 +30,10 @@ export class AvatarComponent implements OnInit {
     }
     const [firstNameInitial] = name;
     const [lastNameInitial] = surname;
+
+    if (firstNameInitial == null || lastNameInitial == null) {
+      return '';
+    }
     return (firstNameInitial + lastNameInitial).toLocaleUpperCase();
   }
 

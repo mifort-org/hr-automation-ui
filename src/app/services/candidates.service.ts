@@ -3,7 +3,7 @@ import { catchError, map, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Keywords } from '@src/app/models/keywords';
 import { CandidateStatus } from '@constants/candidates';
-import { defaultErrorhandler, getFullName } from '@utils/functions';
+import { defaultErrorhandler } from '@utils/functions';
 import { NotificationService } from '@services/notification.service';
 import { CandidateUpdates } from '@src/app/models/candidate-updates';
 import { MergeCandidate } from '@src/app/models/MergeCandidate';
@@ -11,6 +11,7 @@ import { Candidate } from '../models/candidate';
 import { CandidateAttribute } from '../models/candidateAttribute';
 import { CandidatesFilterData } from '../models/candidatesFilterData';
 import { CommunicationHistory } from '../models/communicationHistory';
+import { ContactAttribute } from '../models/contactAttribute';
 import { FetchService } from './fetch.service';
 
 interface IParam {
@@ -68,7 +69,11 @@ export class CandidatesService {
   public mapCandidateDto(candidate: CandidateDto): Candidate {
     return {
       ...candidate,
-      fullName: getFullName(candidate.candidateAttributes),
+      city: this.getAttributeValue(candidate.candidateAttributes, 'city'),
+      firstName: this.getAttributeValue(candidate.candidateAttributes, 'firstname'),
+      lastName: this.getAttributeValue(candidate.candidateAttributes, 'lastname'),
+      contacts: this.getContact(candidate.candidateAttributes),
+      fullName: this.getFullName(candidate.candidateAttributes),
       candidateAttributesValues: candidate.candidateAttributes.map((a) => ({
         name: a.attributeTypes.name || '',
         value: a.value || '',
@@ -78,5 +83,24 @@ export class CandidatesService {
 
   public mapCandidateToDto(candidate: Candidate): CandidateDto {
     return candidate;
+  }
+
+  getFullName = (candidateAttributes: CandidateAttribute[]): string => {
+    const firstName = this.getAttributeValue(candidateAttributes, 'firstname');
+    const lastName = this.getAttributeValue(candidateAttributes, 'lastname');
+    return firstName?.length && lastName?.length ? `${firstName} ${lastName}` : 'No name';
+  };
+
+  getContact = (candidateAttributes: CandidateAttribute[]): ContactAttribute => {
+    const phoneValue = this.getAttributeValue(candidateAttributes, 'phone');
+    const emailValue = this.getAttributeValue(candidateAttributes, 'email');
+    return {
+      phone: phoneValue,
+      email: emailValue,
+    };
+  };
+
+  private getAttributeValue(candidateAttributes: CandidateAttribute[], attributeName: string) {
+    return candidateAttributes.find((attr) => attr.attributeTypes.name === attributeName)?.value;
   }
 }
