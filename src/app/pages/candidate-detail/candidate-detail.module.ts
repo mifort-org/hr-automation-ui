@@ -23,6 +23,7 @@ import { CandidateMainInfoComponent } from './candidate-main-info/candidate-main
 import { CandidateActionComponent } from './candidate-action/candidate-action.component';
 import { AddCommentModalComponent } from './add-comment-modal/add-comment-modal.component';
 import { CommunicationCommentComponent } from './candidate-communications/communication-comment/communication-comment.component';
+import {SharedModule} from "@components/shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { CommunicationCommentComponent } from './candidate-communications/commun
     MatRadioModule,
     MatProgressSpinnerModule,
     CandidateDetailRoutingModule,
+    SharedModule,
   ],
   exports: [
     CandidateCommunicationsComponent,

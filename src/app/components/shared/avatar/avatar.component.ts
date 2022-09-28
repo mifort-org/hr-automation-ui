@@ -10,6 +10,10 @@ import { Candidate } from '@src/app/models/candidate';
 export class AvatarComponent implements OnInit {
   @Input() candidate: Candidate | undefined;
 
+  @Input() width: string | undefined;
+
+  @Input() height: string | undefined;
+
   initials: string = '';
 
   imageExists: boolean = false;
@@ -18,10 +22,17 @@ export class AvatarComponent implements OnInit {
 
   @HostBinding('style.box-shadow') shadowColor: string = '';
 
+  @HostBinding('style.width') _width: string = '';
+
+  @HostBinding('style.height') _height: string = '';
+
   ngOnInit(): void {
     this.selectedColor = this.getColor(this.candidate!.status);
     this.shadowColor = this.getShadowColor(this.selectedColor);
     this.initials = this.getInitials(this.candidate?.firstName!, this.candidate?.lastName!);
+
+    this.width ? (this._width = this.width) : '80px';
+    this.height ? (this._height = this.height) : '80px';
   }
 
   getInitials(name: string, surname: string): string {

@@ -1,51 +1,68 @@
 <div class="candidate-detail-container">
   <app-candidate-action></app-candidate-action>
-  <div class="row">
-    <div class="col-3 col-10-sm">
-      <mat-card class="example-card">
-        <mat-card-header>
-          <mat-card-title>
-            <span
-              matBadge="0"
-              matBadgePosition="below"
-              matBadgeSize="small"
-              [matBadgeColor]="(candidate$ | async)?.status | status"
-              class="hide-text"
-              >{{ (candidate$ | async)?.fullName }}</span
-            ></mat-card-title
-          >
-          <mat-card-subtitle>{{
-            (candidate$ | async)?.id
-          }}</mat-card-subtitle>
-        </mat-card-header>
-        <div class="image-frame" mat-card-image>
-          <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="avatar"/>
+   <div class="row">
+        <div class="upper-section" >
+          <section >
+          <app-avatar *ngIf="currentCandidate"
+                      [candidate]="currentCandidate!"
+                      [width]="'249px'"
+                      [height]="'245px'"></app-avatar>
+            <mat-chip-list >
+              <mat-chip *ngIf="currentCandidate?.status"  class="mat-chip-status"
+                         [ngStyle]="{'background-color':currentCandidate.status === 'unemployed' ? 'rgb(244, 67, 54)':
+                         currentCandidate.status === 'created' ? 'rgb(0, 137, 255)' : 'rgb(40, 194, 101)', 'color': 'black' }"
+              >
+              {{currentCandidate?.status }} </mat-chip>
+            </mat-chip-list>
+          </section>
+          <section class="account-info">
+
+            <div style="display: flex">
+              <p class="flname">{{ currentCandidate?.fullName}}</p>
+              <mat-card-subtitle  *ngIf="currentCandidate?.city" class="location-title" >
+                <mat-icon class="location-icon" >room</mat-icon>
+                {{ currentCandidate?.city }}</mat-card-subtitle>
+            </div>
+            <p class="last-contact">last contact: {{ currentCandidate?.lastContact | date }}</p>
+          </section>
         </div>
-        <mat-card-content>
-          <mat-chip-list>
-            <mat-chip
-              color="primary"
-              *ngFor="let keyword of (candidate$ | async)?.keywords"
-              >{{ keyword?.id | titlecase }}</mat-chip
-            >
-          </mat-chip-list>
-        </mat-card-content>
-      </mat-card>
+
     </div>
+
+  <div class="row">
     <div class="col-7 col-10-sm">
-      <mat-tab-group
-        mat-align-tabs="start"
-        class="mt-20 communication-tabs"
-        animationDuration="0ms"
-      >
-        <mat-tab label="Details info">
-          <app-candidate-main-info></app-candidate-main-info>
-        </mat-tab>
-        <mat-tab label="Communication History"
-          ><app-candidate-communications></app-candidate-communications
-        ></mat-tab>
-        <mat-tab label="Updates"><app-candidate-updates></app-candidate-updates></mat-tab>
-      </mat-tab-group>
+      <div  *ngIf="currentCandidate.keywords.length>0" >
+      <p class="hr-lines">Keywords</p>
+      <div class="kay-word-container">
+        <mat-chip-list>
+          <mat-chip class="keyword-chips"
+            color="primary"
+            *ngFor="let keyword of (candidate$ | async)?.keywords"
+          >{{ keyword?.id | titlecase }}</mat-chip
+          >
+        </mat-chip-list>
+      </div>
+      </div>
+
+
+
+
     </div>
   </div>
-</div>
+<!--    <div class="col-7 col-10-sm">-->
+<!--      <mat-tab-group-->
+<!--        mat-align-tabs="start"-->
+<!--        class="mt-20 communication-tabs"-->
+<!--        animationDuration="0ms"-->
+<!--      >-->
+<!--        <mat-tab label="Details info">-->
+<!--          <app-candidate-main-info></app-candidate-main-info>-->
+<!--        </mat-tab>-->
+<!--        <mat-tab label="Communication History"-->
+<!--        ><app-candidate-communications></app-candidate-communications-->
+<!--        ></mat-tab>-->
+<!--        <mat-tab label="Updates"><app-candidate-updates></app-candidate-updates></mat-tab>-->
+<!--      </mat-tab-group>-->
+<!--    </div>-->
+  </div>
+

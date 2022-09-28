@@ -12,9 +12,15 @@ import { Candidate } from '@src/app/models/candidate';
 export class CandidateDetailComponent implements OnInit {
   public candidate$!: Observable<Candidate>;
 
+  public currentCandidate!: Candidate;
+
   constructor(private candidateDetailService: CandidateDetailService) {}
 
   ngOnInit(): void {
     this.candidate$ = this.candidateDetailService.currentCandidate$;
+    this.candidateDetailService.currentCandidate$.subscribe((res: Candidate) => {
+      this.currentCandidate = res;
+      console.log('keywords', res.keywords);
+    });
   }
 }
