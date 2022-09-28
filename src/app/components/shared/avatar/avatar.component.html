@@ -2,8 +2,12 @@
   <img class="image" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="avatar" />
 </span>
 <ng-template #elseBlock>
-  <p class="text">
-    {{initials}}
-  </p>
+  <span *ngIf="initials; else profAvatar">
+    <p class="text">
+      {{ initials }}
+    </p>
+  </span>
+  <ng-template #profAvatar>
+    <mat-icon>person</mat-icon>
+  </ng-template>
 </ng-template>
-
