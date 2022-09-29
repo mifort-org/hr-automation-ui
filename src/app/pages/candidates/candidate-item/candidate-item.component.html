@@ -4,7 +4,7 @@
     <div class="upper-section">
       <app-avatar [candidate]="candidate!"></app-avatar>
       <div class="text">
-        <mat-card-title>{{ candidate?.fullName}}</mat-card-title>
+        <mat-card-title>{{ candidate?.fullName }}</mat-card-title>
         <mat-card-subtitle>last contact: {{ candidate?.lastContact | date }}</mat-card-subtitle>
       </div>
       <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu">
@@ -26,30 +26,33 @@
       <mat-icon>arrow_right_alt</mat-icon>
     </button>
 
-    <div class="middle-section">
-      <div>
+    <div class="middle-section" *ngIf="contacts || location; else emptyBlock">
+      <div *ngIf="contacts">
         <div class="rounded-background">
           <mat-icon>perm_phone_msg</mat-icon>
         </div>
         <div class="text">
-          <p>{{candidate?.contacts?.email}}</p>
-          <p>{{candidate?.contacts?.phone}} </p>
+          <p>{{ candidate?.contacts?.email }}</p>
+          <p>{{ candidate?.contacts?.phone }}</p>
         </div>
       </div>
-
-      <div class="left-border">
+      <div *ngIf="location" [ngClass]="{ 'left-border': contacts }">
         <div class="rounded-background">
           <mat-icon> location_on</mat-icon>
         </div>
         <p class="text">
-          {{candidate?.city}}
+          {{ candidate?.city }}
         </p>
       </div>
     </div>
+
+    <ng-template #emptyBlock>
+      <div class="empty-block-height">
+      </div>
+    </ng-template>
 
     <!-- <mat-chip-list>
       <mat-chip *ngFor="let keyword of candidate?.keywords">{{ keyword?.id | titlecase }}</mat-chip>
     </mat-chip-list> -->
   </mat-card-content>
-
 </mat-card>

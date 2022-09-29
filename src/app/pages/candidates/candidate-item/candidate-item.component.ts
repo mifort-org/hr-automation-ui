@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Candidate } from '@src/app/models/candidate';
 
 @Component({
@@ -6,6 +6,29 @@ import { Candidate } from '@src/app/models/candidate';
   templateUrl: './candidate-item.component.html',
   styleUrls: ['./candidate-item.component.scss'],
 })
-export class CandidateItemComponent {
+export class CandidateItemComponent implements OnInit {
   @Input() candidate: Candidate | null = null;
+
+  contacts: boolean = false;
+
+  location: boolean = false;
+
+  ngOnInit(): void {
+    this.contacts = this.checkContacts();
+    this.location = this.checkLocation();
+  }
+
+  checkContacts(): boolean {
+    if (!this.candidate?.contacts?.email && !this.candidate?.contacts?.phone) {
+      return false;
+    }
+    return true;
+  }
+
+  checkLocation(): boolean {
+    if (!this.candidate?.city) {
+      return false;
+    }
+    return true;
+  }
 }

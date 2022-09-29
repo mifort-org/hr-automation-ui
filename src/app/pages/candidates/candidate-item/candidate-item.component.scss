@@ -64,7 +64,7 @@
     gap: 10px;
     color: $text-secondary;
 
-    > * {
+    >* {
       margin: 0;
     }
   }
@@ -81,7 +81,11 @@
     cursor: pointer;
 
     .mat-icon {
-      color: white;
+      color: $white;
     }
+  }
+
+  .empty-block-height {
+    height: 40px;
   }
 }
