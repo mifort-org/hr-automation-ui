@@ -30,9 +30,10 @@
     </div>
 
   <div class="row">
-    <div class="col-7 col-10-sm">
-      <div  *ngIf="currentCandidate.keywords.length>0" >
-      <p class="hr-lines">Keywords</p>
+    <div class="col-3 col-10-sm">
+
+      <div  style="position: absolute" *ngIf="currentCandidate.keywords.length>0" >
+        <p class="hr-lines">Keywords</p>
       <div class="kay-word-container">
         <mat-chip-list>
           <mat-chip class="keyword-chips"
@@ -48,21 +49,22 @@
 
 
     </div>
+    <div class="col-7 col-10-sm">
+      <mat-tab-group
+        mat-align-tabs="start"
+        class="mt-20 communication-tabs"
+        animationDuration="0ms"
+      >
+        <mat-tab label="Details info">
+          <app-candidate-main-info></app-candidate-main-info>
+        </mat-tab>
+        <mat-tab label="Communication History"
+        ><app-candidate-communications></app-candidate-communications
+        ></mat-tab>
+        <mat-tab label="Updates"><app-candidate-updates></app-candidate-updates></mat-tab>
+      </mat-tab-group>
+    </div>
   </div>
-<!--    <div class="col-7 col-10-sm">-->
-<!--      <mat-tab-group-->
-<!--        mat-align-tabs="start"-->
-<!--        class="mt-20 communication-tabs"-->
-<!--        animationDuration="0ms"-->
-<!--      >-->
-<!--        <mat-tab label="Details info">-->
-<!--          <app-candidate-main-info></app-candidate-main-info>-->
-<!--        </mat-tab>-->
-<!--        <mat-tab label="Communication History"-->
-<!--        ><app-candidate-communications></app-candidate-communications-->
-<!--        ></mat-tab>-->
-<!--        <mat-tab label="Updates"><app-candidate-updates></app-candidate-updates></mat-tab>-->
-<!--      </mat-tab-group>-->
-<!--    </div>-->
+
   </div>
 
