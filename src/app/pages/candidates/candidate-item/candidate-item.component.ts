@@ -19,19 +19,10 @@ export class CandidateItemComponent implements OnInit {
   }
 
   checkContacts(): boolean {
-    // if (!this.candidate?.contacts?.email && !this.candidate?.contacts?.phone) {
-    //   return false;
-    // }
-    // return true;
-    return Boolean(this.candidate?.contacts?.email || this.candidate?.contacts?.phone);
+    return !!this.candidate?.contacts?.email || !!this.candidate?.contacts?.phone;
   }
 
   checkLocation(): boolean {
-    //   if (!this.candidate?.city) {
-    //     return false;
-    //   }
-    //   return true;
-    // }
-    return Boolean(this.candidate?.city);
+    return !!this.candidate?.city;
   }
 }
