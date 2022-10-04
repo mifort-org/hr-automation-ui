@@ -64,7 +64,7 @@
     gap: 10px;
     color: $text-secondary;
 
-    > * {
+    >* {
       margin: 0;
     }
   }
@@ -81,7 +81,15 @@
     cursor: pointer;
 
     .mat-icon {
-      color: white;
+      color: $white;
     }
+  }
+
+  .empty-block-arrow-button {
+    transform: translateY(-130%) translateX(-50%);
+  }
+
+  .empty-block {
+    height: 200px;
   }
 }

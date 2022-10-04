@@ -1,10 +1,10 @@
 <mat-card data-cy="candidate-item">
   <mat-card-content>
 
-    <div class="upper-section">
+    <div class="upper-section" [class.empty-block]="!hasContacts && !hasLocation">
       <app-avatar [candidate]="candidate!"></app-avatar>
       <div class="text">
-        <mat-card-title>{{ candidate?.fullName}}</mat-card-title>
+        <mat-card-title>{{ candidate?.fullName }}</mat-card-title>
         <mat-card-subtitle>last contact: {{ candidate?.lastContact | date }}</mat-card-subtitle>
       </div>
       <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu">
@@ -22,34 +22,34 @@
       </mat-menu>
     </div>
 
-    <button class="arrow-button" [routerLink]="['/candidates/details', candidate?.id]" data-cy="candidate-item-more">
+    <button class="arrow-button" [routerLink]="['/candidates/details', candidate?.id]" data-cy="candidate-item-more"
+      [class.empty-block-arrow-button]="!hasContacts && !hasLocation">
       <mat-icon>arrow_right_alt</mat-icon>
     </button>
 
-    <div class="middle-section">
-      <div>
+    <div class="middle-section" *ngIf="hasContacts || hasLocation;">
+      <div *ngIf="hasContacts">
         <div class="rounded-background">
           <mat-icon>perm_phone_msg</mat-icon>
         </div>
         <div class="text">
-          <p>{{candidate?.contacts?.email}}</p>
-          <p>{{candidate?.contacts?.phone}} </p>
+          <p>{{ candidate?.contacts?.email }}</p>
+          <p>{{ candidate?.contacts?.phone }}</p>
         </div>
       </div>
-
-      <div class="left-border">
+      <div *ngIf="hasLocation" [ngClass]="{ 'left-border': hasContacts }">
         <div class="rounded-background">
           <mat-icon> location_on</mat-icon>
         </div>
         <p class="text">
-          {{candidate?.city}}
+          {{ candidate?.city }}
         </p>
       </div>
     </div>
+
 
     <!-- <mat-chip-list>
       <mat-chip *ngFor="let keyword of candidate?.keywords">{{ keyword?.id | titlecase }}</mat-chip>
     </mat-chip-list> -->
   </mat-card-content>
-
 </mat-card>
