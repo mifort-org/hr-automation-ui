@@ -85,7 +85,11 @@
     }
   }
 
-  .empty-block-height {
-    height: 40px;
+  .empty-block-arrow-button {
+    transform: translateY(-130%) translateX(-50%);
+  }
+
+  .empty-block {
+    height: 200px;
   }
 }

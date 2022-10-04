@@ -1,7 +1,7 @@
 <mat-card data-cy="candidate-item">
   <mat-card-content>
 
-    <div class="upper-section">
+    <div class="upper-section" [class.empty-block]="!hasContacts && !hasLocation">
       <app-avatar [candidate]="candidate!"></app-avatar>
       <div class="text">
         <mat-card-title>{{ candidate?.fullName }}</mat-card-title>
@@ -22,12 +22,13 @@
       </mat-menu>
     </div>
 
-    <button class="arrow-button" [routerLink]="['/candidates/details', candidate?.id]" data-cy="candidate-item-more">
+    <button class="arrow-button" [routerLink]="['/candidates/details', candidate?.id]" data-cy="candidate-item-more"
+      [class.empty-block-arrow-button]="!hasContacts && !hasLocation">
       <mat-icon>arrow_right_alt</mat-icon>
     </button>
 
-    <div class="middle-section" *ngIf="contacts || location; else emptyBlock">
-      <div *ngIf="contacts">
+    <div class="middle-section" *ngIf="hasContacts || hasLocation;">
+      <div *ngIf="hasContacts">
         <div class="rounded-background">
           <mat-icon>perm_phone_msg</mat-icon>
         </div>
@@ -36,7 +37,7 @@
           <p>{{ candidate?.contacts?.phone }}</p>
         </div>
       </div>
-      <div *ngIf="location" [ngClass]="{ 'left-border': contacts }">
+      <div *ngIf="hasLocation" [ngClass]="{ 'left-border': hasContacts }">
         <div class="rounded-background">
           <mat-icon> location_on</mat-icon>
         </div>
@@ -46,10 +47,6 @@
       </div>
     </div>
 
-    <ng-template #emptyBlock>
-      <div class="empty-block-height">
-      </div>
-    </ng-template>
 
     <!-- <mat-chip-list>
       <mat-chip *ngFor="let keyword of candidate?.keywords">{{ keyword?.id | titlecase }}</mat-chip>
