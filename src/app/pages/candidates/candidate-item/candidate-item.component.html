@@ -33,8 +33,8 @@
           <mat-icon>perm_phone_msg</mat-icon>
         </div>
         <div class="text">
-          <p>{{ candidate?.contacts?.email }}</p>
-          <p>{{ candidate?.contacts?.phone }}</p>
+          <p *ngIf="candidate?.contacts?.email">{{ candidate?.contacts?.email }}</p>
+          <p *ngIf="candidate?.contacts?.phone">{{ candidate?.contacts?.phone }}</p>
         </div>
       </div>
       <div *ngIf="hasLocation" [ngClass]="{ 'left-border': hasContacts }">

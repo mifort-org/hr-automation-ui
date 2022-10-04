@@ -3,6 +3,7 @@
 .mat-card {
   padding: 0;
   background-color: $light-back-color;
+  height: 100%;
 
   .upper-section {
     display: flex;
@@ -18,6 +19,10 @@
       align-self: flex-start;
       margin-left: auto;
     }
+  }
+
+  &-content {
+    height: 100%;
   }
 
   .middle-section {
@@ -90,6 +95,7 @@
   }
 
   .empty-block {
-    height: 200px;
+    min-height: 200px;
+    height: 100%;
   }
 }
