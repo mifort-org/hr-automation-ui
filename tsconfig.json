@@ -18,14 +18,14 @@
     "target": "es2020",
     "module": "es2020",
     "paths": {
-      "@src/*": ["./src/*"], 
+      "@src/*": ["./src/*"],
       "@components/*": ["./src/app/components/*"],
       "@constants/*": ["./src/app/constants/*"],
       "@interfaces/*": ["./src/app/interfaces/*"],
       "@pages/*": ["./src/app/pages/*"],
       "@services/*": ["./src/app/services/*"],
       "@guards/*": ["./src/app/guards/*"],
-      "@utils/*": ["./src/app/utils/*"],
+      "@utils/*": ["./src/app/utils/*"]
     },
     "lib": [
       "es2020",
