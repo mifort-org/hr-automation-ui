@@ -46,6 +46,7 @@ export class CandidateMainInfoComponent implements OnInit {
     });
   }
 
+  // open edit candidate modal
   public openEditModal(): void {
     this.modalService.open(EditCandidateModalComponent, EModalSizes.MD);
   }
