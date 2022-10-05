@@ -1,23 +1,66 @@
-table {
-  margin-top: 20px;
-  border-radius: 5px;
-  margin-bottom: 20px;
+@import 'src/styles/theme';
 
-  &.mat-table {
-    border-spacing: 1px;
+.candidate-details{
+  display: flex;
+  justify-content: space-between;
+  padding-top: 40px;
+
+  .attributes, .contact-info {
+    background-color: transparent;
+    padding-top: 40px;
+
+    &__caption {
+      display: flex; 
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 5px;
+      color: $text-secondary;
+    }
+
+    &__name, &__value {
+      font-size: 16px;
+      font-weight: 500;
+      border: none;
+      min-width: 162px;
+      text-transform: capitalize;
+      color: $white;
+    }
+
+    &__name{
+      display: flex;
+      align-items: center;
+    }
+
+    &__wrapper{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: $light-secondary-color;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      margin-right: 10px;
+
+      &-icon{
+        width: 12px;
+        height: 12px;
+      }
+    }
+
+    .mat-row{
+      height: auto;
+    }
+
+    .mat-cell{
+      padding: 15px 0px 0px;
+    }
+
+    &:first-child{
+      padding: 0px;
+    }
   }
 
-  th {
-    font-size: 14px;
-  }
-
-  .mat-column-name {
-    max-width: fit-content;
-    min-width: 200px;
-  }
-
-  .mat-column-value {
-    max-width: fit-content;
-    min-width: 200px;
+  .edit-button{
+    border: 1px solid $primary-color;
   }
 }
