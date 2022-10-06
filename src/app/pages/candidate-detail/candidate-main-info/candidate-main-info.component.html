@@ -1,20 +1,20 @@
 <div class="candidate-details">
-  <div class="candidate-details__wrapper">
+  <div class="wrapper">
     <table
       class="contact-info"
       mat-table
       *ngIf="candidate"
       [dataSource]="contactInformation || []"
     >
-      <caption class="contact-info__caption">
+      <caption class="caption">
         Contact information
       </caption>
 
       <ng-container matColumnDef="name">
         <ng-container *matCellDef="let element">
-          <td *ngIf="element.value" class="contact-info__name" mat-cell>
-            <div class="contact-info__wrapper">
-              <img class="contact-info__wrapper-icon" [src]="element.icon">
+          <td *ngIf="element.value" class="name" mat-cell>
+            <div class="wrapper">
+              <img class="icon" [src]="element.icon">
             </div>
             <div class="text">{{ element.name }}:</div>
           </td>
@@ -23,11 +23,11 @@
 
       <ng-container matColumnDef="value">
         <ng-container *matCellDef="let element">
-          <td class="contact-info__value" mat-cell *ngIf="element.value">{{ element.value }}</td>
+          <td class="value" mat-cell *ngIf="element.value">{{ element.value }}</td>
         </ng-container>
       </ng-container>
 
-      <tr class="contact-info__row" mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
 
     <table
@@ -36,15 +36,15 @@
       *ngIf="candidate"
       [dataSource]="candidate.candidateAttributes || []"
     >
-      <caption class="attributes__caption">
+      <caption class="caption">
         Candidate attributes
       </caption>
 
       <ng-container matColumnDef="name">
         <ng-container *matCellDef="let element">
-          <td *ngIf="element.value" class="attributes__name" mat-cell>
-            <div class="attributes__wrapper">
-              <img class="attributes__wrapper-icon" [src]="element.attributeTypes.icon">
+          <td *ngIf="element.value" class="name" mat-cell>
+            <div class="wrapper">
+              <img class="icon" [src]="element.attributeTypes.icon">
             </div>
             <div class="text">{{ element.attributeTypes.name }}:</div>
           </td>
@@ -53,15 +53,15 @@
 
       <ng-container matColumnDef="value">
         <ng-container *matCellDef="let element">
-        <td class="attributes__value" mat-cell *ngIf="element.value">{{ element.value }}</td>
+        <td class="value" mat-cell *ngIf="element.value">{{ element.value }}</td>
         </ng-container>
       </ng-container>
 
-      <tr class="attributes__row" mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
   </div>
 
-  <div class="candidate-details__wrapper">
+  <div class="wrapper">
     <button mat-stroked-button color="primary" class="edit-button" (click)="openEditModal()">
       <mat-icon>edit</mat-icon><span class="ml-10">Edit candidate</span>
     </button>

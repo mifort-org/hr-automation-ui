@@ -9,7 +9,7 @@
     background-color: transparent;
     padding-top: 40px;
 
-    &__caption {
+    .caption {
       display: flex; 
       font-size: 20px;
       font-weight: 500;
@@ -17,21 +17,21 @@
       color: $text-secondary;
     }
 
-    &__name, &__value {
+    .name, .value {
       font-size: 16px;
       font-weight: 500;
       border: none;
-      min-width: 162px;
+      min-width: 195px;
       text-transform: capitalize;
       color: $white;
     }
 
-    &__name{
+    .name{
       display: flex;
       align-items: center;
     }
 
-    &__wrapper{
+    .wrapper{
       display: flex;
       justify-content: center;
       align-items: center;
@@ -41,7 +41,7 @@
       border-radius: 50%;
       margin-right: 10px;
 
-      &-icon{
+      .icon{
         width: 12px;
         height: 12px;
       }
@@ -49,10 +49,13 @@
 
     .mat-row{
       height: auto;
+      display: flex;
+      align-items: center;
     }
 
     .mat-cell{
-      padding: 15px 0px 0px;
+      padding: 0px;
+      margin-top: 15px;
     }
 
     &:first-child{
