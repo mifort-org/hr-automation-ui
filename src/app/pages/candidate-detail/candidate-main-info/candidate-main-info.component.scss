@@ -1,23 +1,69 @@
-table {
-  margin-top: 20px;
-  border-radius: 5px;
-  margin-bottom: 20px;
+@import 'src/styles/theme';
 
-  &.mat-table {
-    border-spacing: 1px;
+.candidate-details{
+  display: flex;
+  justify-content: space-between;
+  padding-top: 40px;
+
+  .attributes, .contact-info {
+    background-color: transparent;
+    padding-top: 40px;
+
+    .caption {
+      display: flex; 
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 5px;
+      color: $text-secondary;
+    }
+
+    .name, .value {
+      font-size: 16px;
+      font-weight: 500;
+      border: none;
+      min-width: 195px;
+      text-transform: capitalize;
+      color: $white;
+    }
+
+    .name{
+      display: flex;
+      align-items: center;
+    }
+
+    .wrapper{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: $light-secondary-color;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      margin-right: 10px;
+
+      .icon{
+        width: 12px;
+        height: 12px;
+      }
+    }
+
+    .mat-row{
+      height: auto;
+      display: flex;
+      align-items: center;
+    }
+
+    .mat-cell{
+      padding: 0px;
+      margin-top: 15px;
+    }
+
+    &:first-child{
+      padding: 0px;
+    }
   }
 
-  th {
-    font-size: 14px;
-  }
-
-  .mat-column-name {
-    max-width: fit-content;
-    min-width: 200px;
-  }
-
-  .mat-column-value {
-    max-width: fit-content;
-    min-width: 200px;
+  .edit-button{
+    border: 1px solid $primary-color;
   }
 }
