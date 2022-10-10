@@ -41,7 +41,8 @@ export class CandidatesService {
   public getCandidates(filterData: CandidatesFilterData): Observable<Candidate[]> {
     const param = new HttpParams({ fromObject: filterData as IParam }).toString();
 
-    return this.fetch.get<CandidateDto[]>(`candidates?${param}`).pipe(
+    return this.fetch.get<{ candidates: CandidateDto[] }>(`candidates?${param}`).pipe(
+      map((data: { candidates: CandidateDto[] }) => data?.candidates),
       map((data: CandidateDto[]) => data?.map(this.mapCandidateDto.bind(this))),
       catchError((error) => defaultErrorhandler(this.notification, error))
     );
