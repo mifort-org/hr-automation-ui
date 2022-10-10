@@ -37,6 +37,12 @@
       <app-candidate-item [candidate]="candidate"></app-candidate-item>
     </div>
   </div>
+  <mat-paginator 
+    [length]="length" 
+    [pageSize]="pageSize" 
+    [pageSizeOptions]="pageSizeOptions" 
+    (page)="onPageChanged($event)">
+  </mat-paginator>
 </div>
 
 <ng-template #errorDisplay>

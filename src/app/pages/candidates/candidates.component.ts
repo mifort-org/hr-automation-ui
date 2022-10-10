@@ -21,6 +21,16 @@ export class CandidatesComponent implements OnInit {
 
   public keywordsInput = '';
 
+  // eslint-disable-next-line no-magic-numbers
+  public pageSize: number = 10;
+
+  public pageNumber: number = 1;
+
+  public length = 0;
+
+  // eslint-disable-next-line no-magic-numbers
+  public pageSizeOptions: number[] = [10, 20, 25];
+
   constructor(
     private candidatesService: CandidatesService,
     private formBuilder: NonNullableFormBuilder
@@ -30,15 +40,20 @@ export class CandidatesComponent implements OnInit {
     this.filterForm = this.formBuilder.group({
       email: [''],
     });
-    this.getCandidatesList({ pageNumber: 1, pageSize: 100, keyword: this.keywordsList });
+    this.getCandidatesList({
+      pageNumber: this.pageNumber,
+      pageSize: this.pageSize,
+      keyword: this.keywordsList,
+    });
   }
 
   public getCandidatesList(filterData: CandidatesFilterData) {
     this.pageState.startLoading();
 
     this.candidatesService.getCandidates(filterData).subscribe({
-      next: (resolve: Candidate[]) => {
-        this.candidatesList = resolve;
+      next: (resolve: any) => {
+        this.candidatesList = resolve.candidates;
+        this.length = resolve.totalAmount;
         this.pageState.finishLoading();
       },
       error: (error: string) => {
@@ -50,12 +65,30 @@ export class CandidatesComponent implements OnInit {
 
   public remove(keyword: string): void {
     this.keywordsList = this.keywordsList?.filter((el) => el !== keyword);
-    this.getCandidatesList({ pageNumber: 1, pageSize: 100, keyword: this.keywordsList });
+    this.getCandidatesList({
+      pageNumber: this.pageNumber,
+      pageSize: this.pageSize,
+      keyword: this.keywordsList,
+    });
   }
 
   public add($event: Event): void {
     this.keywordsList.push(($event.target as HTMLInputElement).value.toLowerCase());
     this.keywordsInput = '';
-    this.getCandidatesList({ pageNumber: 1, pageSize: 100, keyword: this.keywordsList });
+    this.getCandidatesList({
+      pageNumber: this.pageNumber,
+      pageSize: this.pageSize,
+      keyword: this.keywordsList,
+    });
+  }
+
+  onPageChanged(e: any) {
+    this.pageSize = e.pageSize;
+    this.pageNumber = e.pageIndex + 1;
+    this.getCandidatesList({
+      pageNumber: this.pageNumber,
+      pageSize: this.pageSize,
+      keyword: this.keywordsList,
+    });
   }
 }

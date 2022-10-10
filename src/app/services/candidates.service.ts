@@ -38,11 +38,15 @@ interface CandidateDto {
 export class CandidatesService {
   constructor(private fetch: FetchService, private notification: NotificationService) {}
 
-  public getCandidates(filterData: CandidatesFilterData): Observable<Candidate[]> {
+  public getCandidates(filterData: CandidatesFilterData): Observable<any> {
     const param = new HttpParams({ fromObject: filterData as IParam }).toString();
-
-    return this.fetch.get<CandidateDto[]>(`candidates?${param}`).pipe(
-      map((data: CandidateDto[]) => data?.map(this.mapCandidateDto.bind(this))),
+    return this.fetch.get<any[]>(`candidates?${param}`).pipe(
+      map((res: any) => {
+        return {
+          candidates: res.candidates?.map(this.mapCandidateDto.bind(this)),
+          totalAmount: res.totalAmount,
+        };
+      }),
       catchError((error) => defaultErrorhandler(this.notification, error))
     );
   }
