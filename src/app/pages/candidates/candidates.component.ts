@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NonNullableFormBuilder, FormGroup } from '@angular/forms';
+import { PageEvent } from '@angular/material/paginator';
 import { CandidatesService } from '@services/candidates.service';
 import { Candidate } from '@src/app/models/candidate';
+import { CandidateInfo } from '@src/app/models/candidateInfo';
 import { CandidatesFilterData } from '@src/app/models/candidatesFilterData';
 import { PageState } from '@utils/pageState';
 
@@ -26,7 +28,7 @@ export class CandidatesComponent implements OnInit {
 
   public pageNumber: number = 1;
 
-  public length = 0;
+  public candidatesTotalAmount = 0;
 
   // eslint-disable-next-line no-magic-numbers
   public pageSizeOptions: number[] = [10, 20, 25];
@@ -51,9 +53,9 @@ export class CandidatesComponent implements OnInit {
     this.pageState.startLoading();
 
     this.candidatesService.getCandidates(filterData).subscribe({
-      next: (resolve: any) => {
+      next: (resolve: CandidateInfo) => {
         this.candidatesList = resolve.candidates;
-        this.length = resolve.totalAmount;
+        this.candidatesTotalAmount = resolve.totalAmount;
         this.pageState.finishLoading();
       },
       error: (error: string) => {
@@ -82,9 +84,9 @@ export class CandidatesComponent implements OnInit {
     });
   }
 
-  onPageChanged(e: any) {
-    this.pageSize = e.pageSize;
-    this.pageNumber = e.pageIndex + 1;
+  onPageChanged(event: PageEvent) {
+    this.pageSize = event.pageSize;
+    this.pageNumber = event.pageIndex + 1;
     this.getCandidatesList({
       pageNumber: this.pageNumber,
       pageSize: this.pageSize,
