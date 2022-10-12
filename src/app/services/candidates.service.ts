@@ -41,6 +41,7 @@ export class CandidatesService {
 
   public getCandidates(filterData: CandidatesFilterData): Observable<CandidateInfo> {
     const param = new HttpParams({ fromObject: filterData as IParam }).toString();
+
     return this.fetch.get<CandidateInfo>(`candidates?${param}`).pipe(
       map((res: CandidateInfo) => {
         return {
@@ -48,6 +49,7 @@ export class CandidatesService {
           totalAmount: res.totalAmount,
         };
       }),
+
       catchError((error) => defaultErrorhandler(this.notification, error))
     );
   }
