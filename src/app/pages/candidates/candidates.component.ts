@@ -84,7 +84,7 @@ export class CandidatesComponent implements OnInit {
     });
   }
 
-  onPageChanged(event: PageEvent) {
+  onPageChanged(event: PageEvent): void {
     this.pageSize = event.pageSize;
     this.pageNumber = event.pageIndex + 1;
     this.getCandidatesList({
