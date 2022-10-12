@@ -12,6 +12,7 @@ import { CandidateAttribute } from '../models/candidateAttribute';
 import { CandidatesFilterData } from '../models/candidatesFilterData';
 import { CommunicationHistory } from '../models/communicationHistory';
 import { ContactAttribute } from '../models/contactAttribute';
+import { CandidateInfo } from '../models/candidateInfo';
 import { FetchService } from './fetch.service';
 
 interface IParam {
@@ -38,12 +39,17 @@ interface CandidateDto {
 export class CandidatesService {
   constructor(private fetch: FetchService, private notification: NotificationService) {}
 
-  public getCandidates(filterData: CandidatesFilterData): Observable<Candidate[]> {
+  public getCandidates(filterData: CandidatesFilterData): Observable<CandidateInfo> {
     const param = new HttpParams({ fromObject: filterData as IParam }).toString();
 
-    return this.fetch.get<{ candidates: CandidateDto[] }>(`candidates?${param}`).pipe(
-      map((data: { candidates: CandidateDto[] }) => data?.candidates),
-      map((data: CandidateDto[]) => data?.map(this.mapCandidateDto.bind(this))),
+    return this.fetch.get<CandidateInfo>(`candidates?${param}`).pipe(
+      map((res: CandidateInfo) => {
+        return {
+          candidates: res.candidates?.map(this.mapCandidateDto.bind(this)),
+          totalAmount: res.totalAmount,
+        };
+      }),
+
       catchError((error) => defaultErrorhandler(this.notification, error))
     );
   }

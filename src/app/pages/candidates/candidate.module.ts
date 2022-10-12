@@ -12,6 +12,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { CommonModule } from '@angular/common';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { SharedModule } from '@components/shared/shared.module';
 import { AppPipesModule } from '@utils/pipes/app-pipes.module';
 import { CandidatesComponent } from '@pages/candidates/candidates.component';
@@ -40,6 +41,7 @@ import { ActionsBarComponent } from './actions-bar/actions-bar.component';
     CandidateRoutingModule,
 
     MatMenuModule,
+    MatPaginatorModule,
   ],
   exports: [ActionsBarComponent, CandidateItemComponent, CandidatesComponent],
 })
