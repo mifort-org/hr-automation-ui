@@ -1,5 +1,5 @@
 <div class="candidate-detail-container">
-  <app-candidate-action></app-candidate-action>
+<!--  <app-candidate-action></app-candidate-action>-->
    <div class="row">
         <div class="upper-section" >
           <section >
@@ -16,7 +16,6 @@
             </mat-chip-list>
           </section>
           <section class="account-info">
-
             <div style="display: flex">
               <p class="flname">{{ currentCandidate?.fullName}}</p>
               <mat-card-subtitle  *ngIf="currentCandidate?.city" class="location-title" >
@@ -24,6 +23,9 @@
                 {{ currentCandidate?.city }}</mat-card-subtitle>
             </div>
             <p class="last-contact">last contact: {{ currentCandidate?.lastContact | date }}</p>
+            <button mat-raised-button color="primary" (click)="openAddCommentModal()">
+              <mat-icon> comment</mat-icon><span class="ml-10">Add comment</span>
+            </button>
           </section>
         </div>
 
@@ -32,13 +34,13 @@
   <div class="row">
     <div class="col-3 col-10-sm">
 
-      <div  style="position: absolute" *ngIf="currentCandidate.keywords.length>0" >
+      <div  style="position: absolute" *ngIf=" currentCandidate && currentCandidate.keywords.length>0" >
         <p class="hr-lines">Keywords</p>
       <div class="kay-word-container">
         <mat-chip-list>
           <mat-chip class="keyword-chips"
             color="primary"
-            *ngFor="let keyword of (candidate$ | async)?.keywords"
+            *ngFor="let keyword of currentCandidate.keywords"
           >{{ keyword?.id | titlecase }}</mat-chip
           >
         </mat-chip-list>
