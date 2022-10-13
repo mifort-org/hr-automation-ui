@@ -27,10 +27,9 @@ export class CandidateDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.candidate$ = this.candidateDetailService.currentCandidate$;
-    this.candidateDetailService.currentCandidate$.subscribe((res: Candidate) => {
-      this.currentCandidate = res;
+    this.candidateDetailService.currentCandidate$.subscribe((candidate: Candidate) => {
+      this.currentCandidate = candidate;
       this.statusColor = this.getColor(this.currentCandidate.status);
-      console.log('this.statusColor', this.statusColor);
     });
   }
 
