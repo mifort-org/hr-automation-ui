@@ -5,6 +5,7 @@ import { Candidate } from '@src/app/models/candidate';
 import { AddCommentModalComponent } from '@pages/candidate-detail/add-comment-modal/add-comment-modal.component';
 import { DialogModalIds, EModalSizes } from '@constants/strings';
 import { ModalService } from '@services/modal.service';
+import { CandidateStatus, STATUS_COLOR } from '@constants/candidates';
 
 @Component({
   selector: 'app-candidate-detail',
@@ -17,6 +18,8 @@ export class CandidateDetailComponent implements OnInit {
 
   public currentCandidate!: Candidate;
 
+  statusColor!: string;
+
   constructor(
     private candidateDetailService: CandidateDetailService,
     private modalService: ModalService
@@ -26,7 +29,8 @@ export class CandidateDetailComponent implements OnInit {
     this.candidate$ = this.candidateDetailService.currentCandidate$;
     this.candidateDetailService.currentCandidate$.subscribe((res: Candidate) => {
       this.currentCandidate = res;
-      console.log('keywords', this.currentCandidate, res.keywords);
+      this.statusColor = this.getColor(this.currentCandidate.status);
+      console.log('this.statusColor', this.statusColor);
     });
   }
 
@@ -38,5 +42,9 @@ export class CandidateDetailComponent implements OnInit {
       undefined,
       DialogModalIds.addCommentModal
     );
+  }
+
+  getColor(status: CandidateStatus): string {
+    return STATUS_COLOR[status] || STATUS_COLOR[CandidateStatus.CREATED];
   }
 }

@@ -1,26 +1,23 @@
 <div class="candidate-detail-container">
-<!--  <app-candidate-action></app-candidate-action>-->
    <div class="row">
         <div class="upper-section" >
           <section >
           <app-avatar *ngIf="currentCandidate"
                       [candidate]="currentCandidate!"
-                      [width]="'249px'"
-                      [height]="'245px'"></app-avatar>
+                      [width]="'250px'"
+                      [height]="'250px'"></app-avatar>
             <mat-chip-list >
               <mat-chip *ngIf="currentCandidate?.status"  class="mat-chip-status"
-                         [ngStyle]="{'background-color':currentCandidate.status === 'unemployed' ? 'rgb(244, 67, 54)':
-                         currentCandidate.status === 'created' ? 'rgb(0, 137, 255)' : 'rgb(40, 194, 101)', 'color': 'black' }"
-              >
+                        [ngStyle]=" {'background-color': statusColor}">
               {{currentCandidate?.status }} </mat-chip>
             </mat-chip-list>
           </section>
           <section class="account-info">
-            <div style="display: flex">
+            <div >
               <p class="flname">{{ currentCandidate?.fullName}}</p>
-              <mat-card-subtitle  *ngIf="currentCandidate?.city" class="location-title" >
+              <p *ngIf="currentCandidate?.city" class="location-title" >
                 <mat-icon class="location-icon" >room</mat-icon>
-                {{ currentCandidate?.city }}</mat-card-subtitle>
+                {{ currentCandidate?.city }}</p>
             </div>
             <p class="last-contact">last contact: {{ currentCandidate?.lastContact | date }}</p>
             <button mat-raised-button color="primary" (click)="openAddCommentModal()">
@@ -33,10 +30,9 @@
 
   <div class="row">
     <div class="col-3 col-10-sm">
-
-      <div  style="position: absolute" *ngIf=" currentCandidate && currentCandidate.keywords.length>0" >
+      <div class="keyword-wrapper" *ngIf="currentCandidate?.keywords?.length" >
         <p class="hr-lines">Keywords</p>
-      <div class="kay-word-container">
+      <div class="keyword-container">
         <mat-chip-list>
           <mat-chip class="keyword-chips"
             color="primary"
@@ -46,10 +42,6 @@
         </mat-chip-list>
       </div>
       </div>
-
-
-
-
     </div>
     <div class="col-7 col-10-sm">
       <mat-tab-group

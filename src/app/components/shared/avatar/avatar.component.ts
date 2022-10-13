@@ -22,17 +22,17 @@ export class AvatarComponent implements OnInit {
 
   @HostBinding('style.box-shadow') shadowColor: string = '';
 
-  @HostBinding('style.width') _width: string = '';
+  @HostBinding('style.width') selectedWidth: string = '';
 
-  @HostBinding('style.height') _height: string = '';
+  @HostBinding('style.height') selectedHeight: string = '';
 
   ngOnInit(): void {
     this.selectedColor = this.getColor(this.candidate!.status);
     this.shadowColor = this.getShadowColor(this.selectedColor);
     this.initials = this.getInitials(this.candidate?.firstName!, this.candidate?.lastName!);
 
-    this.width ? (this._width = this.width) : '80px';
-    this.height ? (this._height = this.height) : '80px';
+    this.selectedWidth = this.width || '80px';
+    this.selectedHeight = this.height || '80px';
   }
 
   getInitials(name: string, surname: string): string {

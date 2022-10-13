@@ -42,8 +42,6 @@
 .location-icon {
   font-size: small;
   text-align: center;
-  //transform: scale(0.7);
-
 }
 
 .mat-chip-status {
@@ -53,40 +51,29 @@
   align-items: center;
   padding: 6px 20px;
   gap: 10px;
-
-  position: absolute;
-  width: 119px;
-  height: 28px;
-  left: 100px;
-  top: 390px;
-
+  width: 50%;
+  height: 6%;
+  left: 60px;
+  top: 45px;
 }
 .account-info {
-  position: absolute;
-  width: 350px;
-  height: 185px;
-  left: 395px;
+  margin-left: 100px;
 
   button {
-    top: 60px;
+    margin-top: 60px;
+  }
+  div {
+    display: flex
   }
 }
-
-
-
-
-
-
   .last-contact {
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 500;
     font-size: 20px;
     line-height: 0px;
-    color: #A0A6D5;
+    color: $text-secondary;
   }
-
-
 
 .flname{
   font-family: 'Roboto';
@@ -94,34 +81,37 @@
   font-weight: 500;
   font-size: 36px;
   line-height: 0px;
-  color: #E3E7FE;
+  color: $white;
 }
-
 
 .location-title {
   display: flex;
-  margin-top: 34px !important;
+  margin-top: 34px;
   margin-left: 10px;
-
+  font-size: 14px;
+  color: $text-secondary;
 
 }
-.kay-word-container {
-  margin-top: 80px;
-  padding-left: 30px;
-  padding-top: 58px;
+.keyword-wrapper {
+position: absolute;
+  width: 300px;
+}
+
+.keyword-container {
+  padding-left: 24px;
+  margin-top: 25px;
 }
 
 .hr-lines{
-  position: absolute;
   max-width: 500px;
   text-align: center;
   font-family: "Roboto";
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
-  color: #A0A6D5;
-  right: 60px;
-  margin-top: 77px;
+  color: $text-secondary;
+  margin-right: 180px;
+  margin-top: 100px;
 }
 .hr-lines:after{
   content:" ";
@@ -129,16 +119,16 @@
   height: 0px;
   display: block;
   position: absolute;
-  top: 50%;
-  right: -180px;
-  border: 1px solid #A0A6D5;
+  margin-top: -10px;
+  right: 25px;
+  border: 1px solid $text-secondary;
 }
 
 mat-chip {
   border-radius: 8px;
-  color: #242636;
+  color: $light-back-color;
 }
 .keyword-chips{
-  background-color: #363951 !important;
-  color:  #A0A6D5 !important;
+  background-color: $light-secondary-color !important;
+  color: $text-secondary !important;
 }
