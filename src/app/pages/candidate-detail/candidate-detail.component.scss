@@ -93,13 +93,12 @@
 
 }
 .keyword-wrapper {
-position: absolute;
   width: 300px;
 }
 
 .keyword-container {
   padding-left: 24px;
-  margin-top: 25px;
+  margin-top: 40px;
 }
 
 .hr-lines{
@@ -118,9 +117,8 @@ position: absolute;
   width: 160px;
   height: 0px;
   display: block;
-  position: absolute;
   margin-top: -10px;
-  right: 25px;
+  margin-left: 120px;
   border: 1px solid $text-secondary;
 }
 
