@@ -18,6 +18,7 @@ import { AppPipesModule } from '@utils/pipes/app-pipes.module';
 import { EditCandidateModalComponent } from '@pages/candidate-detail/edit-candidate-modal/edit-candidate-modal.component';
 import { CandidateFormComponent } from '@pages/candidate-detail/candidate-form/candidate-form.component';
 import { CandidateDetailRoutingModule } from '@pages/candidate-detail/candidate-detail-routing.module';
+import { SharedModule } from '@src/app/components/shared/shared.module';
 import { CandidateCommunicationsComponent } from './candidate-communications/candidate-communications.component';
 import { CandidateDetailComponent } from './candidate-detail.component';
 import { CandidateMainInfoComponent } from './candidate-main-info/candidate-main-info.component';
@@ -57,6 +58,7 @@ import { DeleteDialogComponent } from './candidate-communications/communication-
     MatProgressSpinnerModule,
     CandidateDetailRoutingModule,
     DialogModule,
+    SharedModule,
   ],
   providers: [
     { provide: MAT_DIALOG_DATA, useValue: {} },

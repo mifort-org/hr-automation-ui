@@ -8,7 +8,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
+import { filter, Observable } from 'rxjs';
 import { MODAL_ACTIONS } from '@src/app/constants/modalActions';
 import { Candidate } from '@src/app/models/candidate';
 import { CommentData } from '@src/app/models/commentData';
@@ -24,8 +24,6 @@ import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 export class CommunicationCommentComponent implements OnInit {
   @Input() historyItem!: HistoryElement;
 
-  @Input() candidate!: Observable<Candidate>;
-
   @Input() attachment!: string;
 
   @Output() commentDeleted: EventEmitter<number> = new EventEmitter<number>();
@@ -34,11 +32,13 @@ export class CommunicationCommentComponent implements OnInit {
 
   @ViewChild('textareaRef') textareaRef!: ElementRef;
 
-  public editMode: boolean = false;
+  public candidate!: Observable<Candidate>;
 
   public editFieldValue!: string;
 
-  public showModal = false;
+  public editMode: boolean = false;
+
+  public showModal: boolean = false;
 
   public MODAL_ACTIONS = MODAL_ACTIONS;
 
@@ -48,32 +48,32 @@ export class CommunicationCommentComponent implements OnInit {
     this.candidate = this.candidateDetailService.currentCandidate$;
   }
 
-  public toggleOptionsModal(action: string) {
-    if (action === MODAL_ACTIONS.CLOSE) {
-      this.showModal = false;
-    } else if (action === MODAL_ACTIONS.OPEN) {
-      this.showModal = true;
-    }
+  public toggleOptionsModal(action: string): void {
+    this.showModal = action === MODAL_ACTIONS.OPEN;
   }
 
-  public openDialog(): void {
-    // open delete-comment dialog window
+  // open delete-comment dialog window
+  public openDialog($event: Event): void {
     this.toggleOptionsModal(MODAL_ACTIONS.CLOSE);
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       width: '450px',
     });
 
-    dialogRef.afterClosed().subscribe((result: boolean) => {
-      if (result) {
-        this.commentDeleted.emit(this.historyItem.id);
-      }
-    });
+    dialogRef
+      .afterClosed()
+      .pipe(filter((result) => result))
+      .subscribe(() => this.commentDeleted.emit(this.historyItem.id));
+
+    $event.preventDefault();
+    $event.stopPropagation();
   }
 
-  public editModeOn(): void {
+  public editModeOn($event: Event): void {
     this.editFieldValue = this.historyItem.comment;
     this.toggleOptionsModal(MODAL_ACTIONS.CLOSE);
     this.editMode = true;
+    $event.preventDefault();
+    $event.stopPropagation();
   }
 
   public applyEditingComment(): void {

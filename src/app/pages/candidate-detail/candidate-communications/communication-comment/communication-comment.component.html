@@ -1,8 +1,8 @@
 <mat-card class="card" *ngIf="historyItem">
   <mat-card-content class="card-item">
     <div class="candidate-info">
-      <div class="profile-icon">{{(candidate | async)?.firstName?.[0]}}{{(candidate | async)?.lastName?.[0]}}</div>
-      <h3 class="candidate-name">{{(candidate | async)?.firstName}} {{(candidate | async)?.lastName}}</h3>
+      <app-avatar class="profile-icon" [candidate]="(candidate | async)"></app-avatar>
+      <h3 class="candidate-name">{{(candidate | async)?.fullName}}</h3>
       <sup class="date">
         <div class="separator"></div>
         <p class="text">{{ historyItem.updateDate | date: 'MMM d, y h:mm' }}</p>
@@ -20,12 +20,12 @@
       </div>
 
       <div class="options-modal" *ngIf="showModal">
-        <button (click)="editModeOn(); $event.preventDefault(); $event.stopPropagation()" class="edit"><mat-icon class="icon">edit</mat-icon>
+        <button (click)="editModeOn($event)" class="edit"><mat-icon class="icon">edit</mat-icon>
           <p class="text">Edit</p></button>
-        <button class="delete" 
-          (click)="openDialog(); $event.preventDefault(); $event.stopPropagation()"
+        <button class="delete"
+          (click)="openDialog($event)"
         > 
-          <mat-icon>delete_outline</mat-icon><p class="text">Delete</p></button>
+          <mat-icon class="icon">delete_outline</mat-icon><p class="text">Delete</p></button>
       </div>
     </div>
 
