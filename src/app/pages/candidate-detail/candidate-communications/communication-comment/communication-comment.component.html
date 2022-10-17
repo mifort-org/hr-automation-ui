@@ -1,65 +1,54 @@
-<mat-card class="comment-body" (click)="editModeOff()" *ngIf="historyItem">
-  <mat-card-content class="comment-content">
-    <div class="flex flex-between">
-      <div class="flex flex-column">
-        <div
-          class="comment-text"
-          [id]="historyItem.id + '_comment_text'"
-          (dblclick)="editModeOn(); $event.preventDefault(); $event.stopPropagation()"
-          *ngIf="!editMode; else editField"
-        >
-          {{ historyItem.comment }}
-          <div class="editing-info visible">
-            <span>Double-click on text for editing.</span>
-          </div>
-        </div>
-        <div class="flex flex-between align-center comment-attachments">
-          <mat-card>
-            <mat-card-content>
-              <div class="flex flex-between align-center">
-                <mat-icon>attach_file</mat-icon>
-                <span>Attachment name..</span>
-              </div>
-            </mat-card-content>
-          </mat-card>
-          <button
-            mat-stroked-button
-            *ngIf="editMode"
-            (click)="$event.stopPropagation(); $event.preventDefault(); applyEditingComment()"
-          >
-            Apply
+<mat-card class="card" *ngIf="historyItem">
+  <mat-card-content class="card-item">
+    <div class="candidate-info">
+      <div class="profile-icon">{{(candidate | async)?.firstName?.[0]}}{{(candidate | async)?.lastName?.[0]}}</div>
+      <h3 class="candidate-name">{{(candidate | async)?.firstName}} {{(candidate | async)?.lastName}}</h3>
+      <sup class="date">
+        <div class="separator"></div>
+        <p class="text">{{ historyItem.updateDate | date: 'MMM d, y h:mm' }}</p>
+      </sup>
+      <div class="options">
+        <mat-icon (click)="toggleOptionsModal(MODAL_ACTIONS.OPEN)" *ngIf="!editMode; else editActions">more_vert</mat-icon>    
+        <ng-template #editActions>
+          <button mat-stroked-button class="cancel-editing" (click)="editModeOff()">
+            <p>Cancel</p>
           </button>
-        </div>
+          <button mat-stroked-button class='save-editing' (click)="applyEditingComment()">
+            <p>Save</p>
+          </button>
+        </ng-template>
       </div>
-      <div>
-        <button
-          mat-icon-button
-          class="comment-delete-btn"
-          (click)="
-            commentDeleted.emit(historyItem.id); $event.preventDefault(); $event.stopPropagation()
-          "
-        >
-          <mat-icon color="warn">delete</mat-icon>
-        </button>
+
+      <div class="options-modal" *ngIf="showModal">
+        <button (click)="editModeOn(); $event.preventDefault(); $event.stopPropagation()" class="edit"><mat-icon class="icon">edit</mat-icon>
+          <p class="text">Edit</p></button>
+        <button class="delete" 
+          (click)="openDialog(); $event.preventDefault(); $event.stopPropagation()"
+        > 
+          <mat-icon>delete_outline</mat-icon><p class="text">Delete</p></button>
+      </div>
+    </div>
+
+    <div class="communication-info">
+        <div [id]="historyItem.id + '_comment_text'" class="comment" *ngIf="!editMode; else editField">{{ historyItem.comment }}</div>
+
+        <ng-template #editField>
+          <div class="comment-editing-area">
+            <fieldset>
+              <legend>Comment:</legend>
+              <span #textareaRef class="textarea" role="textbox" contenteditable>{{historyItem.comment}}</span>
+            </fieldset>
+          </div>
+        </ng-template>
+
+        <div class="attachment" *ngIf="attachment">
+          <mat-icon class="icon"> attach_file</mat-icon>
+          <div class="info">
+            <p class="name">Document.pdf</p>
+            <p class="size">3 MB PDF</p>
+          </div>
       </div>
     </div>
   </mat-card-content>
-
-  <mat-card-footer class="comment-footer">
-    <div class="comment-info flex flex-between">
-      <span>{{ 'User Name' }}</span>
-      <span *ngIf="historyItem.updateDate"
-        >Last update: {{ historyItem.updateDate | date: 'MM/dd/yy, h:mm a' }}</span
-      >
-    </div>
-  </mat-card-footer>
 </mat-card>
 
-<ng-template #editField>
-  <div [ngStyle]="{ width: commentWidth, height: commentHeight }" class="comment-editing-area">
-    <textarea
-      (click)="$event.preventDefault(); $event.stopPropagation()"
-      [ngModel]="editFieldValue"
-    ></textarea>
-  </div>
-</ng-template>
