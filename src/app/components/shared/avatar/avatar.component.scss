@@ -1,3 +1,5 @@
+@import '../../../../styles/colors';
+
 :host {
   display: flex;
   align-items: center;
@@ -17,5 +19,11 @@
   .text {
     font-size: 32px;
     margin: 0;
+    color: $light-white;
+  }
+
+  .mat-icon {
+    transform: scale(2);
+    color: $light-white;
   }
 }

@@ -1,10 +1,19 @@
 @import 'src/styles/colors';
 
-.sticky-bar{
+.sticky-bar {
     position: sticky;
     top: 0;
     background-color: $background;
     height: 90px;
     width: 100%;
     z-index: 1000;
+}
+
+.content-container {
+    align-items: stretch;
+}
+
+mat-paginator {
+    margin-top:77px;
+    background: $dark-back-color;
 }
