@@ -63,4 +63,12 @@ export class AvatarComponent implements OnChanges {
   getShadowColor(colorHex: string): string {
     return `0px 0px 0px 3px ${colorHex}80`;
   }
+
+  getTextClass() {
+    return this.width && this.height ? 'text-big' : 'text';
+  }
+
+  getIconClass() {
+    return this.width && this.height ? 'mat-icon-large' : 'mat-icon';
+  }
 }

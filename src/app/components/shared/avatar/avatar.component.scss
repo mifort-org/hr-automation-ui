@@ -22,8 +22,20 @@
     color: $light-white;
   }
 
+  .text-big {
+    font-size: 80px;
+    margin: 0;
+    color: $light-white;
+  }
+
   .mat-icon {
     transform: scale(2);
     color: $light-white;
   }
+
+  .mat-icon-large {
+    transform: scale(6);
+    color: $light-white;
+  }
+
 }
