@@ -9,4 +9,5 @@ export interface CandidateAttributeType {
   basicType: string;
   validation: string;
   identifier: boolean;
+  icon?: string | undefined;
 }

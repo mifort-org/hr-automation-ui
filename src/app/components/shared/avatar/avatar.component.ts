@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core';
+import { Component, HostBinding, Input, OnChanges } from '@angular/core';
 import { STATUS_COLOR, CandidateStatus } from '@src/app/constants/candidates';
 import { Candidate } from '@src/app/models/candidate';
 
@@ -7,8 +7,8 @@ import { Candidate } from '@src/app/models/candidate';
   templateUrl: './avatar.component.html',
   styleUrls: ['./avatar.component.scss'],
 })
-export class AvatarComponent implements OnInit {
-  @Input() candidate: Candidate | undefined;
+export class AvatarComponent implements OnChanges {
+  @Input() candidate: Candidate | undefined | null;
 
   @Input() width: string | undefined;
 
@@ -33,6 +33,14 @@ export class AvatarComponent implements OnInit {
 
     this.selectedWidth = this.width || '80px';
     this.selectedHeight = this.height || '80px';
+  }
+
+  ngOnChanges(changes: any): void {
+    if (changes.candidate.currentValue) {
+      this.selectedColor = this.getColor(this.candidate!.status);
+      this.shadowColor = this.getShadowColor(this.selectedColor);
+      this.initials = this.getInitials(this.candidate?.firstName!, this.candidate?.lastName!);
+    }
   }
 
   getInitials(name: string, surname: string): string {

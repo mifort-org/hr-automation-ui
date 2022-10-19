@@ -1,0 +1,25 @@
+@import 'src/styles';
+
+.heading{
+    margin-bottom: 30px;
+}
+
+.button-wrapper{
+    display: flex;
+    justify-content: end;
+    padding: 0px 0px 24px;
+    min-height: auto;
+
+    .mat-raised-button{
+        background-color: $primary-color;
+        padding: 0px 16px;
+    }
+
+    .mat-stroked-button{
+        border: none;
+    }
+}
+
+.confirmation-question{
+    margin: 0px 0px 40px;
+}
