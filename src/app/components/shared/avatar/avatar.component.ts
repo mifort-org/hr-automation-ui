@@ -31,7 +31,6 @@ export class AvatarComponent implements OnChanges {
     this.selectedColor = this.getColor(this.candidate!.status);
     this.shadowColor = this.getShadowColor(this.selectedColor);
     this.initials = this.getInitials(this.candidate?.firstName!, this.candidate?.lastName!);
-
     this.selectedWidth = this.getWidth();
     this.selectedHeight = this.getHeight();
   }
