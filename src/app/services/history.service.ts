@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable } from 'rxjs';
+import { catchError, Observable } from 'rxjs';
 import { HistoryElement } from '@src/app/models/historyElement';
 import { NotificationService } from '@services/notification.service';
 import { defaultErrorhandler } from '@utils/functions';
@@ -18,13 +18,14 @@ interface HistoryElementDto {
   providedIn: 'root',
 })
 export class HistoryService {
-  constructor(private fetch: FetchService, private notification: NotificationService) {}
+  public errorHandler = defaultErrorhandler;
+
+  constructor(private fetch: FetchService, public notification: NotificationService) {}
 
   public getCandidateHistoryById(id: string): Observable<HistoryElement[]> {
-    return this.fetch.get<HistoryElementDto[]>(`candidates/${id}/history`).pipe(
-      map((data: HistoryElementDto[]) => data.map(this.mapHistoryElement.bind(this))),
-      catchError((error) => defaultErrorhandler(this.notification, error))
-    );
+    return this.fetch
+      .get<HistoryElementDto[]>(`candidates/${id}/history`)
+      .pipe(catchError((error) => this.errorHandler(this.notification, error)));
   }
 
   public updateCandidateHistory(
@@ -33,22 +34,18 @@ export class HistoryService {
   ): Observable<HistoryElement> {
     return this.fetch
       .patch<HistoryElementDto>(`candidates/${candidateId}/history`, data)
-      .pipe(catchError((error) => defaultErrorhandler(this.notification, error)));
+      .pipe(catchError((error) => this.errorHandler(this.notification, error)));
   }
 
   public createNewCandidateHistory(data: CommentData, id: string): Observable<HistoryElement> {
     return this.fetch
       .post<HistoryElementDto>(`candidates/${id}/history`, data)
-      .pipe(catchError((error) => defaultErrorhandler(this.notification, error)));
+      .pipe(catchError((error) => this.errorHandler(this.notification, error)));
   }
 
   public deleteCandidateHistory(id: string, historyId: string): Observable<HistoryElement> {
     return this.fetch
       .delete<HistoryElementDto>(`candidates/${id}/history/${historyId}`)
-      .pipe(catchError((error) => defaultErrorhandler(this.notification, error)));
-  }
-
-  public mapHistoryElement(historyElement: HistoryElementDto): HistoryElement {
-    return historyElement;
+      .pipe(catchError((error) => this.errorHandler(this.notification, error)));
   }
 }

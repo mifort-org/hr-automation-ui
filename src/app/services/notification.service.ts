@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NotificationMode } from '@constants/notification';
 
-const NOTIFICATIONS_DURATION = {
+export const NOTIFICATIONS_DURATION = {
   STANDART: 3000,
 };
 @Injectable({

@@ -2,14 +2,13 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/spec",
-    "types": [
-      "jest"
-    ],
     "esModuleInterop": true,
     "emitDecoratorMetadata": true
   },
+  "types": [
+    "jest"
+  ],
   "files": [
-    "src/test.ts",
     "src/polyfills.ts"
   ],
   "include": [

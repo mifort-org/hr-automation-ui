@@ -21,7 +21,7 @@ interface IParam {
 
 type CandidateCustomAttributeDto = { [key: string]: CandidateAttribute };
 
-interface CandidateDto {
+export interface CandidateDto {
   id: string;
   lastContact: string;
   status: CandidateStatus;
@@ -37,7 +37,9 @@ interface CandidateDto {
   providedIn: 'root',
 })
 export class CandidatesService {
-  constructor(private fetch: FetchService, private notification: NotificationService) {}
+  public errorHandler = defaultErrorhandler;
+
+  constructor(private fetch: FetchService, public notification: NotificationService) {}
 
   public getCandidates(filterData: CandidatesFilterData): Observable<CandidateInfo> {
     const param = new HttpParams({ fromObject: filterData as IParam }).toString();
@@ -49,28 +51,27 @@ export class CandidatesService {
           totalAmount: res.totalAmount,
         };
       }),
-
-      catchError((error) => defaultErrorhandler(this.notification, error))
+      catchError((error) => this.errorHandler(this.notification, error))
     );
   }
 
   public getCandidateById(id: string): Observable<Candidate> {
     return this.fetch.get<CandidateDto>(`candidates/${id}`).pipe(
       map((c) => this.mapCandidateDto(c)),
-      catchError((error) => defaultErrorhandler(this.notification, error))
+      catchError((error) => this.errorHandler(this.notification, error))
     );
   }
 
   public updateCandidateAttributes(id: string, data: any): Observable<CandidateDto> {
     return this.fetch
       .post<CandidateDto>(`candidates/${id}/attributes`, this.mapCandidateToDto(data))
-      .pipe(catchError((error) => defaultErrorhandler(this.notification, error)));
+      .pipe(catchError((error) => this.errorHandler(this.notification, error)));
   }
 
   public createNewCandidate(data: any): Observable<CandidateDto> {
     return this.fetch
       .post<CandidateDto>(`candidates`, this.mapCandidateToDto(data))
-      .pipe(catchError((error) => defaultErrorhandler(this.notification, error)));
+      .pipe(catchError((error) => this.errorHandler(this.notification, error)));
   }
 
   public mapCandidateDto(candidate: CandidateDto): Candidate {

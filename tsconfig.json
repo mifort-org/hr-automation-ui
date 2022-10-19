@@ -17,6 +17,9 @@
     "importHelpers": true,
     "target": "es2020",
     "module": "es2020",
+    "types": [
+      "jest"
+    ],
     "paths": {
       "@src/*": ["./src/*"],
       "@components/*": ["./src/app/components/*"],
@@ -32,6 +35,9 @@
       "dom"
     ]
   },
+  "exclude": [
+    "**/*.spec.ts"
+  ],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,

@@ -11,5 +11,6 @@ module.exports = {
   coverageDirectory: 'coverage',
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths || {}, {
     prefix: '<rootDir>/'
-  })
+  }),
+  testRunner: 'jest-jasmine2'
 };

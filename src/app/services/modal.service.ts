@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EModalSizes } from '@constants/strings';
 
-const MODAL_SIZE = {
+export const MODAL_SIZE = {
   [EModalSizes.XS]: '250px',
   [EModalSizes.SM]: '450px',
   [EModalSizes.MD]: '650px',
