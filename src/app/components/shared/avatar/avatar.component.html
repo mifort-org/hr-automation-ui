@@ -3,11 +3,11 @@
 </span>
 <ng-template #elseBlock>
   <span *ngIf="initials; else profAvatar">
-    <p [ngClass]="getTextClass()">
+    <p class="text" [ngStyle]="{'font-size': getTextSize()}">
       {{ initials }}
     </p>
   </span>
   <ng-template #profAvatar>
-    <mat-icon [ngClass]="getIconClass()">person</mat-icon>
+    <mat-icon [ngStyle]="{'transform' : getIconSize()}">person</mat-icon>
   </ng-template>
 </ng-template>

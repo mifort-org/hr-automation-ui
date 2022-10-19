@@ -1,4 +1,5 @@
 import { Component, HostBinding, Input, OnChanges } from '@angular/core';
+import { round } from 'lodash';
 import { STATUS_COLOR, CandidateStatus } from '@src/app/constants/candidates';
 import { Candidate } from '@src/app/models/candidate';
 
@@ -10,9 +11,9 @@ import { Candidate } from '@src/app/models/candidate';
 export class AvatarComponent implements OnChanges {
   @Input() candidate: Candidate | undefined | null;
 
-  @Input() width: string | undefined;
+  @Input() width: number | undefined;
 
-  @Input() height: string | undefined;
+  @Input() height: number | undefined;
 
   initials: string = '';
 
@@ -31,8 +32,8 @@ export class AvatarComponent implements OnChanges {
     this.shadowColor = this.getShadowColor(this.selectedColor);
     this.initials = this.getInitials(this.candidate?.firstName!, this.candidate?.lastName!);
 
-    this.selectedWidth = this.width || '80px';
-    this.selectedHeight = this.height || '80px';
+    this.selectedWidth = this.getWidth();
+    this.selectedHeight = this.getHeight();
   }
 
   ngOnChanges(changes: any): void {
@@ -64,11 +65,21 @@ export class AvatarComponent implements OnChanges {
     return `0px 0px 0px 3px ${colorHex}80`;
   }
 
-  getTextClass() {
-    return this.width && this.height ? 'text-big' : 'text';
+  getWidth() {
+    return this.width ? `${this.width}px` : '80px';
   }
 
-  getIconClass() {
-    return this.width && this.height ? 'mat-icon-large' : 'mat-icon';
+  getHeight() {
+    return this.height ? `${this.height}px` : '80px';
+  }
+
+  getTextSize() {
+    // eslint-disable-next-line no-magic-numbers
+    return this.height ? `${this.height * 0.3}px` : '32px';
+  }
+
+  getIconSize() {
+    // eslint-disable-next-line no-magic-numbers
+    return this.height ? `scale( ${round(this.height / 40)})` : 'scale(2)';
   }
 }

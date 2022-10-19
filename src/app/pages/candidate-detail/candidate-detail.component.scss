@@ -54,7 +54,8 @@
   width: 50%;
   height: 6%;
   left: 60px;
-  top: 45px;
+  top: 15px;
+  color: $light-back-color;
 }
 .account-info {
   margin-left: 100px;
@@ -132,6 +133,9 @@ mat-chip {
 }
 
 mat-tab-group{
-  margin-left: -90px;
   padding-bottom: 60px;
 }
+ .detail-section {
+   width: 70%;
+   margin-right: 75px;
+ }

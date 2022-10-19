@@ -4,8 +4,8 @@
           <section >
           <app-avatar *ngIf="currentCandidate"
                       [candidate]="currentCandidate!"
-                      [width]="'250px'"
-                      [height]="'250px'"></app-avatar>
+                      [width]="250"
+                      [height]="250"></app-avatar>
             <mat-chip-list >
               <mat-chip *ngIf="currentCandidate?.status"  class="mat-chip-status"
                         [ngStyle]=" {'background-color': statusColor}">
@@ -29,7 +29,7 @@
     </div>
 
   <div class="row">
-    <div class="col-3 col-10-sm">
+    <section>
       <div class="keyword-wrapper" *ngIf="currentCandidate?.keywords?.length" >
         <p class="hr-lines">Keywords</p>
       <div class="keyword-container">
@@ -42,8 +42,8 @@
         </mat-chip-list>
       </div>
       </div>
-    </div>
-    <div class="col-7 col-10-sm">
+    </section>
+    <section class="detail-section">
       <mat-tab-group
         mat-align-tabs="start"
         class="mt-20 communication-tabs"
@@ -57,8 +57,9 @@
         ></mat-tab>
         <mat-tab label="Updates"><app-candidate-updates></app-candidate-updates></mat-tab>
       </mat-tab-group>
-    </div>
+    </section>
   </div>
+
 
   </div>
 
