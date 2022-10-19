@@ -9,20 +9,23 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { DialogModule } from '@angular/cdk/dialog';
 import { CandidateUpdatesComponent } from '@pages/candidate-detail/candidate-updates/candidate-updates.component';
 import { AppPipesModule } from '@utils/pipes/app-pipes.module';
 import { EditCandidateModalComponent } from '@pages/candidate-detail/edit-candidate-modal/edit-candidate-modal.component';
 import { CandidateFormComponent } from '@pages/candidate-detail/candidate-form/candidate-form.component';
 import { CandidateDetailRoutingModule } from '@pages/candidate-detail/candidate-detail-routing.module';
+import { SharedModule } from '@src/app/components/shared/shared.module';
 import { CandidateCommunicationsComponent } from './candidate-communications/candidate-communications.component';
 import { CandidateDetailComponent } from './candidate-detail.component';
 import { CandidateMainInfoComponent } from './candidate-main-info/candidate-main-info.component';
 import { CandidateActionComponent } from './candidate-action/candidate-action.component';
 import { AddCommentModalComponent } from './add-comment-modal/add-comment-modal.component';
 import { CommunicationCommentComponent } from './candidate-communications/communication-comment/communication-comment.component';
+import { DeleteDialogComponent } from './candidate-communications/communication-comment/delete-dialog/delete-dialog.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +36,7 @@ import { CommunicationCommentComponent } from './candidate-communications/commun
     CandidateActionComponent,
     AddCommentModalComponent,
     CommunicationCommentComponent,
+    DeleteDialogComponent,
     EditCandidateModalComponent,
     CandidateFormComponent,
   ],
@@ -53,6 +57,12 @@ import { CommunicationCommentComponent } from './candidate-communications/commun
     MatRadioModule,
     MatProgressSpinnerModule,
     CandidateDetailRoutingModule,
+    DialogModule,
+    SharedModule,
+  ],
+  providers: [
+    { provide: MAT_DIALOG_DATA, useValue: {} },
+    { provide: MatDialogRef, useValue: {} },
   ],
   exports: [
     CandidateCommunicationsComponent,

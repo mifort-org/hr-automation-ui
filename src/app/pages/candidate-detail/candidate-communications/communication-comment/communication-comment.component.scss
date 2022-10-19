@@ -1,97 +1,177 @@
 @import 'src/styles';
 
-.comment-body {
-  max-width: 60%;
-  width: fit-content;
-  min-width: 300px;
-  background-color: rgb(66, 66, 66);
-  margin-bottom: 24px;
-  padding: 0;
+.card {
+  box-sizing: border-box;
+  width: 100%;
+  background-color: $light-back-color;
+  margin-bottom: 40px;
+  padding: 20px 20px 30px;
+  box-shadow: none;
+  font-size: 20px;
+  font-weight: 500;
 
-  .comment-content {
-    .comment-text {
-      padding: 10px 10px 0;
-      cursor: pointer;
-      margin-bottom: 5px;
+  .card-item {
+    .candidate-info{
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
 
-      .editing-info {
-        margin-bottom: 3px;
-        font-size: 12px;
-        color: rgb(135, 135, 135);
-        visibility: hidden;
+      .profile-icon{
+        width: 50px;
+        height: 50px;
+        margin-right: 20px;
       }
-    }
 
-    .comment-attachments {
-      padding-left: 10px;
-      padding-right: 10px;
+      .candidate-name{
+        color: $text-secondary;
+        margin: 0px 16px 0px 0px;
+        font-size: 20px;
+      }
 
-      mat-card {
-        width: fit-content;
-        padding: 7px;
-        background-color: rgb(90, 90, 90);
-        cursor: pointer;
+      .date{
+        display: flex;
+        align-items: center;
+        
+        .separator{
+          width: 3px;
+          height: 3px;
+          content: '';
+          border-radius: 50%;
+          background-color: $text-secondary;
+          margin-right: 16px;
+        }
 
-        mat-icon {
-          height: 18px;
-          width: 18px;
-          font-size: 18px;
+        .text{
+          font-size: 12px;
+          color: $text-secondary;
         }
       }
 
-      .mat-stroked-button{
-        height: 30px;
-        font-size: 12px;
+      .options{
+        margin-left: auto;
+        cursor: pointer;
+
+        .cancel-editing{
+          border: none;
+          color: $white;
+        }
+
+        .save-editing{
+          border: 1px solid $primary-color;
+          color: $primary-color;
+        }
+
+        p{
+          margin: 0px;
+        }
+      }
+
+      .options-modal{
+        background-color: $light-secondary-color;
+        border-radius: 4px;
+        position: absolute;
+        top: 68px;
+        right: 20px;
+        z-index: 1000;
+
+        .edit, .delete{
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 35px;
+          width: 126px;
+          cursor: pointer;
+          margin: 10px 0px;
+          background-color: inherit;
+          border: none;
+          color: $white;
+
+          .text{
+            width: 39px;  
+            display: flex;
+          }
+
+          .icon{
+            margin-right: 13px;
+          }
+
+          &:hover{
+            background-color: $dark-back-color;
+          }
+        }
+      }
+    }
+
+    .communication-info{
+      margin-left: 70px;
+
+      .comment{
+        word-break: break-all;
+        color: $white;
+        font-weight: 400;
+        font-size: 16px;
+      }
+
+      .comment-editing-area{
+        fieldset{
+          display: grid;
+          border-radius: 4px;
+          border: 1px solid $text-secondary;
+          
+          legend{
+            color: $text-secondary;
+            font-size: 10px;
+            font-weight: 400;
+          }
+
+          .textarea{
+            display: inline-block;
+            width: 100%;
+            background-color: transparent;
+            overflow: hidden;
+            padding: 0px;
+            outline: none;
+            border: none;
+            font-size: 14px;
+            font-weight: 400;
+            color: $white;
+          }
+
+          .textarea[contenteditable]:empty::before {
+            color: gray;
+          }
+        }
+      }
+
+      .attachment{
+        margin-top: 30px;
         display: flex;
         align-items: center;
-        justify-content: center;
-        margin-left: 10px;
-      }
-    }
-
-    .comment-delete-btn {
-      width: 30px;
-      height: 30px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      visibility: hidden;
-    }
-
-    .comment-editing-area {
-      padding: 9px 9px 0;
-      box-sizing: border-box;
-      margin-bottom: 5px;
-
-      textarea {
+        border: 1px solid $text-secondary;
+        border-radius: 4px;
+        width: fit-content;
+        min-width: 200px;
+        padding: 10px;
         box-sizing: border-box;
-        overflow: hidden;
-        color: white;
-        background-color: transparent;
-        width: 100%;
-        height: 100%;
-        resize: none;
-        font-family: $main-font;
-        font-size: 14px;
-        padding: 0;
+        cursor: pointer;
+
+        .info{
+          margin-left: 20px;
+
+          .name, .size{
+            margin: 0px;
+          }
+
+          .name{
+            margin-bottom: 4px;
+            color: $white;
+          }
+
+          .size{
+            color: $text-secondary;
+          }
+        }
       }
-    }
-  }
-
-  .comment-footer {
-    margin: 0;
-    font-size: 12px;
-    color: rgb(135, 135, 135);
-    padding: 0 10px 10px;
-  }
-
-  &:hover {
-    .comment-delete-btn mat-icon {
-      visibility: visible;
-    }
-
-    .editing-info span {
-      visibility: visible;
     }
   }
 }
