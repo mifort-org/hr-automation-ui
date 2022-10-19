@@ -57,6 +57,7 @@ import { DeleteDialogComponent } from './candidate-communications/communication-
     MatRadioModule,
     MatProgressSpinnerModule,
     CandidateDetailRoutingModule,
+    SharedModule,
     DialogModule,
     SharedModule,
   ],

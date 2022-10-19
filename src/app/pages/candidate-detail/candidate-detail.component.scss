@@ -22,3 +22,111 @@
     height: 300px;
   }
 }
+
+.upper-section {
+  display: flex;
+  padding: 20px;
+  height: 300px;
+  box-sizing: border-box;
+
+  .text {
+    padding: 12px 0 0 20px;
+  }
+
+  .mat-icon-button {
+    align-self: flex-start;
+    margin-left: auto;
+  }
+}
+
+.location-icon {
+  font-size: small;
+  text-align: center;
+}
+
+.mat-chip-status {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 20px;
+  gap: 10px;
+  width: 50%;
+  height: 6%;
+  left: 60px;
+  top: 45px;
+}
+.account-info {
+  margin-left: 100px;
+
+  button {
+    margin-top: 60px;
+  }
+  div {
+    display: flex
+  }
+}
+  .last-contact {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 0px;
+    color: $text-secondary;
+  }
+
+.flname{
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 0px;
+  color: $white;
+}
+
+.location-title {
+  display: flex;
+  margin-top: 34px;
+  margin-left: 10px;
+  font-size: 14px;
+  color: $text-secondary;
+
+}
+.keyword-wrapper {
+  width: 300px;
+}
+
+.keyword-container {
+  padding-left: 24px;
+  margin-top: 40px;
+}
+
+.hr-lines{
+  max-width: 500px;
+  text-align: center;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  color: $text-secondary;
+  margin-right: 180px;
+  margin-top: 100px;
+}
+.hr-lines:after{
+  content:" ";
+  width: 160px;
+  height: 0px;
+  display: block;
+  margin-top: -10px;
+  margin-left: 120px;
+  border: 1px solid $text-secondary;
+}
+
+mat-chip {
+  border-radius: 8px;
+  color: $light-back-color;
+}
+.keyword-chips{
+  background-color: $light-secondary-color ;
+  color: $text-secondary;
+}

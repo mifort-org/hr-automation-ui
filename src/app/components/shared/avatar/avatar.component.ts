@@ -10,6 +10,10 @@ import { Candidate } from '@src/app/models/candidate';
 export class AvatarComponent implements OnChanges {
   @Input() candidate: Candidate | undefined | null;
 
+  @Input() width: string | undefined;
+
+  @Input() height: string | undefined;
+
   initials: string = '';
 
   imageExists: boolean = false;
@@ -17,6 +21,19 @@ export class AvatarComponent implements OnChanges {
   @HostBinding('style.background-color') selectedColor: string = '';
 
   @HostBinding('style.box-shadow') shadowColor: string = '';
+
+  @HostBinding('style.width') selectedWidth: string = '';
+
+  @HostBinding('style.height') selectedHeight: string = '';
+
+  ngOnInit(): void {
+    this.selectedColor = this.getColor(this.candidate!.status);
+    this.shadowColor = this.getShadowColor(this.selectedColor);
+    this.initials = this.getInitials(this.candidate?.firstName!, this.candidate?.lastName!);
+
+    this.selectedWidth = this.width || '80px';
+    this.selectedHeight = this.height || '80px';
+  }
 
   ngOnChanges(changes: any): void {
     if (changes.candidate.currentValue) {
