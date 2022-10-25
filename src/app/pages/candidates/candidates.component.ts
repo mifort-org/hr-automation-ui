@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NonNullableFormBuilder, FormGroup } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { CandidatesService } from '@services/candidates.service';
@@ -92,5 +92,11 @@ export class CandidatesComponent implements OnInit {
       pageSize: this.pageSize,
       keyword: this.keywordsList,
     });
+
+    this.scrollToTop();
+  }
+
+  scrollToTop(): void {
+    window.scroll(0, 0);
   }
 }
