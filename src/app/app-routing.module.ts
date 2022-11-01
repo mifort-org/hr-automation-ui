@@ -25,6 +25,11 @@ const routes: Routes = [
     path: ROUTES.CANDIDATES_MERGE,
     loadChildren: () => import('./pages/merge-page/merge.module').then((m) => m.MergeModule),
   },
+  {
+    path: ROUTES.Attributes,
+    loadChildren: () =>
+      import('./pages/attributes/attributes.module').then((m) => m.AttributesModule),
+  },
 ];
 
 @NgModule({

@@ -8,7 +8,7 @@ describe('FetchService', () => {
   const createHttp = createHttpFactory(FetchService);
 
   beforeEach(() => {
-    spectator = createHttp()
+    spectator = createHttp();
   });
 
   describe('create service', () => {
