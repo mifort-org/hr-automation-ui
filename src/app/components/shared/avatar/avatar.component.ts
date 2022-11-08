@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, OnChanges } from '@angular/core';
+import { Component, HostBinding, Input, OnChanges, OnInit } from '@angular/core';
 import { round } from 'lodash';
 import { STATUS_COLOR, CandidateStatus } from '@src/app/constants/candidates';
 import { Candidate } from '@src/app/models/candidate';
@@ -8,7 +8,7 @@ import { Candidate } from '@src/app/models/candidate';
   templateUrl: './avatar.component.html',
   styleUrls: ['./avatar.component.scss'],
 })
-export class AvatarComponent implements OnChanges {
+export class AvatarComponent implements OnInit, OnChanges {
   @Input() candidate: Candidate | undefined | null;
 
   @Input() width: number | undefined;

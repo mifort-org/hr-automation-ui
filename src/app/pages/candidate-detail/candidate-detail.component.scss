@@ -1,4 +1,5 @@
 @import 'src/styles/colors';
+@import 'src/styles';
 
 .candidate-detail-container {
   padding: 16px 16px 0;
@@ -57,18 +58,22 @@
   top: 15px;
   color: $light-back-color;
 }
+
 .account-info {
   margin-left: 100px;
 
   button {
     margin-top: 60px;
   }
+
   div {
     display: flex
   }
+
 }
+
   .last-contact {
-    font-family: 'Roboto';
+    font-family: $main-font;
     font-style: normal;
     font-weight: 500;
     font-size: 20px;
@@ -77,7 +82,7 @@
   }
 
 .flname{
-  font-family: 'Roboto';
+  font-family: $main-font;
   font-style: normal;
   font-weight: 500;
   font-size: 36px;
@@ -93,6 +98,7 @@
   color: $text-secondary;
 
 }
+
 .keyword-wrapper {
   width: 300px;
 }
@@ -105,7 +111,7 @@
 .hr-lines{
   max-width: 500px;
   text-align: center;
-  font-family: "Roboto";
+  font-family: $main-font;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
@@ -113,7 +119,8 @@
   margin-right: 180px;
   margin-top: 100px;
 }
-.hr-lines:after{
+
+.hr-lines::after{
   content:" ";
   width: 160px;
   height: 0px;
@@ -127,6 +134,7 @@ mat-chip {
   border-radius: 8px;
   color: $light-back-color;
 }
+
 .keyword-chips{
   background-color: $light-secondary-color ;
   color: $text-secondary;
@@ -135,7 +143,8 @@ mat-chip {
 mat-tab-group{
   padding-bottom: 60px;
 }
- .detail-section {
+ 
+.detail-section {
    width: 70%;
    margin-right: 75px;
  }

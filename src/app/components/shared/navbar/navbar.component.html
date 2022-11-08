@@ -22,6 +22,10 @@
           <mat-icon>merge_type</mat-icon>
           <span>Merge</span>
         </button>
+        <button mat-menu-item [routerLink]="['/attributes']" routerLinkActive="active">
+          <mat-icon>merge_type</mat-icon>
+          <span>Attribute</span>
+        </button>
       </mat-menu>
     </div>
     <button mat-raised-button color="primary" (click)="openSignInDialog()">Sign in</button>
