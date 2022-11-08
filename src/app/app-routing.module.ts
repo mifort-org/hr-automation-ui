@@ -26,7 +26,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/merge-page/merge.module').then((m) => m.MergeModule),
   },
   {
-    path: ROUTES.Attributes,
+    path: ROUTES.ATTRIBUTES,
     loadChildren: () =>
       import('./pages/attributes/attributes.module').then((m) => m.AttributesModule),
   },
