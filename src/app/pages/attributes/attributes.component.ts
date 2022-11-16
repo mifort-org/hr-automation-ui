@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AttributesService } from '@src/app/services/attributes.service';
+import { AttributesService, Types } from '@src/app/services/attributes.service';
 
 @Component({
   selector: 'app-attributes',
@@ -19,6 +19,13 @@ export class AttributesComponent implements OnInit {
     'identifier',
     'multivalued',
     'actions',
+  ];
+
+  types: Types[] = [
+    { basicType: 'data', viewValue: 'Data' },
+    { basicType: 'string', viewValue: 'String' },
+    { basicType: 'number', viewValue: 'Number' },
+    { basicType: 'date', viewValue: 'Date' },
   ];
 
   constructor(private attributeService: AttributesService) {}

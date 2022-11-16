@@ -11,6 +11,12 @@ export interface AttributeTypeDto {
   label: string;
   validation: string;
   icon: string;
+  isEdit: boolean;
+}
+
+export interface Types {
+  basicType: string;
+  viewValue: string;
 }
 
 @Injectable({
