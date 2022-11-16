@@ -1,12 +1,12 @@
 <mat-toolbar class="flex-between">
   <div class="flex align-center gap-20">
     <div class="flex align-center">
-      <div>
+      <a [routerLink]="[candidatesPage]">
         <img src="/assets/mifort.png" alt="" width="60" height="50" />
-      </div>
-      <span  *ngIf="checkIsMainPage()"> Mifort - Human Resources </span>
+      </a>
+      <span class="title" *ngIf="checkIsMainPage()">Mifort - HR automation</span>
     </div>
-    <button mat-raised-button (click)="back()" *ngIf="!checkIsMainPage()">
+    <button mat-stroked-button color="primary" (click)="back()" *ngIf="!checkIsMainPage()">
       <mat-icon>keyboard_backspace</mat-icon>
       <span class="ml-10">Back</span>
     </button>

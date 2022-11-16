@@ -8,8 +8,11 @@ import { ROUTES } from '@src/app/routes';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
+  public readonly candidatesPage: string = ROUTES.CANDIDATES;
+
   constructor(private modalService: ModalService, private router: Router) {}
 
   public openSignInDialog(): void {
@@ -17,6 +20,10 @@ export class NavbarComponent {
   }
 
   public back(): void {
+    this.router.navigate([ROUTES.CANDIDATES]);
+  }
+
+  public goToDashboard(): void {
     this.router.navigate([ROUTES.CANDIDATES]);
   }
 

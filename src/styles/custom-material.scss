@@ -23,3 +23,7 @@
     border-radius: 8px;
   }
 }
+
+.mat-stroked-button:not(.mat-button-disabled) {
+  border-color: $primary-color;
+}
