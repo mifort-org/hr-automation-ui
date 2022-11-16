@@ -28,9 +28,6 @@ export class AvatarComponent implements OnInit, OnChanges {
   @HostBinding('style.height') selectedHeight: string = '';
 
   ngOnInit(): void {
-    this.selectedColor = this.getColor(this.candidate!.status);
-    this.shadowColor = this.getShadowColor(this.selectedColor);
-    this.initials = this.getInitials(this.candidate?.firstName!, this.candidate?.lastName!);
     this.selectedWidth = this.getWidth();
     this.selectedHeight = this.getHeight();
   }
@@ -40,6 +37,8 @@ export class AvatarComponent implements OnInit, OnChanges {
       this.selectedColor = this.getColor(this.candidate!.status);
       this.shadowColor = this.getShadowColor(this.selectedColor);
       this.initials = this.getInitials(this.candidate?.firstName!, this.candidate?.lastName!);
+      this.selectedWidth = this.getWidth();
+      this.selectedHeight = this.getHeight();
     }
   }
 
@@ -64,20 +63,20 @@ export class AvatarComponent implements OnInit, OnChanges {
     return `0px 0px 0px 3px ${colorHex}80`;
   }
 
-  getWidth() {
+  getWidth(): string {
     return this.width ? `${this.width}px` : '80px';
   }
 
-  getHeight() {
+  getHeight(): string {
     return this.height ? `${this.height}px` : '80px';
   }
 
-  getTextSize() {
+  getTextSize(): string {
     // eslint-disable-next-line no-magic-numbers
     return this.height ? `${this.height * 0.3}px` : '32px';
   }
 
-  getIconSize() {
+  getIconSize(): string {
     // eslint-disable-next-line no-magic-numbers
     return this.height ? `scale( ${round(this.height / 40)})` : 'scale(2)';
   }
