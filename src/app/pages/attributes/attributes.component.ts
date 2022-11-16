@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AttributesService, Types } from '@src/app/services/attributes.service';
+import { AttributesService, AttributeTypeDto, Types } from '@src/app/services/attributes.service';
 
 @Component({
   selector: 'app-attributes',
@@ -38,5 +38,9 @@ export class AttributesComponent implements OnInit {
     this.attributeService.getAllAttributes().subscribe((costumers: any) => {
       this.attributes = costumers;
     });
+  }
+
+  onAttributeEdit(element: AttributeTypeDto) {
+    this.attributeService.updateAttribute(element.id, element).subscribe(() => {});
   }
 }

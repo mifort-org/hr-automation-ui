@@ -89,7 +89,10 @@
   <ng-container matColumnDef="identifier">
     <th mat-header-cell *matHeaderCellDef>Identifier</th>
     <td mat-cell *matCellDef="let element">
-      <mat-checkbox   *ngIf="element.isEdit" [(ngModel)]="element.isIdentifier"></mat-checkbox>
+      <mat-checkbox   *ngIf="element.isEdit"
+                      [(ngModel)]="element.isIdentifier"
+                      [color]="'primary'"
+      ></mat-checkbox>
       <span *ngIf="!element.isEdit">
          <mat-icon *ngIf="element.isIdentifier">check</mat-icon>
       </span>
@@ -99,7 +102,10 @@
   <ng-container matColumnDef="multivalued">
     <th mat-header-cell *matHeaderCellDef>Multivalued</th>
     <td mat-cell *matCellDef="let element">
-      <mat-checkbox   *ngIf="element.isEdit" [(ngModel)]="element.isMultivalued"></mat-checkbox>
+      <mat-checkbox   *ngIf="element.isEdit"
+                      [(ngModel)]="element.isMultivalued"
+                      [color]="'primary'"
+      ></mat-checkbox>
       <span *ngIf="!element.isEdit">
          <mat-icon *ngIf="element.isMultivalued">check</mat-icon>
       </span>
@@ -122,7 +128,7 @@
         <button class="edit-button" (click)="element.isEdit = !element.isEdit">
           <mat-icon class="action-icons" >close</mat-icon>
         </button>
-        <button class="edit-button" (click)="element.isEdit = !element.isEdit">
+        <button class="edit-button" (click)="onAttributeEdit(element)" >
           <mat-icon class="save-icon" >save</mat-icon>
         </button>
       </div>
