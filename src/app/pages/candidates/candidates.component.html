@@ -1,4 +1,9 @@
 <div class="sticky-bar">
+  <mat-progress-bar
+      mode="indeterminate"
+      color="primary"
+      *ngIf="pageState.loading"
+  ></mat-progress-bar>
   <div class="container flex flex-between">
     <div class="col-3">
       <mat-form-field class="full-width" appearance="fill">
@@ -13,11 +18,6 @@
     </div>
     <app-actions-bar></app-actions-bar>
   </div>
-  <mat-progress-bar
-    mode="indeterminate"
-    color="primary"
-    *ngIf="pageState.loading"
-  ></mat-progress-bar>
 </div>
 
 <div class="container">
@@ -38,6 +38,7 @@
     </div>
   </div>
   <mat-paginator
+    *ngIf="candidatesList && candidatesList.length >= pageSize && candidatesTotalAmount > pageSize"
     [length]="candidatesTotalAmount"
     [pageSize]="pageSize"
     [pageSizeOptions]="pageSizeOptions"

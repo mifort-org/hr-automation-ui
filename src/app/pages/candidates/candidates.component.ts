@@ -67,6 +67,8 @@ export class CandidatesComponent implements OnInit {
 
   public remove(keyword: string): void {
     this.keywordsList = this.keywordsList?.filter((el) => el !== keyword);
+    this.pageNumber = 1;
+
     this.getCandidatesList({
       pageNumber: this.pageNumber,
       pageSize: this.pageSize,
@@ -77,6 +79,8 @@ export class CandidatesComponent implements OnInit {
   public add($event: Event): void {
     this.keywordsList.push(($event.target as HTMLInputElement).value.toLowerCase());
     this.keywordsInput = '';
+    this.pageNumber = 1;
+
     this.getCandidatesList({
       pageNumber: this.pageNumber,
       pageSize: this.pageSize,
