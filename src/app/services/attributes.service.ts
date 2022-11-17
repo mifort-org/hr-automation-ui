@@ -57,4 +57,10 @@ export class AttributesService {
       .patch<AttributeType>(`attributes/${id}`, this.mapAllAttributes(typesDto))
       .pipe(catchError((error) => this.errorHandler(this.notification, error)));
   }
+
+  public createAttribute(typesDto: any): Observable<AttributeType> {
+    return this.fetch
+      .post<AttributeType>(`attributes`, this.mapAllAttributes(typesDto))
+      .pipe(catchError((error) => this.errorHandler(this.notification, error)));
+  }
 }

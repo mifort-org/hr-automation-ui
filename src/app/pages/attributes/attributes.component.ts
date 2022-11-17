@@ -7,7 +7,9 @@ import { AttributesService, AttributeTypeDto, Types } from '@src/app/services/at
   styleUrls: ['./attributes.component.scss'],
 })
 export class AttributesComponent implements OnInit {
-  public attributes: any;
+  public attributes!: AttributeTypeDto[];
+
+  public isCreate: boolean = false;
 
   public displayedColumns: string[] = [
     'id',
@@ -31,7 +33,9 @@ export class AttributesComponent implements OnInit {
   constructor(private attributeService: AttributesService) {}
 
   ngOnInit() {
-    this.attributes = this.attributeService.getAllAttributes();
+    this.attributeService.getAllAttributes().subscribe((attributes) => {
+      this.attributes = attributes;
+    });
   }
 
   fillAllAttributesGrid() {
@@ -40,7 +44,36 @@ export class AttributesComponent implements OnInit {
     });
   }
 
-  onAttributeEdit(element: AttributeTypeDto) {
-    this.attributeService.updateAttribute(element.id, element).subscribe(() => {});
+  onAttributeSave(element: AttributeTypeDto) {
+    if (element.id) {
+      this.attributeService.updateAttribute(element.id, element).subscribe(() => {});
+    } else {
+      this.attributeService.createAttribute(element).subscribe(() => {});
+      this.isCreate = false;
+    }
+  }
+
+  addRow() {
+    if (!this.isCreate) {
+      const newRow = {
+        id: null,
+        basicType: '',
+        identifier: '',
+        name: '',
+        label: '',
+        validation: '',
+        icon: '',
+        isEdit: true,
+      };
+
+      // @ts-ignore
+      this.attributes = [newRow, ...this.attributes];
+      this.isCreate = true;
+    }
+  }
+
+  removeRow() {
+    this.attributes = this.attributes.filter((u) => u.id != null);
+    this.isCreate = false;
   }
 }
