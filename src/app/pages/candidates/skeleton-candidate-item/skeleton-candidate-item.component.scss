@@ -1,0 +1,109 @@
+@import 'src/styles/colors';
+
+$background: linear-gradient(100deg, $light-secondary-color 8%, #4d5073 18%, $light-secondary-color 33%);
+$animation: shine-avatar 1.5s infinite forwards linear;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: $light-back-color;
+  border-radius: 4px;
+
+  .header {
+    display: flex;
+    padding: 20px;
+    height: 160px;
+
+
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+    }
+
+    .text {
+      margin: 10px 0 0 30px;
+      width: 70%;
+    }
+  }
+
+  .text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .avatar,
+  .title,
+  .subtitle {
+    background: $background;
+    background-size: 200% 100%;
+    animation: $animation;
+  }
+
+  .title {
+    height: 30px;
+    width: 70%;
+    border-radius: 4px;
+    background-color: $light-secondary-color;
+    margin-bottom: 10px;
+  }
+
+  .subtitle {
+    height: 20px;
+    width: 60%;
+    border-radius: 4px;
+    background-color: $light-secondary-color;
+  }
+
+  .middle-section {
+    display: flex;
+    height: 90px;
+    border-top: 1px solid $light-secondary-color;
+
+    > div:first-of-type {
+      border-right: 1px solid $light-secondary-color;
+    }
+
+    .subtitle {
+      margin-left: 10px;
+      width: 80%;
+    }
+
+    .text {
+      width: 80%;
+
+      .subtitle:first-child {
+        margin-bottom: 10px;
+      }
+    }
+
+    > * {
+      display: flex;
+      align-items: center;
+      flex: 1 1 0;
+      padding: 20px;
+    }
+
+    .rounded-background {
+      background-color: $light-secondary-color;
+      width: 40px;
+      height: 40px;
+      border-radius: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .mat-icon {
+      color: $light-back-color;
+    }
+  }
+}
+
+@keyframes shine-avatar {
+  to {
+    background-position-x: -200%;
+  }
+}
+

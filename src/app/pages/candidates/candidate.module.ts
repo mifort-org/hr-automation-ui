@@ -19,9 +19,15 @@ import { CandidatesComponent } from '@pages/candidates/candidates.component';
 import { CandidateItemComponent } from '@pages/candidates/candidate-item/candidate-item.component';
 import { CandidateRoutingModule } from '@pages/candidates/candidate-routing.module';
 import { ActionsBarComponent } from './actions-bar/actions-bar.component';
+import { SkeletonCandidateItemComponent } from './skeleton-candidate-item/skeleton-candidate-item.component';
 
 @NgModule({
-  declarations: [ActionsBarComponent, CandidateItemComponent, CandidatesComponent],
+  declarations: [
+    ActionsBarComponent,
+    CandidateItemComponent,
+    CandidatesComponent,
+    SkeletonCandidateItemComponent,
+  ],
   imports: [
     FormsModule,
 
