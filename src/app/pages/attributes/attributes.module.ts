@@ -20,6 +20,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { AppPipesModule } from '@src/app/utils/pipes/app-pipes.module';
 import { SharedModule } from '@src/app/components/shared/shared.module';
 import { AttributesRoutingModule } from './attributes-routing.module';
+
 import { AttributesComponent } from './attributes.component';
 
 @NgModule({

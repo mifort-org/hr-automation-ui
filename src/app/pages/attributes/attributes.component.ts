@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { AttributesService, AttributeTypeDto, Types } from '@src/app/services/attributes.service';
+import { DeleteDialogComponent } from '@pages/candidate-detail/candidate-communications/communication-comment/delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-attributes',
@@ -30,17 +32,15 @@ export class AttributesComponent implements OnInit {
     { basicType: 'date', viewValue: 'Date' },
   ];
 
-  constructor(private attributeService: AttributesService) {}
+  constructor(private attributeService: AttributesService, public dialog: MatDialog) {}
 
   ngOnInit() {
-    this.attributeService.getAllAttributes().subscribe((attributes) => {
-      this.attributes = attributes;
-    });
+    this.fillAllAttributesGrid();
   }
 
   fillAllAttributesGrid() {
-    this.attributeService.getAllAttributes().subscribe((costumers: any) => {
-      this.attributes = costumers;
+    this.attributeService.getAllAttributes().subscribe((attributes) => {
+      this.attributes = attributes;
     });
   }
 
@@ -48,7 +48,9 @@ export class AttributesComponent implements OnInit {
     if (element.id) {
       this.attributeService.updateAttribute(element.id, element).subscribe(() => {});
     } else {
-      this.attributeService.createAttribute(element).subscribe(() => {});
+      this.attributeService.createAttribute(element).subscribe(() => {
+        this.fillAllAttributesGrid();
+      });
       this.isCreate = false;
     }
   }
@@ -72,8 +74,30 @@ export class AttributesComponent implements OnInit {
     }
   }
 
-  removeRow() {
-    this.attributes = this.attributes.filter((u) => u.id != null);
-    this.isCreate = false;
+  removeRow(id: number | undefined) {
+    this.attributes = this.attributes.filter((u) => u.id !== id);
+  }
+
+  onCancel(id: number | undefined) {
+    if (!id) {
+      this.attributes = this.attributes.filter((u) => u.id !== null);
+      this.isCreate = false;
+    }
+  }
+
+  public openDialog($event: Event, element: AttributeTypeDto): void {
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      width: '450px',
+    });
+    const instance = dialogRef.componentInstance;
+    instance.title = 'Delete attribute';
+    instance.text = `Are you sure you want to delete ${element.name} attribute?`;
+    dialogRef.afterClosed().subscribe(() => {
+      this.attributeService.deleteAttribute(element.id).subscribe(() => {
+        this.removeRow(element.id);
+      });
+    });
+
+    $event.preventDefault();
   }
 }

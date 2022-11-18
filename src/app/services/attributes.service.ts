@@ -54,13 +54,19 @@ export class AttributesService {
 
   public updateAttribute(id: number, typesDto: any): Observable<AttributeType> {
     return this.fetch
-      .patch<AttributeType>(`attributes/${id}`, this.mapAllAttributes(typesDto))
+      .patch<AttributeType>(`attributetypes/${id}`, this.mapAllAttributes(typesDto))
       .pipe(catchError((error) => this.errorHandler(this.notification, error)));
   }
 
   public createAttribute(typesDto: any): Observable<AttributeType> {
     return this.fetch
-      .post<AttributeType>(`attributes`, this.mapAllAttributes(typesDto))
+      .post<AttributeType>(`attributetypes`, this.mapAllAttributes(typesDto))
+      .pipe(catchError((error) => this.errorHandler(this.notification, error)));
+  }
+
+  public deleteAttribute(id: number): Observable<AttributeType> {
+    return this.fetch
+      .delete<AttributeType>(`attributetypes/${id}`)
       .pipe(catchError((error) => this.errorHandler(this.notification, error)));
   }
 }
