@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { AttributesService, AttributeTypeDto, Types } from '@src/app/services/attributes.service';
 import { DeleteDialogComponent } from '@pages/candidate-detail/candidate-communications/communication-comment/delete-dialog/delete-dialog.component';
@@ -8,10 +9,12 @@ import { DeleteDialogComponent } from '@pages/candidate-detail/candidate-communi
   templateUrl: './attributes.component.html',
   styleUrls: ['./attributes.component.scss'],
 })
-export class AttributesComponent implements OnInit {
+export class AttributesComponent implements OnInit, OnDestroy {
   public attributes!: AttributeTypeDto[];
 
   public isCreate: boolean = false;
+
+  subscription!: Subscription;
 
   public displayedColumns: string[] = [
     'id',
@@ -39,7 +42,7 @@ export class AttributesComponent implements OnInit {
   }
 
   fillAllAttributesGrid() {
-    this.attributeService.getAllAttributes().subscribe((attributes) => {
+    this.subscription = this.attributeService.getAllAttributes().subscribe((attributes) => {
       this.attributes = attributes;
     });
   }
@@ -99,5 +102,9 @@ export class AttributesComponent implements OnInit {
     });
 
     $event.preventDefault();
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }
