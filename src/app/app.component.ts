@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { map, Subject, takeUntil } from 'rxjs';
-import { AttributesService, AttributeTypeDto } from '@services/attributes.service';
-import { AttributeType } from '@src/app/models/attributeType';
+import { AttributesService } from '@services/attributes.service';
+import { AttributeType, AttributeTypeDto } from '@src/app/models/attributeType';
 
 @Component({
   selector: 'app-root',

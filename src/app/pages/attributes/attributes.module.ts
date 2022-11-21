@@ -13,9 +13,14 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+
 import { AppPipesModule } from '@src/app/utils/pipes/app-pipes.module';
 import { SharedModule } from '@src/app/components/shared/shared.module';
 import { AttributesRoutingModule } from './attributes-routing.module';
+
 import { AttributesComponent } from './attributes.component';
 
 @NgModule({
@@ -41,6 +46,9 @@ import { AttributesComponent } from './attributes.component';
 
     MatMenuModule,
     MatPaginatorModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatSelectModule,
   ],
   exports: [AttributesComponent],
 })
