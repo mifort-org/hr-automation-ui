@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { map, Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { AttributesService } from '@services/attributes.service';
-import { AttributeType, AttributeTypeDto } from '@src/app/models/attributeType';
+import { Attribute } from '@src/app/models/attributeType';
 
 @Component({
   selector: 'app-root',
@@ -15,14 +15,9 @@ class AppComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this._attributeService
       .getAllAttributes()
-      .pipe(
-        takeUntil(this.unSubscribe$),
-        map((data: AttributeTypeDto[]) =>
-          data.map(this._attributeService.mapAllAttributes.bind(this))
-        )
-      )
+      .pipe(takeUntil(this.unSubscribe$))
       .subscribe({
-        next: (resolve: AttributeType[]) => {
+        next: (resolve: Attribute[]) => {
           this._attributeService.handleResponse(resolve);
         },
       });

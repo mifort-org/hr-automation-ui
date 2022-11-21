@@ -3,27 +3,27 @@
  * Represents an attribute type
  */
 
-export interface AttributeType {
+export interface Attribute {
   basicType: string;
-  id: number;
-  identifier: boolean;
+  id?: number;
+  isIdentifier: boolean;
+  isMultivalued: boolean;
   name: string;
   label: string;
   validation: string;
   icon: string;
   isEdit: boolean;
 }
-export interface Types {
+
+export interface AttributeType {
   basicType: string;
   viewValue: string;
 }
-export interface AttributeTypeDto {
-  basicType: string;
-  id: number;
-  identifier: boolean;
-  name: string;
-  label: string;
-  validation: string;
-  icon: string;
-  isEdit: boolean;
-}
+export const DEFAULT_TYPE: AttributeType = { basicType: 'data', viewValue: 'Data' };
+
+export const PREDEFINED_TYPES: AttributeType[] = [
+  DEFAULT_TYPE,
+  { basicType: 'string', viewValue: 'String' },
+  { basicType: 'number', viewValue: 'Number' },
+  { basicType: 'date', viewValue: 'Date' },
+];

@@ -2,13 +2,13 @@
   <ng-container *ngFor="let attribute of attributesData" [ngSwitch]="attribute?.basicType">
     <mat-form-field appearance="outline" class="full-width" *ngSwitchCase="'number'">
       <mat-label
-        >{{ attribute.name | titlecase }}<span *ngIf="attribute?.identifier"> * </span></mat-label
+        >{{ attribute.name | titlecase }}<span *ngIf="attribute?.isIdentifier"> * </span></mat-label
       >
       <input matInput [formControlName]="attribute.name" type="number" />
     </mat-form-field>
     <mat-form-field appearance="outline" class="full-width" *ngSwitchCase="'string'">
       <mat-label
-        >{{ attribute.name | titlecase }}<span *ngIf="attribute?.identifier"> * </span></mat-label
+        >{{ attribute.name | titlecase }}<span *ngIf="attribute?.isIdentifier"> * </span></mat-label
       >
       <input matInput [formControlName]="attribute.name" />
       <mat-error *ngIf="attribute?.name && formErrors[attribute.name]">
@@ -19,7 +19,7 @@
       <mat-radio-group>
         <div class="mb-10">
           <label class="subheading-2 text-grey"
-            >{{ attribute.name | titlecase }}<span *ngIf="attribute?.identifier"> * </span></label
+            >{{ attribute.name | titlecase }}<span *ngIf="attribute?.isIdentifier"> * </span></label
           >
         </div>
         <div class="flex">

@@ -3,7 +3,12 @@ import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { AttributesService } from '@src/app/services/attributes.service';
 import { DeleteDialogComponent } from '@pages/candidate-detail/candidate-communications/communication-comment/delete-dialog/delete-dialog.component';
-import { AttributeType, Types } from '@src/app/models/attributeType';
+import {
+  Attribute,
+  AttributeType,
+  DEFAULT_TYPE,
+  PREDEFINED_TYPES,
+} from '@src/app/models/attributeType';
 
 @Component({
   selector: 'app-attributes',
@@ -11,11 +16,11 @@ import { AttributeType, Types } from '@src/app/models/attributeType';
   styleUrls: ['./attributes.component.scss'],
 })
 export class AttributesComponent implements OnInit, OnDestroy {
-  public attributes!: AttributeType[];
+  public attributes!: Attribute[];
 
   public isCreate: boolean = false;
 
-  subscription!: Subscription;
+  private subscription!: Subscription;
 
   public displayedColumns: string[] = [
     'id',
@@ -29,28 +34,23 @@ export class AttributesComponent implements OnInit, OnDestroy {
     'actions',
   ];
 
-  types: Types[] = [
-    { basicType: 'data', viewValue: 'Data' },
-    { basicType: 'string', viewValue: 'String' },
-    { basicType: 'number', viewValue: 'Number' },
-    { basicType: 'date', viewValue: 'Date' },
-  ];
+  public types: AttributeType[] = PREDEFINED_TYPES;
 
   constructor(private attributeService: AttributesService, public dialog: MatDialog) {}
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.fillAllAttributesGrid();
   }
 
-  fillAllAttributesGrid(): void {
+  public fillAllAttributesGrid(): void {
     this.subscription = this.attributeService
       .getAllAttributes()
-      .subscribe((attributes: AttributeType[]) => {
+      .subscribe((attributes: Attribute[]) => {
         this.attributes = attributes;
       });
   }
 
-  onAttributeSave(element: AttributeType): void {
+  public onAttributeSave(element: Attribute): void {
     if (element.id) {
       this.attributeService.updateAttribute(element.id, element).subscribe(() => {});
     } else {
@@ -61,14 +61,15 @@ export class AttributesComponent implements OnInit, OnDestroy {
     }
   }
 
-  addRow(): void {
+  public addRow(): void {
     if (this.isCreate) {
       return;
     }
-    const newRow = {
-      id: null,
-      basicType: '',
-      identifier: '',
+
+    const newRow: Attribute = {
+      basicType: DEFAULT_TYPE.basicType,
+      isIdentifier: false,
+      isMultivalued: false,
       name: '',
       label: '',
       validation: '',
@@ -81,18 +82,18 @@ export class AttributesComponent implements OnInit, OnDestroy {
     this.isCreate = true;
   }
 
-  removeRow(id: number | undefined): void {
-    this.attributes = this.attributes.filter((u: AttributeType) => u.id !== id);
+  public removeRow(id: number | undefined): void {
+    this.attributes = this.attributes.filter((u: Attribute) => u.id !== id);
   }
 
-  onCancel(id: number | undefined): void {
+  public onCancel(id: number | undefined): void {
     if (!id) {
-      this.attributes = this.attributes.filter((u: AttributeType) => !!u.id);
+      this.attributes = this.attributes.filter((u: Attribute) => !!u.id);
       this.isCreate = false;
     }
   }
 
-  public openDialog($event: Event, element: AttributeType): void {
+  public openDialog($event: Event, element: Attribute): void {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       width: '450px',
       data: {
@@ -101,7 +102,7 @@ export class AttributesComponent implements OnInit, OnDestroy {
       },
     });
     dialogRef.afterClosed().subscribe(() => {
-      this.attributeService.deleteAttribute(element.id).subscribe(() => {
+      this.attributeService.deleteAttribute(element.id!).subscribe(() => {
         this.removeRow(element.id);
       });
     });
@@ -109,12 +110,12 @@ export class AttributesComponent implements OnInit, OnDestroy {
     $event.preventDefault();
   }
 
-  onEdit(element: AttributeType): void {
+  public onEdit(element: Attribute): void {
     // eslint-disable-next-line no-param-reassign
     element.isEdit = !element.isEdit;
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 }

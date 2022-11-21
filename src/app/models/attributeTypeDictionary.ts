@@ -1,4 +1,4 @@
-import { AttributeType } from './attributeType';
+import { Attribute } from './attributeType';
 
 /**
  * @typedef AttributeTypeDictionary
@@ -6,5 +6,5 @@ import { AttributeType } from './attributeType';
  */
 
 export interface AttributeTypeDictionary {
-  [key: string]: AttributeType;
+  [key: string]: Attribute;
 }
