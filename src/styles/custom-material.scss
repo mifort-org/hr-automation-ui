@@ -15,3 +15,15 @@
 .mat-card-title {
   color: $white;
 }
+
+.mat-chip {
+  &.mat-standard-chip {
+    background-color: $light-secondary-color;
+    color: $text-secondary;
+    border-radius: 8px;
+  }
+}
+
+.mat-stroked-button:not(.mat-button-disabled) {
+  border-color: $primary-color;
+}

@@ -27,7 +27,9 @@
       <mat-icon>arrow_right_alt</mat-icon>
     </button>
 
-    <div class="middle-section" *ngIf="hasContacts || hasLocation;">
+    <div class="middle-section"
+         [style.border-bottom]="candidate?.keywords?.length"
+         *ngIf="hasContacts || hasLocation">
       <div *ngIf="hasContacts">
         <div class="rounded-background">
           <mat-icon>perm_phone_msg</mat-icon>

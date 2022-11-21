@@ -1,150 +1,98 @@
 @import 'src/styles/colors';
 @import 'src/styles';
 
-.candidate-detail-container {
-  padding: 16px 16px 0;
-}
-
-.mat-badge-content{
-  top: 4px;
-  margin-right: -15px;
-}
-
-.image-frame {
-  padding: 0;
-  height: 200px;
-  overflow: hidden;
-  filter: brightness(20%);
-  cursor: pointer;
-  transition: 1s;
-
-  &:hover {
-    filter: none;
-    height: 300px;
-  }
-}
-
-.upper-section {
+:host {
+  padding: 60px 40px;
   display: flex;
-  padding: 20px;
-  height: 300px;
-  box-sizing: border-box;
-
-  .text {
-    padding: 12px 0 0 20px;
-  }
-
-  .mat-icon-button {
-    align-self: flex-start;
-    margin-left: auto;
-  }
+  width: 100%;
 }
 
-.location-icon {
-  font-size: small;
-  text-align: center;
-}
-
-.mat-chip-status {
+.left-panel {
+  width: 250px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 6px 20px;
-  gap: 10px;
-  width: 50%;
-  height: 6%;
-  left: 60px;
-  top: 15px;
-  color: $light-back-color;
-}
 
-.account-info {
-  margin-left: 100px;
+  .avatar-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 60px;
 
-  button {
-    margin-top: 60px;
+    app-avatar {
+      margin-bottom: 20px;
+    }
+
+    .candidate-status {
+      padding: 6px 20px;
+      border-radius: 8px;
+      cursor: default;
+      font-weight: 500;
+      color: $light-back-color;
+    }
   }
 
-  div {
-    display: flex
-  }
-
-}
-
-  .last-contact {
-    font-family: $main-font;
-    font-style: normal;
+  .hr-lines {
     font-weight: 500;
-    font-size: 20px;
-    line-height: 0px;
+    font-size: 16px;
     color: $text-secondary;
+    position: relative;
+    margin-bottom: 30px;
+
+    &::after {
+      content: '';
+      width: calc(100% - 90px);
+      height: 1px;
+      position: absolute;
+      display: block;
+      right: 0;
+      bottom: 8px;
+      background-color: $text-secondary;
+    }
   }
-
-.flname{
-  font-family: $main-font;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 36px;
-  line-height: 0px;
-  color: $white;
 }
 
-.location-title {
-  display: flex;
-  margin-top: 34px;
-  margin-left: 10px;
-  font-size: 14px;
-  color: $text-secondary;
+.right-panel {
+  width: 100%;
+  margin-left: 150px;
 
-}
+  .account-info {
+    margin: 30px 0 20px;
+    min-height: 300px;
 
-.keyword-wrapper {
-  width: 300px;
-}
+    div {
+      display: flex;
+    }
 
-.keyword-container {
-  padding-left: 24px;
-  margin-top: 40px;
-}
+    .name {
+      font-weight: 500;
+      font-size: 36px;
+      color: $white;
+      margin: 0;
+    }
 
-.hr-lines{
-  max-width: 500px;
-  text-align: center;
-  font-family: $main-font;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  color: $text-secondary;
-  margin-right: 180px;
-  margin-top: 100px;
-}
+    .location-title {
+      display: flex;
+      align-items: flex-end;
+      margin: 0 0 6px 20px;
+      font-size: 16px;
+      line-height: 16px;
+      font-weight: 500;
+      color: $text-secondary;
 
-.hr-lines::after{
-  content:" ";
-  width: 160px;
-  height: 0px;
-  display: block;
-  margin-top: -10px;
-  margin-left: 120px;
-  border: 1px solid $text-secondary;
-}
+      .location-icon {
+        font-size: 16px;
+        text-align: center;
+        width: 16px;
+        height: 16px;
+        margin-right: 3px;
+      }
+    }
 
-mat-chip {
-  border-radius: 8px;
-  color: $light-back-color;
+    .last-contact {
+      font-weight: 500;
+      font-size: 20px;
+      color: $text-secondary;
+      margin-bottom: 60px;
+    }
+  }
 }
-
-.keyword-chips{
-  background-color: $light-secondary-color ;
-  color: $text-secondary;
-}
-
-mat-tab-group{
-  padding-bottom: 60px;
-}
- 
-.detail-section {
-   width: 70%;
-   margin-right: 75px;
- }

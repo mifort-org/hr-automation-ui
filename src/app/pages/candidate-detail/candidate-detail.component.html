@@ -26,40 +26,69 @@
           </section>
         </div>
 
-    </div>
-
-  <div class="row">
-    <section>
-      <div class="keyword-wrapper" *ngIf="currentCandidate?.keywords?.length" >
-        <p class="hr-lines">Keywords</p>
+    <section class="keyword-wrapper" *ngIf="currentCandidate.keywords?.length">
+      <p class="hr-lines">Keywords</p>
       <div class="keyword-container">
         <mat-chip-list>
-          <mat-chip class="keyword-chips"
-            color="primary"
-            *ngFor="let keyword of currentCandidate.keywords"
-          >{{ keyword?.id | titlecase }}</mat-chip
-          >
+          <mat-chip *ngFor="let keyword of currentCandidate.keywords">
+            {{ keyword?.id | titlecase }}
+          </mat-chip>
         </mat-chip-list>
       </div>
-      </div>
     </section>
+  </div>
+
+  <div class="right-panel">
+    <section class="account-info">
+      <div>
+        <p class="name">{{ currentCandidate.fullName}}</p>
+        <p *ngIf="currentCandidate.city" class="location-title">
+          <mat-icon class="location-icon">room</mat-icon>
+          {{ currentCandidate.city }}
+        </p>
+      </div>
+      <p class="last-contact">Last contact: {{ currentCandidate.lastContact | date }}</p>
+      <button mat-raised-button color="primary" (click)="openAddCommentModal()">
+        <mat-icon>comment</mat-icon>
+        <span class="ml-10">Add comment</span>
+      </button>
+    </section>
+
+
     <section class="detail-section">
       <mat-tab-group
-        mat-align-tabs="start"
-        class="mt-20 communication-tabs"
-        animationDuration="0ms"
-      >
-        <mat-tab label="Details info">
+          mat-align-tabs="start"
+          class="communication-tabs"
+          animationDuration="0ms">
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="mr-10">person</mat-icon>
+            Details
+          </ng-template>
+
           <app-candidate-main-info></app-candidate-main-info>
         </mat-tab>
-        <mat-tab label="Communication History"
-        ><app-candidate-communications></app-candidate-communications
-        ></mat-tab>
-        <mat-tab label="Updates"><app-candidate-updates></app-candidate-updates></mat-tab>
+
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="mr-10">comment</mat-icon>
+            Communication History
+          </ng-template>
+
+          <app-candidate-communications></app-candidate-communications>
+        </mat-tab>
+
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="mr-10">timeline</mat-icon>
+            Updates
+          </ng-template>
+
+          <app-candidate-updates></app-candidate-updates>
+        </mat-tab>
       </mat-tab-group>
     </section>
   </div>
+</ng-container>
 
-
-  </div>
 
