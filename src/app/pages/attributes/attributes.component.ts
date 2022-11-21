@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { filter, finalize, Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { AttributesService } from '@src/app/services/attributes.service';
 import { DeleteDialogComponent } from '@pages/candidate-detail/candidate-communications/communication-comment/delete-dialog/delete-dialog.component';
@@ -17,6 +17,8 @@ import {
 })
 export class AttributesComponent implements OnInit, OnDestroy {
   public attributes!: Attribute[];
+
+  public inProgress: boolean = false;
 
   public isCreate: boolean = false;
 
@@ -52,7 +54,7 @@ export class AttributesComponent implements OnInit, OnDestroy {
 
   public onAttributeSave(element: Attribute): void {
     if (element.id) {
-      this.attributeService.updateAttribute(element.id, element).subscribe(() => {});
+      this.attributeService.updateAttribute(element.id, element).subscribe();
     } else {
       this.attributeService.createAttribute(element).subscribe(() => {
         this.fillAllAttributesGrid();
@@ -94,6 +96,8 @@ export class AttributesComponent implements OnInit, OnDestroy {
   }
 
   public openDialog($event: Event, element: Attribute): void {
+    this.inProgress = true;
+
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       width: '450px',
       data: {
@@ -101,11 +105,19 @@ export class AttributesComponent implements OnInit, OnDestroy {
         text: `Are you sure you want to delete ${element.name} attribute?`,
       },
     });
-    dialogRef.afterClosed().subscribe(() => {
-      this.attributeService.deleteAttribute(element.id!).subscribe(() => {
-        this.removeRow(element.id);
+    dialogRef
+      .afterClosed()
+      .pipe(
+        filter((response: boolean) => response),
+        finalize(() => {
+          this.inProgress = false;
+        })
+      )
+      .subscribe(() => {
+        this.attributeService.deleteAttribute(element.id!).subscribe(() => {
+          this.removeRow(element.id);
+        });
       });
-    });
 
     $event.preventDefault();
   }
