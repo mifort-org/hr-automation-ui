@@ -10,6 +10,7 @@
 
 ::-webkit-scrollbar {
   width: 7px;
+  height: 7px;
 }
 
 ::-webkit-scrollbar-track {
@@ -76,10 +77,6 @@ body {
   text-align: center;
 }
 
-.mat-dialog-container {
-  background-color: $background;
-}
-
 .snackbar {
   &--success {
     background-color: $success;
@@ -95,22 +92,6 @@ body {
     background-color: $warning;
     color: $background;
   }
-}
-
-.mat-button {
-  &.active {
-    color: mat-color($secondary);
-    position: relative;
-  }
-}
-
-.mat-card {
-  background-color: rgba(0, 0, 0, 40%);
-  box-shadow: -10px -10px 20px 10px rgba(0, 0, 0, 50%);
-}
-
-.mat-badge.hide-text .mat-badge-content {
-  color: transparent;
 }
 
 .text-grey {

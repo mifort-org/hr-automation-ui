@@ -6,13 +6,13 @@
 
 .button-wrapper{
     display: flex;
-    justify-content: end;
-    padding: 0px 0px 24px;
+    justify-content: flex-end;
+    padding: 0 0 24px;
     min-height: auto;
 
     .mat-raised-button{
         background-color: $primary-color;
-        padding: 0px 16px;
+        padding: 0 16px;
     }
 
     .mat-stroked-button{
@@ -21,5 +21,5 @@
 }
 
 .confirmation-question{
-    margin: 0px 0px 40px;
+    margin: 0 0 40px;
 }
