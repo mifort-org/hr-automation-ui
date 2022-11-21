@@ -1,30 +1,15 @@
-<div class="candidate-detail-container">
-   <div class="row">
-        <div class="upper-section" >
-          <section >
-          <app-avatar *ngIf="currentCandidate"
-                      [candidate]="currentCandidate!"
-                      [width]="250"
-                      [height]="250"></app-avatar>
-            <mat-chip-list >
-              <mat-chip *ngIf="currentCandidate.status"  class="mat-chip-status"
-                        [ngStyle]=" {'background-color': statusColor}">
-              {{currentCandidate.status }} </mat-chip>
-            </mat-chip-list>
-          </section>
-          <section class="account-info">
-            <div >
-              <p class="flname">{{ currentCandidate.fullName}}</p>
-              <p *ngIf="currentCandidate.city" class="location-title" >
-                <mat-icon class="location-icon" >room</mat-icon>
-                {{ currentCandidate.city }}</p>
-            </div>
-            <p class="last-contact">last contact: {{ currentCandidate.lastContact | date }}</p>
-            <button mat-raised-button color="primary" (click)="openAddCommentModal()">
-              <mat-icon> comment</mat-icon><span class="ml-10">Add comment</span>
-            </button>
-          </section>
-        </div>
+<ng-container *ngIf="currentCandidate">
+  <div class="left-panel">
+    <section class="avatar-wrapper">
+      <app-avatar [candidate]="currentCandidate"
+                  [width]="250"
+                  [height]="250"></app-avatar>
+      <span *ngIf="currentCandidate.status"
+            class="candidate-status"
+            [ngStyle]=" {'background-color': statusColor}">
+        {{ currentCandidate.status  | lowercase }}
+    </span>
+    </section>
 
     <section class="keyword-wrapper" *ngIf="currentCandidate.keywords?.length">
       <p class="hr-lines">Keywords</p>
