@@ -22,26 +22,31 @@
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>Name</th>
     <td mat-cell *matCellDef="let element">
-      <mat-form-field class="input-field"  *ngIf="element.isEdit " appearance="outline" >
+      <mat-form-field class="input-field"  *ngIf="element.isEdit; else dataView " appearance="outline" >
         <mat-label>Name</mat-label>
         <input matInput [type]="'text'"  [(ngModel)]="element.name">
       </mat-form-field>
-      <span *ngIf="!element.isEdit">
+      <ng-template #dataView>
+          <span >
           {{ element.name }}
       </span>
+      </ng-template>
+
     </td>
   </ng-container>
 
   <ng-container matColumnDef="title">
     <th mat-header-cell *matHeaderCellDef>Title</th>
     <td mat-cell *matCellDef="let element">
-      <mat-form-field  class="input-field"  *ngIf="element.isEdit"  appearance="outline">
+      <mat-form-field  class="input-field"  *ngIf="element.isEdit; else dataView  "  appearance="outline">
         <mat-label>Title</mat-label>
         <input matInput [type]="'text'"  [(ngModel)]="element.label">
       </mat-form-field>
-      <span *ngIf="!element.isEdit">
+      <ng-template #dataView>
+      <span >
           {{ element.label }}
       </span>
+      </ng-template>
     </td>
   </ng-container>
 
@@ -49,19 +54,20 @@
     <th mat-header-cell *matHeaderCellDef>Icon</th>
     <td mat-cell *matCellDef="let element">
 
-      <mat-form-field  class="input-field"  *ngIf="element.isEdit"  appearance="outline">
+      <mat-form-field  class="input-field"  *ngIf="element.isEdit; else dataView "  appearance="outline">
         <mat-label>Icon</mat-label>
         <input matInput [type]="'text'"  [(ngModel)]="element.icon">
       </mat-form-field>
-
-      <mat-icon *ngIf="!element.isEdit" >{{ element.icon }}</mat-icon>
+      <ng-template #dataView>
+      <mat-icon  >{{ element.icon }}</mat-icon>
+      </ng-template>
     </td>
   </ng-container>
 
   <ng-container matColumnDef="type">
     <th mat-header-cell *matHeaderCellDef>Type</th>
     <td mat-cell *matCellDef="let element">
-      <mat-form-field class="input-field" appearance="fill" *ngIf="element.isEdit">
+      <mat-form-field class="input-field" appearance="fill" *ngIf="element.isEdit; else dataView ">
         <mat-label>Type</mat-label>
         <mat-select [(value)]="element.basicType " >
           <mat-option *ngFor="let type of types" [value]="type.basicType">
@@ -69,9 +75,11 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <span *ngIf="!element.isEdit">
+      <ng-template #dataView>
+      <span >
           {{ element.basicType }}
       </span>
+      </ng-template>
 
     </td>
   </ng-container>
@@ -79,47 +87,53 @@
   <ng-container matColumnDef="validation">
     <th mat-header-cell *matHeaderCellDef>Validation</th>
     <td mat-cell *matCellDef="let element">
-      <mat-form-field class="input-field" *ngIf="element.isEdit" appearance="outline" >
+      <mat-form-field class="input-field" *ngIf="element.isEdit; else dataView " appearance="outline" >
         <mat-label>Validation</mat-label>
         <input matInput [type]="'text'"  [(ngModel)]="element.validation">
       </mat-form-field>
-      <span *ngIf="!element.isEdit">
+      <ng-template #dataView>
+      <span >
           {{ element.validation }}
       </span>
+      </ng-template>
     </td>
   </ng-container>
 
   <ng-container matColumnDef="identifier">
     <th mat-header-cell *matHeaderCellDef>Identifier</th>
     <td mat-cell *matCellDef="let element">
-      <mat-checkbox   *ngIf="element.isEdit"
+      <mat-checkbox   *ngIf="element.isEdit ; else dataView "
                       [(ngModel)]="element.isIdentifier"
                       [color]="'primary'"
       ></mat-checkbox>
-      <span *ngIf="!element.isEdit">
+      <ng-template #dataView>
+      <span >
          <mat-icon *ngIf="element.isIdentifier">check</mat-icon>
       </span>
+      </ng-template>
     </td>
   </ng-container>
 
   <ng-container matColumnDef="multivalued">
     <th mat-header-cell *matHeaderCellDef>Multivalued</th>
     <td mat-cell *matCellDef="let element">
-      <mat-checkbox   *ngIf="element.isEdit"
+      <mat-checkbox   *ngIf="element.isEdit ; else dataView "
                       [(ngModel)]="element.isMultivalued"
                       [color]="'primary'"
       ></mat-checkbox>
-      <span *ngIf="!element.isEdit">
+      <ng-template #dataView>
+      <span >
          <mat-icon *ngIf="element.isMultivalued">check</mat-icon>
       </span>
+      </ng-template>
     </td>
   </ng-container>
 
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let element">
-      <div class="btn-wrapper" *ngIf="!element.isEdit" >
-        <button class="edit-button" (click)="element.isEdit = !element.isEdit">
+      <div class="btn-wrapper" *ngIf="!element.isEdit; else dataView " >
+        <button class="edit-button" (click)="onEdit(element)">
           <mat-icon class="action-icons" >edit</mat-icon>
         </button>
         <button class="edit-button" (click)="openDialog($event, element)" >
@@ -127,14 +141,16 @@
         </button>
 
       </div>
-      <div class="btn-wrapper" *ngIf="element.isEdit" >
-        <button class="edit-button" (click)="element.isEdit = !element.isEdit;onCancel(element.id)">
+      <ng-template #dataView>
+      <div class="btn-wrapper" >
+        <button class="edit-button" (click)="onEdit(element);onCancel(element.id)">
           <mat-icon class="action-icons" >close</mat-icon>
         </button>
         <button class="edit-button" (click)="onAttributeSave(element)" >
           <mat-icon class="save-icon" >save</mat-icon>
         </button>
       </div>
+      </ng-template>
     </td>
   </ng-container>
 

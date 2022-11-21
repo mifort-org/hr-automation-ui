@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { AttributesService, AttributeTypeDto, Types } from '@src/app/services/attributes.service';
+import { AttributesService } from '@src/app/services/attributes.service';
 import { DeleteDialogComponent } from '@pages/candidate-detail/candidate-communications/communication-comment/delete-dialog/delete-dialog.component';
+import { AttributeType, Types } from '@src/app/models/attributeType';
 
 @Component({
   selector: 'app-attributes',
@@ -10,7 +11,7 @@ import { DeleteDialogComponent } from '@pages/candidate-detail/candidate-communi
   styleUrls: ['./attributes.component.scss'],
 })
 export class AttributesComponent implements OnInit, OnDestroy {
-  public attributes!: AttributeTypeDto[];
+  public attributes!: AttributeType[];
 
   public isCreate: boolean = false;
 
@@ -41,13 +42,15 @@ export class AttributesComponent implements OnInit, OnDestroy {
     this.fillAllAttributesGrid();
   }
 
-  fillAllAttributesGrid() {
-    this.subscription = this.attributeService.getAllAttributes().subscribe((attributes) => {
-      this.attributes = attributes;
-    });
+  fillAllAttributesGrid(): void {
+    this.subscription = this.attributeService
+      .getAllAttributes()
+      .subscribe((attributes: AttributeType[]) => {
+        this.attributes = attributes;
+      });
   }
 
-  onAttributeSave(element: AttributeTypeDto) {
+  onAttributeSave(element: AttributeType): void {
     if (element.id) {
       this.attributeService.updateAttribute(element.id, element).subscribe(() => {});
     } else {
@@ -58,43 +61,45 @@ export class AttributesComponent implements OnInit, OnDestroy {
     }
   }
 
-  addRow() {
-    if (!this.isCreate) {
-      const newRow = {
-        id: null,
-        basicType: '',
-        identifier: '',
-        name: '',
-        label: '',
-        validation: '',
-        icon: '',
-        isEdit: true,
-      };
-
-      // @ts-ignore
-      this.attributes = [newRow, ...this.attributes];
-      this.isCreate = true;
+  addRow(): void {
+    if (this.isCreate) {
+      return;
     }
+    const newRow = {
+      id: null,
+      basicType: '',
+      identifier: '',
+      name: '',
+      label: '',
+      validation: '',
+      icon: '',
+      isEdit: true,
+    };
+
+    // @ts-ignore
+    this.attributes = [newRow, ...this.attributes];
+    this.isCreate = true;
   }
 
-  removeRow(id: number | undefined) {
-    this.attributes = this.attributes.filter((u) => u.id !== id);
+  removeRow(id: number | undefined): void {
+    this.attributes = this.attributes.filter((u: AttributeType) => u.id !== id);
   }
 
-  onCancel(id: number | undefined) {
+  onCancel(id: number | undefined): void {
     if (!id) {
-      this.attributes = this.attributes.filter((u) => u.id !== null);
+      this.attributes = this.attributes.filter((u: AttributeType) => !!u.id);
       this.isCreate = false;
     }
   }
 
-  public openDialog($event: Event, element: AttributeTypeDto): void {
+  public openDialog($event: Event, element: AttributeType): void {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       width: '450px',
+      data: {
+        title: 'Delete attribute',
+        text: `Are you sure you want to delete ${element.name} attribute?`,
+      },
     });
-    const instance = dialogRef.componentInstance;
-    instance.title = 'Delete attribute';
-    instance.text = `Are you sure you want to delete ${element.name} attribute?`;
     dialogRef.afterClosed().subscribe(() => {
       this.attributeService.deleteAttribute(element.id).subscribe(() => {
         this.removeRow(element.id);
@@ -102,6 +107,11 @@ export class AttributesComponent implements OnInit, OnDestroy {
     });
 
     $event.preventDefault();
+  }
+
+  onEdit(element: AttributeType): void {
+    // eslint-disable-next-line no-param-reassign
+    element.isEdit = !element.isEdit;
   }
 
   ngOnDestroy() {

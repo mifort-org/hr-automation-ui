@@ -2,25 +2,9 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable } from 'rxjs';
 import { defaultErrorhandler } from '@utils/functions';
 import { NotificationService } from '@services/notification.service';
-import { AttributeType } from '@src/app/models/attributeType';
+import { AttributeType, AttributeTypeDto } from '@src/app/models/attributeType';
 import { AttributeTypeDictionary } from '../models/attributeTypeDictionary';
 import { FetchService } from './fetch.service';
-
-export interface AttributeTypeDto {
-  basicType: string;
-  id: number;
-  identifier: boolean;
-  name: string;
-  label: string;
-  validation: string;
-  icon: string;
-  isEdit: boolean;
-}
-
-export interface Types {
-  basicType: string;
-  viewValue: string;
-}
 
 @Injectable({
   providedIn: 'root',
@@ -37,7 +21,7 @@ export class AttributesService {
   constructor(private fetch: FetchService, public notification: NotificationService) {}
 
   public getAllAttributes() {
-    return this.fetch.get<AttributeTypeDto[]>(`attributetypes?pageNumber=1&pageSize=100`);
+    return this.fetch.get<AttributeType[]>(`attributetypes?pageNumber=1&pageSize=100`);
   }
 
   public handleResponse(resolve: AttributeType[]): void {
@@ -52,7 +36,7 @@ export class AttributesService {
     return allAttributes;
   }
 
-  public updateAttribute(id: number, typesDto: any): Observable<AttributeType> {
+  public updateAttribute(id: number, typesDto: AttributeType): Observable<AttributeType> {
     return this.fetch
       .patch<AttributeType>(`attributetypes/${id}`, this.mapAllAttributes(typesDto))
       .pipe(catchError((error) => this.errorHandler(this.notification, error)));

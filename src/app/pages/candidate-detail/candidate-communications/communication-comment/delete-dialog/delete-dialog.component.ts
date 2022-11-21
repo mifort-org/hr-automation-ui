@@ -1,5 +1,6 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DeleteModalDataType } from '@src/app/models/deleteModalDataType';
 
 @Component({
   selector: 'app-delete-dialog',
@@ -7,22 +8,18 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./delete-dialog.component.scss'],
 })
 export class DeleteDialogComponent implements OnInit {
-  @Input() title: string | undefined;
-
-  @Input() text: string | undefined;
-
   conFirmTitle: string = '';
 
   conFirmText: string = '';
 
   constructor(
     public dialogRef: MatDialogRef<DeleteDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public deleteComment: boolean
+    @Inject(MAT_DIALOG_DATA) public data: DeleteModalDataType
   ) {}
 
   ngOnInit() {
-    this.conFirmTitle = this.title || 'Delete comment';
-    this.conFirmText = this.text || 'Are you sure you want to delete this comment?';
+    this.conFirmTitle = this.data.title || 'Delete comment';
+    this.conFirmText = this.data.text || 'Are you sure you want to delete this comment?';
   }
 
   onNoClick(): void {
