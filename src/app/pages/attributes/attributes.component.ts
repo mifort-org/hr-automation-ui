@@ -1,14 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { filter, finalize, Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
 import { AttributesService } from '@src/app/services/attributes.service';
 import { DeleteDialogComponent } from '@pages/candidate-detail/candidate-communications/communication-comment/delete-dialog/delete-dialog.component';
-import {
-  Attribute,
-  AttributeType,
-  DEFAULT_TYPE,
-  PREDEFINED_TYPES,
-} from '@src/app/models/attributeType';
+import { Attribute, AttributeType, PREDEFINED_TYPES } from '@src/app/models/attributeType';
 
 @Component({
   selector: 'app-attributes',
@@ -24,6 +21,8 @@ export class AttributesComponent implements OnInit, OnDestroy {
 
   private subscription!: Subscription;
 
+  VOForm!: FormGroup;
+
   public displayedColumns: string[] = [
     'id',
     'name',
@@ -36,11 +35,22 @@ export class AttributesComponent implements OnInit, OnDestroy {
     'actions',
   ];
 
+  dataSource = new MatTableDataSource<any>();
+
   public types: AttributeType[] = PREDEFINED_TYPES;
 
-  constructor(private attributeService: AttributesService, public dialog: MatDialog) {}
+  constructor(
+    private attributeService: AttributesService,
+    public dialog: MatDialog,
+    private fb: FormBuilder,
+    private _formBuilder: FormBuilder
+  ) {}
 
   public ngOnInit(): void {
+    this.VOForm = this._formBuilder.group({
+      VORows: this._formBuilder.array([]),
+    });
+
     this.fillAllAttributesGrid();
   }
 
@@ -49,14 +59,46 @@ export class AttributesComponent implements OnInit, OnDestroy {
       .getAllAttributes()
       .subscribe((attributes: Attribute[]) => {
         this.attributes = attributes;
+
+        this.initForm(attributes);
       });
   }
 
-  public onAttributeSave(element: Attribute): void {
-    if (element.id) {
-      this.attributeService.updateAttribute(element.id, element).subscribe();
+  public initForm(attributes: Attribute[]): void {
+    this.VOForm = this.fb.group({
+      VORows: this.fb.array(
+        attributes.map((val) =>
+          this.fb.group({
+            id: new FormControl(val.id),
+            name: new FormControl(val.name, Validators.required),
+            label: new FormControl(val.label, Validators.required),
+            icon: new FormControl(val.icon, Validators.required),
+            basicType: new FormControl(val.basicType, Validators.required),
+            validation: new FormControl(val.validation, Validators.required),
+            isIdentifier: new FormControl(val.isIdentifier),
+            isMultivalued: new FormControl(val.isMultivalued),
+            isEdit: new FormControl(false),
+          })
+        )
+      ),
+    });
+
+    this.dataSource = new MatTableDataSource((this.VOForm.get('VORows') as FormArray).controls);
+  }
+
+  public onAttributeSave(element: FormGroup): void {
+    this.validateAllFormFields(element);
+
+    if (element.invalid) {
+      return;
+    }
+
+    if (element.getRawValue().id) {
+      this.attributeService
+        .updateAttribute(element.getRawValue().id, element.getRawValue())
+        .subscribe();
     } else {
-      this.attributeService.createAttribute(element).subscribe(() => {
+      this.attributeService.createAttribute(element.getRawValue()).subscribe(() => {
         this.fillAllAttributesGrid();
       });
       this.isCreate = false;
@@ -68,19 +110,22 @@ export class AttributesComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const newRow: Attribute = {
-      basicType: DEFAULT_TYPE.basicType,
-      isIdentifier: false,
-      isMultivalued: false,
-      name: '',
-      label: '',
-      validation: '',
-      icon: '',
-      isEdit: true,
-    };
+    const newRow = this.fb.group({
+      id: new FormControl(''),
+      basicType: new FormControl('', Validators.required),
+      isIdentifier: new FormControl(false),
+      isMultivalued: new FormControl(false),
+      name: new FormControl('', Validators.required),
+      label: new FormControl('', Validators.required),
+      validation: new FormControl('', Validators.required),
+      icon: new FormControl('', Validators.required),
+      isEdit: new FormControl(true),
+    });
 
-    // @ts-ignore
-    this.attributes = [newRow, ...this.attributes];
+    const control = this.VOForm.get('VORows') as FormArray;
+    control.insert(0, newRow);
+    this.dataSource = new MatTableDataSource(control.controls);
+
     this.isCreate = true;
   }
 
@@ -122,9 +167,20 @@ export class AttributesComponent implements OnInit, OnDestroy {
     $event.preventDefault();
   }
 
-  public onEdit(element: Attribute): void {
+  public onEdit(element: FormGroup): void {
     // eslint-disable-next-line no-param-reassign
-    element.isEdit = !element.isEdit;
+    element.get('isEdit')?.setValue(!element.get('isEdit')?.value);
+  }
+
+  private validateAllFormFields(element: FormGroup): void {
+    Object.keys(element.controls).forEach((field) => {
+      const control = element.get(field);
+      if (control instanceof FormControl) {
+        control.markAsTouched({ onlySelf: true });
+      } else if (control instanceof FormGroup) {
+        this.validateAllFormFields(control);
+      }
+    });
   }
 
   public ngOnDestroy(): void {
