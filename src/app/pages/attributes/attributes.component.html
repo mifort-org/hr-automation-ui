@@ -145,7 +145,7 @@
         <button mat-icon-button class="edit-button" (click)="onEdit(element)">
           <mat-icon class="action-icons">edit</mat-icon>
         </button>
-        <button mat-icon-button class="edit-button" (click)="openDialog($event, element)" [disabled]="inProgress">
+        <button mat-icon-button class="edit-button" (click)="openDialog($event, element.getRawValue(), i)" [disabled]="inProgress">
           <mat-icon class="action-icons">delete</mat-icon>
         </button>
       </div>

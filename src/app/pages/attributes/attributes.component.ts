@@ -129,8 +129,10 @@ export class AttributesComponent implements OnInit, OnDestroy {
     this.isCreate = true;
   }
 
-  public removeRow(id: number | undefined): void {
-    this.attributes = this.attributes.filter((u: Attribute) => u.id !== id);
+  public removeRow(index: number): void {
+    const controls = this.VOForm.get('VORows') as FormArray;
+    controls.removeAt(index);
+    this.dataSource = new MatTableDataSource(controls.controls);
   }
 
   public onCancel(id: number | undefined): void {
@@ -140,7 +142,7 @@ export class AttributesComponent implements OnInit, OnDestroy {
     }
   }
 
-  public openDialog($event: Event, element: Attribute): void {
+  public openDialog($event: Event, element: Attribute, index: number): void {
     this.inProgress = true;
 
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
@@ -160,7 +162,7 @@ export class AttributesComponent implements OnInit, OnDestroy {
       )
       .subscribe(() => {
         this.attributeService.deleteAttribute(element.id!).subscribe(() => {
-          this.removeRow(element.id);
+          this.removeRow(index);
         });
       });
 
