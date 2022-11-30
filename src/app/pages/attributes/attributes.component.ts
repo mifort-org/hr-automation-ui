@@ -39,7 +39,7 @@ export class AttributesComponent implements OnInit, OnDestroy {
 
   public types: AttributeType[] = PREDEFINED_TYPES;
 
-  public reqErrorText = 'This field is required!';
+  public readonly reqErrorText: string = 'This field is required!';
 
   constructor(
     private attributeService: AttributesService,
