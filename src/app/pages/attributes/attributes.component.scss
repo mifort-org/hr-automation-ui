@@ -1,7 +1,6 @@
 @import 'src/styles/colors';
 @import 'src/styles';
 
-$screen800: 800px;
 
 :host {
   display: flex;
@@ -82,7 +81,7 @@ mat-checkbox , .checkbox-wrapper {
     vertical-align: middle;
   }
 
-  @media(max-width: $screen800)
+  @media(max-width: $md)
   {
     .mat-cell,
     .mat-header-cell {
@@ -90,7 +89,7 @@ mat-checkbox , .checkbox-wrapper {
     }
   }
 
-  @media(max-width: $screen800)
+  @media(max-width: $md)
   {
     .material-icons {
       font-size:20px
