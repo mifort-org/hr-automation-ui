@@ -1,6 +1,8 @@
 @import 'src/styles/colors';
 @import 'src/styles';
 
+$screen800: 800px;
+
 :host {
   display: flex;
   flex-direction: column;
@@ -46,10 +48,52 @@ table {
   margin-top: 10px;
 }
 
-mat-checkbox {
-  margin-left: 20px;
+mat-checkbox , .checkbox-wrapper {
+ margin-left: 20px;
 }
 
-.checkbox-wrapper {
- margin-left: 20px;
+.table-responsive {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+
+  .mat-table {
+    width: 100%;
+    max-width: 100%;
+    display: table;
+    border-collapse: collapse;
+    margin: 0px 0px 1rem;
+  }
+
+  .mat-row,
+  .mat-header-row {
+    display: table-row;
+  }
+
+  .mat-cell,
+  .mat-header-cell {
+    word-wrap: initial;
+    display: table-cell;
+    padding: 0px 5px;
+    line-break: unset;
+    width: auto;
+    white-space: nowrap;
+    overflow: hidden;
+    vertical-align: middle;
+  }
+
+  @media(max-width: $screen800)
+  {
+    .mat-cell,
+    .mat-header-cell {
+      font-size:12px
+    }
+  }
+
+  @media(max-width: $screen800)
+  {
+    .material-icons {
+      font-size:20px
+    }
+  }
 }

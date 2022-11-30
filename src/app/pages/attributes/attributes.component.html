@@ -9,6 +9,7 @@
 </div>
 <form [formGroup]="VOForm" >
   <ng-container formArrayName="VORows">
+    <div class="table-responsive">
 <table
   mat-table
   *ngIf="attributes"
@@ -29,7 +30,7 @@
       <mat-form-field class="input-field"  *ngIf="element.get('isEdit').value; else dataView "  appearance="outline" >
         <mat-label>Name</mat-label>
         <input matInput [type]="'text'" formControlName="name">
-        <mat-error *ngIf="element.controls['name'].errors['required']">{{ 'This field is required!' }}</mat-error>
+        <mat-error *ngIf="element.controls['name'].errors['required']">{{ reqErrorText }}</mat-error>
       </mat-form-field>
 
       <ng-template #dataView>
@@ -46,7 +47,7 @@
       <mat-form-field  class="input-field"  *ngIf="element.get('isEdit').value; else dataView  "  appearance="outline">
         <mat-label>Title</mat-label>
         <input matInput [type]="'text'"  formControlName="label">
-        <mat-error *ngIf="element.controls['label'].errors['required']">{{ 'This field is required!' }}</mat-error>
+        <mat-error *ngIf="element.controls['label'].errors['required']">{{ reqErrorText }}</mat-error>
       </mat-form-field>
       <ng-template #dataView>
       <span >
@@ -63,7 +64,7 @@
       <mat-form-field  class="input-field"  *ngIf="element.get('isEdit').value; else dataView "  appearance="outline">
         <mat-label>Icon</mat-label>
         <input matInput [type]="'text'"  formControlName="icon">
-        <mat-error *ngIf="element.controls['icon'].errors['required']">{{ 'This field is required!' }}</mat-error>
+        <mat-error *ngIf="element.controls['icon'].errors['required']">{{ reqErrorText }}</mat-error>
       </mat-form-field>
       <ng-template #dataView>
       <mat-icon>{{ element.get('icon').value }}</mat-icon>
@@ -81,7 +82,7 @@
             {{type.viewValue}}
           </mat-option>
         </mat-select>
-        <mat-error *ngIf="element.controls['basicType'].errors['required']">{{ 'This field is required!' }}</mat-error>
+        <mat-error *ngIf="element.controls['basicType'].errors['required']">{{ reqErrorText }}</mat-error>
       </mat-form-field>
       <ng-template #dataView>
       <span >
@@ -98,7 +99,7 @@
       <mat-form-field class="input-field" *ngIf="element.get('isEdit').value; else dataView " appearance="outline" >
         <mat-label>Validation</mat-label>
         <input matInput [type]="'text'"  formControlName="validation">
-        <mat-error *ngIf="element.controls['validation'].errors['required']">{{ 'This field is required!' }}</mat-error>
+        <mat-error *ngIf="element.controls['validation'].errors['required']">{{ reqErrorText }}</mat-error>
       </mat-form-field>
       <ng-template #dataView>
       <span >
@@ -166,5 +167,6 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
+    </div>
   </ng-container>
 </form>

@@ -21,7 +21,7 @@ export class AttributesComponent implements OnInit, OnDestroy {
 
   private subscription!: Subscription;
 
-  VOForm!: FormGroup;
+  public VOForm!: FormGroup;
 
   public displayedColumns: string[] = [
     'id',
@@ -35,9 +35,11 @@ export class AttributesComponent implements OnInit, OnDestroy {
     'actions',
   ];
 
-  dataSource = new MatTableDataSource<any>();
+  public dataSource = new MatTableDataSource<any>();
 
   public types: AttributeType[] = PREDEFINED_TYPES;
+
+  public reqErrorText = 'This field is required!';
 
   constructor(
     private attributeService: AttributesService,
