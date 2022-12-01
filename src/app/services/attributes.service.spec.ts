@@ -14,7 +14,11 @@ describe('AttributesService', () => {
   // const createHttp = createHttpFactory(AttributesService);
   const baseUrl = environment.baseAPIUrl;
   const requestUrl = `${environment.baseAPIUrl}/attributetypes/1`;
-  const errorResponse = new HttpErrorResponse({ statusText: 'error', status: 500, url: requestUrl });
+  const errorResponse = new HttpErrorResponse({
+    statusText: 'error',
+    status: 500,
+    url: requestUrl,
+  });
   const createHttp = createHttpFactory({
     service: AttributesService,
     providers: [MatSnackBar, Overlay],
