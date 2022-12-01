@@ -1,16 +1,20 @@
-@import 'src/styles/theme';
+@import 'src/styles';
 
 .candidate-details{
   display: flex;
   justify-content: space-between;
   padding-top: 40px;
 
+  @media screen and (max-width: $md){
+    justify-content: normal;
+  }
+
   .attributes, .contact-info {
     background-color: transparent;
     padding-top: 40px;
 
     .caption {
-      display: flex; 
+      display: flex;
       font-size: 20px;
       font-weight: 500;
       margin-bottom: 5px;
@@ -21,7 +25,6 @@
       font-size: 16px;
       font-weight: 500;
       border: none;
-      min-width: 195px;
       text-transform: capitalize;
       color: $white;
     }
@@ -29,6 +32,11 @@
     .name{
       display: flex;
       align-items: center;
+      min-width: 195px;
+    }
+
+    .value {
+      min-width: 120px;
     }
 
     .wrapper{
@@ -63,7 +71,23 @@
     }
   }
 
-  .edit-button{
+
+
+  .edit-button-regular, .edit-button-mobile{
     border: 1px solid $primary-color;
   }
+
+  .edit-button-regular{
+    @media screen and (max-width: $sm){
+      display: none;
+    }
+  }
+
+  .edit-button-mobile{
+    @media screen and (min-width: $sm){
+     display: none;
+    }
+  }
+
+
 }
