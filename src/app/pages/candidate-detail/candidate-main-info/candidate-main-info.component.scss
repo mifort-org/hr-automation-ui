@@ -5,9 +5,7 @@
   justify-content: space-between;
   padding-top: 40px;
 
-  @media screen and (max-width: $md){
-    justify-content: normal;
-  }
+
 
   .attributes, .contact-info {
     background-color: transparent;
@@ -72,22 +70,26 @@
   }
 
 
-
   .edit-button-regular, .edit-button-mobile{
     border: 1px solid $primary-color;
   }
 
-  .edit-button-regular{
-    @media screen and (max-width: $sm){
-      display: none;
-    }
+}
+
+@media screen and (max-width: $md){
+  .candidate-details {
+    justify-content: normal;
   }
+}
 
-  .edit-button-mobile{
-    @media screen and (min-width: $sm){
-     display: none;
-    }
+.edit-button-regular{
+  @media screen and (max-width: $sm){
+    display: none;
   }
+}
 
-
+.edit-button-mobile{
+  @media screen and (min-width: $sm){
+   display: none;
+  }
 }
