@@ -9,7 +9,8 @@ import { AttributesService } from './attributes.service';
 describe('AttributesService', () => {
   let spectator: SpectatorHttp<AttributesService>;
   let handlerSpy: jest.SpyInstance;
-  const error = { statusText: 'error', status: 200 };
+  const error = { statusText: 'error', status: 500 };
+  const success = { statusText: 'success', status: 200 };
   let data: Attribute;
   // const createHttp = createHttpFactory(AttributesService);
   const baseUrl = environment.baseAPIUrl;
@@ -30,8 +31,8 @@ describe('AttributesService', () => {
       basicType: 'string',
       id: 1,
       isIdentifier: true,
-      isMultivalued: true || false,
-      isEdit: true || false,
+      isMultivalued: true,
+      isEdit: true,
       name: 'string',
       label: 'string',
       validation: 'string',
@@ -66,11 +67,6 @@ describe('AttributesService', () => {
     });
   });
 
-  // it('should map all attributes', () => {
-  //   const functionValue = spectator.service.mapAllAttributes(data);
-  //   expect(functionValue).toEqual(data);
-  // });
-
   describe('Update Attribute', () => {
     it('should update attributes', () => {
       const resolve: Attribute = data;
@@ -79,16 +75,15 @@ describe('AttributesService', () => {
       spectator.expectOne(url, HttpMethod.PATCH).flush('', { ...error, status: 500 });
       expect(handlerSpy).toHaveBeenCalledWith(spectator.service.notification, errorResponse);
     });
-  });
 
-  // describe('Update Attribute', () => {
-  //   it('should update attribute', () => {
-  //     const resolve: Attribute = data;
-  //     spectator.service.updateAttribute(1, resolve).subscribe();
-  //     spectator.expectOne(requestUrl, HttpMethod.PATCH).flush('', error);
-  //     expect(handlerSpy).toHaveBeenCalledWith(spectator.service.notification, errorResponse);
-  //   });
-  // });
+    it('should update attributes and return success message', () => {
+      const resolve: Attribute = data;
+      const url = `${environment.baseAPIUrl}/attributetypes/1, ${resolve}`;
+      spectator.service.updateAttribute(1, resolve).subscribe();
+      spectator.expectOne(url, HttpMethod.PATCH).flush('', { ...success, status: 200 });
+      expect(handlerSpy).toHaveBeenCalledWith(spectator.service.notification, success);
+    });
+  });
 
   describe('Create Attribute', () => {
     it('should create attributes', () => {
@@ -105,6 +100,14 @@ describe('AttributesService', () => {
         })
       );
     });
+
+    it('should create attribute and return success message ', () => {
+      const resolve: Attribute = data;
+      const url = `${environment.baseAPIUrl}/attributetypes, ${resolve}`;
+      spectator.service.createAttribute(resolve).subscribe();
+      spectator.expectOne(url, HttpMethod.POST).flush('', { ...success, status: 200 });
+      expect(handlerSpy).toHaveBeenCalledWith(spectator.service.notification, success);
+    });
   });
 
   describe('Delete Attribute', () => {
@@ -113,7 +116,13 @@ describe('AttributesService', () => {
       spectator
         .expectOne(`${environment.baseAPIUrl}/attributetypes/1`, HttpMethod.DELETE)
         .flush('', error);
-      expect(handlerSpy).toHaveBeenCalledWith(spectator.service.notification);
+    });
+
+    it('should delete attribute', () => {
+      spectator.service.deleteAttribute(1).subscribe();
+      spectator
+        .expectOne(`${environment.baseAPIUrl}/attributetypes/1`, HttpMethod.DELETE)
+        .flush('', success);
     });
   });
 });
