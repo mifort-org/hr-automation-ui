@@ -5,12 +5,15 @@
   justify-content: space-between;
   padding-top: 40px;
 
+
   .attributes, .contact-info {
     background-color: transparent;
     padding-top: 40px;
+    overflow: hidden;
+
 
     .caption {
-      display: flex; 
+      display: flex;
       font-size: 20px;
       font-weight: 500;
       margin-bottom: 5px;
@@ -66,4 +69,5 @@
   .edit-button{
     border: 1px solid $primary-color;
   }
+
 }
