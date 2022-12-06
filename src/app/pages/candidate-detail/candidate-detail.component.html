@@ -1,14 +1,18 @@
 <ng-container *ngIf="currentCandidate">
+  <div class="main-container">
   <div class="left-panel">
-    <section class="avatar-wrapper">
-      <app-avatar [candidate]="currentCandidate"
-                  [width]="250"
-                  [height]="250"></app-avatar>
-      <span *ngIf="currentCandidate.status"
-            class="candidate-status"
-            [ngStyle]=" {'background-color': statusColor}">
+    <section class="avatar-section">
+      <div class="avatar-wrapper">
+        <app-avatar [candidate]="currentCandidate"
+                    [width]="250"
+                    [height]="250"></app-avatar>
+        <span *ngIf="currentCandidate.status"
+              class="candidate-status"
+              [ngStyle]=" {'background-color': statusColor}">
         {{ currentCandidate.status  | lowercase }}
     </span>
+      </div>
+
     </section>
 
     <section class="keyword-wrapper" *ngIf="currentCandidate.keywords?.length">
@@ -58,7 +62,8 @@
         <mat-tab>
           <ng-template mat-tab-label>
             <mat-icon class="mr-10">comment</mat-icon>
-            Communication History
+            <p class="label-regular">Communication History</p>
+            <p class="label-mobile">History</p>
           </ng-template>
 
           <app-candidate-communications></app-candidate-communications>
@@ -74,6 +79,7 @@
         </mat-tab>
       </mat-tab-group>
     </section>
+  </div>
   </div>
 </ng-container>
 
