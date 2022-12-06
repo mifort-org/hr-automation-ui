@@ -6,10 +6,11 @@
   padding-top: 40px;
 
 
-
   .attributes, .contact-info {
     background-color: transparent;
     padding-top: 40px;
+    overflow: hidden;
+
 
     .caption {
       display: flex;
