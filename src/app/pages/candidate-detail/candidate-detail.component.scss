@@ -12,10 +12,15 @@
   display: flex;
   flex-direction: column;
 
+  .avatar-section {
+    display: flex;
+  }
+
   .avatar-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     margin-bottom: 60px;
 
     app-avatar {
@@ -53,7 +58,6 @@
 
 .right-panel {
   width: 100%;
-  margin-left: 150px;
 
   .account-info {
     margin: 30px 0 20px;
@@ -94,5 +98,51 @@
       color: $text-secondary;
       margin-bottom: 60px;
     }
+  }
+}
+
+.main-container{
+  display: flex;
+  gap: 150px;
+}
+
+@media screen and (max-width: $md){
+  .main-container {
+    gap: 20px
+  }
+}
+
+@media screen and (max-width: $sm){
+  .main-container{
+    display: block;
+  }
+
+  .left-panel {
+    width: 80%;
+  }
+
+  .right-panel {
+    .account-info {
+      div {
+        display: inline-block;
+      }
+
+      .location-title {
+        margin: 10px 0;
+      }
+    }
+
+  }
+
+  .label-regular {
+    display: none;
+  }
+
+
+}
+
+@media screen and (min-width: $sm){
+  .label-mobile {
+    display: none;
   }
 }
