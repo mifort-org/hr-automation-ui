@@ -3,30 +3,82 @@
 
 .candidate-merge-container {
   font-family: $main-font;
-  margin: 20px 100px;
-  padding-bottom: 10px;
+  margin-top: 20px;
+  padding: 0px 40px;
   height: auto;
   display: flex;
+  width: 100%;
 
   .desc-titles-container {
-    min-width: 200px;
+    border-right: 1px solid $light-secondary-color;
 
     .desc-title {
-      height: 90px;
+      height: 45px;
+      width: 250px;
       display: flex;
-      padding: 10px;
-      background-color: black;
-      margin-top: 10px;
-      border-radius: 5px;
-      box-shadow: $box-shadow;
-      border: 1px solid $light-back-color;
-      box-sizing: border-box;
+      align-items: center;
+      border-bottom: 1px solid $light-secondary-color;
+      padding: 0px 20px;
+      font-weight: 500;
+
+      .wrapper{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $light-secondary-color;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        margin-right: 10px;
+        
+        .icon{
+          width: 12px;
+          height: 12px;
+        }
+      }
+
+      .mat-icon{
+        display: flex;
+        align-items: center;
+        width: fit-content;
+      }
+
+      &-first{
+        height: 160px;
+        display: flex;
+        align-items: flex-end;
+        padding-bottom: 20px;
+
+        .checkbox{
+          color: $fade-blue;
+    
+          // ::ng-deep .mat-checkbox-frame {
+          //   border-color: $fade-blue;
+          //   border-width: 1px;
+          // }
+        }
+      }
     }
   }
   
   .candidates-container {
     display: flex;
     overflow-x: auto;
+    width: 100%;
+
+    .merge-candidates{
+      border-left: 1px solid $light-secondary-color;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .first-candidate{
+      border: none;
+    }
+
+    .add-candidate{
+      width: 100%;
+    }
   }  
 
   .desc-result-container {
@@ -38,6 +90,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 150px;
+  padding-top: 150px;
   text-align: center;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.form-container{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  .mat-form-field{
+    width: 250px;
+  }
 }

@@ -3,14 +3,17 @@
   <div class="left-panel">
     <section class="avatar-section">
       <div class="avatar-wrapper">
-        <app-avatar [candidate]="currentCandidate"
-                    [width]="250"
-                    [height]="250"></app-avatar>
+        <app-avatar 
+            [firstName]="currentCandidate.firstName"
+            [lastName]="currentCandidate.lastName"
+            [status]="currentCandidate.status"
+            [width]="250"
+            [height]="250"></app-avatar>
         <span *ngIf="currentCandidate.status"
               class="candidate-status"
               [ngStyle]=" {'background-color': statusColor}">
         {{ currentCandidate.status  | lowercase }}
-    </span>
+        </span>
       </div>
 
     </section>

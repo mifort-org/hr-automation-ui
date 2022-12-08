@@ -17,7 +17,11 @@ export class MergeCandidateComponent {
 
   @Input() editable: boolean = true;
 
+  @Input() candidates!: MergeCandidate[];
+
   @Input() candidate!: MergeCandidate;
+
+  @Input() addCandidate: boolean = false;
 
   @Input() attributeTypes!: CandidateAttributeType[] | null;
 

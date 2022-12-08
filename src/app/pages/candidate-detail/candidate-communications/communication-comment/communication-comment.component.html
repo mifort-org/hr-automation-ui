@@ -1,7 +1,11 @@
 <mat-card class="card" *ngIf="historyItem">
   <mat-card-content class="card-item">
     <div class="candidate-info">
-      <app-avatar class="profile-icon" [width]="50" [height]="50" [candidate]="(candidate | async)"></app-avatar>
+      <app-avatar class="profile-icon" [width]="50" [height]="50" 
+      [firstName]="(candidate |async)?.firstName"
+      [lastName]="(candidate |async)?.lastName"
+      [status]="(candidate |async)?.status"
+      ></app-avatar>
       <h3 class="candidate-name">{{(candidate | async)?.fullName}}</h3>
       <sup class="date">
         <div class="separator"></div>

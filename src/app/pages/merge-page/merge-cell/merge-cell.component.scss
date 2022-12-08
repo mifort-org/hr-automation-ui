@@ -8,24 +8,30 @@
 .desc-candidate-attrs {
   width: 100%;
   height: 100%;
-  box-sizing: border-box;
+  padding: 0px 20px;
   overflow-y: auto;
-  
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid $light-secondary-color;
+
   .desc-candidate-label {
-    position: relative;
+    font-weight: 400;
 
     .desc-candidate-data {
-      border-radius: 5px;
-      background-color: $dark-back-color;
       display: flex;
-      padding: 10px;
       align-items: center;
-      box-sizing: border-box;
+
+      .checkbox{
+        color: $fade-blue;
+        margin-right: 10px;
+        display: flex;
+        align-items: center;
+    
+        // ::ng-deep .mat-checkbox-frame {
+        //   border-color: $fade-blue;
+        //   border-width: 1px;
+        // }
+      }
     } 
   }
 }
-
-.final {
-  border: 1px solid $light-back-color;
-  border-radius: 5px;
-} 
