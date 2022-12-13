@@ -22,15 +22,9 @@
       align-items: center;
 
       .checkbox{
-        color: $fade-blue;
         margin-right: 10px;
         display: flex;
         align-items: center;
-    
-        // ::ng-deep .mat-checkbox-frame {
-        //   border-color: $fade-blue;
-        //   border-width: 1px;
-        // }
       }
     } 
   }
