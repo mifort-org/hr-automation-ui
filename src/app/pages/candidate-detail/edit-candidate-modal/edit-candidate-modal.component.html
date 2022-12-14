@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Update candidate information</h1>
+<h1 mat-dialog-title data-cy="edit-candidate">Update candidate information</h1>
 <div mat-dialog-content>
   <div *ngIf="!modalState?.loading; else loading">
     <app-candidate-form
@@ -16,7 +16,7 @@
   >
     Submit
   </button>
-  <button mat-button (click)="closeModal()" [disabled]="modalState.loading">Cancel</button>
+  <button mat-button (click)="closeModal()" [disabled]="modalState.loading" data-cy="cancel-edit">Cancel</button>
 </div>
 
 <ng-template #loading>

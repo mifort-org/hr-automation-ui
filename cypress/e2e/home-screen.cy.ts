@@ -8,7 +8,6 @@ describe('Candidates page', () => {
     cy.validatePath('/candidates', true);
     cy.get('[data-cy=candidate-item]').should('have.length.greaterThan', 0);
   });
-
   it.skip('Creates new candidate', () => {
     const name = Math.floor(Math.random() * 1_000_000);
 
