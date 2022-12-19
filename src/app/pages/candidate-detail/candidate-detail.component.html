@@ -1,5 +1,5 @@
-<ng-container *ngIf="currentCandidate">
-  <div class="main-container">
+<ng-container *ngIf="currentCandidate" >
+  <div class="main-container" data-cy="currentCandidate">
   <div class="left-panel">
     <section class="avatar-section">
       <div class="avatar-wrapper">
@@ -37,7 +37,7 @@
         </p>
       </div>
       <p class="last-contact">Last contact: {{ currentCandidate.lastContact | date }}</p>
-      <button mat-raised-button color="primary" (click)="openAddCommentModal()">
+      <button mat-raised-button color="primary" (click)="openAddCommentModal()" data-cy="comments">
         <mat-icon>comment</mat-icon>
         <span class="ml-10">Add comment</span>
       </button>
@@ -56,26 +56,26 @@
             Details
           </ng-template>
 
-          <app-candidate-main-info></app-candidate-main-info>
+          <app-candidate-main-info data-cy="main-info"></app-candidate-main-info>
         </mat-tab>
 
-        <mat-tab>
+        <mat-tab >
           <ng-template mat-tab-label>
-            <mat-icon class="mr-10">comment</mat-icon>
+            <mat-icon class="mr-10" data-cy="communication-history">comment</mat-icon>
             <p class="label-regular">Communication History</p>
             <p class="label-mobile">History</p>
           </ng-template>
 
-          <app-candidate-communications></app-candidate-communications>
+          <app-candidate-communications data-cy="comm-history"></app-candidate-communications>
         </mat-tab>
 
         <mat-tab>
           <ng-template mat-tab-label>
-            <mat-icon class="mr-10">timeline</mat-icon>
+            <mat-icon class="mr-10" data-cy="candidate-updates">timeline</mat-icon>
             Updates
           </ng-template>
 
-          <app-candidate-updates></app-candidate-updates>
+          <app-candidate-updates data-cy="updates"></app-candidate-updates>
         </mat-tab>
       </mat-tab-group>
     </section>
