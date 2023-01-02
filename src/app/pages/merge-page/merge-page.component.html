@@ -1,51 +1,72 @@
-<app-actions-bar-merge></app-actions-bar-merge>
+<app-actions-bar-merge *ngIf="candidates.length"></app-actions-bar-merge>
 <mat-progress-bar
   mode="indeterminate"
   color="primary"
   *ngIf="pageState.loading"
 ></mat-progress-bar>
 <ng-container *ngIf="!pageState.loading">
-  <div *ngIf="candidatesMatrixNotEmpty; else noCandidatesId" class="candidate-merge-container gap-10">
-    <div class="desc-titles-container">
-      <div class="desc-title"></div>
-      <ng-container *ngFor="let attributeType of attributeTypes">
-        <div class="desc-title">
-          <ng-container [ngSwitch]="attributeType.name">
-            <mat-icon [inline]="true" *ngSwitchCase="'email'">email</mat-icon>
-            <mat-icon [inline]="true" *ngSwitchCase="'facebookid'">facebook</mat-icon>
-            <mat-icon [inline]="true" *ngSwitchCase="'phone'">phone</mat-icon>
-            <mat-icon [inline]="true" *ngSwitchCase="'twitter'">chat</mat-icon>
-            <mat-icon [inline]="true" *ngSwitchCase="'firstname'">person</mat-icon>
-            <mat-icon [inline]="true" *ngSwitchCase="'lastname'">person</mat-icon>
-            <mat-icon [inline]="true" *ngSwitchDefault>info</mat-icon>
-          </ng-container>
-          <span>&nbsp;</span>        
-          {{attributeType.name}}
+  <table *ngIf="candidatesMatrixNotEmpty; else noCandidatesId" class="candidate-merge-container">
+    <tr class="desc-titles-container">
+      <div class="desc-title desc-title-first">
+        <div class="content" *ngIf="candidates.length>1">
+          <mat-checkbox
+            class="checkbox"
+            color="primary"
+          >Hide similar attributes
+          </mat-checkbox>
         </div>
+      </div>
+      <ng-container *ngFor="let attributeType of attributeTypes">
+        <th class="desc-title">
+          <div class="wrapper">
+            <img class="icon" [src]="attributeType.icon">
+          </div>
+          {{attributeType.name}}
+        </th>
       </ng-container>
-  </div>
+    </tr>
 
-    <div class="candidates-container gap-10">
-      <ng-container *ngFor="let candidate of candidates">
-        <app-merge-candidate          
+    <div class="candidates-container">
+      <ng-container *ngFor="let candidate of candidates; let first = first">
+        <app-merge-candidate 
+          class="merge-candidates"      
+          [ngClass]="{'first-candidate': first}"   
           [candidate]='candidate'
           [attributeTypes]='attributeTypes'
           (delete)='deleteCandidate(candidate)'
         ></app-merge-candidate>
       </ng-container>
-    </div>
+    
+      <tr class="add-candidate">
+        <app-merge-candidate
+          class="merge-candidates"
+          [candidates]="candidates"
+          [addCandidate]="true"
+          [attributeTypes]='attributeTypes'
+        ></app-merge-candidate>
+      </tr>
 
-    <div class="desc-result-container">
-      <app-merge-candidate
-        [candidate]='finalResult()'
-        [attributeTypes]='attributeTypes'
-        [editable]='false'
-      ></app-merge-candidate>
+      <tr class="desc-result-container" *ngIf="candidates.length>1">
+        <app-merge-candidate
+          class="merge-candidates"
+          [editable]='false'
+          [candidate]='finalResult()'
+          [attributeTypes]='attributeTypes'
+        ></app-merge-candidate>
+      </tr>
     </div>
-  </div>
+  </table>
 
 </ng-container>
 
 <ng-template #noCandidatesId>
   <p class="nothing-merge">You have not selected candidates for the merge. Please add more candidates.</p>
+  <div class="form-container">
+    <mat-form-field appearance="fill" class="form-field">
+    <mat-label>Select a candidate</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let candidate of candidates" [value]="candidate">{{candidate.fullName}}</mat-option>
+    </mat-select>
+    </mat-form-field>
+  </div>
 </ng-template>

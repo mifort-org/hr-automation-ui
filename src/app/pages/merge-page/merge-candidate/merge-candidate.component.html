@@ -1,23 +1,39 @@
-<label class="desc-candidate-title" *ngIf='editable && candidate'>
-  <mat-checkbox
+<th class="desc-candidate-title" *ngIf="editable && candidate">
+  <div class="actions-wrapper">
+    <mat-checkbox
     color="primary"
-    class="desc-candidate-title-label"
-    aria-label="desc-candidate-title"
+    class="checkbox"
     [checked]="checked"
     [value]="candidate.id"
     (change)="selectCandidate($event)"
-  >
-    {{candidate.id}}
-  </mat-checkbox>
-  <mat-icon color="warn" (click)="deleteClick()" class="remove-button">delete_forever</mat-icon>
-</label>
-<label class="desc-candidate-title" *ngIf='!editable'>
-  {{candidate.id}}
-</label>
+    >
+    </mat-checkbox>
+    <mat-icon (click)="deleteClick()" class="remove-button">close</mat-icon>
+  </div>
+  <app-avatar class="profile-icon" [width]="50" [height]="50"
+  [firstName]="candidate.fullName.split(' ')[0]"
+  [lastName]="candidate.fullName.split(' ')[1]"
+  [status]="candidate.status"
+  [width]='80'
+  [height]='80'
+  ></app-avatar>
+  <div class="title-text">{{candidate.fullName}}</div>
+</th>
+
+<th class="desc-candidate-title add-candidate-title" *ngIf="addCandidate">
+  <mat-form-field appearance="fill">
+    <mat-label>Select a candidate</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let candidate of candidates" [value]="candidate">{{candidate.fullName}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</th>
+
+<th class="desc-candidate-title" *ngIf='!editable'></th>
 
 <ng-container *ngFor="let type of attributeTypes">
   <app-merge-cell
-    [value]='candidate.attributesMap.get(type.name)'
+    [value]='candidate?.attributesMap?.get(type.name)'
     (valueChange)='changeAttributeSelections(candidate.attributesMap.get(type.name), $event)'
     class="desc-candidate"
     [editable]='editable'>

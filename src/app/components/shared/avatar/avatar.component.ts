@@ -1,7 +1,6 @@
 import { Component, HostBinding, Input, OnChanges, OnInit } from '@angular/core';
 import { round } from 'lodash';
 import { STATUS_COLOR, CandidateStatus } from '@src/app/constants/candidates';
-import { Candidate } from '@src/app/models/candidate';
 
 @Component({
   selector: 'app-avatar',
@@ -9,7 +8,11 @@ import { Candidate } from '@src/app/models/candidate';
   styleUrls: ['./avatar.component.scss'],
 })
 export class AvatarComponent implements OnInit, OnChanges {
-  @Input() candidate: Candidate | undefined | null;
+  @Input() firstName: string | undefined | null;
+
+  @Input() lastName: string | undefined | null;
+
+  @Input() status: CandidateStatus | undefined | null;
 
   @Input() width: number | undefined;
 
@@ -33,11 +36,20 @@ export class AvatarComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: any): void {
-    if (changes.candidate.currentValue) {
-      this.selectedColor = this.getColor(this.candidate!.status);
+    if (changes.status?.currentValue) {
+      this.selectedColor = this.getColor(this.status!);
       this.shadowColor = this.getShadowColor(this.selectedColor);
-      this.initials = this.getInitials(this.candidate?.firstName!, this.candidate?.lastName!);
+    }
+    if (
+      changes.firstName?.currentValue !== changes.firstName?.previousValue ||
+      changes.lastName?.currentValue !== changes.lastName?.previousValue
+    ) {
+      this.initials = this.getInitials(this.firstName!, this.lastName!);
+    }
+    if (changes.width?.currentValue !== changes.width?.previousValue) {
       this.selectedWidth = this.getWidth();
+    }
+    if (changes.height?.currentValue !== changes.height?.previousValue) {
       this.selectedHeight = this.getHeight();
     }
   }

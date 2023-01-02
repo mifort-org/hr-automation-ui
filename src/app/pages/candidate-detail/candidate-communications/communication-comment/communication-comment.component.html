@@ -1,8 +1,12 @@
 <mat-card class="card" *ngIf="historyItem">
-  <mat-card-content class="card-item">
+  <mat-card-content class="card-item" *ngIf="(candidate | async) as currentCandidate">
     <div class="candidate-info">
-      <app-avatar class="profile-icon" [width]="50" [height]="50" [candidate]="(candidate | async)"></app-avatar>
-      <h3 class="candidate-name">{{(candidate | async)?.fullName}}</h3>
+      <app-avatar class="profile-icon" [width]="50" [height]="50" 
+      [firstName]="currentCandidate?.firstName"
+      [lastName]="currentCandidate?.lastName"
+      [status]="currentCandidate?.status"
+      ></app-avatar>
+      <h3 class="candidate-name">{{currentCandidate?.fullName}}</h3>
       <sup class="date">
         <div class="separator"></div>
         <p class="text">{{ historyItem.updateDate | date: 'MMM d, y h:mm' }}</p>
