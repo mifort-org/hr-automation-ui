@@ -1,5 +1,16 @@
-import { Component, HostBinding, Input, OnChanges, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  HostBinding,
+  Input,
+  OnChanges,
+  OnInit,
+  QueryList,
+  ViewChildren,
+} from '@angular/core';
 import { round } from 'lodash';
+import { NgxCroppedEvent, NgxPhotoEditorService } from 'ngx-photo-editor';
 import { STATUS_COLOR, CandidateStatus } from '@src/app/constants/candidates';
 
 @Component({
@@ -18,6 +29,8 @@ export class AvatarComponent implements OnInit, OnChanges {
 
   @Input() height: number | undefined;
 
+  @Input() fileUpload: boolean = false;
+
   initials: string = '';
 
   imageExists: boolean = false;
@@ -29,6 +42,12 @@ export class AvatarComponent implements OnInit, OnChanges {
   @HostBinding('style.width') selectedWidth: string = '';
 
   @HostBinding('style.height') selectedHeight: string = '';
+
+  @ViewChildren('userProfilePhoto') userProfilePhoto: QueryList<ElementRef> | undefined;
+
+  output?: NgxCroppedEvent;
+
+  constructor(private changeDetector: ChangeDetectorRef, private service: NgxPhotoEditorService) {}
 
   ngOnInit(): void {
     this.selectedWidth = this.getWidth();
@@ -91,5 +110,27 @@ export class AvatarComponent implements OnInit, OnChanges {
   getIconSize(): string {
     // eslint-disable-next-line no-magic-numbers
     return this.height ? `scale( ${round(this.height / 40)})` : 'scale(2)';
+  }
+
+  onFileSelected($event: any) {
+    const file: File = $event.target.files[0];
+
+    if (file) {
+      this.service
+        .open($event, {
+          // eslint-disable-next-line no-magic-numbers
+          aspectRatio: 4 / 3,
+          autoCropArea: 1,
+        })
+        .subscribe((data) => {
+          this.output = data;
+          this.imageExists = true;
+          this.changeDetector.detectChanges();
+          const photo: ElementRef | undefined = this.userProfilePhoto?.first;
+
+          // @ts-ignore
+          photo.nativeElement.src = this.output?.base64;
+        });
+    }
   }
 }

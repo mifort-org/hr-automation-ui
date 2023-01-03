@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
+import { NgxPhotoEditorModule } from 'ngx-photo-editor';
 
 import { SharedModule } from '@components/shared/shared.module';
 
@@ -21,6 +22,7 @@ import AppComponent from './app.component';
       disableConsoleLogging: false,
     }),
     SharedModule,
+    NgxPhotoEditorModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

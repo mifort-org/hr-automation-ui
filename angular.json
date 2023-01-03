@@ -32,7 +32,8 @@
             ],
             "styles": [
               "src/styles/theme.scss",
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/ngx-photo-editor/photo-editor.css"
             ],
             "scripts": []
           },
