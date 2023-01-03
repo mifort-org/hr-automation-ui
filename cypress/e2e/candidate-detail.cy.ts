@@ -37,6 +37,6 @@ describe('Candidates detail page', () => {
 
   it('Shows candidates updates', () => {
     cy.get('[data-cy=candidate-updates]').click();
-    cy.get('[data-cy=updates]');
+    cy.get('[data-cy=attribute-form]').should('be.visible');
   });
 });
