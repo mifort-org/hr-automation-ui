@@ -55,3 +55,10 @@
 .mat-badge.hide-text .mat-badge-content {
   color: transparent;
 }
+
+.mat-checkbox{
+::ng-deep .mat-checkbox-frame {
+    border-color: $fade-blue;
+    border-width: 1px;
+  }
+}

@@ -2,7 +2,7 @@
   <mat-card-content>
 
     <div class="upper-section" [class.empty-block]="!hasContacts && !hasLocation">
-      <app-avatar [candidate]="candidate!"></app-avatar>
+      <app-avatar [firstName]="candidate!.firstName" [lastName]="candidate!.lastName" [status]="candidate!.status"></app-avatar>
       <div class="text">
         <mat-card-title>{{ candidate?.fullName }}</mat-card-title>
         <mat-card-subtitle>last contact: {{ candidate?.lastContact | date }}</mat-card-subtitle>

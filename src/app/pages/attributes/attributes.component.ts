@@ -137,9 +137,9 @@ export class AttributesComponent implements OnInit, OnDestroy {
     this.dataSource = new MatTableDataSource(controls.controls);
   }
 
-  public onCancel(id: number | undefined): void {
+  public onCancel(id: number | undefined, index: number): void {
     if (!id) {
-      this.attributes = this.attributes.filter((u: Attribute) => !!u.id);
+      this.removeRow(index);
       this.isCreate = false;
     }
   }

@@ -14,6 +14,7 @@ module.exports = {
         ignoreFunctions: ['/colorPalette/'],
       },
     ],
+    "selector-pseudo-element-no-unknown": [true, { "ignorePseudoElements": ["ng-deep"] }],
     'no-invalid-double-slash-comments': null,
     'no-descending-specificity': null,
     'declaration-empty-line-before': null,

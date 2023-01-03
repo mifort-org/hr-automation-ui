@@ -9,6 +9,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '@components/shared/shared.module';
@@ -28,7 +30,8 @@ import { MergePageComponent } from './merge-page.component';
   ],
   imports: [
     FormsModule,
-
+    MatFormFieldModule,
+    MatSelectModule,
     MatCheckboxModule,
     MatInputModule,
     MatChipsModule,
