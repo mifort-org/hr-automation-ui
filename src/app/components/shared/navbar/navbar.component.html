@@ -6,7 +6,7 @@
       </a>
       <span class="title" *ngIf="checkIsMainPage()">Mifort - HR automation</span>
     </div>
-    <button mat-stroked-button color="primary" (click)="back()" *ngIf="!checkIsMainPage()">
+    <button mat-stroked-button color="primary" (click)="back()" *ngIf="!checkIsMainPage()" data-cy="back-button" >
       <mat-icon>keyboard_backspace</mat-icon>
       <span class="ml-10">Back</span>
     </button>
@@ -14,15 +14,15 @@
 
   <div class="flex gap-10">
     <div>
-      <button mat-icon-button [matMenuTriggerFor]="menu">
+      <button mat-icon-button [matMenuTriggerFor]="menu"  data-cy="menu">
         <mat-icon>settings</mat-icon>
       </button>
-      <mat-menu #menu="matMenu" [overlapTrigger]="false" xPosition="before">      
-        <button mat-menu-item [routerLink]="['/merge']" routerLinkActive="active">
+      <mat-menu #menu="matMenu" [overlapTrigger]="false" xPosition="before">
+        <button mat-menu-item [routerLink]="['/merge']" routerLinkActive="active" data-cy="merge">
           <mat-icon>merge_type</mat-icon>
           <span>Merge</span>
         </button>
-        <button mat-menu-item [routerLink]="['/attributes']" routerLinkActive="active">
+        <button mat-menu-item [routerLink]="['/attributes']" routerLinkActive="active" data-cy="attributes">
           <mat-icon>library_books</mat-icon>
           <span>Attributes</span>
         </button>

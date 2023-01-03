@@ -71,7 +71,7 @@ describe('example to-do app', () => {
     cy.contains('Pay electric bill').parents('li').should('have.class', 'completed');
   });
 
-  context('with a checked task', () => {
+  context('with a checked task.ts', () => {
     beforeEach(() => {
       // We'll take the command we used above to check off an element
       // Since we want to perform multiple tests that start with checking
@@ -89,7 +89,7 @@ describe('example to-do app', () => {
       // incomplete item in the list.
       cy.get('.todo-list li').should('have.length', 1).first().should('have.text', 'Walk the dog');
 
-      // For good measure, let's also assert that the task we checked off
+      // For good measure, let's also assert that the task.ts we checked off
       // does not exist on the page.
       cy.contains('Pay electric bill').should('not.exist');
     });
@@ -111,7 +111,7 @@ describe('example to-do app', () => {
       // First, let's click the "Clear completed" button
       // `contains` is actually serving two purposes here.
       // First, it's ensuring that the button exists within the dom.
-      // This button only appears when at least one task is checked
+      // This button only appears when at least one task.ts is checked
       // so this command is implicitly verifying that it does exist.
       // Second, it selects the button so we can click it.
       cy.contains('Clear completed').click();
