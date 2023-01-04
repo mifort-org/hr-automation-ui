@@ -6,8 +6,7 @@ import {
   Input,
   OnChanges,
   OnInit,
-  QueryList,
-  ViewChildren,
+  ViewChild,
 } from '@angular/core';
 import { round } from 'lodash';
 import { NgxCroppedEvent, NgxPhotoEditorService } from 'ngx-photo-editor';
@@ -43,7 +42,7 @@ export class AvatarComponent implements OnInit, OnChanges {
 
   @HostBinding('style.height') selectedHeight: string = '';
 
-  @ViewChildren('userProfilePhoto') userProfilePhoto: QueryList<ElementRef> | undefined;
+  @ViewChild('userProfilePhoto') userProfilePhoto: ElementRef | undefined;
 
   output?: NgxCroppedEvent;
 
@@ -91,7 +90,7 @@ export class AvatarComponent implements OnInit, OnChanges {
   }
 
   getShadowColor(colorHex: string): string {
-    return `0px 0px 0px 3px ${colorHex}80`;
+    return `0px 0px 0px 6px ${colorHex}80`;
   }
 
   getWidth(): string {
@@ -119,14 +118,14 @@ export class AvatarComponent implements OnInit, OnChanges {
       this.service
         .open($event, {
           // eslint-disable-next-line no-magic-numbers
-          aspectRatio: 4 / 3,
+          aspectRatio: 4 / 4,
           autoCropArea: 1,
         })
         .subscribe((data) => {
           this.output = data;
           this.imageExists = true;
           this.changeDetector.detectChanges();
-          const photo: ElementRef | undefined = this.userProfilePhoto?.first;
+          const photo: ElementRef | undefined = this.userProfilePhoto;
 
           // @ts-ignore
           photo.nativeElement.src = this.output?.base64;
