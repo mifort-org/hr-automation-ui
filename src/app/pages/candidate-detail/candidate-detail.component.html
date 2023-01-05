@@ -1,22 +1,20 @@
 <ng-container *ngIf="currentCandidate" >
   <div class="main-container" data-cy="currentCandidate">
   <div class="left-panel">
-    <section class="avatar-section">
       <div class="avatar-wrapper">
-        <app-avatar 
+        <app-avatar
             [firstName]="currentCandidate.firstName"
             [lastName]="currentCandidate.lastName"
             [status]="currentCandidate.status"
-            [width]="250"
-            [height]="250"></app-avatar>
+            [width]="300"
+            [height]="300"
+            [fileUpload]="true"></app-avatar>
         <span *ngIf="currentCandidate.status"
               class="candidate-status"
               [ngStyle]=" {'background-color': statusColor}">
         {{ currentCandidate.status  | lowercase }}
         </span>
       </div>
-
-    </section>
 
     <section class="keyword-wrapper" *ngIf="currentCandidate.keywords?.length">
       <p class="hr-lines">Keywords</p>
@@ -34,10 +32,10 @@
     <section class="account-info">
       <div>
         <p class="name">{{ currentCandidate.fullName}}</p>
-        <p *ngIf="currentCandidate.city" class="location-title">
+        <div *ngIf="currentCandidate.city" class="location-title">
           <mat-icon class="location-icon">room</mat-icon>
-          {{ currentCandidate.city }}
-        </p>
+            <p> {{ currentCandidate.city }} </p>
+        </div>
       </div>
       <p class="last-contact">Last contact: {{ currentCandidate.lastContact | date }}</p>
       <button mat-raised-button color="primary" (click)="openAddCommentModal()" data-cy="comments">

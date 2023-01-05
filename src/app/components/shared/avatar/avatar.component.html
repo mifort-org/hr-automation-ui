@@ -1,13 +1,23 @@
-<span *ngIf="imageExists; else elseBlock">
-  <img class="image" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="avatar" />
+<input  type="file" class="file-input"
+        accept="image/*"
+        name="fileInput"
+       (change)="onFileSelected($event)" #imageUpload>
+
+<span *ngIf="imageExists; else elseBlock"  (click)=" !fileUpload|| imageUpload.click()" class="avatar">
+  <img class="image"
+       src="https://bootdey.com/img/Content/avatar/avatar1.png"
+       alt="avatar"
+       #userProfilePhoto
+ />
 </span>
-<ng-template #elseBlock>
-  <span *ngIf="initials; else profAvatar">
+<ng-template #elseBlock >
+  <span *ngIf="initials; else profAvatar" (click)="!fileUpload|| imageUpload.click()">
     <p class="text" [ngStyle]="{'font-size': getTextSize()}">
       {{ initials }}
     </p>
   </span>
   <ng-template #profAvatar>
-    <mat-icon [ngStyle]="{'transform' : getIconSize()}">person</mat-icon>
+    <mat-icon [ngStyle]="{'transform' : getIconSize()}"
+              (click)="!fileUpload|| imageUpload.click()">person</mat-icon>
   </ng-template>
 </ng-template>

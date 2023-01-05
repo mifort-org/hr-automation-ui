@@ -8,7 +8,7 @@
 }
 
 .left-panel {
-  width: 250px;
+  width: 300px;
   display: flex;
   flex-direction: column;
 
@@ -20,12 +20,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    margin-bottom: 60px;
+    gap: 20px;
 
-    app-avatar {
-      margin-bottom: 20px;
-    }
 
     .candidate-status {
       padding: 6px 20px;
@@ -65,30 +61,35 @@
 
     div {
       display: flex;
+      gap: 23px;
+
     }
 
     .name {
       font-weight: 500;
       font-size: 36px;
+      line-height: 42px ;
       color: $white;
       margin: 0;
     }
 
     .location-title {
       display: flex;
-      align-items: flex-end;
-      margin: 0 0 6px 20px;
-      font-size: 16px;
-      line-height: 16px;
-      font-weight: 500;
-      color: $text-secondary;
+      gap: 7px;
 
       .location-icon {
+        font-size: 13px;
+        width: 11px;
+        height: 13px;
+        margin-top: 18px;
+        color: $text-secondary;
+      }
+
+      p {
         font-size: 16px;
-        text-align: center;
-        width: 16px;
-        height: 16px;
-        margin-right: 3px;
+        line-height: 19px;
+        font-weight: 500;
+        color: $text-secondary;
       }
     }
 
@@ -96,8 +97,12 @@
       font-weight: 500;
       font-size: 20px;
       color: $text-secondary;
-      margin-bottom: 60px;
+      line-height: 24px;
     }
+  }
+  
+  button {
+    margin-top: 36px;
   }
 
   .mat-tab-body-content {
