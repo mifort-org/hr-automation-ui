@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { SharedModule } from '@components/shared/shared.module';
 
 import AppRoutingModule from './app-routing.module';
@@ -21,6 +22,7 @@ import AppComponent from './app.component';
       disableConsoleLogging: false,
     }),
     SharedModule,
+    MatSidenavModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

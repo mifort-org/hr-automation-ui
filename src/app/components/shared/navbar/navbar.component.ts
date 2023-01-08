@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { SignInModalComponent } from '@components/shared/sign-in-modal/sign-in-modal.component';
 import { EModalSizes } from '@constants/strings';
@@ -11,7 +11,9 @@ import { ROUTES } from '@src/app/routes';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
-  public readonly candidatesPage: string = ROUTES.CANDIDATES;
+  @Input() public isExpanded: boolean = false;
+
+  @Output() public toggleSidenav: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(private modalService: ModalService, private router: Router) {}
 

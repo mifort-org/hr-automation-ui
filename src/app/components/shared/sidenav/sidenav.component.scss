@@ -1,0 +1,42 @@
+@import 'src/styles/colors';
+
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid $light-secondary-color;
+  color: $text-secondary;
+  text-decoration: none;
+  padding: 10px 15px 10px 10px;
+}
+
+mat-nav-list {
+  padding-top: 40px;
+
+  a {
+    border-left: 5px solid $dark-back-color;
+    margin-bottom: 25px;
+    color: $text-secondary;
+
+    &.active {
+      border-left: 5px solid $primary-color;
+      color: $primary-color;
+    }
+
+    span {
+      margin-left: 25px;
+      font-size: 18px;
+    }
+
+    mat-icon {
+      font-size: 30px;
+      width: 30px;
+      height: 30px;
+    }
+  }
+}
+

@@ -1,3 +1,22 @@
+@import 'src/styles/colors';
+
+mat-toolbar {
+  padding: 15px 20px;
+  border-bottom: 1px solid $light-secondary-color;
+}
+
 .title {
   font-size: 16px;
+}
+
+.toggler {
+  &.active {
+    color: $primary-color;
+  };
+
+  mat-icon {
+    font-size: 30px;
+    width: 30px;
+    height: 30px;
+  }
 }

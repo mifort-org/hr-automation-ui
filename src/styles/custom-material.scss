@@ -62,3 +62,30 @@
     border-width: 1px;
   }
 }
+
+sidenav-container {
+  flex: 1;
+}
+
+.mat-drawer-side {
+  border-right: 1px solid $light-secondary-color;
+}
+
+mat-sidenav-content {
+  max-height: 100vh;
+}
+
+.mat-drawer-container .mat-list-base .mat-list-item .mat-list-item-content{
+  padding-left: 20px;
+}
+
+.mat-drawer,
+.mat-drawer-container {
+  background-color: $dark-back-color;
+  height: 100vh;
+}
+
+.mat-toolbar-row, .mat-toolbar-single-row {
+  height: unset;
+}
+

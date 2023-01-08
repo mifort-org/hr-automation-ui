@@ -1,0 +1,16 @@
+<a class="header" [routerLink]="[candidatesPage]">
+  <img src="/assets/mifort.png" alt="logo" width="60" height="50" />
+  <span class="title" *ngIf="isExpanded">Mifort - HR automation</span>
+</a>
+
+<mat-nav-list>
+  <a mat-list-item
+     [routerLink]="item.path"
+     [routerLinkActive]="'active'"
+     [matTooltip]="isExpanded ? '' : item.label"
+     [matTooltipPosition]="'right'"
+     *ngFor="let item of navigationItems">
+    <mat-icon>{{ item.icon }}</mat-icon>
+    <span *ngIf="isExpanded">{{ item.label }}</span>
+  </a>
+</mat-nav-list>

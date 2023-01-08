@@ -1,33 +1,17 @@
 <mat-toolbar class="flex-between">
   <div class="flex align-center gap-20">
-    <div class="flex align-center">
-      <a [routerLink]="[candidatesPage]">
-        <img src="/assets/mifort.png" alt="" width="60" height="50" />
-      </a>
-      <span class="title" *ngIf="checkIsMainPage()">Mifort - HR automation</span>
-    </div>
+    <button mat-icon-button
+            class="toggler"
+            [class.active]="isExpanded"
+            (click)="toggleSidenav.emit()">
+      <mat-icon>auto_awesome_mosaic</mat-icon>
+    </button>
+
     <button mat-stroked-button color="primary" (click)="back()" *ngIf="!checkIsMainPage()">
       <mat-icon>keyboard_backspace</mat-icon>
       <span class="ml-10">Back</span>
     </button>
   </div>
 
-  <div class="flex gap-10">
-    <div>
-      <button mat-icon-button [matMenuTriggerFor]="menu">
-        <mat-icon>settings</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu" [overlapTrigger]="false" xPosition="before">      
-        <button mat-menu-item [routerLink]="['/merge']" routerLinkActive="active">
-          <mat-icon>merge_type</mat-icon>
-          <span>Merge</span>
-        </button>
-        <button mat-menu-item [routerLink]="['/attributes']" routerLinkActive="active">
-          <mat-icon>library_books</mat-icon>
-          <span>Attributes</span>
-        </button>
-      </mat-menu>
-    </div>
-    <button mat-raised-button color="primary" (click)="openSignInDialog()">Sign in</button>
-  </div>
+  <button mat-raised-button color="primary" (click)="openSignInDialog()">Sign in</button>
 </mat-toolbar>
